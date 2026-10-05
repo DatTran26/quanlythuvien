@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "node .agents/hooks/ba-kit-run.mjs sessionStart",
+        "failClosed": false
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": "node .agents/hooks/ba-kit-run.mjs afterFileEdit",
+        "failClosed": false
+      }
+    ]
+  }
+}

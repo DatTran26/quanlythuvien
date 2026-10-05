@@ -1,0 +1,28 @@
+{
+  "env": {
+    "AUTO_CHANGELOG": "true"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .agents/hooks/ba-kit-run.mjs sessionStart"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .agents/hooks/ba-kit-run.mjs afterFileEdit"
+          }
+        ]
+      }
+    ]
+  }
+}
