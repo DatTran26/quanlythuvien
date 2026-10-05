@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "package": "ai4ba-skills",
+  "projectRoot": "D:\\Projects\\QuanLyThuVIen",
+  "updatedAt": "2026-10-03T21:13:41.067Z",
+  "skills": [
+    "ac",
+    "brainstorm",
+    "srs",
+    "test-cases",
+    "test-checklist",
+    "user-flow",
+    "userstory",
+    "wireframe-html"
+  ],
+  "agents": [
+    "agents-standard",
+    "claude-code",
+    "codex",
+    "cursor",
+    "shared-agents"
+  ],
+  "packs": [],
+  "workflows": [],
+  "groups": [],
+  "companions": true,
+  "hooks": true,
+  "kitRoot": "C:\\Users\\ACER\\AppData\\Local\\npm-cache\\_npx\\b1e9e7013a58dd50\\node_modules\\@dattran26\\ba-ki\\ai4ba-skills",
+  "installerRoot": "C:\\Users\\ACER\\AppData\\Local\\npm-cache\\_npx\\b1e9e7013a58dd50\\node_modules\\@dattran26\\ba-ki",
+  "deploymentMode": "copy",
+  "linkProfile": null
+}

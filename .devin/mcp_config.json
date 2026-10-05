@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "reqwise-figma": {
+      "type": "stdio",
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\ACER\\AppData\\Roaming\\npm\\node_modules\\@dattran26\\reqwise-figma-mcp\\dist\\server\\index.js"
+      ]
+    }
+  }
+}
