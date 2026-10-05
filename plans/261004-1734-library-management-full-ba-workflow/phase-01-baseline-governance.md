@@ -1,6 +1,6 @@
 ---
 title: "Phase 1: Baseline và governance"
-status: pending
+status: in-progress
 priority: P1
 effort: "1 approval cycle"
 dependencies: []
@@ -55,10 +55,10 @@ Hoàn tất đầu ra `brainstorm`, tách fact/proposal/approved và đưa toàn
 
 ## Todo
 
-- [ ] Đối chiếu mọi claim với tài liệu nguồn.
-- [ ] Chuẩn hoá fact/proposal/approved.
-- [ ] Tạo và điền decision register.
-- [ ] Tạo ID registry và chống va chạm OQ.
+- [x] Đối chiếu mọi claim với tài liệu nguồn.
+- [x] Chuẩn hoá fact/proposal/approved.
+- [x] Tạo và điền decision register.
+- [x] Tạo ID registry và chống va chạm OQ.
 - [ ] Thu thập/đánh giá Excel và sơ đồ nguồn hoặc có reconstruction approval.
 - [ ] Chốt blocker scope Reservation, Copy, Fine và privacy.
 - [ ] Ghi approval evidence vào artifact.

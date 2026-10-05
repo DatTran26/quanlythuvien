@@ -191,8 +191,8 @@ Kế thừa OQ-01..OQ-15 từ tài liệu hệ thống (giữ nguyên semantics;
 - [ ] OQ-08: Thu phạt tiền mặt hay online → mặc định tiền mặt; online là R3 candidate.
 - [ ] OQ-12: Quyền xem/xóa lịch sử mượn, retention → gate pháp lý, non-waivable trước go-live.
 - [ ] OQ-15: File Excel thật, trạng thái mã cũ → external blocker của GATE-MIG.
-- [ ] OQ brainstorm-1: Chính sách retention được pháp lý duyệt nào → chờ approver.
-- [ ] OQ brainstorm-3: Nguồn phục hồi state machine Copy và flow trả → Phase 3 reconstruct-as-proposal.
+- [ ] OQ-BS-1: Chính sách retention được pháp lý duyệt nào → chờ approver.
+- [ ] OQ-BS-3: Nguồn phục hồi state machine Copy và flow trả → Phase 3 reconstruct-as-proposal.
 
 ## 12. Approval
 
