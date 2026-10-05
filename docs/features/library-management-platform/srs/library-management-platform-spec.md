@@ -57,6 +57,17 @@ Hệ thống quản lý thư viện quản lý danh mục sách, bản sao sách
 | Bộ phận tài chính/kế toán | stakeholder | Đối soát tiền phạt, điều chỉnh, hoàn/đảo bút toán | Có như stakeholder; policy là OQ |
 | Bảo mật/pháp chế | stakeholder | Kiểm soát PII, retention, audit | Có như stakeholder; policy là OQ |
 
+**Mapping vai trò nguồn ↔ naming SRS (PROPOSAL — trả lời một phần OQ-01 nguồn, phần còn lại ở OQ-LMP-014):**
+
+| Vai trò trong tài liệu nguồn (§2 `he_thong_quan_ly_thu_vien.md`) | Tên dùng trong bộ SRS này | Ghi chú |
+|---|---|---|
+| `Người đọc` | `Người đọc` | Giữ nguyên |
+| `Nhân viên` (trực quầy: mượn/trả, quét QR, báo hư hỏng, khóa tạm người đọc) | `Thủ thư` | Đổi tên — PROPOSAL |
+| `Thủ thư` (kế thừa Nhân viên + quản trị dữ liệu, cấu hình, báo cáo, nhật ký) | `Quản trị viên` | Đổi tên — PROPOSAL; việc tách vai trò admin riêng chính là câu hỏi OQ-01 nguồn |
+| — | `Hệ thống` | Actor kỹ thuật cho job/cron/outbox/audit |
+
+Mọi quyền thao tác trong các UC/model phải dùng đúng naming SRS ở cột 2. Delta so với ma trận quyền nguồn phải gắn nhãn PROPOSAL kèm lý do — không ghi FACT cho quyền đã siết/mở.
+
 ## 3. Functional Requirements (FR)
 
 | ID | Title | Actor | Description | Priority | Release | Verify by | Source |
@@ -65,9 +76,9 @@ Hệ thống quản lý thư viện quản lý danh mục sách, bản sao sách
 | FR-LMP-002 | Quản lý bản sao sách | Thủ thư/Quản trị viên | Đăng ký bản sao vật lý với mã định danh, vị trí, tình trạng ban đầu và trạng thái khả dụng. | P0 | R0 | demo/test | Source fact |
 | FR-LMP-003 | Tra cứu khả dụng | Thủ thư/Người đọc | Tra cứu đầu sách và xem số bản sao khả dụng, đang giữ, đang mượn hoặc không khả dụng. | P0 | R1A | test | Source fact |
 | FR-LMP-004 | Quản lý người đọc | Thủ thư/Quản trị viên | Tạo/cập nhật hồ sơ người đọc, trạng thái hoạt động, thông tin liên hệ và hạn thẻ nếu có. | P0 | R0 | demo/test | Source fact |
-| FR-LMP-005 | Khóa/mở người đọc | Quản trị viên | Cho phép tạm ngưng hoặc khôi phục quyền mượn của người đọc với lý do bắt buộc và audit. | P1 | R1B | test | PROPOSAL; roadmap FR-S10 |
-| FR-LMP-006 | Đăng nhập và phân quyền | Hệ thống | Chỉ actor hợp lệ được truy cập chức năng theo vai trò và phạm vi dữ liệu được cấp. | P0 | R0 | test | Source fact + PROPOSAL |
-| FR-LMP-007 | Step-up và session reset | Hệ thống | Tác vụ nhạy cảm yêu cầu xác thực lại; hết phiên phải quay về trạng thái an toàn không mất dữ liệu đã lưu. | P0 | R0 | test | PROPOSAL |
+| FR-LMP-005 | Khóa/mở người đọc | Thủ thư/Quản trị viên | Cho phép tạm ngưng hoặc khôi phục quyền mượn của người đọc với lý do bắt buộc và audit; quyền theo ma trận nguồn (Nhân viên + Thủ thư đều khóa được). | P1 | R1B | test | Source fact (quyền) + PROPOSAL (lý do bắt buộc, FR-S10) |
+| FR-LMP-006 | Đăng nhập và phân quyền | Thủ thư/Người đọc/Quản trị viên | Chỉ actor hợp lệ được truy cập chức năng theo vai trò và phạm vi dữ liệu được cấp; Hệ thống là bên thực thi kiểm tra. | P0 | R0 | test | Source fact + PROPOSAL |
+| FR-LMP-007 | Step-up và session reset | Thủ thư/Người đọc/Quản trị viên | Tác vụ nhạy cảm yêu cầu xác thực lại; hết phiên phải quay về trạng thái an toàn không mất dữ liệu đã lưu; Hệ thống thực thi. | P0 | R0 | test | PROPOSAL |
 | FR-LMP-008 | Mượn nhiều bản sao nguyên tử | Thủ thư | Một phiếu mượn có nhiều bản sao chỉ thành công khi toàn bộ điều kiện hợp lệ; một bản sao lỗi làm cả giao dịch rollback. | P0 | R1A | test | Source fact + plan red-team |
 | FR-LMP-009 | Idempotency và concurrency mượn | Hệ thống | Lặp submit/checkout cùng request không tạo phiếu trùng; hai giao dịch tranh cùng bản sao chỉ một giao dịch thắng. | P0 | R1A | test/concurrency | Plan red-team |
 | FR-LMP-010 | Trả sách | Thủ thư | Ghi nhận trả một hoặc nhiều bản sao, cập nhật trạng thái bản sao và phiếu mượn, phát hiện quá hạn/hư hỏng để tạo nghĩa vụ tiếp theo. | P0 | R1A | demo/test | Source fact |
@@ -84,7 +95,7 @@ Hệ thống quản lý thư viện quản lý danh mục sách, bản sao sách
 | FR-LMP-021 | Quản trị cấu hình nghiệp vụ | Quản trị viên | Quản lý tham số hạn mượn, số lần gia hạn, hạn giữ chỗ, vai trò và kênh thông báo. Giá trị mặc định là OQ. | P0 | R0 | demo/test | Source fact + PROPOSAL |
 | FR-LMP-022 | Import và đối soát | Quản trị viên | Nhập dữ liệu ban đầu qua file đại diện, validate staging, báo lỗi theo dòng, dry-run trước commit và reconciliation sau import. | P0 | R0 | test | Source fact; file mẫu OQ-LMP-002; DEC-P2-09 |
 | FR-LMP-023 | Báo cáo vận hành | Quản trị viên/Thủ thư | Xem báo cáo sách quá hạn, đang mượn, hàng đợi, tiền phạt và bản sao hư hỏng/mất (RP-01/02/04 ở R1A); báo cáo xu hướng RP-03/05/06/07 ở R2. | P1 | R1A/R2 | demo/test | Source fact |
-| FR-LMP-024 | Cổng tự phục vụ người đọc | Người đọc | Xem khoản mượn, đặt trước, hủy đặt trước và thanh toán nếu được phép; người đọc xem công nợ (FR-R09) ở R1B. | P1 | R2 | test | PROPOSAL; phụ thuộc identity/portal |
+| FR-LMP-024 | Cổng tự phục vụ người đọc | Người đọc | Cổng self-service (R2): xem khoản mượn, đặt/hủy đặt trước, thanh toán nếu được phép. Riêng "người đọc xem công nợ" (FR-R09) thuộc R1B theo roadmap. | P1 | R2 (portal); R1B (xem công nợ) | test | PROPOSAL; phụ thuộc identity/portal; chưa có UC owner — xem usecase index |
 | FR-LMP-025 | Quản lý ảnh bằng chứng | Thủ thư | Upload ảnh cho báo cáo hư hỏng/mất qua trust boundary: kiểm tra loại, kích thước, quét nội dung, không tin metadata gốc. | P1 | R1A | test | PROPOSAL; ảnh 1–5 thuộc CAP-DAMAGE R1A |
 | FR-LMP-026 | QR/barcode locator | Thủ thư | Quét mã bản sao/phiếu chỉ để định vị bản ghi; mã không được dùng như bằng chứng uỷ quyền. | P0 | R0 | test/security | Plan red-team |
 | FR-LMP-027 | Truy vết lịch sử nghiệp vụ | Thủ thư/Quản trị viên | Xem lịch sử trạng thái và sự kiện liên quan của bản sao, phiếu mượn, đặt trước, tiền phạt và báo cáo hư hỏng. | P1 | R1B | demo/test | PROPOSAL; audit viewer FR-L10 |
@@ -127,6 +138,7 @@ Hệ thống quản lý thư viện quản lý danh mục sách, bản sao sách
 | BR-LMP-014 | Import commit chỉ sau dry-run pass hoặc override được phê duyệt; reconciliation phải đối chiếu số lượng, bản ghi lỗi và bản ghi bỏ qua. | Import run | FR-LMP-022 | Source fact + PROPOSAL |
 | BR-LMP-015 | Quyền xem/đổi field PII và tài chính áp theo actor × resource × action × field × purpose; deny mặc định. | Access sensitive field/action | FR-LMP-006/020 | Plan red-team |
 | BR-LMP-016 | Notification không làm fail business transaction chính; business commit ghi outbox event để delivery retry sau. | Business event emits notification | FR-LMP-019 | Plan red-team |
+| BR-LMP-017 | Xóa mềm: Reader, Thủ thư, BibliographicRecord, Copy đã có lịch sử nghiệp vụ chỉ được vô hiệu hóa/deactivate — không xóa cứng (giữ ledger append-only và audit trail). | Delete/deactivate request | FR-LMP-001/002/004 | Source fact (BR-12 nguồn) |
 
 ## 6. Error Matrix
 
@@ -240,6 +252,10 @@ Nhóm màn hình chính: đăng nhập/access, dashboard, danh mục, chi tiết
 - [ ] OQ-LMP-008 — Kênh notification bắt buộc là email/SMS/push hay trong-app? Owner: product owner. Gate: FR-LMP-019.
 - [ ] OQ-LMP-009 — Chính sách reconcile tài chính và ai approve financial override? Owner: finance owner. Gate: BR-LMP-007/008.
 - [ ] OQ-LMP-010 — Ngưỡng loan limit, renewal limit, hold expiry, due/fine threshold và SLA? Owner: domain/product owner. Gate: các BR/SC liên quan.
+- [ ] OQ-LMP-011 — Ngữ nghĩa Loan↔LoanItem: phiếu mượn là header + dòng per-copy (hạn trả/gia hạn/trạng thái ở dòng) — xác nhận thay giả định mặc định "không phiếu cha" từ OQ-06 nguồn. Owner: domain approver. Gate: ERD + uc-checkout/return.
+- [ ] OQ-LMP-012 — Actor/staff reference model: `*_by`/`actor_ref`/`recipient_ref` trỏ tài khoản hệ thống không nằm trong 13 entity §8 — tách entity hay giữ ref logic? Liên quan OQ-LMP-007 (identity model). Owner: security/IT. Gate: ERD + audit.
+- [ ] OQ-LMP-013 — `DamageReport.photo_refs`: list nhúng hay entity Attachment riêng? Liên quan OQ-LMP-006 (retention). Owner: domain/tech. Gate: ERD + uc-damage-lost-found.
+- [ ] OQ-LMP-014 — Kế thừa OQ-01 nguồn: sau khi tách `Quản trị viên` khỏi `Thủ thư` nguồn (mapping §2 — PROPOSAL), ai quản lý tài khoản Quản trị viên và cơ chế chống tự nâng quyền? Owner: security/IT. Gate: FR-LMP-006/007 + ma trận RBAC.
 
 ## 13. Approval register
 

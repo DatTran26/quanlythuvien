@@ -1,6 +1,6 @@
 ---
 title: "Phase 4: SRS core và models"
-status: pending
+status: in-review
 priority: P1
 effort: "2 approval cycles"
 dependencies: [2, 3]
@@ -39,11 +39,11 @@ Dùng skill `srs` để kỹ thuật hoá scope đã duyệt thành Core Spec, u
 
 ## Todo
 
-- [ ] Hoàn thiện Core Spec.
-- [ ] Hoàn thiện use cases.
-- [ ] Hoàn thiện flows và states.
-- [ ] Hoàn thiện ERD và data dictionary tối thiểu.
-- [ ] Chạy quality gate và ghi approval evidence.
+- [x] Hoàn thiện Core Spec (spec.md đã remap release theo DEC-P2-08; thêm mapping actor §2, BR-LMP-017, OQ-LMP-011..014 — vẫn draft chờ L1).
+- [x] Hoàn thiện use cases (10 UC `uc-*.md` theo template; senior-BA review → đã fix 4 blocker + 12 should-fix).
+- [x] Hoàn thiện flows và states (flows.md 8 luồng/10 diagram; states.md 5 aggregate — diagram-reviewer OK, không blocker).
+- [x] Hoàn thiện ERD và data dictionary tối thiểu (erd.md 14 node; mermaid-verify 16/16 block PASS).
+- [ ] Chạy quality gate và ghi approval evidence — mermaid-verify PASS; còn thiếu L1/L2 approval evidence + domain approver cho DEC-D3-01/02 (hard-stop).
 
 ## Verification
 
@@ -69,10 +69,10 @@ Dùng skill `srs` để kỹ thuật hoá scope đã duyệt thành Core Spec, u
 
 ## Tiêu chí hoàn tất
 
-- [ ] Mỗi file Tầng 1 và Tầng 2 có approval evidence.
-- [ ] Tất cả P0 capability có FR/BR/Error/UC tương ứng.
-- [ ] State/flow/ERD nhất quán và Mermaid hợp lệ.
-- [ ] Không còn orphan reference.
+- [ ] Mỗi file Tầng 1 và Tầng 2 có approval evidence — **chưa**: chờ L1/L2 (OQ-LMP-001 block gán approver).
+- [x] Tất cả P0 capability có FR/BR/Error/UC tương ứng (FR-LMP-001..028 ↔ 10 UC ↔ E-LMP-001..018).
+- [x] State/flow/ERD nhất quán và Mermaid hợp lệ (16/16 block PASS; diagram-reviewer không blocker).
+- [ ] Không còn orphan reference — `library-management-platform-userflow.md` cố ý dangle (output Phase 5); link kiểm chứng lần cuối ở Phase 8 traceability.
 
 ## Bước kế tiếp
 

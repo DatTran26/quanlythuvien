@@ -48,6 +48,16 @@ if (!fs.existsSync(FILE)) {
 }
 
 function findChrome() {
+  // Windows: Chrome cài sẵn hoặc puppeteer-cache (chrome-win64)
+  if (process.platform === 'win32') {
+    const winCandidates = [
+      process.env.PUPPETEER_EXECUTABLE_PATH,
+      path.join(process.env['PROGRAMFILES'] || 'C:/Program Files', 'Google/Chrome/Application/chrome.exe'),
+      path.join(process.env['PROGRAMFILES(X86)'] || 'C:/Program Files (x86)', 'Google/Chrome/Application/chrome.exe'),
+      path.join(process.env.LOCALAPPDATA || '', 'Google/Chrome/Application/chrome.exe'),
+    ].filter(Boolean);
+    for (const c of winCandidates) if (fs.existsSync(c)) return c;
+  }
   const glob = path.join(os.homedir(), '.puppeteer-cache', 'chrome');
   if (!fs.existsSync(glob)) return null;
   for (const versionDir of fs.readdirSync(glob)) {
@@ -56,6 +66,8 @@ function findChrome() {
     // linux/x64 layout fallback (best-effort — máy khác kiến trúc có thể cần path khác)
     const linuxCandidate = path.join(glob, versionDir, 'chrome-linux64', 'chrome');
     if (fs.existsSync(linuxCandidate)) return linuxCandidate;
+    const winCandidate = path.join(glob, versionDir, 'chrome-win64', 'chrome.exe');
+    if (fs.existsSync(winCandidate)) return winCandidate;
   }
   return null;
 }
@@ -383,6 +395,8 @@ blocks.forEach((b, i) => {
   const res = spawnSync('mmdc', ['-i', mmdPath, '-o', outPath, '-s', '2'], {
     encoding: 'utf8',
     env: { ...process.env, PUPPETEER_EXECUTABLE_PATH: CHROME },
+    // Windows: mmdc là .cmd — spawnSync cần shell:true mới resolve được
+    shell: process.platform === 'win32',
   });
   const compileOk = res.status === 0 && fs.existsSync(outPath);
   const issues = NO_LINT ? [] : lintBlock(b.code, b.startLine);
