@@ -18,7 +18,7 @@ links:
 |---|---|---|---|---|
 | Open Question (nguồn gốc) | `OQ-NN` (2 chữ số) | `OQ-01`…`OQ-15` | `docs/he_thong_quan_ly_thu_vien.md`, `docs/_product/prd.md` §OQ | Giữ nguyên ngữ nghĩa gốc; không renumber |
 | Open Question (brainstorm) | `OQ-BS-N` | `OQ-BS-1`, `OQ-BS-2`, `OQ-BS-3` | `brainstorms/product-roadmap-baseline.md` | Alias: văn bản cũ ghi `OQ-N` / `OQ brainstorm-N` → xem §2 |
-| Open Question (SRS) | `OQ-LMP-NNN` | `OQ-LMP-001`…`OQ-LMP-014` | `srs/library-management-platform-spec.md` §12 | Series canonical cho OQ mới phát sinh từ SRS |
+| Open Question (SRS) | `OQ-LMP-NNN` | `OQ-LMP-001`…`OQ-LMP-018` | `srs/library-management-platform-spec.md` §12 | Series canonical cho OQ mới phát sinh từ SRS |
 | Open Question (gap mới) | `GAP-OQ-NN` | chưa cấp | phase hiện hành | Dùng cho gap phát hiện sau baseline (phase-01 step 4) |
 | Decision (phase 3 domain) | `DEC-D3-NN` | `DEC-D3-01`…`DEC-D3-09` | `docs/_product/decision-register.md` | Reconstruction + domain rule, chờ domain approver |
 | Decision (phase 2 priority) | `DEC-P2-NN` | `DEC-P2-01`…`DEC-P2-09` | `docs/_product/decision-register.md` | Release boundary + priority crosswalk |

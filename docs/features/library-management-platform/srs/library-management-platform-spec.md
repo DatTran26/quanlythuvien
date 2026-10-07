@@ -256,6 +256,10 @@ Nhóm màn hình chính: đăng nhập/access, dashboard, danh mục, chi tiết
 - [ ] OQ-LMP-012 — Actor/staff reference model: `*_by`/`actor_ref`/`recipient_ref` trỏ tài khoản hệ thống không nằm trong 13 entity §8 — tách entity hay giữ ref logic? Liên quan OQ-LMP-007 (identity model). Owner: security/IT. Gate: ERD + audit.
 - [ ] OQ-LMP-013 — `DamageReport.photo_refs`: list nhúng hay entity Attachment riêng? Liên quan OQ-LMP-006 (retention). Owner: domain/tech. Gate: ERD + uc-damage-lost-found.
 - [ ] OQ-LMP-014 — Kế thừa OQ-01 nguồn: sau khi tách `Quản trị viên` khỏi `Thủ thư` nguồn (mapping §2 — PROPOSAL), ai quản lý tài khoản Quản trị viên và cơ chế chống tự nâng quyền? Owner: security/IT. Gate: FR-LMP-006/007 + ma trận RBAC.
+- [ ] OQ-LMP-015 — Device target cho cổng self-service Người đọc (R2): mobile-first responsive là PROPOSAL; desktop 1024px đã chốt cho màn quầy/quản trị. Owner: product owner. Gate: wireframe/prototype portal R2.
+- [ ] OQ-LMP-016 — FR-LMP-024 (người đọc xem công nợ, FR-R09 nguồn): xây màn reader tối thiểu ở R1B hay chuyển toàn bộ sang portal R2? Hiện chưa có UC/screen owner. Owner: product owner. Gate: tạo `uc-reader-self-service` + userflow/wireframe reader.
+- [ ] OQ-LMP-017 — Thủ thư quầy có quyền xem báo cáo vận hành (reports-flow) không? Quyền này lệch ma trận nguồn — hiện PROPOSAL, chỉ Quản trị viên chắc chắn. Owner: domain approver. Gate: RBAC reports + userflow reports-flow.
+- [ ] OQ-LMP-018 — Ai được approve commit import khi dry-run chưa pass; điều kiện và chứng cứ override là gì? Owner: data owner + Thủ thư trưởng/product owner. Gate: GATE-MIG + uc-admin-import.
 
 ## 13. Approval register
 
