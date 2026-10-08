@@ -19,6 +19,7 @@ docs/_shared/
 ├── core-spec.md                 # actors + mapping vai trò, NFR/BR/E chung, ràng buộc, phụ thuộc, giả định, invariant
 ├── navigation-map.md            # chuyển màn giữa các feature, dashboard theo vai trò
 ├── test-strategy-baseline.md    # phần bền của chiến lược test
+├── core-checklist.md            # 4 CHK dùng chung (giao diện quầy, accessibility, tương thích)
 ├── id-crosswalk-lmp.md          # (phase 1)
 ├── id-registry.md               # (đã có)
 ├── project-profile.md           # (đã có)
@@ -37,6 +38,7 @@ docs/_product/
 3. **Tạo `core-spec.md`** theo `_templates/srs-spec.md` nhưng chỉ chứa: Mục 0 (nhãn nguồn, namespace), Mục 2 (Actors + mapping vai trò đã chốt X7), NFR/BR/E chung (theo crosswalk), invariant từ flows Mục 0, Mục 11 (ràng buộc, phụ thuộc, giả định chung), OQ chung. Không có FR. Frontmatter `type: srs`, `status: draft`, không `feature:`.
 4. **Tạo `navigation-map.md`**: bảng chuyển màn giữa feature (từ userflow Mục 3.5, chỉ các chuyển màn có hai đầu ở hai feature khác nhau), dashboard theo vai trò (từ `dashboard-home`), quy ước nút "quay lại".
 5. **Tạo `test-strategy-baseline.md`** từ phần bền của `test/test-strategy.md` (môi trường, dữ liệu, thiết bị Mobile 375, ngôn ngữ).
+5b. **Tạo `core-checklist.md`** chứa 4 CHK dùng chung (`CHK-core-001..004`, theo `id-crosswalk-lmp.md` Mục 10).
 6. **Di chuyển brainstorm sản phẩm**: `git mv` sang `docs/_product/product-roadmap-baseline.md`, đổi frontmatter `type: brainstorm` → giữ type, bỏ `feature:`, L2 diff cho link.
 7. **Kiểm**: `mermaid-verify.mjs` cho `library-erd.md`, `library-states.md` exit 0; KG build và `explore` một ID chung bất kỳ resolve được.
 

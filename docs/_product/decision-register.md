@@ -5,7 +5,7 @@ updated: 2026-10-08
 links:
   - docs/he_thong_quan_ly_thu_vien.md
   - docs/_shared/project-profile.md
-  - docs/features/library-management-platform/domain/lifecycle-inventory.md
+  - docs/_shared/domain/lifecycle-inventory.md
 ---
 
 # Decision register — Hệ thống Quản lý Thư viện
@@ -14,7 +14,7 @@ links:
 
 | ID | Chủ đề | Loại | Owner | Approver | Due gate | Hard-stop? | Status | Evidence / source |
 |----|--------|------|-------|----------|----------|------------|--------|--------------------|
-| DEC-D3-01 | Copy state machine 7 trạng thái — reconstruction vì sơ đồ gốc mất (`[embedded content]`); toàn bộ transition table §2.2 của lifecycle-inventory | PROPOSAL | BA lead | Thủ thư trưởng (domain approver) | Trước khi Phase 4 khoá state diagram trong SRS | Có — OQ-LMP-004 | Open | `domain/lifecycle-inventory.md` §2 |
+| DEC-D3-01 | Copy state machine 7 trạng thái — reconstruction vì sơ đồ gốc mất (`[embedded content]`); toàn bộ transition table §2.2 của lifecycle-inventory | PROPOSAL | BA lead | Thủ thư trưởng (domain approver) | Trước khi Phase 4 khoá state diagram trong SRS | Có — OQ-LMP-004 | Open | `docs/_shared/domain/lifecycle-inventory.md` §2 |
 | DEC-D3-02 | Flow trả sách "3 bước, 2 quyết định" — reconstruction; chi tiết PROPOSAL, thứ tự "đóng Loan + tính phạt trước" là FACT | PROPOSAL | BA lead | Thủ thư trưởng | Cùng DEC-D3-01 | Có — OQ-LMP-004 | Open | `lifecycle-inventory.md` §2.4 |
 | DEC-D3-03 | Reservation `skip`/`suspend` — nguồn không có; chỉ đưa vào baseline khi domain approved | Open | BA lead | Product owner | Trước Phase 4 | Không | Open — hiện KHÔNG nằm trong baseline | `lifecycle-inventory.md` §4 |
 | DEC-D3-04 | Partial payment + quyền hạn waiver/adjustment/reversal/refund + SoD | PROPOSAL | BA lead | Finance owner + Thủ thư trưởng | Trước release có thu phạt | Có — OQ-LMP-005/009 | Open | `lifecycle-inventory.md` §5 |
@@ -59,3 +59,37 @@ Các decision trên gắn với `OQ-LMP-003/004/005/009/010` trong `docs/feature
 | DEC-SF-07 | Tra cứu tách 2: phía Thủ thư/Quản trị viên ở `catalog-admin` (R0, phục vụ quản trị); phía Người đọc (FR-R02) ở `reader-self-service` (R1A) | Decision | BA lead | Product owner | Phase 1 tách feature | Không | Chốt (người dùng 2026-10-08) | spec FR-LMP-003; `priority-crosswalk.md` FR-R02 |
 | DEC-SF-08 | Persona trong user story đổi theo bộ tên DEC-SF-01 khi chuyển sang feature | Decision | BA lead | — | Rollout từng feature | Không | Chốt (người dùng 2026-10-08) | story index |
 | DEC-SF-09 | Thêm màn trung tâm thông báo (FR-C04) cho `notification-audit-ui`, R1B theo DEC-P2-01 | Decision | BA lead | Product owner | User-flow `notification-audit-ui` | Không | Chốt (người dùng 2026-10-08) | Nguồn FR-C04; DEC-P2-01 |
+| DEC-SF-10 | Giá trị quy định mượn: tối đa 5 cuốn đang mượn, thời hạn mượn 14 ngày, nợ phạt từ 50.000đ trở lên thì chặn mượn. Trả lời một phần OQ-04 nguồn / `OQ-policy-config-001`; các giá trị gia hạn, phạt, giữ chỗ, SLA vẫn mở | Decision | BA lead | Thủ thư trưởng | Trước khi khóa SRS `checkout` | Không | Chốt (người dùng 2026-10-08) | Nguồn BR-01/03/04; `checkout-scope.md` OQ-1 |
+
+## Feature bị ảnh hưởng
+
+| Decision | Feature |
+|---|---|
+| DEC-D3-01 | copy-inventory, checkout, return-handling, damage-lifecycle, lost-handling, reservation |
+| DEC-D3-02 | return-handling |
+| DEC-D3-03 | reservation |
+| DEC-D3-04 | fine-collection-basic, fine-collection-adv |
+| DEC-D3-05 | lost-handling, fine-collection-adv |
+| DEC-D3-06 | damage-lifecycle, reservation |
+| DEC-D3-07 | damage-lifecycle, copy-inventory |
+| DEC-D3-08 | fine-collection-adv, notification-core |
+| DEC-D3-09 | catalog-admin, copy-inventory, checkout |
+| DEC-P2-01 | notification-core, notification-audit-ui |
+| DEC-P2-02 | overdue-fines, ops-reports, checkout |
+| DEC-P2-03 | damage-lifecycle |
+| DEC-P2-04 | fine-collection-basic, fine-collection-adv |
+| DEC-P2-05 | reservation, return-handling, renewal |
+| DEC-P2-06 | ops-foundation, notification-audit-ui |
+| DEC-P2-07 | lost-handling |
+| DEC-P2-08 | Mọi feature |
+| DEC-P2-09 | data-import |
+| DEC-SF-01 | Mọi feature |
+| DEC-SF-02 | reader-self-service, renewal, reservation, expansion-candidates |
+| DEC-SF-03 | reader-onboarding |
+| DEC-SF-04 | account-admin |
+| DEC-SF-05 | ops-foundation |
+| DEC-SF-06 | lost-handling |
+| DEC-SF-07 | catalog-admin, reader-self-service |
+| DEC-SF-08 | Mọi feature có user story |
+| DEC-SF-09 | notification-audit-ui |
+| DEC-SF-10 | checkout, policy-config, return-handling, overdue-fines |

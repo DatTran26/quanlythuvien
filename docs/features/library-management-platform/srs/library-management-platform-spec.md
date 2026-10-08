@@ -5,12 +5,12 @@ status: draft
 updated: 2026-10-05
 links:
   - docs/he_thong_quan_ly_thu_vien.md
-  - docs/features/library-management-platform/brainstorms/product-roadmap-baseline.md
+  - docs/_product/product-roadmap-baseline.md
   - docs/features/library-management-platform/srs/library-management-platform-userflow.md
   - docs/features/library-management-platform/usecases/library-management-platform-usecase-index.md
   - docs/features/library-management-platform/srs/library-management-platform-flows.md
-  - docs/features/library-management-platform/srs/library-management-platform-states.md
-  - docs/features/library-management-platform/srs/library-management-platform-erd.md
+  - docs/_shared/domain/library-states.md
+  - docs/_shared/domain/library-erd.md
 ---
 
 # library-management-platform — Software Requirements Specification
@@ -19,9 +19,9 @@ links:
 
 | Item | State | Evidence / owner | Gate |
 |------|-------|------------------|------|
-| Baseline governance | Draft — chờ L1 | `docs/_shared/project-profile.md`, `brainstorms/product-roadmap-baseline.md`, `decision-register.md` và `docs/_shared/id-registry.md` đã tồn tại; 18 DEC entry đều `Open` | Owner: BA lead + stakeholder |
+| Baseline governance | Draft — chờ L1 | `docs/_shared/project-profile.md`, `docs/_product/product-roadmap-baseline.md`, `decision-register.md` và `docs/_shared/id-registry.md` đã tồn tại; 18 DEC entry đều `Open` | Owner: BA lead + stakeholder |
 | PRD / release approval | Draft — chờ L1 | `docs/_product/prd.md`, `roadmap.md`, `priority-crosswalk.md`, `readiness-gates.md` đã tồn tại dạng PROPOSAL | Owner: product owner |
-| Domain lifecycle inventory | PROPOSAL — chờ domain approver | `domain/lifecycle-inventory.md` đã tồn tại; Copy state machine + flow trả là reconstruction (DEC-D3-01/02 `Open`) | Owner: domain approver (Thủ thư trưởng) |
+| Domain lifecycle inventory | PROPOSAL — chờ domain approver | `docs/_shared/domain/lifecycle-inventory.md` đã tồn tại; Copy state machine + flow trả là reconstruction (DEC-D3-01/02 `Open`) | Owner: domain approver (Thủ thư trưởng) |
 | SRS L1 content approval | Pending | Được sinh trong phiên Phase 4–8, chưa có phê duyệt người dùng | Owner: BA lead / stakeholder |
 | Hard-stop identity/privacy/finance/release | Open | Xem Mục 12 Open Questions | Không coi là ready |
 
@@ -266,7 +266,7 @@ Nhóm màn hình chính: đăng nhập/access, dashboard, danh mục, chi tiết
 | Artifact layer | Required approver | Current evidence | State |
 |----------------|-------------------|------------------|-------|
 | Core spec | BA lead + product owner | Chưa có approval event | draft / pending |
-| Lifecycle states | Domain approver | `domain/lifecycle-inventory.md` đã tồn tại — reconstruction DEC-D3-01/02 `Open` | PROPOSAL |
+| Lifecycle states | Domain approver | `docs/_shared/domain/lifecycle-inventory.md` đã tồn tại — reconstruction DEC-D3-01/02 `Open` | PROPOSAL |
 | Security/privacy/finance | Security, legal, finance owners | OQ mở | blocked for approval |
 | Release boundary | Product owner | `docs/_product/roadmap.md` R0–R3 draft — chờ L1; remap SRS theo DEC-P2-08 | pending |
 

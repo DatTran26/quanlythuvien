@@ -1,7 +1,7 @@
 ---
 title: "Tách bộ tài liệu thành 23 feature theo Feature Map"
 description: "Chuyển feature gộp library-management-platform thành 23 thư mục feature theo docs/_product/prd.md Mục 7, phần dùng chung vào docs/_shared/, đánh lại ID theo feature và đi đủ quy trình brainstorm → URD → BRD → PRD → SRS → models → UX → story/AC → checklist cho từng feature."
-status: pending
+status: in-progress
 priority: P1
 effort: "10 phases, khoảng 23 chuỗi tài liệu"
 issue: ""
@@ -23,10 +23,10 @@ Feature Map trong `docs/_product/prd.md` Mục 7 định nghĩa 23 feature có s
 
 | # | Quyết định |
 |---|---|
-| D1 | Chia đúng **23 feature** theo Feature Map. `expansion-candidates` (R3) chỉ có khung + PRD envelope, không viết SRS. |
+| D1 | Chia đúng **23 feature** theo Feature Map. `expansion-candidates` (R3) chỉ có khung + brainstorm, không viết SRS. |
 | D2 | Phần dùng chung (ERD tổng, vòng đời trạng thái, NFR/BR/lỗi xuyên hệ thống) chuyển vào **`docs/_shared/`**. Thư mục `docs/features/library-management-platform/` bị xóa sau khi chuyển xong. |
 | D3 | **Đánh mã ID mới theo feature** (`FR-checkout-001`…). Mã `*-LMP-*` chuyển sang retired, có bảng đối chiếu. |
-| D4 | Mỗi feature đi **đủ quy trình**: brainstorm → URD → BRD → PRD → SRS → models → UX → story/AC → checklist. |
+| D4 | Mỗi feature đi quy trình: brainstorm → SRS → models → UX → story/AC → checklist. **Không viết URD, BRD, PRD cấp feature** (người dùng bỏ ngày 2026-10-08): PRD sản phẩm Mục 7.x là mô tả cấp sản phẩm của từng feature. |
 
 ## Kết quả mong muốn
 
@@ -46,10 +46,10 @@ Feature Map trong `docs/_product/prd.md` Mục 7 định nghĩa 23 feature có s
 
 | # | Phase | File | Phụ thuộc | Cổng duyệt |
 |---|---|---|---|---|
-| 0 | Chuẩn bị, đóng băng, spike công cụ | [phase-00-preparation.md](phase-00-preparation.md) | — | Team đồng ý đóng băng |
-| 1 | Ma trận phân bổ và bảng đối chiếu ID | [phase-01-allocation-matrix.md](phase-01-allocation-matrix.md) | 0 | Duyệt ma trận + xung đột |
-| 2 | Dựng tầng dùng chung `docs/_shared/` | [phase-02-shared-layer.md](phase-02-shared-layer.md) | 1 | L1/L2 từng file |
-| 3 | Dựng khung 23 thư mục + nối PRD | [phase-03-feature-skeletons.md](phase-03-feature-skeletons.md) | 2 | L1 một lần |
+| 0 | Chuẩn bị, đóng băng, spike công cụ — **xong 2026-10-08** (bỏ qua mermaid-verify theo người dùng) | [phase-00-preparation.md](phase-00-preparation.md) | — | Team đồng ý đóng băng |
+| 1 | Ma trận phân bổ và bảng đối chiếu ID — **xong 2026-10-08** (`docs/_shared/id-crosswalk-lmp.md`, DEC-SF-01..09) | [phase-01-allocation-matrix.md](phase-01-allocation-matrix.md) | 0 | Duyệt ma trận |
+| 2 | Dựng tầng dùng chung `docs/_shared/` — **xong 2026-10-08** | [phase-02-shared-layer.md](phase-02-shared-layer.md) | 1 | L1/L2 từng file |
+| 3 | Chuẩn hóa tầng sản phẩm theo /prd → /roadmap + khung 23 thư mục — **xong 2026-10-08** (điểm RICE đã duyệt) | [phase-03-product-layer-and-skeletons.md](phase-03-product-layer-and-skeletons.md) | 2 | L2 PRD, L2 roadmap (duyệt điểm RICE) |
 | 4 | Pilot end-to-end: `checkout` | [phase-04-pilot-checkout.md](phase-04-pilot-checkout.md) | 3 | Retro pilot, chốt công thức |
 | 5 | Rollout R0 (8 feature) | [phase-05-rollout-r0.md](phase-05-rollout-r0.md) | 4 | Duyệt từng feature |
 | 6 | Rollout R1A (8 feature còn lại) | [phase-06-rollout-r1a.md](phase-06-rollout-r1a.md) | 5 | Duyệt từng feature |
@@ -57,23 +57,26 @@ Feature Map trong `docs/_product/prd.md` Mục 7 định nghĩa 23 feature có s
 | 8 | Gỡ feature gộp, sửa link, retire ID | [phase-08-retire-umbrella.md](phase-08-retire-umbrella.md) | 7 | Kiểm 0 link gãy |
 | 9 | Review chéo, traceability, bàn giao | [phase-09-review-handoff.md](phase-09-review-handoff.md) | 8 | Người dùng duyệt PR |
 
+Tiến độ hiện tại và việc tiếp theo: [checkpoint-2026-10-09.md](checkpoint-2026-10-09.md) (phase 4–7 đang chạy theo tầng, duyệt theo lô release).
+
 Công thức chạy cho một feature (dùng ở phase 4–7): [feature-recipe.md](feature-recipe.md).
 Ma trận phân bổ nháp (đầu vào phase 1): [feature-allocation-draft.md](feature-allocation-draft.md).
 
 ## Ước lượng khối lượng
 
-- 22 feature chạy đủ chuỗi + 1 feature chỉ có envelope. Mỗi feature khoảng 12–16 điểm duyệt (L1/L2/HARD STOP user-flow), tổng khoảng 300 điểm duyệt. Phase 1 gom duyệt theo lô để giảm tải (xem `feature-recipe.md` Mục "Gom duyệt").
-- Runtime **không có** skill `/urd`, `/brd`, `/prd-epic`. URD/BRD/PRD feature viết từ `_templates/urd.md`, `brd.md`, `prd.md` với cùng approval gate L1/L2 như các skill BA.
+- 22 feature chạy đủ chuỗi + 1 feature chỉ có envelope. Mỗi feature khoảng 9–12 điểm duyệt (L1/L2/HARD STOP user-flow); rollout gom duyệt theo lô (xem `feature-recipe.md` Mục "Gom duyệt").
+- Runtime không có skill `/urd`, `/brd`, `/prd-epic`, và quy trình không dùng các bước này (D4).
 
 ## Tiêu chí hoàn thành
 
 - [ ] 23 thư mục feature tồn tại, frontmatter đúng `feature: {slug}`.
-- [ ] 22 feature có đủ: brainstorm, URD, BRD, PRD, `srs/{feature}-spec.md`, use case, userflow (`stage: flow-approved`), wireframe HTML, user story có AC, checklist. Feature thiếu artifact phải ghi lý do trong PRD feature.
-- [ ] `expansion-candidates` có PRD envelope + brainstorm, ghi rõ không build.
+- [ ] 22 feature có đủ: brainstorm, `srs/{feature}-spec.md`, use case, userflow (`stage: flow-approved`), wireframe HTML, user story có AC, checklist. Feature thiếu artifact phải ghi lý do trong PRD feature.
+- [ ] `expansion-candidates` có brainstorm, ghi rõ không build.
 - [ ] `grep -rE '(FR|NFR|BR|E|SC|OQ|CHK)-LMP-' docs/` chỉ còn trong bảng đối chiếu.
 - [ ] `docs/features/library-management-platform/` không còn tồn tại.
 - [ ] KG build: 0 broken ref do namespace; mục "Phải Read tay" không còn short-form ID.
-- [ ] `mermaid-verify.mjs` exit 0 cho mọi file mermaid (cần Chrome Headless — phase 0).
+- [ ] Sơ đồ mermaid: **không kiểm bằng máy** trên môi trường này (`mermaid-verify.mjs` không hỗ trợ Windows, người dùng chọn bỏ qua 2026-10-08) — kiểm bằng mắt khi review.
+- [ ] Tầng sản phẩm: PRD có Feature Map đủ cột + 23 khối 7.x; roadmap có xếp hạng ưu tiên, feature theo slug, sơ đồ phụ thuộc mức feature.
 - [ ] Ma trận phân bổ: 100% item nguồn có đích, 0 item mồ côi, 0 item hai chủ.
 - [ ] Review chéo (senior-ba, qa-reviewer, pm-reviewer) không còn BLOCKING.
 

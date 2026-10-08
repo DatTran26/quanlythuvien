@@ -6,7 +6,7 @@ updated: 2026-10-05
 links:
   - docs/features/library-management-platform/usecases/library-management-platform-usecase-index.md
   - docs/features/library-management-platform/srs/library-management-platform-spec.md
-  - docs/features/library-management-platform/domain/lifecycle-inventory.md
+  - docs/_shared/domain/lifecycle-inventory.md
   - docs/_product/decision-register.md
 ---
 
