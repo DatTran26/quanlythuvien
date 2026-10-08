@@ -45,3 +45,11 @@
 | 2026-10-08 | /brainstorm | @dattran26 | `docs/features/policy-config/brainstorms/policy-config-scope.md` | brainstorm policy-config, Micro từ nguồn, 2 OQ hold |
 | 2026-10-08 | /brainstorm | @dattran26 | `docs/features/reader-onboarding/brainstorms/reader-onboarding-scope.md` | brainstorm reader-onboarding, Micro từ nguồn, 4 OQ hold |
 | 2026-10-08 | /brainstorm | @dattran26 | `docs/features/checkout/brainstorms/checkout-scope.md` | next steps đổi sang /srs (bỏ URD/BRD/PRD) |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/damage-lifecycle/brainstorms/damage-lifecycle-scope.md` | brainstorm damage-lifecycle, Micro từ nguồn, 3 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/fine-collection-basic/brainstorms/fine-collection-basic-scope.md` | brainstorm fine-collection-basic, Micro từ nguồn, 1 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/lost-handling/brainstorms/lost-handling-scope.md` | brainstorm lost-handling, Micro từ nguồn, 3 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/notification-core/brainstorms/notification-core-scope.md` | brainstorm notification-core, Micro từ nguồn, 4 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/ops-reports/brainstorms/ops-reports-scope.md` | brainstorm ops-reports, Micro từ nguồn, 2 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/overdue-fines/brainstorms/overdue-fines-scope.md` | brainstorm overdue-fines, Micro từ nguồn, 2 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/reader-self-service/brainstorms/reader-self-service-scope.md` | brainstorm reader-self-service, Micro từ nguồn, 4 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/return-handling/brainstorms/return-handling-scope.md` | brainstorm return-handling, Micro từ nguồn, 2 OQ hold |
