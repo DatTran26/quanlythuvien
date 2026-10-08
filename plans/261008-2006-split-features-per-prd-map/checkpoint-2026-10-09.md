@@ -49,7 +49,7 @@ Lô R0 tầng 4: 7 feature có UI (`access-control`, `reader-onboarding`, `accou
 - Màn mới phải vẽ thêm: các màn cổng người đọc (`reader-self-service`) và trung tâm thông báo (`notification-audit-ui`, DEC-SF-09).
 - Mỗi feature sinh 3 file trong `docs/features/{feature}/html-wireframe/`: `{flow-slug}.html`, `{feature}-wireframe.html` (cửa vào), `{feature}-wireframe-html-index.md`. Khung Mobile 375, đen trắng, đánh số màn lại từ [1] theo user flow của feature; link sang feature khác dùng `../../{feature}/html-wireframe/{flow}.html#sN`; link tới feature chưa có wireframe thì để dạng chữ.
 - Sau khi tách: đổi mã cũ `*-LMP-*` theo `docs/_shared/id-crosswalk-lmp.md`, rồi sửa các ghi chú cũ trái với quyết định DEC-SF (vai trò, cấp tài khoản tại quầy, giá trị 5 cuốn/14 ngày/50.000đ…). Kiểm link bằng script và chụp màn hình bằng Chrome headless (`C:/Program Files/Google/Chrome/Application/chrome.exe --headless=new --screenshot`).
-- Script sinh (`wf_split.py`, `wf_entry.py`, `idremap.py`, `uf_r0.py`…) nằm trong scratchpad của phiên trước, **không được lưu lại**. Phiên sau cần viết lại theo mô tả trên hoặc làm thủ công.
+- Script sinh đã chép vào `scripts/split-features/` trên máy của @dattran26 (thư mục `scripts/` bị gitignore, **không có trên remote**). Chính: `idremap.py` (đổi mã `*-LMP-*` theo crosswalk), `uf_r0.py` (sinh user flow), `wf_split.py` + `wf_r0.py` + `wf_r0_fix.py` (tách wireframe cũ, vẽ màn mới, sửa ghi chú theo DEC-SF), `wf_entry.py` (sinh cửa vào + index). Chạy bằng `python -I <script> <thư-mục-nháp>` rồi chép kết quả vào `docs/`. Một số script tầng trước còn trỏ đường dẫn scratchpad cũ — sửa đường dẫn trước khi dùng lại. Máy khác thì viết lại theo mô tả trên.
 
 ## Câu hỏi còn mở đáng chú ý
 
