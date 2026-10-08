@@ -59,6 +59,7 @@ Các decision trên gắn với `OQ-LMP-003/004/005/009/010` trong `docs/feature
 | DEC-SF-07 | Tra cứu tách 2: phía Thủ thư/Quản trị viên ở `catalog-admin` (R0, phục vụ quản trị); phía Người đọc (FR-R02) ở `reader-self-service` (R1A) | Decision | BA lead | Product owner | Phase 1 tách feature | Không | Chốt (người dùng 2026-10-08) | spec FR-LMP-003; `priority-crosswalk.md` FR-R02 |
 | DEC-SF-08 | Persona trong user story đổi theo bộ tên DEC-SF-01 khi chuyển sang feature | Decision | BA lead | — | Rollout từng feature | Không | Chốt (người dùng 2026-10-08) | story index |
 | DEC-SF-09 | Thêm màn trung tâm thông báo (FR-C04) cho `notification-audit-ui`, R1B theo DEC-P2-01 | Decision | BA lead | Product owner | User-flow `notification-audit-ui` | Không | Chốt (người dùng 2026-10-08) | Nguồn FR-C04; DEC-P2-01 |
+| DEC-SF-10 | Giá trị quy định mượn: tối đa 5 cuốn đang mượn, thời hạn mượn 14 ngày, nợ phạt từ 50.000đ trở lên thì chặn mượn. Trả lời một phần OQ-04 nguồn / `OQ-policy-config-001`; các giá trị gia hạn, phạt, giữ chỗ, SLA vẫn mở | Decision | BA lead | Thủ thư trưởng | Trước khi khóa SRS `checkout` | Không | Chốt (người dùng 2026-10-08) | Nguồn BR-01/03/04; `checkout-scope.md` OQ-1 |
 
 ## Feature bị ảnh hưởng
 
@@ -91,3 +92,4 @@ Các decision trên gắn với `OQ-LMP-003/004/005/009/010` trong `docs/feature
 | DEC-SF-07 | catalog-admin, reader-self-service |
 | DEC-SF-08 | Mọi feature có user story |
 | DEC-SF-09 | notification-audit-ui |
+| DEC-SF-10 | checkout, policy-config, return-handling, overdue-fines |

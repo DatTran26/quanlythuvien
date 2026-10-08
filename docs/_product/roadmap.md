@@ -73,7 +73,7 @@ graph LR
 | KPI | Quét QR → hiển thị < 1s; tra cứu < 2s @50.000 bản sao (NFR-01); 0 Loan mở trùng bản sao; 100% thao tác ghi có audit. |
 | Rủi ro | Lỗi tính phạt/quá hạn trên dữ liệu thật → rollback R1A (xem dưới); hai quầy tranh chấp cùng bản sao → khóa lạc quan BR-13 + message wording chuẩn. |
 | Rollback boundary | Tắt endpoint giao dịch (feature flag circulation-off): dữ liệu Loan/Fine/DamageReport đã ghi được giữ nguyên và xử lý thủ công theo SOP; quay về trạng thái chỉ-đọc của R0. Không xóa dữ liệu nghiệp vụ đã ghi — sửa sai bằng quy trình điều chỉnh có audit. |
-| Non-goal | Không phân bổ hàng chờ đặt trước (điểm quyết định D5 luôn "không có hàng chờ" — DEC-P2-05); không gia hạn; không biên nhận in/xuất; không miễn/điều chỉnh phạt; không trung tâm thông báo đầy đủ; không audit viewer. |
+| Non-goal | Không phân bổ hàng chờ đặt trước (điểm quyết định D5 luôn "không có hàng chờ" — DEC-P2-05); không gia hạn; không biên nhận thu phạt in/xuất (biên nhận mượn sách có từ R1A — `checkout`); không miễn/điều chỉnh phạt; không trung tâm thông báo đầy đủ; không audit viewer. |
 
 ## 5. Release R1B — Hoàn thiện nghiệp vụ & sẵn sàng pilot
 

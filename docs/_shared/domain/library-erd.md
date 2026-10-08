@@ -385,15 +385,15 @@ Nhãn tổng entity: **PROPOSAL** (vị trí gắn hạn trả/gia hạn/trạng
 
 | `policy_key` (đề xuất) | Rule | Default proposal |
 |---|---|---|
-| `loan_max_open` | SRC-BR-01 | 5 bản sao |
-| `loan_days` | SRC-BR-04 | 14 ngày |
+| `loan_max_open` | SRC-BR-01 | 5 bản sao — chốt (DEC-SF-10) |
+| `loan_days` | SRC-BR-04 | 14 ngày — chốt (DEC-SF-10) |
 | `renew_max_count` / `renew_extra_days` | SRC-BR-04 | 1 lần / +7 ngày |
 | `fine_overdue_per_day` / `fine_overdue_cap` | SRC-BR-05 | 2.000đ/ngày / = giá sách |
 | `lost_compensation_pct` / `lost_fee_flat` | SRC-BR-06 | 100% giá + phí xử lý |
 | `damage_pct_minor/moderate/severe` | SRC-BR-07 | 0% / 30% / 100% giá |
 | `reservation_max_open` | SRC-BR-08 | 3 đặt trước |
 | `hold_hours` | SRC-BR-10 | 48 giờ |
-| `fine_block_threshold` | SRC-BR-03 | 50.000đ |
+| `fine_block_threshold` | SRC-BR-03 | 50.000đ — chốt (DEC-SF-10) |
 
 ### 3.13 `ImportBatch` — Lô nhập liệu + đối soát
 

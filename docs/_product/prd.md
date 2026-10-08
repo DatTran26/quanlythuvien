@@ -127,7 +127,7 @@ Namespace `CAP-*` là `PROPOSAL` chờ ID registry Phase 1. Ưu tiên là normal
 | 6 | Import Excel & đối soát | `data-import` | CAP-IMPORT | Quản trị viên | Must (P0) | catalog-admin, policy-config, file Excel nguồn (external blocker) | R0 | ⬜ chưa |
 | 7 | Cấu hình quy định | `policy-config` | CAP-POLICY | Quản trị viên | Must (P0) | Quyết định giá trị BR (GATE-DEC) | R0 | ⬜ chưa |
 | 8 | Audit capture & backup/restore | `ops-foundation` | CAP-AUDIT, CAP-OPS | Hệ thống | Must (P0) | access-control | R0 | ⬜ chưa |
-| 9 | Mượn tại quầy | `checkout` | CAP-CIRC | Thủ thư | Must (P0) | access-control, catalog-admin, copy-inventory, policy-config | R1A | ⬜ chưa |
+| 9 | Mượn tại quầy | `checkout` | CAP-CIRC | Thủ thư | Must (P0) | access-control, catalog-admin, copy-inventory, policy-config | R1A | 🔄 đang chi tiết (1 brainstorm) |
 | 10 | Trả & ngoại lệ | `return-handling` | CAP-CIRC | Thủ thư | Must (P0) | checkout, overdue-fines, damage-lifecycle | R1A | ⬜ chưa |
 | 11 | Job quá hạn & fine ledger | `overdue-fines` | CAP-OVERDUE, CAP-FINE | Hệ thống | Must (P0) | policy-config, ops-foundation | R1A | ⬜ chưa |
 | 12 | Báo cáo hư hỏng & duyệt | `damage-lifecycle` | CAP-DAMAGE | Thủ thư, Quản trị viên | Must (P0) | checkout | R1A | ⬜ chưa |
@@ -289,7 +289,7 @@ Thủ thư quét thẻ và nhiều sách; hệ thống kiểm điều kiện nga
 
 __Phục vụ job:__ Mượn sách nhanh, đúng, không hai người cùng giữ một bản sao.
 
-__Phạm vi v1:__ Quét thẻ, quét sách, rà soát, xác nhận, xử lý xung đột (R1A).
+__Phạm vi v1:__ Quét thẻ, quét sách, rà soát, xác nhận, xử lý xung đột, in biên nhận mượn (R1A).
 __Chưa làm:__ Nhận sách đặt trước (thuộc `reservation`, R2).
 
 __Luồng chính:__

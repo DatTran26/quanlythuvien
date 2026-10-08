@@ -26,3 +26,13 @@
 | 2026-10-08 | /test-checklist | DatTran26 | `docs/features/library-management-platform/test/checklist/checklist-feature.md` | generated 97 items (12 categories) |
 | 2026-10-08 | /test-checklist | DatTran26 | `docs/features/library-management-platform/test/checklist/library-management-platform-checklist-index.md` | generated 97 items (12 categories) cho checklist-feature |
 | 2026-10-08 | manual | DatTran26 | `docs/_product/decision-register.md` | manual edit |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/checkout/brainstorms/checkout-scope.md` | brainstorm checkout, Confirm-only, 4 OQ |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/checkout/brainstorms/checkout-scope.md` | cascade từ OQ-1 resolved: DEC-SF-10 hạn mức 5 cuốn/14 ngày/50.000đ |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/_shared/domain/library-erd.md` | cascade từ OQ-1 resolved: DEC-SF-10 hạn mức 5 cuốn/14 ngày/50.000đ |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/_product/decision-register.md` | cascade từ OQ-1 resolved: DEC-SF-10 hạn mức 5 cuốn/14 ngày/50.000đ |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/checkout/brainstorms/checkout-scope.md` | resolved OQ-2: nội dung biên nhận mượn; thêm OQ-5 khổ giấy/máy in |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/checkout/brainstorms/checkout-scope.md` | resolved OQ-3: wording bản sao không cho mượn, xác nhận lặp, quét trùng |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/_product/roadmap.md` | resolved OQ-4: R1A chỉ loại biên nhận thu phạt, biên nhận mượn có từ R1A |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/_product/prd.md` | resolved OQ-4: R1A chỉ loại biên nhận thu phạt, biên nhận mượn có từ R1A |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/checkout/brainstorms/checkout-scope.md` | resolved OQ-4: R1A chỉ loại biên nhận thu phạt, biên nhận mượn có từ R1A |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/_product/prd.md` | mark checkout đang chi tiết hóa (1 brainstorm) |

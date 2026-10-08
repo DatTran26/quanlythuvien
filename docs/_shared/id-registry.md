@@ -22,7 +22,7 @@ links:
 | Open Question (gap mới) | `GAP-OQ-NN` | chưa cấp | phase hiện hành | Dùng cho gap phát hiện sau baseline (phase-01 step 4) |
 | Decision (phase 3 domain) | `DEC-D3-NN` | `DEC-D3-01`…`DEC-D3-09` | `docs/_product/decision-register.md` | Reconstruction + domain rule, chờ domain approver |
 | Decision (phase 2 priority) | `DEC-P2-NN` | `DEC-P2-01`…`DEC-P2-09` | `docs/_product/decision-register.md` | Release boundary + priority crosswalk |
-| Decision (tách feature) | `DEC-SF-NN` | `DEC-SF-01`…`DEC-SF-09` | `docs/_product/decision-register.md` | Giải xung đột khi tách 23 feature |
+| Decision (tách feature) | `DEC-SF-NN` | `DEC-SF-01`…`DEC-SF-10` | `docs/_product/decision-register.md` | Giải xung đột khi tách 23 feature |
 | Requirement theo feature | `{FR,NFR,BR,E}-{feature}-NNN`, `SC-{feature}-NN`, `OQ-{feature}-NNN`, `CHK-{feature}-NNN` | xem `id-crosswalk-lmp.md` | `docs/features/{feature}/` | Thay series `*-LMP-*` |
 | Requirement dùng chung | `{NFR,BR,E,OQ,CHK}-core-NNN` | xem `id-crosswalk-lmp.md` | `docs/_shared/core-spec.md` | KG đã kiểm nhận được (spike 2026-10-08) |
 | Decision (mới) | `DEC-<PHASE>-NN` | — | `decision-register.md` | `<PHASE>` = mã phase 2 ký tự sinh decision (D3, P2…) |
