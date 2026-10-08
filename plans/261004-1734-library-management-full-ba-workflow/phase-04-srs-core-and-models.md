@@ -72,7 +72,7 @@ Dùng skill `srs` để kỹ thuật hoá scope đã duyệt thành Core Spec, u
 - [ ] Mỗi file Tầng 1 và Tầng 2 có approval evidence — **chưa**: chờ L1/L2 (OQ-LMP-001 block gán approver).
 - [x] Tất cả P0 capability có FR/BR/Error/UC tương ứng (FR-LMP-001..028 ↔ 10 UC ↔ E-LMP-001..018).
 - [x] State/flow/ERD nhất quán và Mermaid hợp lệ (16/16 block PASS; diagram-reviewer không blocker).
-- [ ] Không còn orphan reference — `library-management-platform-userflow.md` cố ý dangle (output Phase 5); link kiểm chứng lần cuối ở Phase 8 traceability.
+- [x] Không còn orphan reference — userflow và các model Phase 4–5 đã tồn tại; lần quét hiện tại không phát hiện broken reference. Phase 8 vẫn chạy lại traceability toàn chuỗi.
 
 ## Bước kế tiếp
 

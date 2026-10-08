@@ -1,6 +1,6 @@
 ---
 title: "Phase 5: UX flow và HTML wireframe"
-status: pending
+status: completed
 priority: P1
 effort: "2 approval cycles"
 dependencies: [4]
@@ -38,11 +38,11 @@ Dùng `user-flow` và `wireframe-html` để biến use case đã duyệt thành
 
 ## Todo
 
-- [ ] Hoàn thiện master user flow.
-- [ ] Phê duyệt UX flow và thiết bị mục tiêu.
-- [ ] Hoàn thiện screen inventory/transition table.
-- [ ] Tạo entry page và flow wireframes.
-- [ ] Kiểm tra navigation, accessibility cơ bản và source fidelity.
+- [x] Hoàn thiện master user flow.
+- [x] Phê duyệt UX flow và thiết bị mục tiêu.
+- [x] Hoàn thiện screen inventory/transition table.
+- [x] Tạo entry page và flow wireframes.
+- [x] Kiểm tra navigation, accessibility cơ bản và source fidelity.
 
 ## Verification
 
@@ -50,6 +50,8 @@ Dùng `user-flow` và `wireframe-html` để biến use case đã duyệt thành
 - Mọi transition trong flow có màn hình/feedback tương ứng hoặc lý do không cần UI.
 - `library-management-platform-wireframe.html` mở được; mỗi flow có breadcrumb về entry và không có link nội bộ hỏng.
 - Wireframe đen trắng, không masquerade thành visual design hoàn chỉnh.
+
+Evidence ngày 2026-10-08: 11 flow / 38 màn hình khớp `flow_hash: c4d1b86d`; 60 link từ cửa-vào resolve tới file/screen có thật; mỗi flow có screen label, một bảng mô tả 5 cột và breadcrumb; palette chỉ dùng `#000`, `#fff`, `#f0f0f0`, `#888`, `#ccc`; Chrome headless render cửa-vào và iframe thành công ở viewport 1440px.
 
 ## Kịch bản kiểm tra tối thiểu
 
@@ -68,10 +70,10 @@ Dùng `user-flow` và `wireframe-html` để biến use case đã duyệt thành
 
 ## Tiêu chí hoàn tất
 
-- [ ] User flow có approval evidence.
-- [ ] Device/layout target được xác nhận.
-- [ ] Entry HTML và toàn bộ flow chính hoạt động.
-- [ ] Screen/transition/source mapping nhất quán với SRS.
+- [x] User flow có approval evidence.
+- [x] Device/layout target được xác nhận.
+- [x] Entry HTML và toàn bộ flow chính hoạt động.
+- [x] Screen/transition/source mapping nhất quán với SRS.
 
 ## Bước kế tiếp
 

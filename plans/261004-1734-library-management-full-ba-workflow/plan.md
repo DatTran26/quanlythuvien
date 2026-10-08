@@ -44,8 +44,8 @@ Chuyển tài liệu khám phá hiện có thành chuỗi đặc tả có truy v
 | 1 | [Baseline và governance](./phase-01-baseline-governance.md) | In-progress | — |
 | 2 | [Product PRD và roadmap](./phase-02-product-prd-and-roadmap.md) | In-review (chờ L1 approval) | 1 |
 | 3 | [Domain model và phục hồi state](./phase-03-domain-models-and-state-recovery.md) | Completed | 1, 2 |
-| 4 | [SRS core và models](./phase-04-srs-core-and-models.md) | Pending | 2, 3 |
-| 5 | [UX flow và HTML wireframe](./phase-05-ux-flow-and-html-wireframe.md) | Pending | 4 |
+| 4 | [SRS core và models](./phase-04-srs-core-and-models.md) | In-review | 2, 3 |
+| 5 | [UX flow và HTML wireframe](./phase-05-ux-flow-and-html-wireframe.md) | Completed | 4 |
 | 6 | [Backlog và acceptance criteria](./phase-06-backlog-and-acceptance-criteria.md) | Pending | 4, 5 |
 | 7 | [QA checklist và test cases](./phase-07-qa-checklist-and-test-cases.md) | Pending | 4, 5, 6 |
 | 8 | [Traceability, review và handoff](./phase-08-traceability-review-and-handoff.md) | Pending | 1–7 |
