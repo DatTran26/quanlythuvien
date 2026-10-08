@@ -29,8 +29,8 @@ Tài liệu này phân biệt ba mức độ tin cậy. Mọi mục không ghi n
 |---|---|---|
 | Product PRD | `PROPOSAL` | Chờ L1 approval (đợt 1 — xem readiness-gates). |
 | Roadmap R0–R3 | `PROPOSAL` | Chờ L1 approval (đợt 2, sau PRD). |
-| Decision register | `PROPOSAL` | `docs/_product/decision-register.md`; Phase 1 chưa sinh bản gốc trên filesystem tại thời điểm viết — các quyết định Phase 2 dùng namespace `DEC-P2-*`. |
-| ID registry | Chưa tồn tại | `docs/_shared/id-registry.md` là output Phase 1; namespace CAP-/REL-/GATE-/DEC- trong tài liệu này là `PROPOSAL` cho tới khi registry được duyệt. |
+| Decision register | `PROPOSAL` | `docs/_product/decision-register.md` đã tồn tại; 18 quyết định hiện đều `Open`. |
+| ID registry | `draft` | `docs/_shared/id-registry.md` đã tồn tại; namespace CAP-/REL-/GATE-/DEC- vẫn là `PROPOSAL` cho tới khi được duyệt. |
 
 ## 1. One-line Pitch
 
@@ -41,7 +41,7 @@ Số hóa trọn vòng mượn – trả – đặt trước của một thư vi
 - **Vấn đề cốt lõi:** quầy mượn–trả thủ công dễ nhầm sách/người đọc/trạng thái; kho và công nợ phạt không minh bạch; không có baseline để ra quyết định go-live. (FACT)
 - **Ai đang đau:** Nhân viên quầy (tốc độ và độ chính xác giao dịch), Thủ thư (kiểm soát kho, quy định, hư hỏng, báo cáo), Người đọc (không tự theo dõi được), Thủ thư trưởng (thiếu căn cứ go-live). (FACT — brainstorm §3)
 - **Giải pháp thay thế hiện tại:** quy trình thủ công/sổ sách tại quầy. (FACT — suy từ mục tiêu số hóa)
-- **Why now:** pilot tại một cơ sở với hai quầy đã là giả định vận hành; dữ liệu Excel sẵn có cần được import và đối soát trước pilot. (FACT — project profile, OQ-15)
+- **Why now:** pilot tại một cơ sở với hai quầy đã là giả định vận hành; nhu cầu import và đối soát Excel đã được xác định, nhưng file đại diện vẫn là external blocker. (FACT — project profile, OQ-15)
 
 ## 3. Target Users
 
@@ -191,8 +191,8 @@ Kế thừa OQ-01..OQ-15 từ tài liệu hệ thống (giữ nguyên semantics;
 - [ ] OQ-08: Thu phạt tiền mặt hay online → mặc định tiền mặt; online là R3 candidate.
 - [ ] OQ-12: Quyền xem/xóa lịch sử mượn, retention → gate pháp lý, non-waivable trước go-live.
 - [ ] OQ-15: File Excel thật, trạng thái mã cũ → external blocker của GATE-MIG.
-- [ ] OQ brainstorm-1: Chính sách retention được pháp lý duyệt nào → chờ approver.
-- [ ] OQ brainstorm-3: Nguồn phục hồi state machine Copy và flow trả → Phase 3 reconstruct-as-proposal.
+- [ ] OQ-BS-1: Chính sách retention được pháp lý duyệt nào → chờ approver.
+- [ ] OQ-BS-3: Nguồn phục hồi state machine Copy và flow trả → Phase 3 reconstruct-as-proposal.
 
 ## 12. Approval
 

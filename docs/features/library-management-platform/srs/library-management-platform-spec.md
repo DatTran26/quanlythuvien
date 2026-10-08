@@ -19,9 +19,9 @@ links:
 
 | Item | State | Evidence / owner | Gate |
 |------|-------|------------------|------|
-| Baseline governance | Blocked | Phase 1 output chưa tồn tại trên filesystem | Owner: Phase 1 terminal + stakeholder |
-| PRD / release approval | Blocked | Phase 2 output chưa tồn tại; roadmap baseline là proposal | Owner: Phase 2 terminal + product owner |
-| Domain lifecycle inventory | Blocked | Phase 3 output chưa tồn tại; lifecycle bên dưới là PROPOSAL | Owner: Phase 3 terminal + domain approver |
+| Baseline governance | Draft — chờ L1 | `docs/_shared/project-profile.md`, `brainstorms/product-roadmap-baseline.md`, `decision-register.md` và `docs/_shared/id-registry.md` đã tồn tại; 18 DEC entry đều `Open` | Owner: BA lead + stakeholder |
+| PRD / release approval | Draft — chờ L1 | `docs/_product/prd.md`, `roadmap.md`, `priority-crosswalk.md`, `readiness-gates.md` đã tồn tại dạng PROPOSAL | Owner: product owner |
+| Domain lifecycle inventory | PROPOSAL — chờ domain approver | `domain/lifecycle-inventory.md` đã tồn tại; Copy state machine + flow trả là reconstruction (DEC-D3-01/02 `Open`) | Owner: domain approver (Thủ thư trưởng) |
 | SRS L1 content approval | Pending | Được sinh trong phiên Phase 4–8, chưa có phê duyệt người dùng | Owner: BA lead / stakeholder |
 | Hard-stop identity/privacy/finance/release | Open | Xem Mục 12 Open Questions | Không coi là ready |
 
@@ -36,10 +36,12 @@ links:
 
 Hệ thống quản lý thư viện quản lý danh mục sách, bản sao sách, người đọc, mượn/trả/gia hạn, đặt trước, tiền phạt/thanh toán, báo cáo hư hỏng/mất/tìm thấy, thông báo, phân quyền, nhật ký kiểm toán và nhập liệu/đối soát ban đầu.
 
-**Release boundary:**
-- `R1 / P0`: nghiệp vụ lõi đủ để vận hành quầy thủ thư và kiểm soát vòng đời tài nguyên.
-- `R2 / P1`: tự phục vụ người đọc, báo cáo vận hành, điều chỉnh tài chính nâng cao, phục hồi mất/tìm thấy nâng cao.
-- `Later / P2`: phân tích nâng cao, đề xuất, tối ưu danh mục; chỉ là capability envelope, không phải baseline build.
+**Release boundary (PROPOSAL — đã ánh xạ lại theo `docs/_product/roadmap.md` R0–R3 theo DEC-P2-08, chờ L1 approve):**
+- `R0`: nền tảng — identity/RBAC, tài khoản người đọc, catalog/bản sao/QR, import + đối soát, policy config, audit capture, backup/restore. **Chưa có giao dịch mượn–trả.**
+- `R1A`: lưu thông lõi tại quầy — checkout/return nguyên tử, job quá hạn + phạt tạm tính, fine ledger + thu tiền mặt tối thiểu, damage/mất tối thiểu, notify tối thiểu, báo cáo vận hành RP-01/02/04.
+- `R1B`: gia hạn, fine nâng cao (biên nhận/miễn/điều chỉnh), trung tâm thông báo đầy đủ, audit viewer, quản lý người đọc giới hạn → readiness gates → pilot go-live.
+- `R2`: reservation trọn vòng (single release owner — DEC-P2-05) + báo cáo xu hướng + reader self-service.
+- `R3 / candidate`: điểm danh, thanh toán online, đa chi nhánh, offline, SMS/push/Zalo, phân loại người đọc — chỉ capability envelope, không cam kết.
 
 **Out of scope hiện tại:** cổng thanh toán thật, chính sách pháp lý cuối cùng, mô hình dữ liệu import Excel chưa có file mẫu, đề xuất AI/recommendation.
 
@@ -55,55 +57,66 @@ Hệ thống quản lý thư viện quản lý danh mục sách, bản sao sách
 | Bộ phận tài chính/kế toán | stakeholder | Đối soát tiền phạt, điều chỉnh, hoàn/đảo bút toán | Có như stakeholder; policy là OQ |
 | Bảo mật/pháp chế | stakeholder | Kiểm soát PII, retention, audit | Có như stakeholder; policy là OQ |
 
+**Mapping vai trò nguồn ↔ naming SRS (PROPOSAL — trả lời một phần OQ-01 nguồn, phần còn lại ở OQ-LMP-014):**
+
+| Vai trò trong tài liệu nguồn (§2 `he_thong_quan_ly_thu_vien.md`) | Tên dùng trong bộ SRS này | Ghi chú |
+|---|---|---|
+| `Người đọc` | `Người đọc` | Giữ nguyên |
+| `Nhân viên` (trực quầy: mượn/trả, quét QR, báo hư hỏng, khóa tạm người đọc) | `Thủ thư` | Đổi tên — PROPOSAL |
+| `Thủ thư` (kế thừa Nhân viên + quản trị dữ liệu, cấu hình, báo cáo, nhật ký) | `Quản trị viên` | Đổi tên — PROPOSAL; việc tách vai trò admin riêng chính là câu hỏi OQ-01 nguồn |
+| — | `Hệ thống` | Actor kỹ thuật cho job/cron/outbox/audit |
+
+Mọi quyền thao tác trong các UC/model phải dùng đúng naming SRS ở cột 2. Delta so với ma trận quyền nguồn phải gắn nhãn PROPOSAL kèm lý do — không ghi FACT cho quyền đã siết/mở.
+
 ## 3. Functional Requirements (FR)
 
 | ID | Title | Actor | Description | Priority | Release | Verify by | Source |
 |----|-------|-------|-------------|----------|---------|-----------|--------|
-| FR-LMP-001 | Quản lý danh mục sách | Thủ thư/Quản trị viên | Tạo, xem, cập nhật, tìm kiếm bản ghi thư mục gồm tiêu đề, tác giả, thể loại, nhà xuất bản, năm, ISBN và mô tả khi có. | P0 | R1 | demo/test | Source fact |
-| FR-LMP-002 | Quản lý bản sao sách | Thủ thư/Quản trị viên | Đăng ký bản sao vật lý với mã định danh, vị trí, tình trạng ban đầu và trạng thái khả dụng. | P0 | R1 | demo/test | Source fact |
-| FR-LMP-003 | Tra cứu khả dụng | Thủ thư/Người đọc | Tra cứu đầu sách và xem số bản sao khả dụng, đang giữ, đang mượn hoặc không khả dụng. | P0 | R1 | test | Source fact |
-| FR-LMP-004 | Quản lý người đọc | Thủ thư/Quản trị viên | Tạo/cập nhật hồ sơ người đọc, trạng thái hoạt động, thông tin liên hệ và hạn thẻ nếu có. | P0 | R1 | demo/test | Source fact |
-| FR-LMP-005 | Khóa/mở người đọc | Quản trị viên | Cho phép tạm ngưng hoặc khôi phục quyền mượn của người đọc với lý do bắt buộc và audit. | P0 | R1 | test | PROPOSAL |
-| FR-LMP-006 | Đăng nhập và phân quyền | Hệ thống | Chỉ actor hợp lệ được truy cập chức năng theo vai trò và phạm vi dữ liệu được cấp. | P0 | R1 | test | Source fact + PROPOSAL |
-| FR-LMP-007 | Step-up và session reset | Hệ thống | Tác vụ nhạy cảm yêu cầu xác thực lại; hết phiên phải quay về trạng thái an toàn không mất dữ liệu đã lưu. | P0 | R1 | test | PROPOSAL |
-| FR-LMP-008 | Mượn nhiều bản sao nguyên tử | Thủ thư | Một phiếu mượn có nhiều bản sao chỉ thành công khi toàn bộ điều kiện hợp lệ; một bản sao lỗi làm cả giao dịch rollback. | P0 | R1 | test | Source fact + plan red-team |
-| FR-LMP-009 | Idempotency và concurrency mượn | Hệ thống | Lặp submit/checkout cùng request không tạo phiếu trùng; hai giao dịch tranh cùng bản sao chỉ một giao dịch thắng. | P0 | R1 | test/concurrency | Plan red-team |
-| FR-LMP-010 | Trả sách | Thủ thư | Ghi nhận trả một hoặc nhiều bản sao, cập nhật trạng thái bản sao và phiếu mượn, phát hiện quá hạn/hư hỏng để tạo nghĩa vụ tiếp theo. | P0 | R1 | demo/test | Source fact |
-| FR-LMP-011 | Gia hạn | Thủ thư/Người đọc | Gia hạn khoản mượn đủ điều kiện theo policy; từ chối khi đã quá hạn, có giữ chỗ hoặc vượt giới hạn gia hạn. | P0 | R1 | test | Source fact; ngưỡng là PROPOSAL |
-| FR-LMP-012 | Đặt trước và hàng đợi | Thủ thư/Người đọc | Tạo/hủy đặt trước, duy trì thứ tự hàng đợi, chuyển bản sao phù hợp sang giữ chỗ khi đến lượt. | P0 | R1-PROPOSAL | test | Source fact; MVP boundary là OQ-LMP-003 |
-| FR-LMP-013 | Hết hạn giữ chỗ | Hệ thống | Khi hết thời hạn nhận, hệ thống hủy lượt giữ và đẩy người kế tiếp lên đầu hàng đợi một cách nguyên tử. | P0 | R1-PROPOSAL | test | Source fact + PROPOSAL |
-| FR-LMP-014 | Ghi nhận tiền phạt | Hệ thống/Thủ thư | Tạo nghĩa vụ tiền phạt khi quá hạn/hư hỏng/mất theo policy; mọi thay đổi số dư là sự kiện tài chính append-only. | P0 | R1 | test | Source fact + plan red-team |
-| FR-LMP-015 | Thanh toán tiền phạt | Thủ thư/Người đọc | Ghi nhận thanh toán, hỗ trợ idempotency, cập nhật số dư và không cho xóa/sửa bút toán đã ghi. | P0 | R1 | test | Source fact |
-| FR-LMP-016 | Miễn/điều chỉnh/hoàn tiền | Quản trị viên | Cho phép waiver, adjustment, reversal/refund có lý do, quyền và audit; partial-payment policy chờ duyệt. | P1 | R2 | test | PROPOSAL; policy OQ-LMP-005 |
-| FR-LMP-017 | Báo cáo hư hỏng | Thủ thư | Tạo báo cáo hư hỏng gắn bản sao/phiếu mượn, mức độ, mô tả, bằng chứng ảnh tùy chọn và trạng thái xử lý. | P0 | R1 | demo/test | Source fact |
-| FR-LMP-018 | Mất và tìm lại | Thủ thư/Quản trị viên | Đánh dấu bản sao mất, ghi nhận nghĩa vụ bồi thường nếu có; khi tìm lại cho phép phục hồi trạng thái và đối soát nghĩa vụ liên quan. | P1 | R2 | test | Source fact; lifecycle PROPOSAL |
-| FR-LMP-019 | Thông báo bền | Hệ thống | Đưa thông báo sắp đến hạn/quá hạn/giữ sẵn/phạt vào outbox bền, retry theo chính sách và không mất khi kênh ngoài lỗi. | P0 | R1 | test | Source fact + plan red-team |
-| FR-LMP-020 | Audit log giao dịch | Hệ thống/Quản trị viên | Ghi audit cùng transaction với hành động nhạy cảm, bao gồm actor, thời điểm, resource, trước/sau tối thiểu và lý do khi có. | P0 | R1 | test | Source fact + plan red-team |
-| FR-LMP-021 | Quản trị cấu hình nghiệp vụ | Quản trị viên | Quản lý tham số hạn mượn, số lần gia hạn, hạn giữ chỗ, vai trò và kênh thông báo. Giá trị mặc định là OQ. | P0 | R1 | demo/test | Source fact + PROPOSAL |
-| FR-LMP-022 | Import và đối soát | Quản trị viên | Nhập dữ liệu ban đầu qua file đại diện, validate staging, báo lỗi theo dòng, dry-run trước commit và reconciliation sau import. | P0 | R1-PROPOSAL | test | Source fact; file mẫu OQ-LMP-002 |
-| FR-LMP-023 | Báo cáo vận hành | Quản trị viên/Thủ thư | Xem báo cáo sách quá hạn, đang mượn, hàng đợi, tiền phạt và bản sao hư hỏng/mất. | P1 | R2 | demo/test | Source fact |
-| FR-LMP-024 | Cổng tự phục vụ người đọc | Người đọc | Xem khoản mượn, đặt trước, hủy đặt trước và thanh toán nếu được phép. | P1 | R2 | test | PROPOSAL; phụ thuộc identity/portal |
-| FR-LMP-025 | Quản lý ảnh bằng chứng | Thủ thư | Upload ảnh cho báo cáo hư hỏng/mất qua trust boundary: kiểm tra loại, kích thước, quét nội dung, không tin metadata gốc. | P1 | R2 | test | PROPOSAL |
-| FR-LMP-026 | QR/barcode locator | Thủ thư | Quét mã bản sao/phiếu chỉ để định vị bản ghi; mã không được dùng như bằng chứng uỷ quyền. | P0 | R1 | test/security | Plan red-team |
-| FR-LMP-027 | Truy vết lịch sử nghiệp vụ | Thủ thư/Quản trị viên | Xem lịch sử trạng thái và sự kiện liên quan của bản sao, phiếu mượn, đặt trước, tiền phạt và báo cáo hư hỏng. | P1 | R2 | demo/test | PROPOSAL |
-| FR-LMP-028 | Phân tích nâng cao | Quản trị viên | Phân tích xu hướng mượn và đề xuất mua sắm; chỉ capability envelope, chưa phải yêu cầu build. | P2 | Later | phân tích | Roadmap baseline / PROPOSAL |
+| FR-LMP-001 | Quản lý danh mục sách | Thủ thư/Quản trị viên | Tạo, xem, cập nhật, tìm kiếm bản ghi thư mục gồm tiêu đề, tác giả, thể loại, nhà xuất bản, năm, ISBN và mô tả khi có. | P0 | R0 | demo/test | Source fact |
+| FR-LMP-002 | Quản lý bản sao sách | Thủ thư/Quản trị viên | Đăng ký bản sao vật lý với mã định danh, vị trí, tình trạng ban đầu và trạng thái khả dụng. | P0 | R0 | demo/test | Source fact |
+| FR-LMP-003 | Tra cứu khả dụng | Thủ thư/Người đọc | Tra cứu đầu sách và xem số bản sao khả dụng, đang giữ, đang mượn hoặc không khả dụng. | P0 | R1A | test | Source fact |
+| FR-LMP-004 | Quản lý người đọc | Thủ thư/Quản trị viên | Tạo/cập nhật hồ sơ người đọc, trạng thái hoạt động, thông tin liên hệ và hạn thẻ nếu có. | P0 | R0 | demo/test | Source fact |
+| FR-LMP-005 | Khóa/mở người đọc | Thủ thư/Quản trị viên | Cho phép tạm ngưng hoặc khôi phục quyền mượn của người đọc với lý do bắt buộc và audit; quyền theo ma trận nguồn (Nhân viên + Thủ thư đều khóa được). | P1 | R1B | test | Source fact (quyền) + PROPOSAL (lý do bắt buộc, FR-S10) |
+| FR-LMP-006 | Đăng nhập và phân quyền | Thủ thư/Người đọc/Quản trị viên | Chỉ actor hợp lệ được truy cập chức năng theo vai trò và phạm vi dữ liệu được cấp; Hệ thống là bên thực thi kiểm tra. | P0 | R0 | test | Source fact + PROPOSAL |
+| FR-LMP-007 | Step-up và session reset | Thủ thư/Người đọc/Quản trị viên | Tác vụ nhạy cảm yêu cầu xác thực lại; hết phiên phải quay về trạng thái an toàn không mất dữ liệu đã lưu; Hệ thống thực thi. | P0 | R0 | test | PROPOSAL |
+| FR-LMP-008 | Mượn nhiều bản sao nguyên tử | Thủ thư | Một phiếu mượn có nhiều bản sao chỉ thành công khi toàn bộ điều kiện hợp lệ; một bản sao lỗi làm cả giao dịch rollback. | P0 | R1A | test | Source fact + plan red-team |
+| FR-LMP-009 | Idempotency và concurrency mượn | Hệ thống | Lặp submit/checkout cùng request không tạo phiếu trùng; hai giao dịch tranh cùng bản sao chỉ một giao dịch thắng. | P0 | R1A | test/concurrency | Plan red-team |
+| FR-LMP-010 | Trả sách | Thủ thư | Ghi nhận trả một hoặc nhiều bản sao, cập nhật trạng thái bản sao và phiếu mượn, phát hiện quá hạn/hư hỏng để tạo nghĩa vụ tiếp theo. | P0 | R1A | demo/test | Source fact |
+| FR-LMP-011 | Gia hạn | Thủ thư/Người đọc | Gia hạn khoản mượn đủ điều kiện theo policy; từ chối khi đã quá hạn, có giữ chỗ hoặc vượt giới hạn gia hạn. | P1 | R1B | test | Source fact; ngưỡng là PROPOSAL; roadmap CAP-RENEW |
+| FR-LMP-012 | Đặt trước và hàng đợi | Thủ thư/Người đọc | Tạo/hủy đặt trước, duy trì thứ tự hàng đợi, chuyển bản sao phù hợp sang giữ chỗ khi đến lượt. | P1 | R2 | test | Source fact; release owner R2 — DEC-P2-05 |
+| FR-LMP-013 | Hết hạn giữ chỗ | Hệ thống | Khi hết thời hạn nhận, hệ thống hủy lượt giữ và đẩy người kế tiếp lên đầu hàng đợi một cách nguyên tử. | P1 | R2 | test | Source fact + PROPOSAL; DEC-P2-05 |
+| FR-LMP-014 | Ghi nhận tiền phạt | Hệ thống/Thủ thư | Tạo nghĩa vụ tiền phạt khi quá hạn/hư hỏng/mất theo policy; mọi thay đổi số dư là sự kiện tài chính append-only. | P0 | R1A | test | Source fact + plan red-team |
+| FR-LMP-015 | Thanh toán tiền phạt | Thủ thư/Người đọc | Ghi nhận thanh toán tiền mặt tối thiểu, hỗ trợ idempotency, cập nhật số dư và không cho xóa/sửa bút toán đã ghi; biên nhận đầy đủ ở R1B. | P0 | R1A | test | Source fact; split DEC-P2-04 |
+| FR-LMP-016 | Miễn/điều chỉnh/hoàn tiền | Quản trị viên | Cho phép waiver, adjustment, reversal/refund có lý do, quyền và audit; partial-payment policy chờ duyệt. | P1 | R1B | test | PROPOSAL; policy OQ-LMP-005; hard-stop DEC-D3-04 |
+| FR-LMP-017 | Báo cáo hư hỏng | Thủ thư | Tạo báo cáo hư hỏng gắn bản sao/phiếu mượn, mức độ, mô tả, bằng chứng ảnh 1–5 và trạng thái xử lý; disposition tối thiểu Bác bỏ/Sửa/Thanh lý. | P0 | R1A | demo/test | Source fact; DEC-P2-03 |
+| FR-LMP-018 | Mất và tìm lại | Thủ thư/Quản trị viên | Đánh dấu bản sao mất, ghi nhận nghĩa vụ bồi thường (tối thiểu R1A — DEC-P2-07); khi tìm lại cho phép phục hồi trạng thái và đối soát nghĩa vụ liên quan (R1B — DEC-D3-05). | P1 | R1A/R1B | test | Source fact; lifecycle PROPOSAL |
+| FR-LMP-019 | Thông báo bền | Hệ thống | Đưa thông báo sắp đến hạn/quá hạn/giữ sẵn/phạt vào outbox bền, retry theo chính sách và không mất khi kênh ngoài lỗi; in-app + email sự kiện quan trọng ở R1A, trung tâm thông báo đầy đủ R1B. | P0 | R1A | test | Source fact + plan red-team; DEC-P2-01 |
+| FR-LMP-020 | Audit log giao dịch | Hệ thống/Quản trị viên | Ghi audit cùng transaction với hành động nhạy cảm, bao gồm actor, thời điểm, resource, trước/sau tối thiểu và lý do khi có; audit viewer ở R1B. | P0 | R0 | test | Source fact + plan red-team; DEC-P2-06 |
+| FR-LMP-021 | Quản trị cấu hình nghiệp vụ | Quản trị viên | Quản lý tham số hạn mượn, số lần gia hạn, hạn giữ chỗ, vai trò và kênh thông báo. Giá trị mặc định là OQ. | P0 | R0 | demo/test | Source fact + PROPOSAL |
+| FR-LMP-022 | Import và đối soát | Quản trị viên | Nhập dữ liệu ban đầu qua file đại diện, validate staging, báo lỗi theo dòng, dry-run trước commit và reconciliation sau import. | P0 | R0 | test | Source fact; file mẫu OQ-LMP-002; DEC-P2-09 |
+| FR-LMP-023 | Báo cáo vận hành | Quản trị viên/Thủ thư | Xem báo cáo sách quá hạn, đang mượn, hàng đợi, tiền phạt và bản sao hư hỏng/mất (RP-01/02/04 ở R1A); báo cáo xu hướng RP-03/05/06/07 ở R2. | P1 | R1A/R2 | demo/test | Source fact |
+| FR-LMP-024 | Cổng tự phục vụ người đọc | Người đọc | Cổng self-service (R2): xem khoản mượn, đặt/hủy đặt trước, thanh toán nếu được phép. Riêng "người đọc xem công nợ" (FR-R09) thuộc R1B theo roadmap. | P1 | R2 (portal); R1B (xem công nợ) | test | PROPOSAL; phụ thuộc identity/portal; chưa có UC owner — xem usecase index |
+| FR-LMP-025 | Quản lý ảnh bằng chứng | Thủ thư | Upload ảnh cho báo cáo hư hỏng/mất qua trust boundary: kiểm tra loại, kích thước, quét nội dung, không tin metadata gốc. | P1 | R1A | test | PROPOSAL; ảnh 1–5 thuộc CAP-DAMAGE R1A |
+| FR-LMP-026 | QR/barcode locator | Thủ thư | Quét mã bản sao/phiếu chỉ để định vị bản ghi; mã không được dùng như bằng chứng uỷ quyền. | P0 | R0 | test/security | Plan red-team |
+| FR-LMP-027 | Truy vết lịch sử nghiệp vụ | Thủ thư/Quản trị viên | Xem lịch sử trạng thái và sự kiện liên quan của bản sao, phiếu mượn, đặt trước, tiền phạt và báo cáo hư hỏng. | P1 | R1B | demo/test | PROPOSAL; audit viewer FR-L10 |
+| FR-LMP-028 | Phân tích nâng cao | Quản trị viên | Phân tích xu hướng mượn và đề xuất mua sắm; chỉ capability envelope, chưa phải yêu cầu build. | P2 | R3-candidate | phân tích | Roadmap baseline / PROPOSAL |
 
 ## 4. Non-Functional Requirements (NFR)
 
 | ID | Category | Requirement | Priority | Release | Acceptance |
 |----|----------|-------------|----------|---------|------------|
-| NFR-LMP-001 | availability | Chức năng quầy lõi phải khả dụng trong giờ vận hành thư viện; SLA cụ thể chưa chốt. | P0 | R1 | OQ-LMP-010 định nghĩa SLA/đo uptime |
-| NFR-LMP-002 | performance | Tra cứu danh mục phổ thông phản hồi trong ngưỡng được phê duyệt; đề xuất ≤2s cho truy vấn thường dùng. | P0 | R1 | Đo P95 môi trường test; ngưỡng là PROPOSAL |
-| NFR-LMP-003 | integrity | Mọi chuyển trạng thái Copy/Loan/Reservation phải nguyên tử và chống double-write. | P0 | R1 | Test concurrency + kiểm tra dữ liệu sau commit |
-| NFR-LMP-004 | security | Authorization phải theo actor × resource × action × field × purpose. | P0 | R1 | Permission matrix test + security review |
-| NFR-LMP-005 | privacy | PII người đọc được mask theo quyền; retention/deletion chưa định nghĩa cho tới khi approved. | P0 | R1 | Permission test + privacy review; policy là OQ |
-| NFR-LMP-006 | auditability | Audit write thất bại phải làm hành động nhạy cảm thất bại theo cùng transaction. | P0 | R1 | Fault injection audit + transaction rollback |
-| NFR-LMP-007 | reliability | Outbox notification phải retry có kiểm soát và có trạng thái lỗi/dead-letter để xử lý. | P0 | R1 | Retry simulation + dead-letter evidence |
-| NFR-LMP-008 | usability | Màn hình quầy phải thao tác được bằng bàn phím và hiển thị trạng thái rõ ràng trên desktop 1024px. | P0 | R1 | Keyboard walkthrough + wireframe review |
+| NFR-LMP-001 | availability | Chức năng quầy lõi phải khả dụng trong giờ vận hành thư viện; SLA cụ thể chưa chốt. | P0 | R1A | OQ-LMP-010 định nghĩa SLA/đo uptime |
+| NFR-LMP-002 | performance | Tra cứu danh mục phổ thông phản hồi trong ngưỡng được phê duyệt; đề xuất ≤2s cho truy vấn thường dùng @50.000 bản sao. | P0 | R1A | Đo P95 môi trường test; ngưỡng là PROPOSAL |
+| NFR-LMP-003 | integrity | Mọi chuyển trạng thái Copy/Loan/Reservation phải nguyên tử và chống double-write. | P0 | R1A | Test concurrency + kiểm tra dữ liệu sau commit |
+| NFR-LMP-004 | security | Authorization phải theo actor × resource × action × field × purpose. | P0 | R0 | Permission matrix test + security review |
+| NFR-LMP-005 | privacy | PII người đọc được mask theo quyền; retention/deletion chưa định nghĩa cho tới khi approved. | P0 | R0 | Permission test + privacy review; policy là OQ; non-waivable trước GATE-GNG |
+| NFR-LMP-006 | auditability | Audit write thất bại phải làm hành động nhạy cảm thất bại theo cùng transaction. | P0 | R0 | Fault injection audit + transaction rollback |
+| NFR-LMP-007 | reliability | Outbox notification phải retry có kiểm soát và có trạng thái lỗi/dead-letter để xử lý. | P0 | R1A | Retry simulation + dead-letter evidence |
+| NFR-LMP-008 | usability | Màn hình quầy phải hiển thị trạng thái rõ ràng trong khung Mobile 375 và vẫn thao tác được bằng bàn phím khi có bàn phím phần cứng. | P0 | R1A | Keyboard walkthrough + wireframe review |
 | NFR-LMP-009 | accessibility | Điều khiển có label/name, focus visible, lỗi mô tả rõ; mục tiêu WCAG level chờ chốt. | P1 | R2 | A11y checklist + assistive smoke test |
-| NFR-LMP-010 | observability | Ghi log nghiệp vụ đủ để điều tra lỗi mà không lộ secrets/PII không cần thiết. | P1 | R2 | Log inspection + redaction review |
-| NFR-LMP-011 | data quality | Import phải có dry-run, lỗi theo dòng và số liệu đối soát trước khi commit. | P0 | R1 | Import fixture test + reconciliation report |
-| NFR-LMP-012 | compatibility | Responsive cơ bản; primary device desktop 1024 cho thủ thư, mobile/tablet là P1 nếu có portal. | P1 | R2 | Browser/device smoke matrix |
+| NFR-LMP-010 | observability | Ghi log nghiệp vụ đủ để điều tra lỗi mà không lộ secrets/PII không cần thiết. | P1 | R1B | Log inspection + redaction review |
+| NFR-LMP-011 | data quality | Import phải có dry-run, lỗi theo dòng và số liệu đối soát trước khi commit. | P0 | R0 | Import fixture test + reconciliation report; GATE-MIG |
+| NFR-LMP-012 | compatibility | HTML wireframe canonical dùng Mobile 375; responsive desktop/tablet và device production của portal vẫn cần browser/device smoke matrix riêng. | P1 | R2 | Browser/device smoke matrix |
 
 ## 5. Business Rules
 
@@ -125,6 +138,7 @@ Hệ thống quản lý thư viện quản lý danh mục sách, bản sao sách
 | BR-LMP-014 | Import commit chỉ sau dry-run pass hoặc override được phê duyệt; reconciliation phải đối chiếu số lượng, bản ghi lỗi và bản ghi bỏ qua. | Import run | FR-LMP-022 | Source fact + PROPOSAL |
 | BR-LMP-015 | Quyền xem/đổi field PII và tài chính áp theo actor × resource × action × field × purpose; deny mặc định. | Access sensitive field/action | FR-LMP-006/020 | Plan red-team |
 | BR-LMP-016 | Notification không làm fail business transaction chính; business commit ghi outbox event để delivery retry sau. | Business event emits notification | FR-LMP-019 | Plan red-team |
+| BR-LMP-017 | Xóa mềm: Reader, Thủ thư, BibliographicRecord, Copy đã có lịch sử nghiệp vụ chỉ được vô hiệu hóa/deactivate — không xóa cứng (giữ ledger append-only và audit trail). | Delete/deactivate request | FR-LMP-001/002/004 | Source fact (BR-12 nguồn) |
 
 ## 6. Error Matrix
 
@@ -209,7 +223,7 @@ Nhóm màn hình chính: đăng nhập/access, dashboard, danh mục, chi tiết
 | Phụ thuộc | Owner | Blocks nếu chưa sẵn |
 |-----------|-------|--------------------|
 | Decision register + stakeholder approval authority | Phase 1 / product owner | Mọi trạng thái approved |
-| PRD và release boundary chính thức | Phase 2 / product owner | R1/R2 chốt |
+| PRD và release boundary chính thức | Phase 2 / product owner | R0–R3 boundary chốt |
 | Lifecycle inventory approved | Phase 3 / domain approver | States/diagrams ready |
 | Representative Excel source | Data owner | Import schema/details |
 | Notification channel/provider | Product + technical owner | Channel-specific requirements |
@@ -221,16 +235,16 @@ Nhóm màn hình chính: đăng nhập/access, dashboard, danh mục, chi tiết
 | Giả định | Invalidate nếu sai |
 |----------|--------------------|
 | Thủ thư là actor P0 chính; người đọc tự phục vụ có thể dời R2 | FR-LMP-024 và screen portal |
-| Reservation được đưa vào R1 ở dạng tối thiểu | FR-LMP-012/013 priority/release |
+| Reservation trọn vòng có một release owner duy nhất là R2; luồng trả R1A không phân bổ hàng chờ (D5 = "không có hàng chờ") | FR-LMP-012/013; PROPOSAL DEC-P2-05 |
 | Cấu hình loan/renewal/hold/fine là policy do quản trị viên quản lý | BR-LMP-003/004/005 |
-| Upload ảnh chỉ cần trong damage/lost flow, có thể R2 | FR-LMP-025 |
-| Desktop 1024 là primary device | Userflow/wireframe device |
+| Upload ảnh cần trong damage/lost flow từ R1A (báo cáo hư hỏng có ảnh 1–5 thuộc CAP-DAMAGE R1A) | FR-LMP-025 |
+| Mobile 375 là primary device của HTML wireframe theo quyết định người dùng ngày 2026-10-07 | Userflow/wireframe device |
 
 ## 12. Open Questions
 
 - [ ] OQ-LMP-001 — Ai có quyền approve baseline/release/hard-stop? Owner: product sponsor. Gate: không artifact nào được đánh `approved`.
 - [ ] OQ-LMP-002 — Representative Excel source và mapping schema là gì? Owner: data owner. Gate: FR-LMP-022 chỉ proposal cho đến khi có file mẫu.
-- [ ] OQ-LMP-003 — Reservation thuộc MVP/R1 hay R2? Owner: product owner. Gate: FR-LMP-012/013 release boundary.
+- [ ] OQ-LMP-003 — Reservation thuộc MVP hay R2? Resolved-as-PROPOSAL bởi DEC-P2-05: single release owner = R2. Owner: product owner. Gate: chờ approve trước khi SRS lock.
 - [ ] OQ-LMP-004 — Diagram Copy/Return gốc thiếu; lifecycle hiện tại là PROPOSAL cần domain review. Owner: domain approver.
 - [ ] OQ-LMP-005 — Fine partial payment, waiver, adjustment, reversal/refund và reconciliation policy? Owner: finance owner. Gate: FR-LMP-016/018.
 - [ ] OQ-LMP-006 — Retention/deletion/masking policy? Owner: legal/privacy. Gate: NFR-LMP-005 và privacy QA.
@@ -238,13 +252,21 @@ Nhóm màn hình chính: đăng nhập/access, dashboard, danh mục, chi tiết
 - [ ] OQ-LMP-008 — Kênh notification bắt buộc là email/SMS/push hay trong-app? Owner: product owner. Gate: FR-LMP-019.
 - [ ] OQ-LMP-009 — Chính sách reconcile tài chính và ai approve financial override? Owner: finance owner. Gate: BR-LMP-007/008.
 - [ ] OQ-LMP-010 — Ngưỡng loan limit, renewal limit, hold expiry, due/fine threshold và SLA? Owner: domain/product owner. Gate: các BR/SC liên quan.
+- [ ] OQ-LMP-011 — Ngữ nghĩa Loan↔LoanItem: phiếu mượn là header + dòng per-copy (hạn trả/gia hạn/trạng thái ở dòng) — xác nhận thay giả định mặc định "không phiếu cha" từ OQ-06 nguồn. Owner: domain approver. Gate: ERD + uc-checkout/return.
+- [ ] OQ-LMP-012 — Actor/staff reference model: `*_by`/`actor_ref`/`recipient_ref` trỏ tài khoản hệ thống không nằm trong 13 entity §8 — tách entity hay giữ ref logic? Liên quan OQ-LMP-007 (identity model). Owner: security/IT. Gate: ERD + audit.
+- [ ] OQ-LMP-013 — `DamageReport.photo_refs`: list nhúng hay entity Attachment riêng? Liên quan OQ-LMP-006 (retention). Owner: domain/tech. Gate: ERD + uc-damage-lost-found.
+- [ ] OQ-LMP-014 — Kế thừa OQ-01 nguồn: sau khi tách `Quản trị viên` khỏi `Thủ thư` nguồn (mapping §2 — PROPOSAL), ai quản lý tài khoản Quản trị viên và cơ chế chống tự nâng quyền? Owner: security/IT. Gate: FR-LMP-006/007 + ma trận RBAC.
+- [ ] OQ-LMP-015 — HTML wireframe chung đã chốt Mobile 375; device production và responsive target riêng cho cổng self-service Người đọc R2 vẫn là PROPOSAL. Owner: product owner. Gate: prototype/production portal R2.
+- [ ] OQ-LMP-016 — FR-LMP-024 (người đọc xem công nợ, FR-R09 nguồn): xây màn reader tối thiểu ở R1B hay chuyển toàn bộ sang portal R2? Hiện chưa có UC/screen owner. Owner: product owner. Gate: tạo `uc-reader-self-service` + userflow/wireframe reader.
+- [ ] OQ-LMP-017 — Thủ thư quầy có quyền xem báo cáo vận hành (reports-flow) không? Quyền này lệch ma trận nguồn — hiện PROPOSAL, chỉ Quản trị viên chắc chắn. Owner: domain approver. Gate: RBAC reports + userflow reports-flow.
+- [ ] OQ-LMP-018 — Ai được approve commit import khi dry-run chưa pass; điều kiện và chứng cứ override là gì? Owner: data owner + Thủ thư trưởng/product owner. Gate: GATE-MIG + uc-admin-import.
 
 ## 13. Approval register
 
 | Artifact layer | Required approver | Current evidence | State |
 |----------------|-------------------|------------------|-------|
 | Core spec | BA lead + product owner | Chưa có approval event | draft / pending |
-| Lifecycle states | Domain approver | Chưa có Phase 3 input | PROPOSAL |
+| Lifecycle states | Domain approver | `domain/lifecycle-inventory.md` đã tồn tại — reconstruction DEC-D3-01/02 `Open` | PROPOSAL |
 | Security/privacy/finance | Security, legal, finance owners | OQ mở | blocked for approval |
-| Release boundary | Product owner | Roadmap baseline là draft | pending |
+| Release boundary | Product owner | `docs/_product/roadmap.md` R0–R3 draft — chờ L1; remap SRS theo DEC-P2-08 | pending |
 
