@@ -1,6 +1,6 @@
 ---
 title: "Phase 3: Domain model và phục hồi state"
-status: in-progress
+status: completed
 priority: P1
 effort: "1 review cycle"
 dependencies: [1, 2]

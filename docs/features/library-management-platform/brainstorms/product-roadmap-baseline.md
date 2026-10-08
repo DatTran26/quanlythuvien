@@ -256,9 +256,9 @@ State machine đầy đủ của Copy đã được dựng lại thành artifact
 
 ## 11. Open Questions
 
-- [ ] OQ-1: Chính sách lưu giữ và xử lý yêu cầu dữ liệu cá nhân nào được người phụ trách pháp lý phê duyệt?
-- [ ] OQ-2: File Excel thực tế có cấu trúc, chất lượng và mã QR cũ như thế nào?
-- [ ] OQ-3: Sơ đồ 7 trạng thái Copy và chi tiết luồng trả gốc có thể phục hồi từ nguồn nào? — Đã reconstruct-as-PROPOSAL tại `domain/lifecycle-inventory.md` (DEC-D3-01/02); vẫn mở cho tới khi domain approver xác nhận hoặc nguồn gốc được tìm lại.
+- [ ] OQ-BS-1 (trước ghi `OQ-1`): Chính sách lưu giữ và xử lý yêu cầu dữ liệu cá nhân nào được người phụ trách pháp lý phê duyệt?
+- [ ] OQ-BS-2 (trước ghi `OQ-2`): File Excel thực tế có cấu trúc, chất lượng và mã QR cũ như thế nào?
+- [ ] OQ-BS-3 (trước ghi `OQ-3`): Sơ đồ 7 trạng thái Copy và chi tiết luồng trả gốc có thể phục hồi từ nguồn nào? — Đã reconstruct-as-PROPOSAL tại `domain/lifecycle-inventory.md` (DEC-D3-01/02); vẫn mở cho tới khi domain approver xác nhận hoặc nguồn gốc được tìm lại.
 
 ## 12. Next Steps
 

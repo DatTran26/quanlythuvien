@@ -1,6 +1,6 @@
 ---
 title: "Phase 2: Product PRD và roadmap"
-status: pending
+status: in-review
 priority: P1
 effort: "1–2 approval cycles"
 dependencies: [1]
