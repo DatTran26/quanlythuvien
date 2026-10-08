@@ -60,3 +60,12 @@
 | 2026-10-08 | /brainstorm | @dattran26 | `docs/features/reservation/brainstorms/reservation-scope.md` | brainstorm reservation, Micro từ nguồn, 3 OQ hold |
 | 2026-10-08 | /brainstorm | @dattran26 | `docs/features/trend-reports/brainstorms/trend-reports-scope.md` | brainstorm trend-reports, Micro từ nguồn, 1 OQ hold |
 | 2026-10-08 | /brainstorm | @dattran26 | `docs/_product/prd.md` | mark 22 feature đang chi tiết hóa (1 brainstorm mỗi feature) |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/access-control/srs/access-control-spec.md` | SRS Tầng 1 access-control: 5 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/account-admin/srs/account-admin-spec.md` | SRS Tầng 1 account-admin: 3 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/catalog-admin/srs/catalog-admin-spec.md` | SRS Tầng 1 catalog-admin: 3 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/copy-inventory/srs/copy-inventory-spec.md` | SRS Tầng 1 copy-inventory: 3 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/data-import/srs/data-import-spec.md` | SRS Tầng 1 data-import: 1 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/ops-foundation/srs/ops-foundation-spec.md` | SRS Tầng 1 ops-foundation: 2 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/policy-config/srs/policy-config-spec.md` | SRS Tầng 1 policy-config: 1 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/reader-onboarding/srs/reader-onboarding-spec.md` | SRS Tầng 1 reader-onboarding: 1 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/_shared/id-crosswalk-lmp.md` | thêm 5 FR mới lô R0, đánh dấu đã chuyển SRS lô R0 |
