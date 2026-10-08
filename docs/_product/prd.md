@@ -119,29 +119,29 @@ Namespace `CAP-*` là `PROPOSAL` chờ ID registry Phase 1. Ưu tiên là normal
 
 | # | Tính năng | Slug | Theme | Persona | Ưu tiên (MoSCoW) | Phụ thuộc | Release | Chi tiết hóa |
 |---|---|---|---|---|---|---|---|---|
-| 1 | Đăng nhập & phân quyền | `access-control` | CAP-IDENT | Mọi vai trò | Must (P0) | — | R0 | 🔄 đang chi tiết (1 brainstorm) |
-| 2 | Cấp & kích hoạt tài khoản người đọc tại quầy | `reader-onboarding` | CAP-ACCT | Thủ thư | Must (P0) | access-control | R0 | 🔄 đang chi tiết (1 brainstorm) |
-| 3 | Quản trị tài khoản | `account-admin` | CAP-ACCT | Quản trị viên, Thủ thư | Must (P0) R0; Should (P1) R1B | access-control | R0, R1B | 🔄 đang chi tiết (1 brainstorm) |
-| 4 | Danh mục & đầu sách | `catalog-admin` | CAP-CATALOG | Quản trị viên, Thủ thư | Must (P0) | access-control | R0 | 🔄 đang chi tiết (1 brainstorm) |
-| 5 | Bản sao & nhãn QR | `copy-inventory` | CAP-CATALOG | Quản trị viên | Must (P0) | catalog-admin | R0 | 🔄 đang chi tiết (1 brainstorm) |
-| 6 | Import Excel & đối soát | `data-import` | CAP-IMPORT | Quản trị viên | Must (P0) | catalog-admin, policy-config, file Excel nguồn (external blocker) | R0 | 🔄 đang chi tiết (1 brainstorm) |
-| 7 | Cấu hình quy định | `policy-config` | CAP-POLICY | Quản trị viên | Must (P0) | Quyết định giá trị BR (GATE-DEC) | R0 | 🔄 đang chi tiết (1 brainstorm) |
-| 8 | Audit capture & backup/restore | `ops-foundation` | CAP-AUDIT, CAP-OPS | Hệ thống | Must (P0) | access-control | R0 | 🔄 đang chi tiết (1 brainstorm) |
-| 9 | Mượn tại quầy | `checkout` | CAP-CIRC | Thủ thư | Must (P0) | access-control, catalog-admin, copy-inventory, policy-config | R1A | 🔄 đang chi tiết (1 brainstorm) |
-| 10 | Trả & ngoại lệ | `return-handling` | CAP-CIRC | Thủ thư | Must (P0) | checkout, overdue-fines, damage-lifecycle | R1A | 🔄 đang chi tiết (1 brainstorm) |
-| 11 | Job quá hạn & fine ledger | `overdue-fines` | CAP-OVERDUE, CAP-FINE | Hệ thống | Must (P0) | policy-config, ops-foundation | R1A | 🔄 đang chi tiết (1 brainstorm) |
-| 12 | Báo cáo hư hỏng & duyệt | `damage-lifecycle` | CAP-DAMAGE | Thủ thư, Quản trị viên | Must (P0) | checkout | R1A | 🔄 đang chi tiết (1 brainstorm) |
-| 13 | Ghi nhận mất & tìm lại | `lost-handling` | CAP-DAMAGE | Thủ thư | Must (P0-PROPOSAL) R1A; Should (P1) R1B | return-handling, GATE-DEC (financial control) | R1A, R1B | 🔄 đang chi tiết (1 brainstorm) |
-| 14 | Thu phạt tiền mặt tối thiểu | `fine-collection-basic` | CAP-FINE | Thủ thư | Must (P0-PROPOSAL) | overdue-fines | R1A | 🔄 đang chi tiết (1 brainstorm) |
-| 15 | Tự phục vụ người đọc | `reader-self-service` | CAP-READER | Người đọc | Must (P0) R1A; Should (P1) R1B | access-control, checkout | R1A, R1B | 🔄 đang chi tiết (1 brainstorm) |
-| 16 | Thông báo tối thiểu | `notification-core` | CAP-NOTIFY | Hệ thống | Must (P0) | access-control | R1A | 🔄 đang chi tiết (1 brainstorm) |
-| 17 | Báo cáo vận hành | `ops-reports` | CAP-REPORT | Quản trị viên | Must (P0) | checkout (dữ liệu thật) | R1A, R1B | 🔄 đang chi tiết (1 brainstorm) |
-| 18 | Gia hạn tại quầy & online | `renewal` | CAP-RENEW, CAP-READER | Người đọc, Thủ thư | Should (P1) | checkout; BR gia hạn kiểm hàng chờ rỗng tới R2 (DEC-P2-05) | R1B | 🔄 đang chi tiết (1 brainstorm) |
-| 19 | Thu phạt nâng cao (biên nhận, miễn/điều chỉnh) | `fine-collection-adv` | CAP-FINE | Thủ thư, Quản trị viên | Should (P1) | fine-collection-basic, financial-control approval | R1B | 🔄 đang chi tiết (1 brainstorm) |
-| 20 | Trung tâm thông báo & audit viewer | `notification-audit-ui` | CAP-NOTIFY, CAP-AUDIT | Mọi vai trò, Quản trị viên | Should (P1) | notification-core, ops-foundation | R1B | 🔄 đang chi tiết (1 brainstorm) |
-| 21 | Đặt trước trọn vòng | `reservation` | CAP-RESERVE | Người đọc, Thủ thư | Should (P1) | return-handling (điểm quyết định D5), notification-core, policy-config | R2 | 🔄 đang chi tiết (1 brainstorm) |
-| 22 | Báo cáo xu hướng | `trend-reports` | CAP-REPORT | Quản trị viên | Should (P1) | ops-reports (dữ liệu vận hành tích lũy) | R2 | 🔄 đang chi tiết (1 brainstorm) |
-| 23 | Candidate mở rộng | `expansion-candidates` | CAP-ATTEND/PAY/BRANCH/OFFLINE/MSGALT | — | Could (P2) | Quyết định riêng từng mục | R3 (candidate) | 🔄 đang chi tiết (1 brainstorm) |
+| 1 | Đăng nhập & phân quyền | `access-control` | CAP-IDENT | Mọi vai trò | Must (P0) | — | R0 | ✅ 6 tầng (draft) |
+| 2 | Cấp & kích hoạt tài khoản người đọc tại quầy | `reader-onboarding` | CAP-ACCT | Thủ thư | Must (P0) | access-control | R0 | ✅ 6 tầng (draft) |
+| 3 | Quản trị tài khoản | `account-admin` | CAP-ACCT | Quản trị viên, Thủ thư | Must (P0) R0; Should (P1) R1B | access-control | R0, R1B | ✅ 6 tầng (draft) |
+| 4 | Danh mục & đầu sách | `catalog-admin` | CAP-CATALOG | Quản trị viên, Thủ thư | Must (P0) | access-control | R0 | ✅ 6 tầng (draft) |
+| 5 | Bản sao & nhãn QR | `copy-inventory` | CAP-CATALOG | Quản trị viên | Must (P0) | catalog-admin | R0 | ✅ 6 tầng (draft) |
+| 6 | Import Excel & đối soát | `data-import` | CAP-IMPORT | Quản trị viên | Must (P0) | catalog-admin, policy-config, file Excel nguồn (external blocker) | R0 | ✅ 6 tầng (draft) |
+| 7 | Cấu hình quy định | `policy-config` | CAP-POLICY | Quản trị viên | Must (P0) | Quyết định giá trị BR (GATE-DEC) | R0 | ✅ 6 tầng (draft) |
+| 8 | Audit capture & backup/restore | `ops-foundation` | CAP-AUDIT, CAP-OPS | Hệ thống | Must (P0) | access-control | R0 | ✅ 6 tầng (draft) |
+| 9 | Mượn tại quầy | `checkout` | CAP-CIRC | Thủ thư | Must (P0) | access-control, catalog-admin, copy-inventory, policy-config | R1A | ✅ 6 tầng (draft) |
+| 10 | Trả & ngoại lệ | `return-handling` | CAP-CIRC | Thủ thư | Must (P0) | checkout, overdue-fines, damage-lifecycle | R1A | ✅ 6 tầng (draft) |
+| 11 | Job quá hạn & fine ledger | `overdue-fines` | CAP-OVERDUE, CAP-FINE | Hệ thống | Must (P0) | policy-config, ops-foundation | R1A | ✅ 6 tầng (draft) |
+| 12 | Báo cáo hư hỏng & duyệt | `damage-lifecycle` | CAP-DAMAGE | Thủ thư, Quản trị viên | Must (P0) | checkout | R1A | ✅ 6 tầng (draft) |
+| 13 | Ghi nhận mất & tìm lại | `lost-handling` | CAP-DAMAGE | Thủ thư | Must (P0-PROPOSAL) R1A; Should (P1) R1B | return-handling, GATE-DEC (financial control) | R1A, R1B | ✅ 6 tầng (draft) |
+| 14 | Thu phạt tiền mặt tối thiểu | `fine-collection-basic` | CAP-FINE | Thủ thư | Must (P0-PROPOSAL) | overdue-fines | R1A | ✅ 6 tầng (draft) |
+| 15 | Tự phục vụ người đọc | `reader-self-service` | CAP-READER | Người đọc | Must (P0) R1A; Should (P1) R1B | access-control, checkout | R1A, R1B | ✅ 6 tầng (draft) |
+| 16 | Thông báo tối thiểu | `notification-core` | CAP-NOTIFY | Hệ thống | Must (P0) | access-control | R1A | ✅ 6 tầng (draft) |
+| 17 | Báo cáo vận hành | `ops-reports` | CAP-REPORT | Quản trị viên | Must (P0) | checkout (dữ liệu thật) | R1A, R1B | ✅ 6 tầng (draft) |
+| 18 | Gia hạn tại quầy & online | `renewal` | CAP-RENEW, CAP-READER | Người đọc, Thủ thư | Should (P1) | checkout; BR gia hạn kiểm hàng chờ rỗng tới R2 (DEC-P2-05) | R1B | ✅ 6 tầng (draft) |
+| 19 | Thu phạt nâng cao (biên nhận, miễn/điều chỉnh) | `fine-collection-adv` | CAP-FINE | Thủ thư, Quản trị viên | Should (P1) | fine-collection-basic, financial-control approval | R1B | ✅ 6 tầng (draft) |
+| 20 | Trung tâm thông báo & audit viewer | `notification-audit-ui` | CAP-NOTIFY, CAP-AUDIT | Mọi vai trò, Quản trị viên | Should (P1) | notification-core, ops-foundation | R1B | ✅ 6 tầng (draft) |
+| 21 | Đặt trước trọn vòng | `reservation` | CAP-RESERVE | Người đọc, Thủ thư | Should (P1) | return-handling (điểm quyết định D5), notification-core, policy-config | R2 | ✅ 6 tầng (draft) |
+| 22 | Báo cáo xu hướng | `trend-reports` | CAP-REPORT | Quản trị viên | Should (P1) | ops-reports (dữ liệu vận hành tích lũy) | R2 | ✅ 6 tầng (draft) |
+| 23 | Candidate mở rộng | `expansion-candidates` | CAP-ATTEND/PAY/BRANCH/OFFLINE/MSGALT | — | Could (P2) | Quyết định riêng từng mục | R3 (candidate) | 🔄 brainstorm only — không chi tiết hóa |
 
 Ưu tiên ghi theo MoSCoW kèm normalized priority trong ngoặc (`priority-crosswalk.md`). Cột Release là bổ sung so với template, giữ vì release gắn với readiness gate.
 ### 7.1 Đăng nhập & phân quyền — `access-control`

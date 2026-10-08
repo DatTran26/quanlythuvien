@@ -1,6 +1,6 @@
 # Checkpoint bàn giao — 2026-10-09
 
-Nhánh `docs/split-features`, commit cuối `8e06bf5` (đã push lên `origin`). Plan gốc: [plan.md](plan.md), công thức từng feature: [feature-recipe.md](feature-recipe.md).
+Nhánh `docs/split-features` (sau đó merge `develop-dat`). Plan gốc: [plan.md](plan.md), công thức: [feature-recipe.md](feature-recipe.md), quyết định Max: [max-decisions-2026-10-09.md](max-decisions-2026-10-09.md).
 
 ## Cách đang làm
 
@@ -19,22 +19,19 @@ Nhánh `docs/split-features`, commit cuối `8e06bf5` (đã push lên `origin`).
 | 1. Brainstorm — 23/23 feature | Xong | `5936b8f`, `7385dc2`, `826e2d4` |
 | 2. SRS spec — 22/22 (trừ `expansion-candidates`) | Xong | `7d5150a`, `3ab41ea`, `30e8d28` |
 | 3. Use case + flows — 22/22 | Xong | `95b6b44`, `189aa72`, `a7117bc` (+ `a8b4fe1` đổi ký hiệu `SRC-BRnn`) |
-| 4. User flow + wireframe HTML | **Lô R0 xong**; R1A, R1B+R2 chưa làm | `a865085` (user flow R0), `8e06bf5` (wireframe R0) |
-| 5. User story + AC | Chưa làm | — |
-| 6. Checklist | Chưa làm | — |
-| Phase 8 (gỡ feature gộp), phase 9 (review, PR) | Chưa làm | — |
+| 4. User flow + wireframe HTML | **R0 + R1A + R1B+R2 xong** (22 feature; `ops-foundation`/`overdue-fines` không có màn; `expansion-candidates` không vẽ) | R0: `a865085`/`8e06bf5`; còn lại: Max 2026-10-09 |
+| 5. User story + AC | **22/22 xong** (draft, chuyển từ LMP + FR mới) | Max 2026-10-09 |
+| 6. Checklist | **22/22 xong** (draft, `CHK-{feature}-NNN`) | Max 2026-10-09 |
+| Phase 8 (gỡ feature gộp) | Chưa xóa LMP — **cần xác nhận user** | — |
+| Phase 9 (PR vào `develop`) | Đang làm khi user yêu cầu merge `develop-dat` | — |
 
 Lô R0 tầng 4: 7 feature có UI (`access-control`, `reader-onboarding`, `account-admin`, `catalog-admin`, `copy-inventory`, `data-import`, `policy-config`); `ops-foundation` không có màn hình nên không có user flow/wireframe.
 
 ## Việc tiếp theo (theo thứ tự)
 
-1. **Tầng 4 lô R1A** — user flow (HARD STOP duyệt cả lô) rồi wireframe HTML cho các feature R1A có UI: `checkout`, `return-handling`, `damage-lifecycle`, `lost-handling`, `fine-collection-basic`, `reader-self-service`, `notification-core` (màn `notification-status`), `ops-reports`. `overdue-fines` là job hệ thống, không có màn.
-2. **Tầng 4 lô R1B+R2** — `renewal`, `fine-collection-adv`, `notification-audit-ui`, `reservation`, `trend-reports`. `expansion-candidates` không vẽ.
-3. Tầng 5 user story + AC: đánh số `US-001` lại theo từng feature, persona theo DEC-SF-08.
-4. Tầng 6 checklist: `CHK-{feature}-NNN` theo crosswalk; `test-strategy.md` từng feature tham chiếu `docs/_shared/test-strategy-baseline.md`.
-5. Khi một feature đủ 6 tầng: đổi cột "Chi tiết hóa" trong Feature Map (`docs/_product/prd.md`) sang ✅.
-6. Phase 8: quét mã `*-LMP-*` còn sót, sửa link, xóa `docs/features/library-management-platform/` (**phải hỏi người dùng xác nhận rõ trước khi xóa**).
-7. Phase 9: review chéo, chỉ tạo PR vào `develop` khi người dùng yêu cầu.
+1. Soát 🔶 trong [max-decisions-2026-10-09.md](max-decisions-2026-10-09.md) và lô user flow/wireframe (Max đã tự chốt HARD STOP).
+2. Phase 8: quét mã `*-LMP-*` còn sót trong feature gộp, sửa link, xóa `docs/features/library-management-platform/` (**phải hỏi người dùng xác nhận rõ trước khi xóa**).
+3. Review chéo /srs Phase G nếu cần; Feature Map đã đánh ✅ 6 tầng (draft) trừ `expansion-candidates`.
 
 ## Cách làm wireframe (để lô sau làm giống R0)
 

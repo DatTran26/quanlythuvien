@@ -181,3 +181,59 @@
 | 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/policy-config/html-wireframe/policy-config-flow.html` | Wireframe HTML lô R0 tách theo feature |
 | 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/policy-config/html-wireframe/policy-config-wireframe.html` | Wireframe HTML lô R0 tách theo feature |
 | 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/policy-config/html-wireframe/policy-config-wireframe-html-index.md` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/access-control/userstories/access-control-story-index.md` | story index access-control |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/account-admin/userstories/account-admin-story-index.md` | story index account-admin |
+| 2026-10-09 | /test-checklist | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/account-admin/test/checklist/checklist-feature.md` | checklist account-admin |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/catalog-admin/userstories/catalog-admin-story-index.md` | story index catalog-admin |
+| 2026-10-09 | /user-flow | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/checkout/srs/checkout-userflow.md` | user flow checkout, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/checkout/html-wireframe/checkout-wireframe.html` | Wireframe HTML checkout |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/checkout/userstories/checkout-story-index.md` | story index checkout |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/copy-inventory/userstories/copy-inventory-story-index.md` | story index copy-inventory |
+| 2026-10-09 | /user-flow | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/damage-lifecycle/srs/damage-lifecycle-userflow.md` | user flow damage-lifecycle, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/damage-lifecycle/html-wireframe/damage-lifecycle-wireframe.html` | Wireframe HTML damage-lifecycle |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/damage-lifecycle/userstories/damage-lifecycle-story-index.md` | story index damage-lifecycle |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/data-import/userstories/data-import-story-index.md` | story index data-import |
+| 2026-10-09 | /user-flow | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/fine-collection-adv/srs/fine-collection-adv-userflow.md` | user flow fine-collection-adv, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/fine-collection-adv/html-wireframe/fine-collection-adv-wireframe.html` | Wireframe HTML fine-collection-adv |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/fine-collection-adv/userstories/fine-collection-adv-story-index.md` | story index fine-collection-adv |
+| 2026-10-09 | /test-checklist | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/fine-collection-adv/test/checklist/checklist-feature.md` | checklist fine-collection-adv |
+| 2026-10-09 | /user-flow | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/fine-collection-basic/srs/fine-collection-basic-userflow.md` | user flow fine-collection-basic, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/fine-collection-basic/html-wireframe/fine-collection-basic-wireframe.html` | Wireframe HTML fine-collection-basic |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/fine-collection-basic/userstories/fine-collection-basic-story-index.md` | story index fine-collection-basic |
+| 2026-10-09 | /user-flow | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/lost-handling/srs/lost-handling-userflow.md` | user flow lost-handling, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/lost-handling/html-wireframe/lost-handling-wireframe.html` | Wireframe HTML lost-handling |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/lost-handling/userstories/lost-handling-story-index.md` | story index lost-handling |
+| 2026-10-09 | /user-flow | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/notification-audit-ui/srs/notification-audit-ui-userflow.md` | user flow notification-audit-ui, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/notification-audit-ui/html-wireframe/notification-audit-ui-wireframe.html` | Wireframe HTML notification-audit-ui |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/notification-audit-ui/userstories/notification-audit-ui-story-index.md` | story index notification-audit-ui |
+| 2026-10-09 | /user-flow | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/notification-core/srs/notification-core-userflow.md` | user flow notification-core, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/notification-core/html-wireframe/notification-core-wireframe.html` | Wireframe HTML notification-core |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/notification-core/userstories/notification-core-story-index.md` | story index notification-core |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/ops-foundation/userstories/ops-foundation-story-index.md` | story index ops-foundation |
+| 2026-10-09 | /test-checklist | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/ops-foundation/test/checklist/checklist-feature.md` | checklist ops-foundation |
+| 2026-10-09 | /user-flow | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/ops-reports/srs/ops-reports-userflow.md` | user flow ops-reports, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/ops-reports/html-wireframe/ops-reports-wireframe.html` | Wireframe HTML ops-reports |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/ops-reports/userstories/ops-reports-story-index.md` | story index ops-reports |
+| 2026-10-09 | /test-checklist | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/ops-reports/test/checklist/checklist-feature.md` | checklist ops-reports |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/overdue-fines/userstories/overdue-fines-story-index.md` | story index overdue-fines |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/policy-config/userstories/policy-config-story-index.md` | story index policy-config |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/reader-onboarding/userstories/reader-onboarding-story-index.md` | story index reader-onboarding |
+| 2026-10-09 | /user-flow | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/reader-self-service/srs/reader-self-service-userflow.md` | user flow reader-self-service, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/reader-self-service/html-wireframe/reader-self-service-wireframe.html` | Wireframe HTML reader-self-service |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/reader-self-service/userstories/reader-self-service-story-index.md` | story index reader-self-service |
+| 2026-10-09 | /test-checklist | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/reader-self-service/test/checklist/checklist-feature.md` | checklist reader-self-service |
+| 2026-10-09 | /user-flow | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/renewal/srs/renewal-userflow.md` | user flow renewal, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/renewal/html-wireframe/renewal-wireframe.html` | Wireframe HTML renewal |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/renewal/userstories/renewal-story-index.md` | story index renewal |
+| 2026-10-09 | /test-checklist | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/renewal/test/checklist/checklist-feature.md` | checklist renewal |
+| 2026-10-09 | /user-flow | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/reservation/srs/reservation-userflow.md` | user flow reservation, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/reservation/html-wireframe/reservation-wireframe.html` | Wireframe HTML reservation |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/reservation/userstories/reservation-story-index.md` | story index reservation |
+| 2026-10-09 | /test-checklist | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/reservation/test/checklist/checklist-feature.md` | checklist reservation |
+| 2026-10-09 | /user-flow | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/return-handling/srs/return-handling-userflow.md` | user flow return-handling, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/return-handling/html-wireframe/return-handling-wireframe.html` | Wireframe HTML return-handling |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/return-handling/userstories/return-handling-story-index.md` | story index return-handling |
+| 2026-10-09 | /user-flow | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/trend-reports/srs/trend-reports-userflow.md` | user flow trend-reports, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/trend-reports/html-wireframe/trend-reports-wireframe.html` | Wireframe HTML trend-reports |
+| 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/trend-reports/userstories/trend-reports-story-index.md` | story index trend-reports |
+| 2026-10-09 | /test-checklist | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/trend-reports/test/checklist/checklist-feature.md` | checklist trend-reports |

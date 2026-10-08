@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>checkout — Mượn tại quầy | Wireframe</title>
+  <style>
+    /* RESET */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f0f0;
+      color: #000;
+      padding: 32px 24px;
+    }
+    .wf-page { max-width: 1400px; margin: 0 auto; }
+
+    /* BREADCRUMB về cửa-vào TOC — chỉ hiện khi mở file flow TRỰC TIẾP, ẩn khi trong iframe của {feature}-wireframe.html */
+    .wf-breadcrumb { max-width: 1400px; margin: 0 auto 16px; }
+    .wf-breadcrumb a { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #000; text-decoration: none; border: 1px solid #000; border-radius: 4px; padding: 6px 12px; background: #fff; }
+    .wf-breadcrumb a:hover { background: #f0f0f0; }
+    html.in-iframe .wf-breadcrumb { display: none; }
+
+    /* HEADER */
+    .wf-header { margin-bottom: 28px; border-bottom: 2px solid #000; padding-bottom: 14px; background: #fff; padding: 16px 20px; }
+    .wf-feature-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; }
+    .wf-flow-title { font-size: 22px; font-weight: 700; margin-top: 4px; }
+    .wf-flow-meta { font-size: 12px; color: #888; margin-top: 6px; }
+    .wf-flow-desc { font-size: 13px; color: #000; margin-top: 8px; line-height: 1.5; }
+
+    /* FLOW ROW — screens xếp ngang, TỰ WRAP theo bề rộng device (KHÔNG ép 3/row) */
+    .wf-rows { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px 16px; }
+    .wf-row-divider { display: none; } /* không còn chia row cứng — wrap tự nhiên */
+
+    /* SCREEN WRAPPER — bề rộng = device thật, KHÔNG phải 33% trừu tượng.
+       data-device trên .wf-page quyết định: mobile 375 / tablet 768 / desktop 1440.
+       Frame giữ tỉ lệ thật của thiết bị → không còn "size sai / trông giả". */
+    .wf-screen { flex: 0 0 auto; }
+    .wf-page[data-device="mobile"]  .wf-screen { width: 375px; }
+    .wf-page[data-device="tablet"]  .wf-screen { width: 768px; }
+    .wf-page[data-device="desktop"] .wf-screen { width: 1024px; max-width: 100%; }
+    .wf-page:not([data-device]) .wf-screen { width: 375px; } /* fallback mobile-first */
+    .wf-device-tag { display: inline-block; font-size: 10px; color: #000; border: 1px solid #ccc; border-radius: 3px; padding: 1px 6px; margin-bottom: 6px; }
+    .wf-step-badge {
+      font-size: 10px; font-weight: 700; color: #fff;
+      background: #000; border-radius: 50%;
+      width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 6px;
+    }
+    .wf-screen-label { text-align: center; font-size: 11px; color: #000; margin-top: 6px; }
+    .wf-shared-badge { font-size: 9px; color: #888; border: 1px solid #ccc; border-radius: 3px; padding: 0 4px; margin-left: 4px; }
+    .wf-arrow { display: flex; align-items: center; padding-top: 48px; font-size: 22px; color: #000; flex-shrink: 0; }
+
+    /* SCREEN FRAME (device chrome) */
+    .wf-screen-frame { border: 2px solid #000; border-radius: 8px; overflow: hidden; background: #fff; }
+    .wf-screen-bar { background: #f0f0f0; border-bottom: 1px solid #000; padding: 6px 10px; display: flex; align-items: center; gap: 5px; }
+    .wf-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid #888; background: #fff; flex-shrink: 0; }
+    .wf-bar-title { font-size: 11px; font-weight: 600; flex: 1; text-align: center; }
+    .wf-screen-content { padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+    /* FORM CONTAINER — form/auth/dialog KHÔNG trải rộng hết khung desktop.
+       Bọc nội dung form trong .wf-form (box căn giữa, hẹp) — input/nút full-width TRONG box này,
+       không phải full khung. Trên mobile 375 thì .wf-form ~= full width tự nhiên. */
+    .wf-form { width: 100%; max-width: 380px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .wf-form.card { border: 1px solid #ccc; border-radius: 8px; padding: 20px; background: #fff; } /* optional: viền box rõ */
+
+    /* APP BRAND */
+    .wf-app-brand { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: #000; padding-bottom: 4px; border-bottom: 1px solid #f0f0f0; margin-bottom: 4px; }
+    .wf-screen-title { font-size: 15px; font-weight: 700; text-align: center; margin-bottom: 4px; }
+
+    /* FORM ELEMENTS */
+    .field { display: flex; flex-direction: column; gap: 3px; }
+    .field label { font-size: 11px; font-weight: 600; }
+    .field input[type=text], .field input[type=email], .field input[type=password] {
+      border: 1px solid #000; border-radius: 3px; padding: 7px 9px;
+      font-size: 12px; width: 100%; background: #fff; color: #000;
+    }
+    .field input::placeholder { color: #888; }
+    .input-pw { position: relative; }
+    .input-pw input { padding-right: 28px; width: 100%; border: 1px solid #000; border-radius: 3px; padding: 7px 9px; font-size: 12px; }
+    .input-pw .eye { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 13px; cursor: pointer; color: #000; }
+
+    /* CHECKBOX */
+    label.checkbox { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; }
+    label.checkbox input { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* BUTTONS */
+    .btn-primary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #000; color: #fff;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-secondary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-google {
+      display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .g-icon { font-size: 14px; font-weight: 900; font-style: italic; }
+
+    /* LINK */
+    .wf-link { font-size: 12px; color: #000; text-decoration: underline; cursor: pointer; }
+    .links-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; }
+
+    /* BANNERS / INFO */
+    .banner { font-size: 11px; padding: 8px 10px; border: 1px solid #000; border-radius: 4px; display: flex; gap: 6px; align-items: flex-start; line-height: 1.4; }
+    .banner-info { background: #f0f0f0; }
+    .banner-warn { background: #f0f0f0; }
+
+    /* LABELS / HINTS */
+    .info-label { font-size: 12px; color: #000; line-height: 1.5; text-align: center; }
+    .hint-text { font-size: 11px; color: #888; font-style: italic; }
+    .state-hint { font-size: 10px; color: #888; font-style: italic; margin-top: 2px; }
+
+    /* PASSWORD CHECKLIST */
+    .pw-check { display: flex; gap: 8px; flex-wrap: wrap; font-size: 10px; }
+    .pw-check .ok { color: #000; }
+    .pw-check .ok::before { content: "✓ "; }
+    .pw-check .fail { color: #888; }
+    .pw-check .fail::before { content: "✗ "; }
+
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #888; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #ccc; }
+
+    /* MODAL BOX */
+    .modal-box { border: 2px solid #000; border-radius: 6px; padding: 12px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+    .modal-title { font-size: 12px; font-weight: 700; border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+    .modal-desc { font-size: 11px; color: #000; line-height: 1.5; }
+    .modal-actions { display: flex; gap: 8px; margin-top: 4px; }
+    .modal-actions .btn-secondary, .modal-actions .btn-primary { flex: 1; font-size: 11px; padding: 7px 8px; }
+
+    /* ICON PLACEHOLDER */
+    .icon-lg { text-align: center; font-size: 28px; margin-bottom: 4px; }
+
+    /* BACK NAV */
+    .back-nav { font-size: 12px; color: #000; display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 4px; }
+
+    /* CARD */
+    .wf-card { border: 1px solid #ccc; border-radius: 4px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; }
+    .wf-card-body { flex: 1; }
+    .wf-card-title { font-size: 12px; font-weight: 700; }
+    .wf-card-sub { font-size: 11px; color: #000; }
+    .wf-card-action { flex-shrink: 0; }
+
+    /* CAPTCHA placeholder */
+    .captcha-box { border: 1px dashed #888; border-radius: 4px; padding: 8px; text-align: center; font-size: 10px; color: #888; background: #f0f0f0; }
+
+    /* FOOTER */
+    .wf-footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid #ccc; font-size: 10px; color: #888; display: flex; justify-content: space-between; }
+
+    /* SCREEN DESCRIPTION TABLE (Phase F.5) */
+    .wf-desc-section { margin-top: 32px; }
+    .wf-desc-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #000; }
+    .wf-desc-table { width: 100%; border-collapse: collapse; background: #fff; font-size: 12px; }
+    .wf-desc-table th, .wf-desc-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; }
+    .wf-desc-table th { background: #f0f0f0; font-weight: 700; font-size: 11px; text-transform: uppercase; }
+    .wf-desc-table td:first-child, .wf-desc-table th:first-child { width: 36px; text-align: center; }
+    .wf-desc-table td:nth-child(2) { width: 150px; }  /* Items */
+    .wf-desc-table td:nth-child(3) { width: 110px; }  /* Control type */
+    .wf-desc-table td:nth-child(4) { width: 90px; }   /* Data type */
+    /* col 5 (Description) = phần còn lại */
+    .wf-desc-screen-header td { background: #000; color: #fff; font-weight: 700; font-size: 12px; }
+  </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.documentElement.classList.add('in-iframe');</script>
+<div class="wf-breadcrumb"><a href="checkout-wireframe.html">← Mục lục wireframe (checkout)</a></div>
+<div class="wf-page" data-device="mobile">
+  <div class="wf-header">
+    <div class="wf-feature-label">Feature: checkout / Wireframe</div>
+    <div class="wf-flow-title">Mượn tại quầy</div>
+    <div class="wf-flow-meta">Mobile 375 · 4 màn · 2026-10-09 · đen trắng</div>
+    <div class="wf-flow-desc">Quét thẻ và bản sao, commit nguyên tử, biên nhận trên màn. Máy in/khổ giấy còn OQ-checkout-001.</div>
+  </div>
+  <div class="wf-rows">
+    <div class="wf-screen" id="s1">
+      <div class="wf-step-badge">1</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Quầy lưu thông</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div>
+          <div class="wf-screen-title">Quầy lưu thông</div>
+          <div class="info-label">Phiên đã xác thực — Thủ thư, có quyền checkout (include uc-access-control). Thao tác được bằng bàn phím, trạng thái và thao tác rõ ràng (NFR-checkout-001).</div>
+          <button class="btn-primary" type="button">Bắt đầu mượn (R1A)</button>
+          <button class="btn-secondary" type="button">Trả sách / gia hạn</button>
+          <div class="links-row">
+            <a class="wf-link" href="../../account-admin/html-wireframe/account-admin-flow.html">Tra cứu người đọc</a>
+            <a class="wf-link" href="../../catalog-admin/html-wireframe/catalog-admin-flow.html">Tra cứu danh mục</a>
+          </div>
+          <div class="banner banner-info"><span>Trả sách luôn khả dụng kể cả khi reader bị khóa — BR-core-001 chỉ áp cho checkout/renewal. Phiên idle hết hạn hoặc hành động nhạy cảm → E-access-control-001 step-up → màn chung [5] <a class="wf-link" href="../../access-control/html-wireframe/auth-flow.html">auth-flow</a>.</span></div>
+        </div>
+      </div>
+      <div class="wf-screen-label">circulation-desk</div>
+  </div>
+<div class="wf-screen" id="s2">
+      <div class="wf-step-badge">2</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Quét phiên mượn</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="back-nav"><a class="wf-link" href="#s1">← Quầy lưu thông</a></div>
+          <div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div>
+          <div class="wf-screen-title">Quét phiên mượn</div>
+          <div class="field">
+            <label>Mã thẻ người đọc *</label>
+            <input type="text" placeholder="Quét QR thẻ hoặc nhập mã">
+          </div>
+          <p class="hint-text">Mã chỉ dùng để locate Reader — scan không phải authorization (BR-copy-inventory-001). <a class="wf-link" href="#s2">Nhập mã tay</a></p>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">RD-000123 · Nguyễn Văn A</div>
+              <div class="wf-card-sub">active · đang mượn 2 cuốn · không quá hạn · nợ trong ngưỡng</div>
+            </div>
+          </div>
+          <div class="banner banner-info"><span><b>Đủ điều kiện (BR-core-001)</b> — 3 điều kiện chặn (FACT tập BR-03 nguồn): tài khoản khóa/không active; có sách quá hạn; nợ phạt vượt ngưỡng (ngưỡng — PROPOSAL OQ-policy-config-001, 50.000đ — DEC-SF-10). Loan đang mở + giỏ ≤ loan limit (đề xuất 5 — OQ-policy-config-001).</span></div>
+          <div class="field">
+            <label>Mã bản sao *</label>
+            <input type="text" placeholder="Quét QR / nhập mã từng cuốn">
+          </div>
+          <p class="hint-text">Kiểm tra ngay khi thêm (BR-checkout-002): status=AVAILABLE + is_loanable, hoặc ON_HOLD với Reservation READY của đúng reader này (nhánh R2 — DEC-P2-05); không trùng trong giỏ; không trùng đầu sách đang mượn.</p>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">COPY-00912 · Giải tích 1</div>
+              <div class="wf-card-sub">AVAILABLE · is_loanable ✓</div>
+            </div>
+            <span class="wf-card-action">✓</span>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">COPY-00777 · Đại số tuyến tính</div>
+              <div class="wf-card-sub">AVAILABLE · is_loanable ✓</div>
+            </div>
+            <span class="wf-card-action">✓</span>
+          </div>
+          <button class="btn-primary" type="button">Hoàn tất quét → Rà soát mượn</button>
+          <button class="btn-secondary" type="button">Hủy phiên</button>
+          <div class="divider"><span>Trạng thái lỗi</span></div>
+          <div class="banner banner-warn"><span><b>E-core-001 / E-core-003</b> — Mã thẻ không đọc được / hết hạn: quét lại hoặc <a class="wf-link" href="#s2">nhập mã tay</a>; thẻ tài khoản không active → xử lý như blocked bên dưới. Mã không tồn tại → "Không tìm thấy người đọc / bản sao với mã này" + quét lại, nhập lại hoặc tra cứu thủ công trên <a class="wf-link" href="../../account-admin/html-wireframe/account-admin-flow.html">reader-list</a> / <a class="wf-link" href="../../catalog-admin/html-wireframe/catalog-admin-flow.html">catalog-search</a>. Không vào bước quét sách khi chưa locate được Reader hợp lệ.</span></div>
+          <div class="banner banner-warn"><span><b>E-core-006</b> — Reader không đủ điều kiện (blocked): mỗi lý do hiển thị riêng, kèm hành động khắc phục — không dùng lý do chung "block nghiệp vụ". Khóa/không active → <a class="wf-link" href="../../account-admin/html-wireframe/account-admin-flow.html">mở khóa (uc-reader-admin)</a>; sách quá hạn → <a class="wf-link" href="../../return-handling/html-wireframe/return-handling-flow.html">trả sách</a>; nợ vượt ngưỡng → <a class="wf-link" href="../../fine-collection-basic/html-wireframe/fine-collection-basic-flow.html">thanh toán</a>; "Người đọc đã đạt giới hạn N cuốn đang mượn." (N=5 — DEC-SF-10 — OQ-policy-config-001). Hoặc hủy phiếu / đổi reader.</span></div>
+          <div class="banner banner-warn"><span><b>E-checkout-001</b> — Copy không hợp lệ để mượn: báo trạng thái hiện tại (ON_LOAN, ON_HOLD sai chủ, PENDING_REVIEW, IN_REPAIR, LOST, DISPOSED, hoặc AVAILABLE nhưng is_loanable=false) → cuốn lỗi không thêm vào giỏ, giữ nguyên các cuốn hợp lệ; ON_HOLD người khác → gợi ý <a class="wf-link" href="../../reservation/html-wireframe/reservation-flow.html">reservation-queue</a> (R2). Quét trùng cùng Copy trong giỏ / trùng đầu sách đang mượn (E-core-001 inline): cảnh báo và bỏ qua — không nhân đôi item.</span></div>
+        </div>
+      </div>
+      <div class="wf-screen-label">checkout-scan</div>
+  </div>
+<div class="wf-screen" id="s3">
+      <div class="wf-step-badge">3</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Rà soát mượn</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="back-nav"><a class="wf-link" href="#s2">← Quét mượn</a></div>
+          <div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div>
+          <div class="wf-screen-title">Rà soát mượn</div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">RD-000123 · Nguyễn Văn A</div>
+              <div class="wf-card-sub">2 cuốn trong giỏ · đang mượn 2 · sau phiếu: 4/5 (limit đề xuất — OQ-policy-config-001)</div>
+            </div>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">Giải tích 1</div>
+              <div class="wf-card-sub">COPY-00912 · hạn trả dự kiến 29/10 (đề xuất 14 ngày — OQ-policy-config-001)</div>
+            </div>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">Đại số tuyến tính</div>
+              <div class="wf-card-sub">COPY-00777 · hạn trả dự kiến 29/10 (đề xuất 14 ngày — OQ-policy-config-001)</div>
+            </div>
+          </div>
+          <p class="hint-text">Xác nhận = một transaction nguyên tử (AT-CHK-01): client phát sinh operation_id (AT-CHK-02) → CAS trên Copy.version + allowed-source-state (AVAILABLE / ON_HOLD đúng chủ) → từng Copy →ON_LOAN (COPY-T01/T02), N Loan ACTIVE + due_at = borrowed + hạn mượn (LOAN-T01), Reservation đúng lượt →FULFILLED (RES-T03 — chỉ R2), audit + outbox notify kèm hạn trả (BR-core-003/BR-core-005).</p>
+          <button class="btn-primary" type="button">Xác nhận mượn</button>
+          <button class="btn-secondary" type="button">Quay lại quét</button>
+          <div class="divider"><span>Kết quả / lỗi</span></div>
+          <div class="banner banner-info"><span><b>Thành công (commit)</b> — "Đã tạo phiếu mượn. Hạn trả được hiển thị trong danh sách sách đang mượn." (wording baseline §7.3 — PROPOSAL) → kết thúc phiếu, quay về <a class="wf-link" href="#s1">circulation-desk</a> cho giao dịch mới.</span></div>
+          <div class="banner banner-warn"><span><b>E-core-004</b> — Xung đột (critical): ≥1 item đổi trạng thái sau khi load giỏ, hoặc quầy khác vừa ghi cùng Copy → CAS thất bại → rollback toàn bộ, không Loan nào được ghi (BR-checkout-001; chỉ transaction ghi trước thắng — AT-CHK-03, SC-checkout-02) → <a class="wf-link" href="#s4">checkout-conflict</a> hiển thị trạng thái mới.</span></div>
+          <div class="banner banner-warn"><span><b>E-core-005</b> — Double-submit / mất mạng sau xác nhận: unique constraint trên operation_id (PROPOSAL — AT-CHK-02) → submit lặp nhận lại kết quả gốc + duplicate notice, không tạo Loan thứ hai; giao dịch chưa nhận phản hồi được đối soát.</span></div>
+          <div class="banner banner-warn"><span><b>E-core-007 / E-core-008</b> — Audit write thất bại: business write fail theo cùng transaction — fail-closed (BR-core-003), cảnh báo vận hành, thử lại khi audit sink hoạt động (chi tiết <a class="wf-link" href="../../notification-core/html-wireframe/notification-status-flow.html">uc-notification-audit</a>). Action trạng thái không hợp lệ (re-confirm phiếu đã đóng, submit giỏ rỗng, copy vừa DISPOSED): disable/từ chối kèm giải thích, reload trạng thái, chỉ hiển thị action hợp lệ.</span></div>
+        </div>
+      </div>
+      <div class="wf-screen-label">checkout-review</div>
+  </div>
+<div class="wf-screen" id="s4">
+      <div class="wf-step-badge">4</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Xung đột checkout</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div>
+          <div class="wf-screen-title">Xung đột checkout</div>
+          <div class="modal-box">
+            <div class="modal-title">Sách vừa được cập nhật — E-core-004</div>
+            <div class="modal-desc">"Sách vừa được cập nhật. Vui lòng quét lại để xem trạng thái mới." — CAS trên Copy.version + allowed-source-state thất bại; rollback toàn bộ phiếu, chưa có side effect nào commit nên retry an toàn.</div>
+            <div class="wf-card">
+              <div class="wf-card-body">
+                <div class="wf-card-title">COPY-00912 · Giải tích 1</div>
+                <div class="wf-card-sub">trạng thái mới: PENDING_REVIEW</div>
+              </div>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-body">
+                <div class="wf-card-title">COPY-00777 · Đại số tuyến tính</div>
+                <div class="wf-card-sub">trạng thái mới: ON_LOAN (quầy khác vừa mượn)</div>
+              </div>
+            </div>
+            <div class="modal-desc">Hai quầy tranh chấp cùng một Copy: chỉ giao dịch ghi trước (CAS thắng) commit — không phát sinh double-loan (SC-checkout-02, NFR-catalog-admin-002).</div>
+            <div class="modal-actions">
+              <button class="btn-secondary" type="button">Hủy phiên</button>
+              <button class="btn-primary" type="button">Tải trạng thái mới → Rà soát lại</button>
+            </div>
+          </div>
+          <p class="hint-text">"Tải trạng thái mới" reload giỏ ở trạng thái mới, loại/thay item conflict → <a class="wf-link" href="#s3">checkout-review</a> xác nhận lại (transition [17]→[16]). "Hủy phiên" → <a class="wf-link" href="#s1">circulation-desk</a>, phiếu không ghi gì.</p>
+        </div>
+      </div>
+      <div class="wf-screen-label">checkout-conflict</div>
+  </div>
+  </div>
+  <div class="wf-footer">
+    <span>checkout / checkout-flow</span>
+    <span>/wireframe-html · 2026-10-09</span>
+  </div>
+</div>
+</body>
+</html>
