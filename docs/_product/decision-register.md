@@ -59,3 +59,35 @@ Các decision trên gắn với `OQ-LMP-003/004/005/009/010` trong `docs/feature
 | DEC-SF-07 | Tra cứu tách 2: phía Thủ thư/Quản trị viên ở `catalog-admin` (R0, phục vụ quản trị); phía Người đọc (FR-R02) ở `reader-self-service` (R1A) | Decision | BA lead | Product owner | Phase 1 tách feature | Không | Chốt (người dùng 2026-10-08) | spec FR-LMP-003; `priority-crosswalk.md` FR-R02 |
 | DEC-SF-08 | Persona trong user story đổi theo bộ tên DEC-SF-01 khi chuyển sang feature | Decision | BA lead | — | Rollout từng feature | Không | Chốt (người dùng 2026-10-08) | story index |
 | DEC-SF-09 | Thêm màn trung tâm thông báo (FR-C04) cho `notification-audit-ui`, R1B theo DEC-P2-01 | Decision | BA lead | Product owner | User-flow `notification-audit-ui` | Không | Chốt (người dùng 2026-10-08) | Nguồn FR-C04; DEC-P2-01 |
+
+## Feature bị ảnh hưởng
+
+| Decision | Feature |
+|---|---|
+| DEC-D3-01 | copy-inventory, checkout, return-handling, damage-lifecycle, lost-handling, reservation |
+| DEC-D3-02 | return-handling |
+| DEC-D3-03 | reservation |
+| DEC-D3-04 | fine-collection-basic, fine-collection-adv |
+| DEC-D3-05 | lost-handling, fine-collection-adv |
+| DEC-D3-06 | damage-lifecycle, reservation |
+| DEC-D3-07 | damage-lifecycle, copy-inventory |
+| DEC-D3-08 | fine-collection-adv, notification-core |
+| DEC-D3-09 | catalog-admin, copy-inventory, checkout |
+| DEC-P2-01 | notification-core, notification-audit-ui |
+| DEC-P2-02 | overdue-fines, ops-reports, checkout |
+| DEC-P2-03 | damage-lifecycle |
+| DEC-P2-04 | fine-collection-basic, fine-collection-adv |
+| DEC-P2-05 | reservation, return-handling, renewal |
+| DEC-P2-06 | ops-foundation, notification-audit-ui |
+| DEC-P2-07 | lost-handling |
+| DEC-P2-08 | Mọi feature |
+| DEC-P2-09 | data-import |
+| DEC-SF-01 | Mọi feature |
+| DEC-SF-02 | reader-self-service, renewal, reservation, expansion-candidates |
+| DEC-SF-03 | reader-onboarding |
+| DEC-SF-04 | account-admin |
+| DEC-SF-05 | ops-foundation |
+| DEC-SF-06 | lost-handling |
+| DEC-SF-07 | catalog-admin, reader-self-service |
+| DEC-SF-08 | Mọi feature có user story |
+| DEC-SF-09 | notification-audit-ui |
