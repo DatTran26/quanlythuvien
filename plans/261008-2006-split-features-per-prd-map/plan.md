@@ -47,7 +47,7 @@ Feature Map trong `docs/_product/prd.md` Mục 7 định nghĩa 23 feature có s
 | # | Phase | File | Phụ thuộc | Cổng duyệt |
 |---|---|---|---|---|
 | 0 | Chuẩn bị, đóng băng, spike công cụ — **xong 2026-10-08** (bỏ qua mermaid-verify theo người dùng) | [phase-00-preparation.md](phase-00-preparation.md) | — | Team đồng ý đóng băng |
-| 1 | Ma trận phân bổ và bảng đối chiếu ID — xung đột X1–X9 **đã quyết** (DEC-SF-01..09) | [phase-01-allocation-matrix.md](phase-01-allocation-matrix.md) | 0 | Duyệt ma trận |
+| 1 | Ma trận phân bổ và bảng đối chiếu ID — **xong 2026-10-08** (`docs/_shared/id-crosswalk-lmp.md`, DEC-SF-01..09) | [phase-01-allocation-matrix.md](phase-01-allocation-matrix.md) | 0 | Duyệt ma trận |
 | 2 | Dựng tầng dùng chung `docs/_shared/` | [phase-02-shared-layer.md](phase-02-shared-layer.md) | 1 | L1/L2 từng file |
 | 3 | Chuẩn hóa tầng sản phẩm theo /prd → /roadmap + khung 23 thư mục | [phase-03-product-layer-and-skeletons.md](phase-03-product-layer-and-skeletons.md) | 2 | L2 PRD, L2 roadmap (duyệt điểm RICE) |
 | 4 | Pilot end-to-end: `checkout` | [phase-04-pilot-checkout.md](phase-04-pilot-checkout.md) | 3 | Retro pilot, chốt công thức |
