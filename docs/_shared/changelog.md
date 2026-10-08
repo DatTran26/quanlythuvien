@@ -85,3 +85,28 @@
 | 2026-10-08 | /srs | @dattran26 | `docs/features/reservation/srs/reservation-spec.md` | SRS Tầng 1 reservation: 3 FR, tách từ spec gộp |
 | 2026-10-08 | /srs | @dattran26 | `docs/features/trend-reports/srs/trend-reports-spec.md` | SRS Tầng 1 trend-reports: 1 FR, tách từ spec gộp |
 | 2026-10-08 | /srs | @dattran26 | `docs/_shared/id-crosswalk-lmp.md` | thêm 1 FR mới lô R1B, đánh dấu đã chuyển SRS lô R1B/R2/R3 |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/access-control/srs/access-control-flows.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/access-control/usecases/access-control-usecase-index.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/access-control/usecases/uc-access-control.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/account-admin/srs/account-admin-flows.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/account-admin/usecases/account-admin-usecase-index.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/account-admin/usecases/uc-account-admin.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/catalog-admin/srs/catalog-admin-flows.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/catalog-admin/usecases/catalog-admin-usecase-index.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/catalog-admin/usecases/uc-catalog-admin.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/copy-inventory/srs/copy-inventory-flows.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/copy-inventory/usecases/copy-inventory-usecase-index.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/copy-inventory/usecases/uc-copy-inventory.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/data-import/srs/data-import-flows.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/data-import/usecases/data-import-usecase-index.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/data-import/usecases/uc-data-import.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/ops-foundation/srs/ops-foundation-flows.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/ops-foundation/usecases/ops-foundation-usecase-index.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/ops-foundation/usecases/uc-audit-capture.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/ops-foundation/usecases/uc-backup-restore.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/policy-config/srs/policy-config-flows.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/policy-config/usecases/policy-config-usecase-index.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/policy-config/usecases/uc-policy-config.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/reader-onboarding/srs/reader-onboarding-flows.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/reader-onboarding/usecases/reader-onboarding-usecase-index.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/reader-onboarding/usecases/uc-reader-onboarding.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
