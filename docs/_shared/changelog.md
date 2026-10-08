@@ -53,3 +53,10 @@
 | 2026-10-08 | /brainstorm | @dattran26 | `docs/features/overdue-fines/brainstorms/overdue-fines-scope.md` | brainstorm overdue-fines, Micro từ nguồn, 2 OQ hold |
 | 2026-10-08 | /brainstorm | @dattran26 | `docs/features/reader-self-service/brainstorms/reader-self-service-scope.md` | brainstorm reader-self-service, Micro từ nguồn, 4 OQ hold |
 | 2026-10-08 | /brainstorm | @dattran26 | `docs/features/return-handling/brainstorms/return-handling-scope.md` | brainstorm return-handling, Micro từ nguồn, 2 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/expansion-candidates/brainstorms/expansion-candidates-scope.md` | brainstorm expansion-candidates, Micro từ nguồn, 1 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/fine-collection-adv/brainstorms/fine-collection-adv-scope.md` | brainstorm fine-collection-adv, Micro từ nguồn, 3 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/notification-audit-ui/brainstorms/notification-audit-ui-scope.md` | brainstorm notification-audit-ui, Micro từ nguồn, 2 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/renewal/brainstorms/renewal-scope.md` | brainstorm renewal, Micro từ nguồn, 1 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/reservation/brainstorms/reservation-scope.md` | brainstorm reservation, Micro từ nguồn, 3 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/trend-reports/brainstorms/trend-reports-scope.md` | brainstorm trend-reports, Micro từ nguồn, 1 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/_product/prd.md` | mark 22 feature đang chi tiết hóa (1 brainstorm mỗi feature) |
