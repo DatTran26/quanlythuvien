@@ -54,7 +54,7 @@ Nguồn: inventory §1.1 (FACT).
 ## 1. State: Copy (Bản sao)
 
 **Related UC**: `uc-catalog-admin`, `uc-checkout`, `uc-return-renewal`, `uc-reservation`, `uc-damage-lost-found`
-**Related BR**: BR-checkout-001/BR-checkout-002/BR-reservation-001/BR-reservation-002/BR-lost-handling-001, SRC-BR-01..SRC-BR-13 (nguồn), SRC-BR-11 khả dụng tính toán
+**Related BR**: BR-checkout-001/BR-checkout-002/BR-reservation-001/BR-reservation-002/BR-lost-handling-001, SRC-BR01..SRC-BR13 (nguồn), SRC-BR11 khả dụng tính toán
 **Nhãn tổng**: `PROPOSAL` — chờ **DEC-D3-01** (hard-stop, OQ-core-002). Tên 7 trạng thái là FACT (còn trong văn bản nguồn); ma trận transition là reconstruction.
 
 ### 1.1 Diagram
@@ -98,7 +98,7 @@ stateDiagram-v2
 |-------|-----|-------|----------------------|-----------|------|
 | `AVAILABLE` | Sẵn sàng | Trên kệ, cho mượn được nếu `is_loanable` | Có (nếu loanable) | Không | FACT (tên) |
 | `ON_LOAN` | Đang mượn | Gắn với một Loan đang mở | Không | Không | FACT (tên) |
-| `ON_HOLD` | Đang giữ | Gắn với một Reservation `READY`, chờ người đặt đến lấy trong hạn SRC-BR-10 | Không | Không | FACT (tên) |
+| `ON_HOLD` | Đang giữ | Gắn với một Reservation `READY`, chờ người đặt đến lấy trong hạn SRC-BR10 | Không | Không | FACT (tên) |
 | `PENDING_REVIEW` | Chờ duyệt | Bị báo cáo hư hỏng, chặn lưu thông chờ thủ thư (OQ-11 default) | Không | Không | FACT (tên) |
 | `IN_REPAIR` | Đang sửa | Quản trị viên đã duyệt sửa chữa | Không | Không | FACT (tên) |
 | `LOST` | Mất | Đã ghi nhận mất; có thể quay lại qua found-after-lost | Không | Không | FACT (tên) |
@@ -109,7 +109,7 @@ stateDiagram-v2
 | ID | Từ → Sang | Trigger | Actor | Nhãn | Source ref / Gate |
 |----|-----------|---------|-------|------|--------------------|
 | COPY-T00 | ∅ → AVAILABLE | Đăng ký/import bản sao | Thủ thư / Hệ thống import | PROPOSAL | SRC-FR-L03; OQ-15 — gộp DEC-D3-01 |
-| COPY-T01 | AVAILABLE → ON_LOAN | Xác nhận checkout | Thủ thư / Quản trị viên | FACT | baseline §6.1; SRC-BR-13 |
+| COPY-T01 | AVAILABLE → ON_LOAN | Xác nhận checkout | Thủ thư / Quản trị viên | FACT | baseline §6.1; SRC-BR13 |
 | COPY-T02 | ON_HOLD → ON_LOAN | Checkout nhận sách đặt trước | Thủ thư / Quản trị viên | FACT | baseline §6.3 bước 4 |
 | COPY-T03 | ON_LOAN → AVAILABLE | Trả bình thường, không hàng chờ | Thủ thư / Quản trị viên | FACT | baseline §5, §6.2, D5 |
 | COPY-T04 | ON_LOAN → ON_HOLD | Trả bình thường, có hàng chờ | Thủ thư / Quản trị viên | FACT | baseline §6.3 bước 3, D5 |
@@ -125,22 +125,22 @@ stateDiagram-v2
 | COPY-T14 | IN_REPAIR → DISPOSED | Sửa không thành, thanh lý | Quản trị viên | **PROPOSAL — Open DEC-D3-07** | Suy diễn |
 | COPY-T15 | LOST → AVAILABLE | Found-after-lost, reconcile xong, không hàng chờ | Thủ thư / Quản trị viên | **PROPOSAL — Open DEC-D3-05** | Baseline "Có điều kiện nếu tìm lại"; tiền đề: financial reconciliation xong |
 | COPY-T16 | LOST → ON_HOLD | Found-after-lost, reconcile xong, có hàng chờ | Thủ thư / Quản trị viên | **PROPOSAL — Open DEC-D3-05** | Suy diễn |
-| COPY-T17 | AVAILABLE → DISPOSED | Thanh lý trực tiếp không qua hư hỏng | Quản trị viên | **PROPOSAL — Open DEC-D3-07** | Suy diễn (SRC-BR-12 vô hiệu hoá) |
+| COPY-T17 | AVAILABLE → DISPOSED | Thanh lý trực tiếp không qua hư hỏng | Quản trị viên | **PROPOSAL — Open DEC-D3-07** | Suy diễn (SRC-BR12 vô hiệu hoá) |
 | COPY-T18 | ON_HOLD → AVAILABLE | Giải phóng giữ chỗ (hết hạn/hủy), queue rỗng | Hệ thống (cron) / Thủ thư | FACT | baseline §6.3 bước 4; §8 cron |
-| COPY-T19 | ON_HOLD → ON_HOLD | Giải phóng giữ chỗ, queue còn người (re-hold) | Hệ thống | FACT | baseline §6.3 bước 4; SRC-BR-09 — self-loop nguyên tử |
+| COPY-T19 | ON_HOLD → ON_HOLD | Giải phóng giữ chỗ, queue còn người (re-hold) | Hệ thống | FACT | baseline §6.3 bước 4; SRC-BR09 — self-loop nguyên tử |
 
 ### 1.4 Invariants — Copy
 
 | # | Invariant | Nhãn / nguồn |
 |---|-----------|--------------|
 | CP-INV-01 | `Copy.status` chỉ aggregate Copy sở hữu; mọi cập nhật chéo (Reservation/Loan/DamageReport) đi qua use case trong **cùng một transaction**. | FACT — inventory §1.1 |
-| CP-INV-02 | Checkout chỉ hợp lệ từ `AVAILABLE` (COPY-T01) hoặc `ON_HOLD` đúng chủ (COPY-T02); chống tranh bằng CAS trên `Copy.version` + allowed-source-state. | FACT — SRC-BR-13, SRC-NFR-03, AT-CHK-03 |
-| CP-INV-03 | "Khả dụng" = đếm Copy `AVAILABLE` **và** `is_loanable = true` — giá trị **tính toán** (SRC-BR-11), không lưu counter, không phải trạng thái. | FACT (SRC-BR-11) + PROPOSAL (is_loanable, DEC-D3-09) |
+| CP-INV-02 | Checkout chỉ hợp lệ từ `AVAILABLE` (COPY-T01) hoặc `ON_HOLD` đúng chủ (COPY-T02); chống tranh bằng CAS trên `Copy.version` + allowed-source-state. | FACT — SRC-BR13, SRC-NFR03, AT-CHK-03 |
+| CP-INV-03 | "Khả dụng" = đếm Copy `AVAILABLE` **và** `is_loanable = true` — giá trị **tính toán** (SRC-BR11), không lưu counter, không phải trạng thái. | FACT (SRC-BR11) + PROPOSAL (is_loanable, DEC-D3-09) |
 | CP-INV-04 | `is_loanable` là **thuộc tính** trên Title (mặc định) và override trên Copy — đổi `is_loanable` không phải state transition nhưng vẫn ghi audit. | PROPOSAL — DEC-D3-09 |
 | CP-INV-05 | `DISPOSED` là terminal duy nhất: không transition ra; API từ chối `DISPOSED → *` (E-core-008). | FACT |
 | CP-INV-06 | Trong flow trả: **đóng Loan và tính phạt trước, quyết trạng thái Copy sau**; bước đóng Loan → quyết Copy → audit/outbox trong một transaction. | FACT (thứ tự) + PROPOSAL chi tiết — DEC-D3-02 |
 | CP-INV-07 | Một Copy tối đa một Reservation `READY` giữ (`held_copy_id` unique khi đang giữ) và tối đa một DamageReport `PENDING`. | PROPOSAL — AT-RSV-02, inventory §6 |
-| CP-INV-08 | Mọi transition ghi audit cùng transaction; notification qua durable outbox, không làm fail business write. | FACT — SRC-NFR-04, BR-core-003/BR-core-005 |
+| CP-INV-08 | Mọi transition ghi audit cùng transaction; notification qua durable outbox, không làm fail business write. | FACT — SRC-NFR04, BR-core-003/BR-core-005 |
 
 ### 1.5 Invalid transitions — Copy
 
@@ -160,7 +160,7 @@ stateDiagram-v2
 ## 2. State: Loan (Phiếu mượn)
 
 **Related UC**: `uc-checkout`, `uc-return-renewal`
-**Related BR**: BR-checkout-001/BR-core-001/BR-renewal-001, SRC-BR-01..SRC-BR-05 (nguồn)
+**Related BR**: BR-checkout-001/BR-core-001/BR-renewal-001, SRC-BR01..SRC-BR05 (nguồn)
 **Nhãn**: trạng thái và transition lõi là `FACT` (baseline §5, §6.3); phần "không reopen" của LOAN-T05 là `PROPOSAL`.
 
 ### 2.1 Diagram
@@ -186,10 +186,10 @@ stateDiagram-v2
 
 | State | Tên | Nghĩa | Terminal? | Nhãn |
 |-------|-----|-------|-----------|------|
-| `ACTIVE` | Đang mở | Loan đang hiệu lực, `due_at = borrowed + kỳ hạn SRC-BR-04` | Không | FACT |
-| `OVERDUE` | Quá hạn | `now > due_at`, chưa trả; SRC-BR-03 chặn mượn mới | Không | FACT |
+| `ACTIVE` | Đang mở | Loan đang hiệu lực, `due_at = borrowed + kỳ hạn SRC-BR04` | Không | FACT |
+| `OVERDUE` | Quá hạn | `now > due_at`, chưa trả; SRC-BR03 chặn mượn mới | Không | FACT |
 | `RETURNED` | Đã trả | Đóng bởi trả sách; ghi `returned_at`, `return_condition`, `closed_by` | **Có** | FACT |
-| `LOST` | Mất | Đóng bởi ghi nhận mất; bồi thường SRC-BR-06 đã assess | **Có** | FACT |
+| `LOST` | Mất | Đóng bởi ghi nhận mất; bồi thường SRC-BR06 đã assess | **Có** | FACT |
 
 ### 2.3 Bảng đối chiếu transition
 
@@ -197,7 +197,7 @@ stateDiagram-v2
 |----|-----------|---------|-------|------|--------------------|
 | LOAN-T01 | ∅ → ACTIVE | Checkout commit | Thủ thư / Quản trị viên | FACT | baseline §6.1 |
 | LOAN-T02 | ACTIVE → OVERDUE | Cron quét quá hạn 00:05 | Hệ thống | FACT | baseline §5; §8 cron |
-| LOAN-T03 | ACTIVE → ACTIVE | Gia hạn (self-loop: `due_at += 7 ngày`, `renew_count++`) | Người đọc / Thủ thư / Quản trị viên | FACT | SRC-FR-R06/S06; SRC-BR-04 — ngưỡng OQ-policy-config-001 |
+| LOAN-T03 | ACTIVE → ACTIVE | Gia hạn (self-loop: `due_at += 7 ngày`, `renew_count++`) | Người đọc / Thủ thư / Quản trị viên | FACT | SRC-FR-R06/S06; SRC-BR04 — ngưỡng OQ-policy-config-001 |
 | LOAN-T04 | ACTIVE/OVERDUE → RETURNED | Trả sách | Thủ thư / Quản trị viên | FACT | baseline §5, §6.2 |
 | LOAN-T05 | ACTIVE/OVERDUE → LOST | Ghi nhận mất | Thủ thư / Quản trị viên | FACT + PROPOSAL (không reopen) | baseline §5; SRC-FR-S07 — phần reopen theo DEC-D3-05 |
 
@@ -210,7 +210,7 @@ stateDiagram-v2
 | LN-INV-03 | Loan chỉ được tạo qua checkout (∅ → ACTIVE); cấm ∅ → OVERDUE/RETURNED/LOST. | FACT |
 | LN-INV-04 | Checkout nguyên tử all-or-nothing theo commit set; idempotent theo `operation_id`; tranh chấp CAS — transition commit trước thắng, giao dịch sau nhận E-core-004. | FACT — BR-checkout-001, AT-CHK-01/02/03 |
 | LN-INV-05 | Double-return trên Loan đã `RETURNED` → idempotent reject, trả kết quả gốc. | PROPOSAL — khớp AT-RSV-03 pattern |
-| LN-INV-06 | Đóng Loan (T04/T05) luôn kèm assess phạt (quá hạn SRC-BR-05, hư hỏng SRC-BR-07, mất SRC-BR-06) và Copy transition tương ứng trong cùng transaction. | FACT — inventory §2.4 |
+| LN-INV-06 | Đóng Loan (T04/T05) luôn kèm assess phạt (quá hạn SRC-BR05, hư hỏng SRC-BR07, mất SRC-BR06) và Copy transition tương ứng trong cùng transaction. | FACT — inventory §2.4 |
 
 ### 2.5 Invalid transitions — Loan
 
@@ -226,7 +226,7 @@ stateDiagram-v2
 ## 3. State: Reservation (Đặt trước)
 
 **Related UC**: `uc-reservation` (release owner: **R2** — DEC-P2-05; luồng trả R1A không phân bổ hàng chờ)
-**Related BR**: BR-reservation-001/BR-reservation-002, SRC-BR-08/09/10 (nguồn)
+**Related BR**: BR-reservation-001/BR-reservation-002, SRC-BR08/09/10 (nguồn)
 **Nhãn**: trạng thái và transition `FACT` (baseline §5, §6.3, SRC-FR-R08); nhánh re-queue `READY → WAITING` là `PROPOSAL — Open DEC-D3-06`; `skip`/`suspend` **không nằm trong baseline** — `Open DEC-D3-03`.
 
 ### 3.1 Diagram
@@ -255,7 +255,7 @@ stateDiagram-v2
 | State | Tên | Nghĩa | Terminal? | Nhãn |
 |-------|-----|-------|-----------|------|
 | `WAITING` | Đang chờ | Trong hàng chờ FIFO của title, chưa được gán Copy | Không | FACT |
-| `READY` | Sẵn sàng lấy | Đã giữ `held_copy_id`, `hold_expires_at = +48h` (SRC-BR-10) | Không | FACT |
+| `READY` | Sẵn sàng lấy | Đã giữ `held_copy_id`, `hold_expires_at = +48h` (SRC-BR10) | Không | FACT |
 | `FULFILLED` | Đã nhận | Người đặt đã checkout qua COPY-T02 | **Có** | FACT |
 | `EXPIRED` | Hết hạn | Quá `hold_expires_at`, cron đóng và advance queue | **Có** | FACT |
 | `CANCELLED` | Đã hủy | Bị hủy bởi người đọc/nhân viên | **Có** | FACT |
@@ -264,10 +264,10 @@ stateDiagram-v2
 
 | ID | Từ → Sang | Trigger | Actor | Nhãn | Source ref / Gate |
 |----|-----------|---------|-------|------|--------------------|
-| RES-T01 | ∅ → WAITING | Tạo đặt trước khi title `khả dụng = 0` (SRC-BR-08) | Người đọc / Thủ thư / Quản trị viên | FACT + PROPOSAL (dedup cùng title) | baseline §6.3; SRC-BR-08/09 |
+| RES-T01 | ∅ → WAITING | Tạo đặt trước khi title `khả dụng = 0` (SRC-BR08) | Người đọc / Thủ thư / Quản trị viên | FACT + PROPOSAL (dedup cùng title) | baseline §6.3; SRC-BR08/09 |
 | RES-T02 | WAITING → READY | Allocation khi Copy về (COPY-T04/T13/T15/T16/T19) | Hệ thống | FACT | baseline §6.3 bước 3 — nguyên tử AT-RSV-01 |
 | RES-T03 | READY → FULFILLED | Người đặt đến nhận, checkout | Thủ thư / Quản trị viên | FACT | baseline §5; §6.3 bước 4 |
-| RES-T04 | READY → EXPIRED | Cron hết hạn giữ (mỗi 15 phút) | Hệ thống | FACT | baseline §5; §8 cron; SRC-BR-10 |
+| RES-T04 | READY → EXPIRED | Cron hết hạn giữ (mỗi 15 phút) | Hệ thống | FACT | baseline §5; §8 cron; SRC-BR10 |
 | RES-T05 | WAITING → CANCELLED | Hủy khi đang chờ | Người đọc / Thủ thư / Quản trị viên | FACT | baseline §5; ma trận quyền |
 | RES-T06 | READY → CANCELLED | Hủy khi đang giữ | Người đọc / Thủ thư / Quản trị viên | FACT | baseline §5 — nguyên tử với COPY-T18/T19 |
 | *(COPY-T08 side effect)* | READY → WAITING | Copy đang giữ bị báo hư hỏng → re-queue giữ vị trí | Hệ thống (cùng transaction COPY-T08) | **PROPOSAL — Open DEC-D3-06** | inventory COPY-T08; chưa có nguồn |
@@ -279,9 +279,9 @@ stateDiagram-v2
 | RSV-INV-01 | `WAITING → READY` nguyên tử cùng `Copy → ON_HOLD` + `held_copy_id` + `hold_expires_at` + outbox notify — một transaction, CAS trên cả hai aggregate. | PROPOSAL — AT-RSV-01 (khớp BR-reservation-001) |
 | RSV-INV-02 | Một Copy tối đa một Reservation `READY`; một reader tối đa một Reservation mở cho cùng title (constraint DB). | PROPOSAL — AT-RSV-02 |
 | RSV-INV-03 | `READY → EXPIRED/CANCELLED` nguyên tử với giải phóng Copy + queue advance: gán người kế (COPY-T19) hoặc về `AVAILABLE` (COPY-T18) — không lộ trạng thái trung gian. | PROPOSAL — AT-RSV-04; FACT về yêu cầu BR-reservation-002 |
-| RSV-INV-04 | Thứ tự FIFO = `created_at` hợp lệ; allocation luôn chọn đầu queue tại thời điểm commit. | FACT — SRC-BR-09, AT-RSV-05 |
+| RSV-INV-04 | Thứ tự FIFO = `created_at` hợp lệ; allocation luôn chọn đầu queue tại thời điểm commit. | FACT — SRC-BR09, AT-RSV-05 |
 | RSV-INV-05 | Notify fail **không** rollback business transition: `READY` không tự hủy vì lỗi notify, `hold_expires_at` vẫn chạy; outbox retry + dead-letter, escalation cảnh báo vận hành sau ngưỡng retry. | FACT (outbox bền) + PROPOSAL kênh escalation — DEC-D3-08 |
-| RSV-INV-06 | Race hủy-vs-allocate phân giải bằng CAS trên `Reservation.status`: ai commit trước thắng, nhánh sau đi đường tương ứng (RES-T06 hoặc bỏ qua + advance); cả hai idempotent. | PROPOSAL — cơ chế; FACT yêu cầu SRC-BR-13 |
+| RSV-INV-06 | Race hủy-vs-allocate phân giải bằng CAS trên `Reservation.status`: ai commit trước thắng, nhánh sau đi đường tương ứng (RES-T06 hoặc bỏ qua + advance); cả hai idempotent. | PROPOSAL — cơ chế; FACT yêu cầu SRC-BR13 |
 | RSV-INV-07 | `skip`/`suspend` **không có trong baseline** — chỉ thêm khi `DEC-D3-03` approved. | Open — DEC-D3-03 |
 | RSV-INV-08 | Release boundary: Reservation trọn vòng một release owner = R2; ở R1A D5 luôn nhánh "không có hàng chờ" nên COPY-T04/T13/T19 và RES-T02/T04/T06 chưa phát sinh trong R1A. | PROPOSAL — DEC-P2-05 (hard-stop release boundary) |
 
@@ -292,14 +292,14 @@ stateDiagram-v2
 | `WAITING → FULFILLED` | Phải qua READY + pickup | Từ chối (E-core-008) |
 | `FULFILLED/EXPIRED/CANCELLED → *` | Terminal | Từ chối |
 | `READY → WAITING` ngoài nhánh COPY-T08 | Re-queue chỉ qua cơ chế DEC-D3-06 (Open) | Từ chối |
-| Tạo RES khi title còn bản khả dụng | Vi phạm SRC-BR-08 | Từ chối nghiệp vụ |
+| Tạo RES khi title còn bản khả dụng | Vi phạm SRC-BR08 | Từ chối nghiệp vụ |
 
 ---
 
 ## 4. State: Fine (Khoản phạt) — ledger-derived
 
 **Related UC**: `uc-fine-payment`, `uc-return-renewal` (assessment), `uc-damage-lost-found` (compensation)
-**Related BR**: BR-core-002/BR-fine-collection-basic-001, SRC-BR-05/06/07 (nguồn)
+**Related BR**: BR-core-002/BR-fine-collection-basic-001, SRC-BR05/06/07 (nguồn)
 **Nhãn**: 3 trạng thái `FACT` (data model §7); transition **suy ra từ `FinancialEvent`** — công thức balance, partial payment, SoD là `PROPOSAL`/`Open` (DEC-D3-04/05/08, OQ-fine-collection-adv-001/OQ-fine-collection-adv-002).
 
 ### 4.1 Diagram
@@ -331,7 +331,7 @@ stateDiagram-v2
 
 | Đường đi | Điều kiện | Event quyết định | Nhãn | Source ref / Gate |
 |----------|-----------|------------------|------|--------------------|
-| ∅ → UNPAID | Nghĩa vụ phát sinh (đóng Loan assess, manual assessment) | `ASSESSMENT` | FACT (SRC-BR-05/06/07) + PROPOSAL (manual) | inventory §5.1–5.2 |
+| ∅ → UNPAID | Nghĩa vụ phát sinh (đóng Loan assess, manual assessment) | `ASSESSMENT` | FACT (SRC-BR05/06/07) + PROPOSAL (manual) | inventory §5.1–5.2 |
 | UNPAID → UNPAID | Event làm giảm/tăng nhưng `balance > 0` | `PAYMENT`/`WAIVER`/`ADJUSTMENT`/`REVERSAL` một phần | **PROPOSAL — Open DEC-D3-04** (partial payment) | OQ-fine-collection-adv-001 |
 | UNPAID → PAID | `balance = 0`, event chốt mang tính thu tiền | `PAYMENT` (đủ) | FACT | SRC-FR-S08; inventory §5.1 |
 | UNPAID → WAIVED | `balance = 0`, event chốt mang tính miễn | `WAIVER` (hoặc hỗn hợp — event cuối quyết nhãn) | **PROPOSAL** | DEC-D3-04; OQ-fine-collection-adv-001 |
@@ -358,8 +358,8 @@ stateDiagram-v2
 | FIN-INV-03 | `PAID`/`WAIVED` terminal — **không reopen**; nghĩa vụ mới sau đóng → mở Fine mới. | PROPOSAL — inventory §5.1 |
 | FIN-INV-04 | SoD: người duyệt `WAIVER`/`ADJUSTMENT` không được là người đã tạo `ASSESSMENT` thủ công cho cùng khoản; Thủ thư (quầy) chỉ `PAYMENT`. | PROPOSAL — DEC-D3-04 (hard-stop finance) |
 | FIN-INV-05 | Payment idempotent theo operation key (BR-fine-collection-basic-001); `receipt_no` unique; reconcile job lệch → `RECONCILIATION` + alert. | FACT (idempotent) + PROPOSAL — DEC-D3-08, AT-FIN-02/03 |
-| FIN-INV-06 | Lost→found: nghĩa vụ LOST đã assess **không tự xóa** — chưa thu → `REVERSAL`/`ADJUSTMENT` về 0; đã thu → `REFUND`; có thể giữ phí xử lý SRC-BR-06. Compensation + Copy transition trong một transaction (AT-FIN-04). | PROPOSAL — Open DEC-D3-05; OQ-fine-collection-adv-001 |
-| FIN-INV-07 | Mọi event nhạy cảm yêu cầu `reason` + audit cùng transaction; audit fail → rollback. | FACT — SRC-NFR-04, AT-CHK-04 |
+| FIN-INV-06 | Lost→found: nghĩa vụ LOST đã assess **không tự xóa** — chưa thu → `REVERSAL`/`ADJUSTMENT` về 0; đã thu → `REFUND`; có thể giữ phí xử lý SRC-BR06. Compensation + Copy transition trong một transaction (AT-FIN-04). | PROPOSAL — Open DEC-D3-05; OQ-fine-collection-adv-001 |
+| FIN-INV-07 | Mọi event nhạy cảm yêu cầu `reason` + audit cùng transaction; audit fail → rollback. | FACT — SRC-NFR04, AT-CHK-04 |
 
 ### 4.5 Invalid transitions — Fine
 
@@ -375,7 +375,7 @@ stateDiagram-v2
 ## 5. State: DamageReport (Báo cáo hư hỏng)
 
 **Related UC**: `uc-damage-lost-found`, `uc-return-renewal` (phát hiện lúc trả)
-**Related BR**: BR-damage-lifecycle-001/BR-damage-lifecycle-002, SRC-BR-07 (nguồn)
+**Related BR**: BR-damage-lifecycle-001/BR-damage-lifecycle-002, SRC-BR07 (nguồn)
 **Nhãn**: `FACT` (data model §7, baseline §6.4); phần khôi phục trạng thái trước report của DMG-T04 là `PROPOSAL`.
 
 ### 5.1 Diagram
@@ -420,7 +420,7 @@ stateDiagram-v2
 | DMG-INV-01 | Một Copy tối đa **một** DamageReport `PENDING` tại một thời điểm; báo cáo lặp trên cùng Copy gộp vào report đang mở hoặc từ chối idempotent. | PROPOSAL — inventory §6 |
 | DMG-INV-02 | Report không tự đóng — chỉ đóng khi có disposition (`REPAIR`/`DISPOSE`/`REJECTED`) + audit đầy đủ. | FACT — BR-damage-lifecycle-001 |
 | DMG-INV-03 | DMG-T01 chặn lưu thông ngay: Copy → `PENDING_REVIEW` trong cùng transaction (OQ-11 default). | FACT — inventory DMG-T01 |
-| DMG-INV-04 | `loan_id` nullable liên kết return phát hiện hư hỏng → phạt SRC-BR-07 gắn Loan đó; fine DAMAGE giữ **độc lập** với disposition thanh lý. | FACT — baseline §6.4 bước 4 |
+| DMG-INV-04 | `loan_id` nullable liên kết return phát hiện hư hỏng → phạt SRC-BR07 gắn Loan đó; fine DAMAGE giữ **độc lập** với disposition thanh lý. | FACT — baseline §6.4 bước 4 |
 | DMG-INV-05 | Disposition là quyết định của DamageReport (aggregate sở hữu), không phải Copy tự duyệt; Copy chỉ nhận side-effect transition tương ứng (COPY-T09/T10/T11). | FACT — inventory §1.1 |
 
 ### 5.5 Invalid transitions — DamageReport
@@ -437,11 +437,11 @@ stateDiagram-v2
 
 | # | Invariant | Nhãn / nguồn |
 |---|-----------|--------------|
-| X-INV-01 | **Atomic boundary cross-aggregate**: cặp transition liên kết (RES-T02 + Copy→ON_HOLD; RES-T04/T06 + COPY-T18/T19; LOAN-T04/T05 + COPY-T03..T06; DMG-T02/T03/T04 + COPY-T09/T10/T11) commit trong **một transaction** — không có trạng thái trung gian lộ ra ngoài. | FACT — SRC-NFR-03, BR-reservation-001/BR-reservation-002 + PROPOSAL chi tiết (AT-RSV-01/04) |
-| X-INV-02 | **Concurrency**: mọi transition nhạy cảm dùng CAS trên `version` + allowed-source-state; giao dịch thua nhận E-core-004 "Sách vừa được cập nhật". | FACT — SRC-BR-13, AT-CHK-03 |
+| X-INV-01 | **Atomic boundary cross-aggregate**: cặp transition liên kết (RES-T02 + Copy→ON_HOLD; RES-T04/T06 + COPY-T18/T19; LOAN-T04/T05 + COPY-T03..T06; DMG-T02/T03/T04 + COPY-T09/T10/T11) commit trong **một transaction** — không có trạng thái trung gian lộ ra ngoài. | FACT — SRC-NFR03, BR-reservation-001/BR-reservation-002 + PROPOSAL chi tiết (AT-RSV-01/04) |
+| X-INV-02 | **Concurrency**: mọi transition nhạy cảm dùng CAS trên `version` + allowed-source-state; giao dịch thua nhận E-core-004 "Sách vừa được cập nhật". | FACT — SRC-BR13, AT-CHK-03 |
 | X-INV-03 | **Idempotency**: checkout/payment/cron expire/cancel đều replay-safe qua operation key hoặc CAS trạng thái; chạy lặp trả kết quả gốc, không nhân đôi side effect. | FACT + PROPOSAL — AT-CHK-02, AT-RSV-03, AT-FIN-02 |
-| X-INV-04 | **Audit**: mọi transition ghi `AuditEvent` cùng transaction; audit fail → rollback business write. | FACT — SRC-NFR-04, BR-core-003 |
-| X-INV-05 | **Notification**: outbox event ghi trong transaction business; delivery retry sau, không làm fail transition; dead-letter sau ngưỡng + escalation (Open DEC-D3-08). | FACT — BR-core-005, SRC-NFR-07 |
+| X-INV-04 | **Audit**: mọi transition ghi `AuditEvent` cùng transaction; audit fail → rollback business write. | FACT — SRC-NFR04, BR-core-003 |
+| X-INV-05 | **Notification**: outbox event ghi trong transaction business; delivery retry sau, không làm fail transition; dead-letter sau ngưỡng + escalation (Open DEC-D3-08). | FACT — BR-core-005, SRC-NFR07 |
 | X-INV-06 | Không aggregate nào sở hữu quyết định của aggregate khác (bảng §0.4); cập nhật chéo chỉ qua use case trong cùng transaction. | FACT — inventory §1.1, §8 |
 
 ## 7. Phủ transition — kiểm chứng đối chiếu inventory

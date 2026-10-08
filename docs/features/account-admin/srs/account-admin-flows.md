@@ -31,7 +31,7 @@ flowchart TD
     CardOk -->|"không"| Err2["E-core-003 — nhập lại mã hoặc kiểm tra hồ sơ"]
     Err2 --> Card
     CardOk -->|"có"| Save
-    Check -->|"còn nghĩa vụ"| Block["Từ chối xoá — chỉ vô hiệu hoá khi sạch nghĩa vụ SRC-BR-12"]
+    Check -->|"còn nghĩa vụ"| Block["Từ chối xoá — chỉ vô hiệu hoá khi sạch nghĩa vụ SRC-BR12"]
     Block --> EndBlock(["Kết thúc — giữ nguyên"])
     Check -->|"sạch"| Soft["Xóa mềm + audit"]
     Lock --> StepUp{"Tác vụ nhạy cảm — cần step-up?"}
@@ -50,7 +50,7 @@ flowchart TD
 | 2 | Thủ thư/Quản trị viên | Tạo/cập nhật hồ sơ | Validate + lưu | E-core-001/E-core-003 — giữ dữ liệu cho sửa |
 | 3 | Thủ thư/Quản trị viên | Kích hoạt + cấp `card_code` (QR locator) | Reader `active`, mượn được theo BR-core-001 | E-core-003 — mã trùng/không tồn tại |
 | 4 | Thủ thư/Quản trị viên | Khóa/mở quyền mượn — lý do bắt buộc (R1B; quyền theo ma trận nguồn §2 — FACT) | Reader trạng thái block; chặn ở D1 checkout; notify "tài khoản bị khóa/mở" | E-core-008 — thao tác không hợp lệ từ trạng thái hiện tại; E-access-control-001 step-up nếu phiên yếu |
-| 5 | Quản trị viên | Vô hiệu hoá (xóa mềm) | Chỉ khi không còn Loan mở và nợ phạt (SRC-BR-12, SRC-FR-L05) | Còn nghĩa vụ → từ chối, giải thích lý do |
+| 5 | Quản trị viên | Vô hiệu hoá (xóa mềm) | Chỉ khi không còn Loan mở và nợ phạt (SRC-BR12, SRC-FR-L05) | Còn nghĩa vụ → từ chối, giải thích lý do |
 | 6 | Hệ thống | Mọi ghi: audit cùng TX (INV-01) | AuditEvent có actor/thời điểm/trước-sau/lý do | E-core-007 — audit fail → rollback |
 
 **Liên kết:** FR-reader-onboarding-001, FR-account-admin-002, FR-access-control-001, FR-access-control-002, FR-notification-core-001 (notify khóa/mở), FR-ops-foundation-001 · BR-core-003, BR-core-004 · OQ-core-003 (retention/masking), OQ-access-control-001 (identity model).

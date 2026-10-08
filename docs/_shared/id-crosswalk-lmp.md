@@ -418,7 +418,7 @@ Chủ của CHK = chủ của FR đầu tiên trong cột Nguồn của CHK (FR 
 | Entity | 14 | `docs/_shared/domain/library-erd.md` | Giữ tên entity |
 | State machine | 5 | `docs/_shared/domain/library-states.md` | Copy, Loan, Reservation, Fine, DamageReport |
 | State transition `COPY/LOAN/RES/DMG-Tnn` | 35 | `docs/_shared/domain/lifecycle-inventory.md` | Giữ mã |
-| ID dạng ngắn của tài liệu nguồn (`BR-01`, `NFR-01`, `FR-C01`…) | — | Giữ trong tài liệu nguồn | Trong tài liệu dẫn xuất ghi tiền tố `SRC-` (vd `SRC-BR-01`) để KG không hiểu nhầm là mã feature |
+| ID dạng ngắn của tài liệu nguồn (`BR-01`, `NFR-01`, `FR-C01`…) | — | Giữ trong tài liệu nguồn | Trong tài liệu dẫn xuất ghi tiền tố `SRC-` (vd `SRC-BR01`) để KG không hiểu nhầm là mã feature |
 
 ## 12. Tổng hợp theo đích
 

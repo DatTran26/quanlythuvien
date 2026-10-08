@@ -83,7 +83,7 @@ __Constraints:__
 
 | Ràng buộc | Source / Owner |
 |---|---|
-| Kiểm tra quyền ở phía hệ thống cho mọi thao tác, không chỉ ẩn nút | SRC-NFR-02 (nguồn) |
+| Kiểm tra quyền ở phía hệ thống cho mọi thao tác, không chỉ ẩn nút | SRC-NFR02 (nguồn) |
 | QR chỉ là locator, không phải credential | core-spec Mục 11 |
 
 __Dependencies:__

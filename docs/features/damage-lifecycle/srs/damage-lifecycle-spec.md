@@ -84,7 +84,7 @@ __Constraints:__
 | Ràng buộc | Source / Owner |
 |---|---|
 | Disposition tối thiểu Bác bỏ/Sửa/Thanh lý có ở R1A | DEC-P2-03 |
-| 1–5 ảnh, mỗi ảnh ≤ 500 KB sau nén | SRC-NFR-05 (nguồn) |
+| 1–5 ảnh, mỗi ảnh ≤ 500 KB sau nén | SRC-NFR05 (nguồn) |
 
 __Dependencies:__
 

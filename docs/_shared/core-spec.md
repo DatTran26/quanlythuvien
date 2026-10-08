@@ -18,7 +18,7 @@ links:
 ## 0. Namespace và nhãn nguồn
 
 - Mã dùng chung: `NFR-core-NNN`, `BR-core-NNN`, `E-core-NNN`, `OQ-core-NNN`, `CHK-core-NNN`. Mã của từng feature: `{TYPE}-{feature}-NNN`. Mã cũ `*-LMP-*` tra ở `docs/_shared/id-crosswalk-lmp.md`.
-- Mã có tiền tố `SRC-` (vd `SRC-BR-01`, `SRC-FR-L06`) là mã của tài liệu nguồn `docs/he_thong_quan_ly_thu_vien.md`.
+- Mã có tiền tố `SRC-` (vd `SRC-BR01`, `SRC-FR-L06`) là mã của tài liệu nguồn `docs/he_thong_quan_ly_thu_vien.md`.
 - `Source fact`: có trong tài liệu nguồn hoặc baseline sản phẩm. `PROPOSAL`: suy diễn hợp lý, chờ domain approval. `Open`: chưa đủ quyết định, không được xem là approved.
 
 ## 2. Actors & Stakeholders
@@ -69,7 +69,7 @@ Tên vai trò chốt theo DEC-SF-01 (`docs/_product/decision-register.md`).
 | BR-core-003 | Audit phải ghi cùng transaction; nếu audit fail thì business write fail, không để sensitive action không audit. | Sensitive action | FR-ops-foundation-001 | Plan red-team |
 | BR-core-004 | Quyền xem/đổi field PII và tài chính áp theo actor × resource × action × field × purpose; deny mặc định. | Access sensitive field/action | FR-access-control-001/FR-ops-foundation-001 | Plan red-team |
 | BR-core-005 | Notification không làm fail business transaction chính; business commit ghi outbox event để delivery retry sau. | Business event emits notification | FR-notification-core-001 | Plan red-team |
-| BR-core-006 | Xóa mềm: Reader, Thủ thư, BibliographicRecord, Copy đã có lịch sử nghiệp vụ chỉ được vô hiệu hóa/deactivate — không xóa cứng (giữ ledger append-only và audit trail). | Delete/deactivate request | FR-catalog-admin-001/FR-copy-inventory-001/FR-reader-onboarding-001 | Source fact (SRC-BR-12 nguồn) |
+| BR-core-006 | Xóa mềm: Reader, Thủ thư, BibliographicRecord, Copy đã có lịch sử nghiệp vụ chỉ được vô hiệu hóa/deactivate — không xóa cứng (giữ ledger append-only và audit trail). | Delete/deactivate request | FR-catalog-admin-001/FR-copy-inventory-001/FR-reader-onboarding-001 | Source fact (SRC-BR12 nguồn) |
 
 ## 6. Error dùng chung
 
@@ -92,7 +92,7 @@ Tên vai trò chốt theo DEC-SF-01 (`docs/_product/decision-register.md`).
 | ID | Invariant | Nhãn | Source |
 |----|-----------|------|--------|
 | INV-01 | Business write + `AuditEvent` + `NotificationEvent` (outbox) ghi trong **một** transaction; audit fail → rollback toàn bộ (E-core-007) | FACT (BR-core-003, BR-core-005, NFR-core-005) | spec §5/§6 |
-| INV-02 | Concurrency bằng CAS trên `version` + allowed-source-state; giao dịch sau nhận conflict và phải reload (E-core-004) | FACT (SRC-BR-13 nguồn, NFR-core-002) | spec §4, lifecycle §3 |
+| INV-02 | Concurrency bằng CAS trên `version` + allowed-source-state; giao dịch sau nhận conflict và phải reload (E-core-004) | FACT (SRC-BR13 nguồn, NFR-core-002) | spec §4, lifecycle §3 |
 | INV-03 | Mọi submit ghi (checkout, payment, pickup) mang `operation_id`/idempotency key; replay trả kết quả gốc, không nhân đôi side effect (E-core-005, E-fine-collection-basic-002) | PROPOSAL (AT-CHK-02, AT-FIN-02, BR-fine-collection-basic-001) | lifecycle §7 |
 | INV-04 | Notification không bao giờ làm fail business transaction; delivery retry có kiểm soát + dead-letter + cảnh báo vận hành (E-notification-core-001, E-notification-core-002) | FACT (BR-core-005, NFR-notification-core-001); ngưỡng retry PROPOSAL | spec §5, lifecycle §4 |
 | INV-05 | QR/barcode chỉ là **locator**; sau khi locate vẫn phải kiểm tra actor × resource × action (BR-copy-inventory-001, BR-core-004) | FACT | spec §5 |

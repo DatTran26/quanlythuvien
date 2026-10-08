@@ -76,7 +76,7 @@ __Constraints:__
 
 | Ràng buộc | Source / Owner |
 |---|---|
-| Backup hằng ngày, giữ 30 bản | SRC-NFR-07 (nguồn), DEC-SF-05 |
+| Backup hằng ngày, giữ 30 bản | SRC-NFR07 (nguồn), DEC-SF-05 |
 | Audit nhất quán theo giao dịch | core-spec Mục 11 |
 
 __Dependencies:__

@@ -33,7 +33,7 @@ Quy ước chung (áp cho mọi entity, không lặp trong từng bảng):
 - Mọi entity nghiệp vụ có `created_at`/`updated_at` theo quy ước audit chung — `PROPOSAL` (chuẩn hóa; nguồn chỉ nêu `created_at` ở một số bảng). Field thời điểm mang nghĩa nghiệp vụ riêng (vd `Reservation.created_at` quyết định FIFO) vẫn liệt kê tường minh.
 - Mọi cột `*_by` / `actor_ref` / `recipient_ref` là **tham chiếu logic** tới tài khoản người dùng hệ thống (Thủ thư / Quản trị viên / Người đọc / Hệ thống — theo mapping spec §2). Tài khoản hệ thống **không nằm trong 13 aggregate §8 của spec** (ERD này vẽ 14 node: 13 aggregate + `ImportIssue` tách từ `ImportBatch`) — vẽ như FK cứng sẽ sai phạm vi → không vẽ quan hệ, xem `OQ-core-005` (Mục 6).
 - QR/barcode chỉ là **locator**, không phải credential (BR-copy-inventory-001, FR-copy-inventory-002) — `qr_code`, `card_code` là business key duy nhất, không mang quyền.
-- Xóa mềm theo SRC-BR-12: entity có lịch sử chỉ vô hiệu hóa (`status`/`is_active`), không xóa vật lý.
+- Xóa mềm theo SRC-BR12: entity có lịch sử chỉ vô hiệu hóa (`status`/`is_active`), không xóa vật lý.
 - Soft FK sang danh mục phụ trợ (`Author`, `Category`, `Publisher`, `Shelf`): nguồn §7 gọi là "danh mục phụ trợ"; ở mức SRS chỉ ghi nhận thuộc tính tham chiếu, không khai entity riêng.
 
 ## 1. ERD tổng
@@ -177,9 +177,9 @@ erDiagram
 | BibliographicRecord → Copy | 1 : 0..n | Mọi Copy thuộc đúng 1 đầu sách | FACT | nguồn §7 |
 | Reader → Loan | 1 : 0..n | | FACT | nguồn §7 |
 | Loan → LoanItem | 1 : 1..n | Phiếu ≥1 dòng; commit all-or-nothing (BR-checkout-001) | FACT tính nguyên tử / PROPOSAL tách dòng | FR-checkout-001; OQ-core-004 |
-| Copy → LoanItem | 1 : 0..n | Tại một thời điểm **tối đa 1 LoanItem mở** trên một Copy (không double-loan, SRC-BR-13/NFR-core-002) | FACT | nguồn §7; SC-checkout-02 |
-| Reader → Reservation | 1 : 0..n | ≤ N đặt trước đang mở (default 3 — SRC-BR-08); ≤1 reservation mở cho cùng một đầu sách (AT-RSV-02) | FACT + PROPOSAL | RES-T01 |
-| BibliographicRecord → Reservation | 1 : 0..n | Đặt theo **đầu sách**, không theo bản sao; hàng đợi FIFO theo `created_at` (SRC-BR-09) | FACT | nguồn §7 |
+| Copy → LoanItem | 1 : 0..n | Tại một thời điểm **tối đa 1 LoanItem mở** trên một Copy (không double-loan, SRC-BR13/NFR-core-002) | FACT | nguồn §7; SC-checkout-02 |
+| Reader → Reservation | 1 : 0..n | ≤ N đặt trước đang mở (default 3 — SRC-BR08); ≤1 reservation mở cho cùng một đầu sách (AT-RSV-02) | FACT + PROPOSAL | RES-T01 |
+| BibliographicRecord → Reservation | 1 : 0..n | Đặt theo **đầu sách**, không theo bản sao; hàng đợi FIFO theo `created_at` (SRC-BR09) | FACT | nguồn §7 |
 | Copy → Reservation (giữ chỗ) | 0..1 : 0..n (lịch sử) | `held_copy_id` chỉ có khi READY; tối đa 1 Reservation READY giữ cùng Copy (AT-RSV-02) | FACT + PROPOSAL | RES-T02; §2.2 |
 | Reader → Fine | 1 : 0..n | | FACT | nguồn §7 |
 | LoanItem → Fine | 0..1 : 0..n | Fine thường gắn dòng mượn (quá hạn/hư hỏng/mất); fine manual có thể không gắn | FACT + PROPOSAL | nguồn §7 (`loan_id`); §5.2 manual |
@@ -206,12 +206,12 @@ erDiagram
 | `categories` | danh sách tham chiếu danh mục | — | FACT | n–n `Category`; tra cứu theo thể loại SRC-FR-R02 |
 | `publisher` | tham chiếu danh mục | — | FACT | nguồn `publisher_id` → `Publisher` phụ trợ |
 | `publish_year` | năm | — | FACT | nguồn `year` |
-| `price` | tiền (VND) | — | FACT | Cơ sở trần phạt SRC-BR-05 và bồi thường SRC-BR-06/SRC-BR-07 |
+| `price` | tiền (VND) | — | FACT | Cơ sở trần phạt SRC-BR05 và bồi thường SRC-BR06/SRC-BR07 |
 | `cover_ref` | tham chiếu ảnh | — | FACT | nguồn `cover_url`; SRC-FR-L02 ảnh bìa |
 | `description` | văn bản | — | FACT | FR-catalog-admin-001 |
 | `is_loanable` | boolean | — | PROPOSAL | Mặc định loanability cấp đầu sách — DEC-D3-09, default OQ-10 |
-| `is_active` | boolean | — | FACT | Ẩn/vô hiệu hóa (SRC-FR-L02, SRC-BR-12) |
-| `available_count` | số nguyên | — | **derived** | = số Copy `AVAILABLE` ∧ loanable hiệu dụng; **không lưu** — SRC-BR-11, CP-AVL-01 |
+| `is_active` | boolean | — | FACT | Ẩn/vô hiệu hóa (SRC-FR-L02, SRC-BR12) |
+| `available_count` | số nguyên | — | **derived** | = số Copy `AVAILABLE` ∧ loanable hiệu dụng; **không lưu** — SRC-BR11, CP-AVL-01 |
 
 ### 3.2 `Copy` — Bản sao vật lý
 
@@ -224,7 +224,7 @@ erDiagram
 | `condition` | enum(`NEW`,`GOOD`,`WORN`,`DAMAGED`) | — | FACT | Tình trạng vật lý; cập nhật khi trả/sửa xong |
 | `status` | enum(`AVAILABLE`,`ON_LOAN`,`ON_HOLD`,`PENDING_REVIEW`,`IN_REPAIR`,`LOST`,`DISPOSED`) | — | FACT tên trạng thái / PROPOSAL ma trận transition | **Trạng thái LƯU duy nhất** của vòng đời — DEC-D3-01 |
 | `loanable_override` | enum(`INHERIT`,`LOANABLE`,`NOT_LOANABLE`) | — | PROPOSAL | Override `BibliographicRecord.is_loanable` — DEC-D3-09; mặc định `INHERIT` |
-| `version` | số nguyên | — | FACT | Khóa lạc quan CAS — SRC-BR-13, NFR-core-002 |
+| `version` | số nguyên | — | FACT | Khóa lạc quan CAS — SRC-BR13, NFR-core-002 |
 | `acquired_at` | thời điểm | — | FACT | Ngày nhập kho |
 | `effective_loanable` | boolean | — | **derived** | = `loanable_override` nếu ≠ INHERIT, ngược lại `Title.is_loanable` — CP-AVL-02 |
 
@@ -241,7 +241,7 @@ erDiagram
 | `phone` | văn bản | — | FACT | PII |
 | `dob` | ngày | — | FACT | PII — nguồn `ReaderProfile.dob` |
 | `address` | văn bản | — | FACT | PII |
-| `status` | enum(`ACTIVE`,`LOCKED`,`DELETED`) | — | FACT | DELETED = xóa mềm SRC-BR-12; chặn xóa khi còn phiếu mở/nợ phạt (SRC-FR-L05); khóa/mở có lý do (FR-account-admin-002) |
+| `status` | enum(`ACTIVE`,`LOCKED`,`DELETED`) | — | FACT | DELETED = xóa mềm SRC-BR12; chặn xóa khi còn phiếu mở/nợ phạt (SRC-FR-L05); khóa/mở có lý do (FR-account-admin-002) |
 | `card_expiry` | ngày | — | FACT | nguồn `expiry_date`; policy hạn 1 năm là default OQ-05 |
 | `lock_reason` | văn bản | — | PROPOSAL | Lý do bắt buộc khi khóa (FR-account-admin-002) |
 | `auth_account_ref` | tham chiếu logic | — | **[NEEDS CLARIFICATION: OQ-access-control-001 + OQ-core-005]** | Nguồn tách `User`(password_hash, role) ↔ `ReaderProfile`; SRS để ngỏ identity model — tách entity tài khoản hay gộp là quyết định thiết kế |
@@ -271,7 +271,7 @@ Nhãn tổng entity: **PROPOSAL** (vị trí gắn hạn trả/gia hạn/trạng
 | `copy_id` | định danh | FK → Copy | FACT | nguồn `Loan.copy_id`; unique trong phạm vi "đang mở" (chống double-loan) |
 | `status` | enum(`ACTIVE`,`OVERDUE`,`RETURNED`,`LOST`) | — | FACT trạng thái / PROPOSAL gắn ở dòng | §5 nguồn; `RETURNED`/`LOST` terminal, không reopen (LOAN-T05) |
 | `due_at` | thời điểm | — | FACT | = `checked_out_at` + policy `loan_days` tại thời điểm mượn (LOAN-T01) |
-| `renew_count` | số nguyên | — | FACT | SRC-BR-04 / FR-renewal-001; chặn khi quá hạn/có hàng chờ/vượt limit |
+| `renew_count` | số nguyên | — | FACT | SRC-BR04 / FR-renewal-001; chặn khi quá hạn/có hàng chờ/vượt limit |
 | `returned_at` | thời điểm | — | FACT | Đóng bằng trả (LOAN-T04) |
 | `return_condition` | enum(`OK`,`DAMAGED`,`LOST`) | — | FACT field / PROPOSAL giá trị | Điều khiển nhánh Copy sau trả (D5); nguồn `return_condition` |
 | `closed_by` | tham chiếu logic | — | FACT | Ai đóng phiếu — nguồn `closed_by` |
@@ -284,9 +284,9 @@ Nhãn tổng entity: **PROPOSAL** (vị trí gắn hạn trả/gia hạn/trạng
 | `reader_id` | định danh | FK → Reader | FACT | |
 | `bibliographic_record_id` | định danh | FK → BibliographicRecord | FACT | Đặt theo đầu sách — nguồn `title_id` |
 | `status` | enum(`WAITING`,`READY`,`FULFILLED`,`EXPIRED`,`CANCELLED`) | — | FACT | §5 nguồn; terminal: FULFILLED/EXPIRED/CANCELLED |
-| `created_at` | thời điểm | — | FACT | Thứ tự hàng đợi FIFO (SRC-BR-09, AT-RSV-05) |
+| `created_at` | thời điểm | — | FACT | Thứ tự hàng đợi FIFO (SRC-BR09, AT-RSV-05) |
 | `held_copy_id` | định danh | FK → Copy (tùy chọn) | FACT | Chỉ set khi READY; một Copy tối đa 1 Reservation giữ (AT-RSV-02) |
-| `hold_expires_at` | thời điểm | — | FACT | = thời điểm READY + `hold_hours` (default 48h — SRC-BR-10, ngưỡng OQ-policy-config-001) |
+| `hold_expires_at` | thời điểm | — | FACT | = thời điểm READY + `hold_hours` (default 48h — SRC-BR10, ngưỡng OQ-policy-config-001) |
 | `queue_position` | số nguyên | — | **derived** | = rank theo `created_at` trong tập reservation mở của đầu sách — **không lưu** (AT-RSV-05) |
 
 ### 3.7 `Fine` — Nghĩa vụ tài chính (trạng thái & số dư suy từ ledger)
@@ -298,7 +298,7 @@ Nhãn tổng entity: **PROPOSAL** (vị trí gắn hạn trả/gia hạn/trạng
 | `loan_item_id` | định danh | FK → LoanItem (tùy chọn) | PROPOSAL | nguồn `loan_id` — trỏ dòng mượn sau khi tách; fine manual không gắn — OQ-core-004 |
 | `damage_report_id` | định danh | FK → DamageReport (tùy chọn) | PROPOSAL | Truy vết fine gắn báo cáo hư hỏng (BR-damage-lifecycle-001 "fine-linked") |
 | `fine_type` | enum(`OVERDUE`,`DAMAGE`,`LOST`; `MANUAL`) | — | FACT 3 giá trị / PROPOSAL `MANUAL` | §5.2: assessment manual của Thủ thư là PROPOSAL |
-| `assessed_amount` | tiền (VND) | — | FACT | Nghĩa vụ ban đầu (SRC-BR-05/06/07 theo policy); assess bổ sung = event mới, không sửa field |
+| `assessed_amount` | tiền (VND) | — | FACT | Nghĩa vụ ban đầu (SRC-BR05/06/07 theo policy); assess bổ sung = event mới, không sửa field |
 | `status` | enum(`UNPAID`,`PAID`,`WAIVED`) | — | FACT giá trị / PROPOSAL cơ chế | Suy từ ledger: `PAID` khi balance=0 do PAYMENT, `WAIVED` khi do WAIVER (§5.1); không có `PARTIALLY_PAID` (DEC-D3-04) |
 | `balance` | tiền (VND) | — | **derived** | = ΣASSESSMENT + ΣADJUSTMENT(+) − ΣPAYMENT − ΣWAIVER − ΣADJUSTMENT(−) − ΣREVERSAL (§5.1); có thể cache **chỉ khi đối soát được** (AT-FIN-01) |
 | `paid_at` | thời điểm | — | **derived** / PROPOSAL | Thời điểm balance về 0; nguồn lưu field này trên Fine |
@@ -329,9 +329,9 @@ Nhãn tổng entity: **PROPOSAL** (vị trí gắn hạn trả/gia hạn/trạng
 | `copy_id` | định danh | FK → Copy | FACT | |
 | `loan_item_id` | định danh | FK → LoanItem (tùy chọn) | FACT field / PROPOSAL đổi tên | nguồn `loan_id` — link khi phát hiện lúc trả (DMG-T01) |
 | `reported_by` | tham chiếu logic | — | FACT | Thủ thư tạo |
-| `severity` | enum(`MINOR`/`MODERATE`/`SEVERE` = Nhẹ/Vừa/Nặng) | — | FACT | §6.4 nguồn; ánh xạ % bồi thường SRC-BR-07 là policy |
+| `severity` | enum(`MINOR`/`MODERATE`/`SEVERE` = Nhẹ/Vừa/Nặng) | — | FACT | §6.4 nguồn; ánh xạ % bồi thường SRC-BR07 là policy |
 | `note` | văn bản | — | FACT | |
-| `photo_refs` | danh sách tham chiếu (1–5 phần tử) | — | FACT | SRC-NFR-05: chỉ lưu tham chiếu object-storage, ≤500KB/ảnh; qua trust boundary BR-damage-lifecycle-002. Nhúng list hay tách entity `Attachment` — **OQ-damage-lifecycle-001** |
+| `photo_refs` | danh sách tham chiếu (1–5 phần tử) | — | FACT | SRC-NFR05: chỉ lưu tham chiếu object-storage, ≤500KB/ảnh; qua trust boundary BR-damage-lifecycle-002. Nhúng list hay tách entity `Attachment` — **OQ-damage-lifecycle-001** |
 | `status` | enum(`PENDING`,`REPAIR`,`DISPOSE`,`REJECTED`) | — | FACT | §7 nguồn; terminal cho report — Copy đi tiếp theo disposition |
 | `reviewed_by` | tham chiếu logic | — | FACT | Thủ thư duyệt (SRC-FR-L08) |
 | `reviewed_at` | thời điểm | — | FACT | |
@@ -385,15 +385,15 @@ Nhãn tổng entity: **PROPOSAL** (vị trí gắn hạn trả/gia hạn/trạng
 
 | `policy_key` (đề xuất) | Rule | Default proposal |
 |---|---|---|
-| `loan_max_open` | SRC-BR-01 | 5 bản sao — chốt (DEC-SF-10) |
-| `loan_days` | SRC-BR-04 | 14 ngày — chốt (DEC-SF-10) |
-| `renew_max_count` / `renew_extra_days` | SRC-BR-04 | 1 lần / +7 ngày |
-| `fine_overdue_per_day` / `fine_overdue_cap` | SRC-BR-05 | 2.000đ/ngày / = giá sách |
-| `lost_compensation_pct` / `lost_fee_flat` | SRC-BR-06 | 100% giá + phí xử lý |
-| `damage_pct_minor/moderate/severe` | SRC-BR-07 | 0% / 30% / 100% giá |
-| `reservation_max_open` | SRC-BR-08 | 3 đặt trước |
-| `hold_hours` | SRC-BR-10 | 48 giờ |
-| `fine_block_threshold` | SRC-BR-03 | 50.000đ — chốt (DEC-SF-10) |
+| `loan_max_open` | SRC-BR01 | 5 bản sao — chốt (DEC-SF-10) |
+| `loan_days` | SRC-BR04 | 14 ngày — chốt (DEC-SF-10) |
+| `renew_max_count` / `renew_extra_days` | SRC-BR04 | 1 lần / +7 ngày |
+| `fine_overdue_per_day` / `fine_overdue_cap` | SRC-BR05 | 2.000đ/ngày / = giá sách |
+| `lost_compensation_pct` / `lost_fee_flat` | SRC-BR06 | 100% giá + phí xử lý |
+| `damage_pct_minor/moderate/severe` | SRC-BR07 | 0% / 30% / 100% giá |
+| `reservation_max_open` | SRC-BR08 | 3 đặt trước |
+| `hold_hours` | SRC-BR10 | 48 giờ |
+| `fine_block_threshold` | SRC-BR03 | 50.000đ — chốt (DEC-SF-10) |
 
 ### 3.13 `ImportBatch` — Lô nhập liệu + đối soát
 
@@ -428,9 +428,9 @@ Nhãn tổng entity: **PROPOSAL** (vị trí gắn hạn trả/gia hạn/trạng
 | X1 | `Fine.balance`, `Fine.status`, `paid_at` suy từ `FinancialEvent` — **không sửa trực tiếp**, chỉ append event; sửa sai = `REVERSAL` trỏ event gốc | FACT nguyên tắc / PROPOSAL công thức | §5.1–5.2; BR-core-002 |
 | X2 | `AuditEvent` ghi cùng transaction, **không FK** tới entity bị audit (ref logic); audit fail → rollback business write | FACT | BR-core-003; NFR-core-005 |
 | X3 | `Copy.status` là trạng thái **lưu** (7 giá trị); `is_loanable` là **thuộc tính** — mặc định ở `BibliographicRecord`, override ở `Copy` (`INHERIT`/`LOANABLE`/`NOT_LOANABLE`); đổi loanable không phải transition nhưng vẫn audit | PROPOSAL | DEC-D3-09; CP-AVL-02/03 |
-| X4 | Số khả dụng, vị trí hàng đợi, số ngày quá hạn, balance — **derived**, không lưu counter | FACT | SRC-BR-11; §1.1; AT-RSV-05 |
+| X4 | Số khả dụng, vị trí hàng đợi, số ngày quá hạn, balance — **derived**, không lưu counter | FACT | SRC-BR11; §1.1; AT-RSV-05 |
 | X5 | `PAYMENT` có `receipt_no` duy nhất + `operation_id` duy nhất; replay trả kết quả gốc | PROPOSAL | DEC-D3-08; AT-FIN-02; BR-fine-collection-basic-001 |
-| X6 | Một Copy tối đa: 1 LoanItem mở, 1 Reservation `READY` giữ, 1 DamageReport `PENDING` | FACT + PROPOSAL | SRC-BR-13; AT-RSV-02; §6 |
+| X6 | Một Copy tối đa: 1 LoanItem mở, 1 Reservation `READY` giữ, 1 DamageReport `PENDING` | FACT + PROPOSAL | SRC-BR13; AT-RSV-02; §6 |
 | X7 | Reservation allocation/expiry và chuyển trạng thái Copy là **một** transaction nguyên tử (CAS trên cả hai aggregate) | PROPOSAL | AT-RSV-01/04; BR-reservation-001/BR-reservation-002 |
 | X8 | Checkout nhiều bản sao all-or-nothing qua `Loan.operation_id`; `Copy.version` là CAS | FACT + PROPOSAL | BR-checkout-001; AT-CHK-02/03 |
 | X9 | `NotificationEvent`/`AuditEvent`/`PolicyConfig` không có FK nghiệp vụ — quan hệ với các entity khác là ref logic hoặc policy key | FACT + PROPOSAL | FR-notification-core-001/FR-ops-foundation-001/FR-policy-config-001 |
@@ -464,8 +464,8 @@ OQ hiện hữu được tham chiếu (không mở mới): OQ-data-import-001 (s
 | AT-CHK-02 | `Loan.operation_id` UK |
 | AT-FIN-02/03 | `FinancialEvent.operation_id` UK; RECONCILIATION |
 | BR-data-import-001 / NFR-data-import-001 | `ImportBatch` counters + `mode` + `override_approved_by`; `ImportIssue` theo dòng |
-| SRC-BR-12 | `is_active`/`status=DELETED` — không hard delete |
-| SRC-NFR-05 / BR-damage-lifecycle-002 | `photo_refs` = tham chiếu storage, không lưu binary |
+| SRC-BR12 | `is_active`/`status=DELETED` — không hard delete |
+| SRC-NFR05 / BR-damage-lifecycle-002 | `photo_refs` = tham chiếu storage, không lưu binary |
 
 > Kiểm chứng bằng máy: mermaid block ở Mục 1 đã pass lint/compile (xem phần kết quả verify trong báo cáo phiên). Cardinality/đúng nghiệp vụ đã tự đối chiếu spec — máy không kiểm phần này.
 

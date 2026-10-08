@@ -51,7 +51,7 @@ links:
 | `OQ brainstorm-1`, `OQ brainstorm-3` (trong `prd.md`) | `OQ-BS-1`, `OQ-BS-3` | Alias văn xuôi của cùng câu hỏi |
 | `R1`, `R2`, `Later` (SRS cũ) | `R0`, `R1A`, `R1B`, `R2`, `R3` | DEC-P2-08 — SRS đã remap; artifact mới chỉ dùng R0–R3 |
 | `FR-Cnn/Rnn/Lnn/Snn` | Giữ nguyên (series nguồn) | Map sang `FR-LMP-nnn` trong traceability Phase 6/8 — một FR-LMP có thể cover nhiều FR nguồn |
-| `BR-NN`, `NFR-NN`, `FR-Cnn/Rnn/Lnn/Snn` khi nhắc trong `docs/features/` và `docs/_shared/` | `SRC-BR-NN`, `SRC-NFR-NN`, `SRC-FR-Xnn` | Tài liệu nguồn giữ nguyên mã gốc; tài liệu ở `docs/features/` và `docs/_shared/` ghi tiền tố `SRC-` để KG không hiểu nhầm là mã feature; `docs/_product/` trích thẳng mã nguồn |
+| `BR-NN`, `NFR-NN`, `FR-Cnn/Rnn/Lnn/Snn` khi nhắc trong `docs/features/` và `docs/_shared/` | `SRC-BRnn`, `SRC-NFRnn`, `SRC-FR-Xnn` (BR/NFR không có gạch nối trước số, vì KG đọc mọi chuỗi `BR-nn` là mã của feature hiện tại) | Tài liệu nguồn giữ nguyên mã gốc; tài liệu ở `docs/features/` và `docs/_shared/` ghi tiền tố `SRC-` để KG không hiểu nhầm là mã feature; `docs/_product/` trích thẳng mã nguồn |
 | `P0-PROPOSAL` (release của Reservation) | `R2` | DEC-P2-05: single release owner |
 
 ## 3. Crosswalk quy tắc nguồn → SRS

@@ -21,7 +21,7 @@ Quản trị viên quản lý đầu sách và danh mục (thể loại, tác gi
 - Mọi giao dịch mượn, trả, đặt trước đều cần đầu sách chuẩn. Đầu sách là cha của các bản sao (`copy-inventory`).
 - Phần lớn đầu sách đi vào hệ thống qua import Excel (`data-import`); feature này lo tạo, sửa, vô hiệu từng bản ghi và tra cứu.
 - Tra cứu phía người đọc thuộc `reader-self-service` (DEC-SF-07). Số bản khả dụng chỉ có ý nghĩa đầy đủ khi lưu thông chạy từ R1A.
-- Số lượng khả dụng luôn tính từ trạng thái các bản sao, không nhập tay (BR-11 nguồn).
+- Số lượng khả dụng luôn tính từ trạng thái các bản sao, không nhập tay (SRC-BR11 nguồn).
 
 ## 3. User Types (preliminary)
 

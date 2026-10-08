@@ -77,7 +77,7 @@ __Constraints:__
 
 | Ràng buộc | Source / Owner |
 |---|---|
-| Số lượng khả dụng luôn tính từ trạng thái bản sao | SRC-BR-11 (nguồn) |
+| Số lượng khả dụng luôn tính từ trạng thái bản sao | SRC-BR11 (nguồn) |
 
 __Dependencies:__
 

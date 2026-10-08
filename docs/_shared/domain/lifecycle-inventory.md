@@ -43,7 +43,7 @@ Thuật ngữ theo `docs/_shared/project-profile.md`. Cột "SRS alias" ánh x�
 | Người đọc | `User`/`ReaderProfile` | Chủ thẻ QR, chủ Loan/Reservation/Fine | `Reader` |
 | Thông báo | `NotificationEvent` | Outbox bền cho thông báo | `NotificationEvent` |
 | Nhật ký | `AuditEvent` | Audit ghi cùng transaction | `AuditEvent` |
-| Cấu hình | `PolicyConfig` (`Setting`) | Tham số SRC-BR-01..SRC-BR-10 | `PolicyConfig` |
+| Cấu hình | `PolicyConfig` (`Setting`) | Tham số SRC-BR01..SRC-BR10 | `PolicyConfig` |
 
 | Actor (profile) | Vai trò domain |
 |-----------------|----------------|
@@ -62,7 +62,7 @@ Thuật ngữ theo `docs/_shared/project-profile.md`. Cột "SRS alias" ánh x�
 | `Reservation.status`, `Reservation.held_copy_id` | Reservation | Copy chỉ giữ trạng thái Đang giữ; gắn bản sao cụ thể là quyết định của Reservation |
 | `Fine.status`, `Fine.balance` | Fine (suy từ `FinancialEvent`) | Không sửa `balance` trực tiếp; chỉ append event |
 | `DamageReport.status` | DamageReport | Copy không tự duyệt; disposition là quyết định của report |
-| Số lượng khả dụng | **Tính toán** (SRC-BR-11) | Không lưu counter; = số Copy ở trạng thái Sẵn sàng và `is_loanable` |
+| Số lượng khả dụng | **Tính toán** (SRC-BR11) | Không lưu counter; = số Copy ở trạng thái Sẵn sàng và `is_loanable` |
 
 **Quy tắc lưu vs tính toán:** `Copy.status` là trạng thái **lưu**. "Khả dụng" (available count), "đang quá hạn bao nhiêu ngày", "số dư phạt" là giá trị **tính toán**. Không dùng "available" như trạng thái suy diễn mơ hồ — trạng thái lưu duy nhất tương ứng là `Sẵn sàng`, và điều kiện cho mượn thực tế = `Sẵn sàng` + `is_loanable` + không bị chặn bởi rule khác.
 
@@ -78,7 +78,7 @@ Thuật ngữ theo `docs/_shared/project-profile.md`. Cột "SRS alias" ánh x�
 |---|-----------|------|---------|----------------------|-----------|------|
 | 1 | Sẵn sàng | `AVAILABLE` | Trên kệ, cho mượn được nếu `is_loanable` | Có (nếu loanable) | Không | FACT (tên) |
 | 2 | Đang mượn | `ON_LOAN` | Gắn với một Loan đang mở | Không | Không | FACT (tên) |
-| 3 | Đang giữ | `ON_HOLD` | Gắn với một Reservation `READY`, chờ người đặt đến lấy trong SRC-BR-10 | Không | Không | FACT (tên) |
+| 3 | Đang giữ | `ON_HOLD` | Gắn với một Reservation `READY`, chờ người đặt đến lấy trong SRC-BR10 | Không | Không | FACT (tên) |
 | 4 | Chờ duyệt | `PENDING_REVIEW` | Bị báo cáo hư hỏng, chặn lưu thông chờ quản trị viên (OQ-11 default) | Không | Không | FACT (tên) |
 | 5 | Đang sửa | `IN_REPAIR` | Quản trị viên đã duyệt sửa chữa | Không | Không | FACT (tên) |
 | 6 | Mất | `LOST` | Đã ghi nhận mất; có thể quay lại qua found-after-lost | Không | Không | FACT (tên) |
@@ -91,12 +91,12 @@ Trạng thái khởi tạo: `∅ → AVAILABLE` khi đăng ký/import bản sao 
 | ID | Từ | Sang | Trigger | Actor | Precondition | Side effect | Reversible? | Nhãn | Source ref |
 |----|-----|------|---------|-------|--------------|-------------|-------------|------|------------|
 | COPY-T00 | ∅ | AVAILABLE | Đăng ký/import bản sao | Quản trị viên / Hệ thống import | QR duy nhất, title hợp lệ | Audit; cập nhật số khả dụng (tính toán) | — | PROPOSAL | SRC-FR-L03; OQ-15 |
-| COPY-T01 | AVAILABLE | ON_LOAN | Xác nhận checkout | Thủ thư / Quản trị viên | Reader đủ điều kiện (SRC-BR-03); `is_loanable`; SRC-BR-01/02 thoả; CAS status=`AVAILABLE` | Tạo Loan ACTIVE; audit; outbox notify; nếu đi kèm reservation đúng lượt thì Reservation→FULFILLED | Không; sửa sai qua quy trình điều chỉnh | FACT | §6.1; SRC-BR-13 |
+| COPY-T01 | AVAILABLE | ON_LOAN | Xác nhận checkout | Thủ thư / Quản trị viên | Reader đủ điều kiện (SRC-BR03); `is_loanable`; SRC-BR01/02 thoả; CAS status=`AVAILABLE` | Tạo Loan ACTIVE; audit; outbox notify; nếu đi kèm reservation đúng lượt thì Reservation→FULFILLED | Không; sửa sai qua quy trình điều chỉnh | FACT | §6.1; SRC-BR13 |
 | COPY-T02 | ON_HOLD | ON_LOAN | Checkout nhận sách đặt trước | Thủ thư / Quản trị viên | Reservation `READY` thuộc đúng reader này; `hold_expires_at` chưa qua | Loan ACTIVE; Reservation→FULFILLED; audit; notify | Không | FACT | §6.3 bước 4; §5 Reservation |
-| COPY-T03 | ON_LOAN | AVAILABLE | Trả bình thường, không có hàng chờ | Thủ thư / Quản trị viên | Loan mở tồn tại; condition ghi nhận OK | Loan→RETURNED; assess phạt quá hạn (SRC-BR-05) nếu có; audit; notify phạt | Không | FACT | §5; §6.2; baseline D5 |
-| COPY-T04 | ON_LOAN | ON_HOLD | Trả bình thường, có hàng chờ | Thủ thư / Quản trị viên | Queue title ≠ ∅ | Loan→RETURNED; Reservation đầu hàng →READY + `held_copy_id` + `hold_expires_at=+48h` (SRC-BR-10); notify người đặt | Không | FACT | §6.3 bước 3; D5 |
-| COPY-T05 | ON_LOAN | PENDING_REVIEW | Trả với hư hỏng | Thủ thư / Quản trị viên | Condition ≠ OK khi trả | Loan→RETURNED; DamageReport PENDING gắn `loan_id`; assess phạt hư hỏng (SRC-BR-07); notify Quản trị viên | Có điều kiện (qua disposition) | FACT | §6.2; §6.4 bước 4 |
-| COPY-T06 | ON_LOAN | LOST | Ghi nhận mất sách | Thủ thư / Quản trị viên | Loan mở tồn tại | Loan→LOST; assess bồi thường SRC-BR-06; audit; notify | Có điều kiện (COPY-T15/16) | FACT | SRC-FR-S07; §5 Loan |
+| COPY-T03 | ON_LOAN | AVAILABLE | Trả bình thường, không có hàng chờ | Thủ thư / Quản trị viên | Loan mở tồn tại; condition ghi nhận OK | Loan→RETURNED; assess phạt quá hạn (SRC-BR05) nếu có; audit; notify phạt | Không | FACT | §5; §6.2; baseline D5 |
+| COPY-T04 | ON_LOAN | ON_HOLD | Trả bình thường, có hàng chờ | Thủ thư / Quản trị viên | Queue title ≠ ∅ | Loan→RETURNED; Reservation đầu hàng →READY + `held_copy_id` + `hold_expires_at=+48h` (SRC-BR10); notify người đặt | Không | FACT | §6.3 bước 3; D5 |
+| COPY-T05 | ON_LOAN | PENDING_REVIEW | Trả với hư hỏng | Thủ thư / Quản trị viên | Condition ≠ OK khi trả | Loan→RETURNED; DamageReport PENDING gắn `loan_id`; assess phạt hư hỏng (SRC-BR07); notify Quản trị viên | Có điều kiện (qua disposition) | FACT | §6.2; §6.4 bước 4 |
+| COPY-T06 | ON_LOAN | LOST | Ghi nhận mất sách | Thủ thư / Quản trị viên | Loan mở tồn tại | Loan→LOST; assess bồi thường SRC-BR06; audit; notify | Có điều kiện (COPY-T15/16) | FACT | SRC-FR-S07; §5 Loan |
 | COPY-T07 | AVAILABLE | PENDING_REVIEW | Báo cáo hư hỏng ngoài luồng trả | Thủ thư / Quản trị viên | Report hợp lệ (1–5 ảnh, severity) | DamageReport PENDING; chặn lưu thông ngay (OQ-11 default); notify Quản trị viên | Có (COPY-T09) | FACT | §6.4 bước 1–2 |
 | COPY-T08 | ON_HOLD | PENDING_REVIEW | Báo hư hỏng trên bản đang giữ | Thủ thư / Quản trị viên | Report hợp lệ | DamageReport PENDING; **Reservation `READY` liên quan quay `WAITING` và giữ vị trí hàng chờ** | Có (COPY-T09) | PROPOSAL — DEC-D3-06 | Suy diễn; edge case chưa có nguồn |
 | COPY-T09 | PENDING_REVIEW | AVAILABLE | Quản trị viên bác bỏ báo cáo | Quản trị viên | Disposition = REJECTED | DamageReport→REJECTED; audit | — | FACT | §6.4 bước 3 |
@@ -107,9 +107,9 @@ Trạng thái khởi tạo: `∅ → AVAILABLE` khi đăng ký/import bản sao 
 | COPY-T14 | IN_REPAIR | DISPOSED | Sửa không thành, thanh lý | Quản trị viên | Quyết định của quản trị viên | DamageReport bổ sung disposition DISPOSE hoặc report mới; audit | — | PROPOSAL — DEC-D3-07 | Suy diễn |
 | COPY-T15 | LOST | AVAILABLE | Found-after-lost, reconcile xong, không hàng chờ | Thủ thư / Quản trị viên | Kiểm tra vật lý; **financial reconciliation đã xong** (DEC-D3-05) | Compensation events (REVERSAL/ADJUSTMENT/REFUND nếu đã thu); audit bắt buộc | — | PROPOSAL — DEC-D3-05 | Baseline "Có điều kiện nếu tìm lại" |
 | COPY-T16 | LOST | ON_HOLD | Found-after-lost, reconcile xong, có hàng chờ | Thủ thư / Quản trị viên | Như T15 + queue ≠ ∅ | Như T15 + Reservation đầu hàng →READY | — | PROPOSAL — DEC-D3-05 | Suy diễn |
-| COPY-T17 | AVAILABLE | DISPOSED | Thanh lý trực tiếp không qua hư hỏng | Quản trị viên | Lý do bắt buộc; không Loan mở, không Reservation giữ | Audit; loại khỏi khả dụng | — | PROPOSAL — DEC-D3-07 | Suy diễn (SRC-BR-12 vô hiệu hoá) |
+| COPY-T17 | AVAILABLE | DISPOSED | Thanh lý trực tiếp không qua hư hỏng | Quản trị viên | Lý do bắt buộc; không Loan mở, không Reservation giữ | Audit; loại khỏi khả dụng | — | PROPOSAL — DEC-D3-07 | Suy diễn (SRC-BR12 vô hiệu hoá) |
 | COPY-T18 | ON_HOLD | AVAILABLE | Giải phóng giữ chỗ (hết hạn/hủy), không còn người chờ | Hệ thống (cron) / Thủ thư | Reservation chuyển EXPIRED/CANCELLED; queue rỗng sau khi advance | Outbox notify (nếu expiry); audit | — | FACT | §6.3 bước 4; §8 cron |
-| COPY-T19 | ON_HOLD | ON_HOLD (re-hold) | Giải phóng giữ chỗ, queue còn người | Hệ thống | Queue advance nguyên tử cùng transaction với EXPIRED/CANCELLED | `held_copy_id` gán người kế tiếp; `hold_expires_at` reset; notify | — | FACT | §6.3 bước 4; SRC-BR-09 |
+| COPY-T19 | ON_HOLD | ON_HOLD (re-hold) | Giải phóng giữ chỗ, queue còn người | Hệ thống | Queue advance nguyên tử cùng transaction với EXPIRED/CANCELLED | `held_copy_id` gán người kế tiếp; `hold_expires_at` reset; notify | — | FACT | §6.3 bước 4; SRC-BR09 |
 
 **Ghi chú COPY-T19:** trạng thái lưu không đổi (`ON_HOLD`) nhưng chủ thể giữ đổi — xem là transition nội bộ nguyên tử trong cùng boundary với `READY→EXPIRED/CANCELLED` của reservation trước và `WAITING→READY` của reservation kế tiếp.
 
@@ -117,10 +117,10 @@ Trạng thái khởi tạo: `∅ → AVAILABLE` khi đăng ký/import bản sao 
 
 | Rule | Nội dung | Nhãn |
 |------|----------|------|
-| CP-AVL-01 | "Khả dụng" = đếm Copy `status=AVAILABLE` **và** `is_loanable=true`; tính từ trạng thái, không lưu counter (SRC-BR-11). | FACT (SRC-BR-11) + PROPOSAL (phần is_loanable) |
+| CP-AVL-01 | "Khả dụng" = đếm Copy `status=AVAILABLE` **và** `is_loanable=true`; tính từ trạng thái, không lưu counter (SRC-BR11). | FACT (SRC-BR11) + PROPOSAL (phần is_loanable) |
 | CP-AVL-02 | `is_loanable` là **thuộc tính**, không phải trạng thái; đặt trên Title (mặc định) và override được trên Copy. Copy non-loanable vẫn `AVAILABLE` nhưng bị từ chối ở COPY-T01/T02. | PROPOSAL — DEC-D3-09; theo default OQ-10 |
 | CP-AVL-03 | Đổi `is_loanable` không phải state transition; vẫn ghi audit. | PROPOSAL |
-| CP-AVL-04 | Copy `PENDING_REVIEW`/`IN_REPAIR`/`LOST`/`DISPOSED`/`ON_HOLD`/`ON_LOAN` đều không tính khả dụng và không checkout được. | FACT (suy trực tiếp từ SRC-BR-11 + §6.1) |
+| CP-AVL-04 | Copy `PENDING_REVIEW`/`IN_REPAIR`/`LOST`/`DISPOSED`/`ON_HOLD`/`ON_LOAN` đều không tính khả dụng và không checkout được. | FACT (suy trực tiếp từ SRC-BR11 + §6.1) |
 
 ### 2.4 Flow trả sách (PROPOSAL — DEC-D3-02)
 
@@ -131,14 +131,14 @@ Nguồn chỉ còn placeholder "3 bước, 2 quyết định" + câu FACT: *"Phi
       └─ D3: Có Loan mở? ──không──> Dừng, hiển thị "Không tìm thấy phiếu mượn đang mở"
 2. Ghi nhận tình trạng trả: Bình thường / Hư hỏng (severity) / Mất
       └─ D4: Hư hỏng? → chuẩn bị PENDING_REVIEW + DamageReport
-3. Đóng Loan (→RETURNED hoặc →LOST) + assess phạt (quá hạn SRC-BR-05, hư hỏng SRC-BR-07, mất SRC-BR-06)
+3. Đóng Loan (→RETURNED hoặc →LOST) + assess phạt (quá hạn SRC-BR05, hư hỏng SRC-BR07, mất SRC-BR06)
       └─ D5: Copy quyết định trạng thái sau cùng:
             hư hỏng → PENDING_REVIEW | mất → LOST |
             bình thường + queue → ON_HOLD (allocate) | bình thường, queue rỗng → AVAILABLE
 4. Audit trong cùng transaction; notification qua outbox; hiển thị kết quả cho thủ thư.
 ```
 
-Thứ tự bắt buộc: **đóng Loan và tính phạt trước**, quyết định trạng thái Copy sau (FACT). Toàn bộ bước 3–4 trong một transaction (SRC-NFR-03).
+Thứ tự bắt buộc: **đóng Loan và tính phạt trước**, quyết định trạng thái Copy sau (FACT). Toàn bộ bước 3–4 trong một transaction (SRC-NFR03).
 
 ### 2.5 Invalid transitions — Copy
 
@@ -161,13 +161,13 @@ Trạng thái: `ACTIVE` (Đang mượn) · `OVERDUE` (Quá hạn) · `RETURNED` 
 
 | ID | Từ | Sang | Trigger | Actor | Precondition | Side effect | Reversible? | Nhãn | Source ref |
 |----|-----|------|---------|-------|--------------|-------------|-------------|------|------------|
-| LOAN-T01 | ∅ | ACTIVE | Checkout commit | Thủ thư / Quản trị viên | Reader đủ điều kiện; Copy CAS thành công; SRC-BR-01/02 | Copy→ON_LOAN; `due_at=borrowed+SRC-BR-04`; outbox notify kèm hạn trả; audit | — | FACT | §6.1 |
-| LOAN-T02 | ACTIVE | OVERDUE | Cron quét quá hạn 00:05 | Hệ thống | `now > due_at` và chưa trả | Cập nhật phạt tạm tính; notify quá hạn (ngày đầu + mỗi 3 ngày); SRC-BR-03 chặn mượn mới | Có (đóng bằng RETURNED/LOST) | FACT | §5; §8 cron |
-| LOAN-T03 | ACTIVE | ACTIVE (renew) | Gia hạn | Người đọc / Thủ thư / Quản trị viên | `renew_count < limit`; chưa quá hạn; title không có Reservation đang chờ (SRC-BR-04) | `due_at += 7 ngày`; `renew_count++`; audit | Không tự hoàn; trả sớm vẫn được | FACT | SRC-FR-R06/S06; SRC-BR-04 |
+| LOAN-T01 | ∅ | ACTIVE | Checkout commit | Thủ thư / Quản trị viên | Reader đủ điều kiện; Copy CAS thành công; SRC-BR01/02 | Copy→ON_LOAN; `due_at=borrowed+SRC-BR04`; outbox notify kèm hạn trả; audit | — | FACT | §6.1 |
+| LOAN-T02 | ACTIVE | OVERDUE | Cron quét quá hạn 00:05 | Hệ thống | `now > due_at` và chưa trả | Cập nhật phạt tạm tính; notify quá hạn (ngày đầu + mỗi 3 ngày); SRC-BR03 chặn mượn mới | Có (đóng bằng RETURNED/LOST) | FACT | §5; §8 cron |
+| LOAN-T03 | ACTIVE | ACTIVE (renew) | Gia hạn | Người đọc / Thủ thư / Quản trị viên | `renew_count < limit`; chưa quá hạn; title không có Reservation đang chờ (SRC-BR04) | `due_at += 7 ngày`; `renew_count++`; audit | Không tự hoàn; trả sớm vẫn được | FACT | SRC-FR-R06/S06; SRC-BR04 |
 | LOAN-T04 | ACTIVE/OVERDUE | RETURNED | Trả sách | Thủ thư / Quản trị viên | Loan mở của đúng Copy | `returned_at`, `return_condition`, `closed_by`; assess fine quá hạn/hư hỏng; Copy transition T03/T04/T05 | Không; sửa sai qua điều chỉnh + audit | FACT | §5; §6.2 |
-| LOAN-T05 | ACTIVE/OVERDUE | LOST | Ghi nhận mất | Thủ thư / Quản trị viên | Loan mở; xác nhận với người đọc | `closed_by`; assess fine LOST (SRC-BR-06); Copy→LOST | **Không reopen** — found xử lý ở Copy + Fine (DEC-D3-05) | FACT + PROPOSAL (phần không reopen) | §5; SRC-FR-S07 |
+| LOAN-T05 | ACTIVE/OVERDUE | LOST | Ghi nhận mất | Thủ thư / Quản trị viên | Loan mở; xác nhận với người đọc | `closed_by`; assess fine LOST (SRC-BR06); Copy→LOST | **Không reopen** — found xử lý ở Copy + Fine (DEC-D3-05) | FACT + PROPOSAL (phần không reopen) | §5; SRC-FR-S07 |
 
-**Concurrency conflict (FACT SRC-BR-13 + SRC-NFR-03):** hai giao dịch tranh cùng Copy → chỉ ghi trước (CAS trên `Copy.version` + allowed-source-state) thành công; giao dịch sau nhận lỗi "Sách vừa được cập nhật. Vui lòng quét lại để xem trạng thái mới." Renew đua với trả/mất: transition đầu tiên commit thắng, transition sau nhận invalid-state.
+**Concurrency conflict (FACT SRC-BR13 + SRC-NFR03):** hai giao dịch tranh cùng Copy → chỉ ghi trước (CAS trên `Copy.version` + allowed-source-state) thành công; giao dịch sau nhận lỗi "Sách vừa được cập nhật. Vui lòng quét lại để xem trạng thái mới." Renew đua với trả/mất: transition đầu tiên commit thắng, transition sau nhận invalid-state.
 
 **Invalid transitions — Loan:** `RETURNED/LOST → *` (terminal); `OVERDUE → ACTIVE` mà không qua renew hợp lệ; `∅ → OVERDUE/RETURNED/LOST` (phải qua ACTIVE); double-return (Loan đã `RETURNED` bị đóng lần nữa) → idempotent reject, trả kết quả gốc.
 
@@ -179,10 +179,10 @@ Trạng thái: `WAITING` (Đang chờ) · `READY` (Sẵn sàng lấy) · `FULFIL
 
 | ID | Từ | Sang | Trigger | Actor | Precondition | Side effect | Reversible? | Nhãn | Source ref |
 |----|-----|------|---------|-------|--------------|-------------|-------------|------|------------|
-| RES-T01 | ∅ | WAITING | Người đọc/thủ thư tạo đặt trước | Người đọc / Thủ thư / Quản trị viên | Title `khả dụng = 0` (SRC-BR-08); reader < 3 đặt trước mở; **không có reservation mở khác cho cùng title** | Vào cuối queue FIFO (SRC-BR-09); hiển thị vị trí; audit | — | FACT + PROPOSAL (dedup cùng title) | §6.3; SRC-BR-08/09 |
+| RES-T01 | ∅ | WAITING | Người đọc/thủ thư tạo đặt trước | Người đọc / Thủ thư / Quản trị viên | Title `khả dụng = 0` (SRC-BR08); reader < 3 đặt trước mở; **không có reservation mở khác cho cùng title** | Vào cuối queue FIFO (SRC-BR09); hiển thị vị trí; audit | — | FACT + PROPOSAL (dedup cùng title) | §6.3; SRC-BR08/09 |
 | RES-T02 | WAITING | READY | Allocation khi có Copy | Hệ thống | Reservation ở đầu queue của title; Copy vừa về (T04/T13/T15/T16/T19) | **Nguyên tử cùng transaction**: Copy→ON_HOLD; `held_copy_id`; `hold_expires_at=+48h`; outbox notify "đến nhận trong 48h" | Không (chỉ tiến EXPIRED/CANCELLED/FULFILLED) | FACT | §6.3 bước 3 |
 | RES-T03 | READY | FULFILLED | Người đặt đến nhận, checkout | Thủ thư / Quản trị viên | `hold_expires_at` chưa qua; reader đủ điều kiện mượn | Loan ACTIVE qua COPY-T02; audit; notify xác nhận | Không | FACT | §5; §6.3 bước 4 |
-| RES-T04 | READY | EXPIRED | Cron hết hạn giữ (mỗi 15 phút) | Hệ thống | `now > hold_expires_at` | **Nguyên tử**: giải phóng Copy (T18/T19); advance queue; notify "đặt trước hết hạn giữ" | Không | FACT | §5; §8 cron; SRC-BR-10 |
+| RES-T04 | READY | EXPIRED | Cron hết hạn giữ (mỗi 15 phút) | Hệ thống | `now > hold_expires_at` | **Nguyên tử**: giải phóng Copy (T18/T19); advance queue; notify "đặt trước hết hạn giữ" | Không | FACT | §5; §8 cron; SRC-BR10 |
 | RES-T05 | WAITING | CANCELLED | Người đọc/thủ thư hủy | Người đọc / Thủ thư / Quản trị viên | Reservation đang mở của chính reader (hoặc thay mặt) | Rời queue; audit | Không | FACT | §5; ma trận quyền |
 | RES-T06 | READY | CANCELLED | Hủy khi đang giữ | Như RES-T05 | Như trên | **Nguyên tử**: giải phóng Copy → advance queue (T19) hoặc AVAILABLE (T18); audit | Không | FACT | §5 |
 
@@ -190,9 +190,9 @@ Trạng thái: `WAITING` (Đang chờ) · `READY` (Sẵn sàng lấy) · `FULFIL
 
 **`skip`/`suspend`:** **không đưa vào baseline.** Nguồn không có; phase contract yêu cầu chỉ thêm khi có domain approval → ghi Open tại DEC-D3-03.
 
-**Race hủy-vs-allocate:** hủy đúng lúc allocation chạy → CAS trên `Reservation.status`: nếu allocation commit trước thì cancel đi nhánh RES-T06 (giải phóng copy); nếu cancel commit trước thì allocation bỏ qua và advance queue. Cả hai idempotent (PROPOSAL — cơ chế, FACT về yêu cầu SRC-BR-13).
+**Race hủy-vs-allocate:** hủy đúng lúc allocation chạy → CAS trên `Reservation.status`: nếu allocation commit trước thì cancel đi nhánh RES-T06 (giải phóng copy); nếu cancel commit trước thì allocation bỏ qua và advance queue. Cả hai idempotent (PROPOSAL — cơ chế, FACT về yêu cầu SRC-BR13).
 
-**Invalid transitions — Reservation:** `WAITING → FULFILLED` (phải qua READY + pickup); `terminal → *`; `READY → WAITING` (trừ nhánh T08 của Copy — re-queue là PROPOSAL DEC-D3-06); tạo RES mới khi title còn bản khả dụng (vi phạm SRC-BR-08).
+**Invalid transitions — Reservation:** `WAITING → FULFILLED` (phải qua READY + pickup); `terminal → *`; `READY → WAITING` (trừ nhánh T08 của Copy — re-queue là PROPOSAL DEC-D3-06); tạo RES mới khi title còn bản khả dụng (vi phạm SRC-BR08).
 
 ---
 
@@ -211,7 +211,7 @@ Trạng thái: `WAITING` (Đang chờ) · `READY` (Sẵn sàng lấy) · `FULFIL
 
 | Event | Chiều tiền | Actor được phép | Nhãn |
 |-------|-----------|-----------------|------|
-| `ASSESSMENT` | + nghĩa vụ | Hệ thống (đóng Loan) / Quản trị viên (manual) | FACT (SRC-BR-05/06/07) + PROPOSAL (manual) |
+| `ASSESSMENT` | + nghĩa vụ | Hệ thống (đóng Loan) / Quản trị viên (manual) | FACT (SRC-BR05/06/07) + PROPOSAL (manual) |
 | `PAYMENT` | − (ghi nhận thu tiền mặt) | Thủ thư / Quản trị viên (SRC-FR-S08) | FACT |
 | `WAIVER` | − (miễn) | **Quản trị viên** trở lên + lý do bắt buộc | PROPOSAL — DEC-D3-04 |
 | `ADJUSTMENT` | ± (điều chỉnh) | **Quản trị viên** + lý do; ngưỡng cần duyệt cao hơn là OQ | PROPOSAL — OQ-fine-collection-adv-001 |
@@ -232,7 +232,7 @@ Trạng thái: `WAITING` (Đang chờ) · `READY` (Sẵn sàng lấy) · `FULFIL
 2. Mọi event ghi cùng transaction với business action tạo ra nó; audit fail → rollback.
 3. Payment idempotent theo operation key (xem §7): double-submit không tạo hai PAYMENT.
 4. `Fine.balance` tính lại được từ ledger; reconcile job đối chiếu `balance` vs Σ events → lệch thì `RECONCILIATION` + cảnh báo (PROPOSAL).
-5. **Lost→found compensation (DEC-D3-05):** khi Copy `LOST` được tìm thấy (COPY-T15/T16), nghĩa vụ LOST đã assess không tự xóa. Nếu chưa thu → `REVERSAL`/`ADJUSTMENT` về 0. Nếu đã thu → `REFUND` theo policy finance. Có thể giữ phần phí xử lý SRC-BR-06 — **OQ-fine-collection-adv-001, không tự quyết**.
+5. **Lost→found compensation (DEC-D3-05):** khi Copy `LOST` được tìm thấy (COPY-T15/T16), nghĩa vụ LOST đã assess không tự xóa. Nếu chưa thu → `REVERSAL`/`ADJUSTMENT` về 0. Nếu đã thu → `REFUND` theo policy finance. Có thể giữ phần phí xử lý SRC-BR06 — **OQ-fine-collection-adv-001, không tự quyết**.
 
 ---
 
@@ -247,7 +247,7 @@ Trạng thái: `PENDING` (Chờ duyệt) · `REPAIR` (Sửa chữa) · `DISPOSE`
 | DMG-T03 | PENDING | DISPOSE | Quản trị viên duyệt thanh lý | Quản trị viên | Review đủ evidence | Copy→DISPOSED; audit; fine DAMAGE (nếu gắn loan) giữ độc lập | Không | FACT | §6.4 bước 3 |
 | DMG-T04 | PENDING | REJECTED | Quản trị viên bác bỏ | Quản trị viên | Xác định không hư hỏng | Copy→AVAILABLE **hoặc trạng thái lưu trước report nếu vẫn hợp lệ** (ON_HOLD nếu giữ chỗ còn hiệu lực); audit | Không | FACT + PROPOSAL (phần khôi phục trạng thái trước) | §6.4 bước 3 |
 
-**Liên kết:** `DamageReport.loan_id` (nullable) liên kết return phát hiện hư hỏng → phạt SRC-BR-07 gắn Loan đó (FACT §6.4 bước 4). Disposition `REPAIR` → theo dõi Copy qua IN_REPAIR; hoàn tất sửa cập nhật `Copy.condition`.
+**Liên kết:** `DamageReport.loan_id` (nullable) liên kết return phát hiện hư hỏng → phạt SRC-BR07 gắn Loan đó (FACT §6.4 bước 4). Disposition `REPAIR` → theo dõi Copy qua IN_REPAIR; hoàn tất sửa cập nhật `Copy.condition`.
 
 **Quy tắc bổ sung (PROPOSAL):** một Copy chỉ có **một** DamageReport `PENDING` tại một thời điểm; báo cáo lặp trên cùng Copy gộp vào report đang mở hoặc bị từ chối idempotent. Report không tự đóng — chỉ đóng khi có disposition + audit (khớp BR-damage-lifecycle-001).
 
@@ -259,10 +259,10 @@ Trạng thái: `PENDING` (Chờ duyệt) · `REPAIR` (Sửa chữa) · `DISPOSE`
 
 | Req | Nội dung | Nhãn |
 |-----|----------|------|
-| AT-CHK-01 | **All-or-nothing commit set:** một lần xác nhận tạo N Loan + N transition Copy→ON_LOAN + đóng Reservation liên quan + audit + outbox, trong **một transaction**. Bất kỳ điều kiện nào fail (SRC-BR-01/02/03, CAS, `is_loanable`) → rollback toàn bộ, không Loan nào được ghi. | FACT (SRC-NFR-03; baseline §5.2) + PROPOSAL (chi tiết cơ chế) |
+| AT-CHK-01 | **All-or-nothing commit set:** một lần xác nhận tạo N Loan + N transition Copy→ON_LOAN + đóng Reservation liên quan + audit + outbox, trong **một transaction**. Bất kỳ điều kiện nào fail (SRC-BR01/02/03, CAS, `is_loanable`) → rollback toàn bộ, không Loan nào được ghi. | FACT (SRC-NFR03; baseline §5.2) + PROPOSAL (chi tiết cơ chế) |
 | AT-CHK-02 | **Operation key:** client phát sinh `operation_id` cho mỗi lần xác nhận; server có unique constraint trên `operation_id`. Submit lặp/mất mạng sau confirm → trả về kết quả gốc (**query-by-operation recovery**), không tạo Loan thứ hai. | PROPOSAL (khớp baseline §6.4) |
-| AT-CHK-03 | **Concurrency:** CAS theo `Copy.version` + allowed-source-state (`AVAILABLE` hoặc `ON_HOLD` đúng chủ). Thao tác sau nhận E conflict "Sách vừa được cập nhật". | FACT (SRC-BR-13, SRC-NFR-03) |
-| AT-CHK-04 | Audit write nằm **trong** transaction; audit fail → business write fail. | FACT (SRC-NFR-04) + PROPOSAL (fail-closed) |
+| AT-CHK-03 | **Concurrency:** CAS theo `Copy.version` + allowed-source-state (`AVAILABLE` hoặc `ON_HOLD` đúng chủ). Thao tác sau nhận E conflict "Sách vừa được cập nhật". | FACT (SRC-BR13, SRC-NFR03) |
+| AT-CHK-04 | Audit write nằm **trong** transaction; audit fail → business write fail. | FACT (SRC-NFR04) + PROPOSAL (fail-closed) |
 | AT-CHK-05 | Notification không làm fail transaction chính; ghi outbox event trong transaction, delivery retry sau. | PROPOSAL (khớp BR-core-005) |
 
 ### 7.2 Reservation allocation & hold
@@ -273,7 +273,7 @@ Trạng thái: `PENDING` (Chờ duyệt) · `REPAIR` (Sửa chữa) · `DISPOSE`
 | AT-RSV-02 | **Unique active hold:** một Copy tối đa một Reservation `READY` giữ; một reader tối đa một Reservation mở cho cùng title (constraint DB). | PROPOSAL |
 | AT-RSV-03 | **Idempotent expire/cancel/fulfill:** cron expiry, cancel, pickup đều CAS theo trạng thái hiện tại; chạy lặp trả kết quả gốc, không nhân đôi side effect (queue advance, notify, fine). | PROPOSAL (khớp baseline §6.4) |
 | AT-RSV-04 | **Queue advance nguyên tử:** khi `READY→EXPIRED/CANCELLED`, giải phóng Copy và gán người kế tiếp (COPY-T19) hoặc về AVAILABLE (T18) trong cùng transaction — không có trạng thái trung gian "copy vừa free chưa ai giữ" lộ ra ngoài. | PROPOSAL |
-| AT-RSV-05 | FIFO = thứ tự `created_at` hợp lệ; allocation luôn chọn đầu queue tại thời điểm commit (SRC-BR-09). | FACT |
+| AT-RSV-05 | FIFO = thứ tự `created_at` hợp lệ; allocation luôn chọn đầu queue tại thời điểm commit (SRC-BR09). | FACT |
 
 ### 7.3 Tài chính
 

@@ -11,7 +11,7 @@ updated: 2026-10-08
 
 **Trigger:** Thủ thư/Quản trị viên mở chức năng quản trị danh mục hoặc kho bản sao. · **UC:** uc-catalog-admin · **Release:** R0 (tra cứu khả dụng vận hành từ R1A — FR-catalog-admin-002)
 
-**Nhãn:** CRUD đầu sách/bản sao/danh mục + in QR là FACT (SRC-FR-L02/L03/L04, FR-catalog-admin-001/FR-copy-inventory-001). `is_loanable` là thuộc tính Title/Copy là PROPOSAL (DEC-D3-09, theo default OQ-10). Số khả dụng là giá trị tính toán từ `Copy.status` + `is_loanable`, không lưu counter — FACT (SRC-BR-11). Copy `∅→AVAILABLE` khi đăng ký/import là PROPOSAL (COPY-T00 — DEC-D3-01).
+**Nhãn:** CRUD đầu sách/bản sao/danh mục + in QR là FACT (SRC-FR-L02/L03/L04, FR-catalog-admin-001/FR-copy-inventory-001). `is_loanable` là thuộc tính Title/Copy là PROPOSAL (DEC-D3-09, theo default OQ-10). Số khả dụng là giá trị tính toán từ `Copy.status` + `is_loanable`, không lưu counter — FACT (SRC-BR11). Copy `∅→AVAILABLE` khi đăng ký/import là PROPOSAL (COPY-T00 — DEC-D3-01).
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
     Search --> EndSearch(["Kết thúc — hiển thị"])
     Pick -->|"tạo hoặc sửa đầu sách"| BibForm["Form BibliographicRecord — ISBN, tác giả, thể loại, NXB, năm"]
     Pick -->|"đăng ký bản sao"| CopyForm["Form Copy — qr_code, kệ, condition, is_loanable override"]
-    Pick -->|"vô hiệu hoá"| SoftDel["Xóa mềm SRC-BR-12 — chỉ vô hiệu hoá khi có lịch sử, không xoá cứng"]
+    Pick -->|"vô hiệu hoá"| SoftDel["Xóa mềm SRC-BR12 — chỉ vô hiệu hoá khi có lịch sử, không xoá cứng"]
     BibForm --> VBib{"Dữ liệu hợp lệ và không trùng?"}
     VBib -->|"lỗi"| Err1["E-core-001 hoặc E-core-003 — inline error, giữ dữ liệu nhập"]
     Err1 --> BibForm
@@ -48,6 +48,6 @@ flowchart TD
 | 3 | Hệ thống | Validate form: trường bắt buộc, định dạng ISBN, unique business key | Inline error hoặc cho lưu | E-core-001 (validation), E-core-003 (trùng/không tồn tại) — giữ dữ liệu, cho sửa lại |
 | 4 | Hệ thống | Commit: lưu record (+ Copy `∅→AVAILABLE` nếu đăng ký bản sao) + AuditEvent — một transaction (INV-01) | Record sẵn dùng; số khả dụng tính lại | Audit fail → rollback + E-core-007 |
 | 5 | Thủ thư | Sinh/in nhãn QR cho bản sao mới | File in nhãn; QR gắn locator, không phải credential (BR-copy-inventory-001) | QR sai/mờ/trùng (edge case §6.5) → nhập mã thủ công hoặc in lại |
-| 6 | Thủ thư | Sửa/xoá record đã có lịch sử | Chỉ cho vô hiệu hoá (xóa mềm SRC-BR-12); Copy `DISPOSED` là terminal | E-core-008 — action không hợp lệ từ trạng thái hiện tại |
+| 6 | Thủ thư | Sửa/xoá record đã có lịch sử | Chỉ cho vô hiệu hoá (xóa mềm SRC-BR12); Copy `DISPOSED` là terminal | E-core-008 — action không hợp lệ từ trạng thái hiện tại |
 
 **Liên kết:** FR-catalog-admin-001, FR-copy-inventory-001, FR-catalog-admin-002, FR-ops-foundation-001, FR-copy-inventory-002 · BR-copy-inventory-001, BR-core-003, BR-core-004 · NFR-catalog-admin-001 (tra cứu ≤2s @50.000 bản sao — ngưỡng PROPOSAL) · transitions: COPY-T00, COPY-T17.

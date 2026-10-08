@@ -110,3 +110,4 @@
 | 2026-10-08 | /srs | @dattran26 | `docs/features/reader-onboarding/srs/reader-onboarding-flows.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
 | 2026-10-08 | /srs | @dattran26 | `docs/features/reader-onboarding/usecases/reader-onboarding-usecase-index.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
 | 2026-10-08 | /srs | @dattran26 | `docs/features/reader-onboarding/usecases/uc-reader-onboarding.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-08 | manual | @dattran26 | `docs/_shared/id-registry.md` | đổi ký hiệu mã nguồn SRC-BR-nn sang SRC-BRnn (KG đọc nhầm BR-nn) |
