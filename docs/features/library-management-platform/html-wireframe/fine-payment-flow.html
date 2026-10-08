@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>library-management-platform — Công nợ và thanh toán | Wireframe</title>
+  <style>
+    /* RESET */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f0f0;
+      color: #000;
+      padding: 32px 24px;
+    }
+    .wf-page { max-width: 1400px; margin: 0 auto; }
+
+    /* BREADCRUMB về cửa-vào TOC — chỉ hiện khi mở file flow TRỰC TIẾP, ẩn khi trong iframe của {feature}-wireframe.html */
+    .wf-breadcrumb { max-width: 1400px; margin: 0 auto 16px; }
+    .wf-breadcrumb a { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #000; text-decoration: none; border: 1px solid #000; border-radius: 4px; padding: 6px 12px; background: #fff; }
+    .wf-breadcrumb a:hover { background: #f0f0f0; }
+    html.in-iframe .wf-breadcrumb { display: none; }
+
+    /* HEADER */
+    .wf-header { margin-bottom: 28px; border-bottom: 2px solid #000; padding-bottom: 14px; background: #fff; padding: 16px 20px; }
+    .wf-feature-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; }
+    .wf-flow-title { font-size: 22px; font-weight: 700; margin-top: 4px; }
+    .wf-flow-meta { font-size: 12px; color: #888; margin-top: 6px; }
+    .wf-flow-desc { font-size: 13px; color: #000; margin-top: 8px; line-height: 1.5; }
+
+    /* FLOW ROW — screens xếp ngang, TỰ WRAP theo bề rộng device (KHÔNG ép 3/row) */
+    .wf-rows { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px 16px; }
+    .wf-row-divider { display: none; } /* không còn chia row cứng — wrap tự nhiên */
+
+    /* SCREEN WRAPPER — bề rộng = device thật, KHÔNG phải 33% trừu tượng. */
+    .wf-screen { flex: 0 0 auto; }
+    .wf-page[data-device="mobile"]  .wf-screen { width: 375px; }
+    .wf-page[data-device="tablet"]  .wf-screen { width: 768px; }
+    .wf-page[data-device="desktop"] .wf-screen { width: 1024px; max-width: 100%; }
+    .wf-page:not([data-device]) .wf-screen { width: 375px; } /* fallback mobile-first */
+    .wf-device-tag { display: inline-block; font-size: 10px; color: #000; border: 1px solid #ccc; border-radius: 3px; padding: 1px 6px; margin-bottom: 6px; }
+    .wf-step-badge {
+      font-size: 10px; font-weight: 700; color: #fff;
+      background: #000; border-radius: 50%;
+      width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 6px;
+    }
+    .wf-screen-label { text-align: center; font-size: 11px; color: #000; margin-top: 6px; }
+    .wf-shared-badge { font-size: 9px; color: #888; border: 1px solid #ccc; border-radius: 3px; padding: 0 4px; margin-left: 4px; }
+    .wf-arrow { display: flex; align-items: center; padding-top: 48px; font-size: 22px; color: #000; flex-shrink: 0; }
+
+    /* SCREEN FRAME (device chrome) */
+    .wf-screen-frame { border: 2px solid #000; border-radius: 8px; overflow: hidden; background: #fff; }
+    .wf-screen-bar { background: #f0f0f0; border-bottom: 1px solid #000; padding: 6px 10px; display: flex; align-items: center; gap: 5px; }
+    .wf-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid #888; background: #fff; flex-shrink: 0; }
+    .wf-bar-title { font-size: 11px; font-weight: 600; flex: 1; text-align: center; }
+    .wf-screen-content { padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+    /* FORM CONTAINER */
+    .wf-form { width: 100%; max-width: 380px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .wf-form.card { border: 1px solid #ccc; border-radius: 8px; padding: 20px; background: #fff; }
+
+    /* APP BRAND */
+    .wf-app-brand { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: #000; padding-bottom: 4px; border-bottom: 1px solid #f0f0f0; margin-bottom: 4px; }
+    .wf-screen-title { font-size: 15px; font-weight: 700; text-align: center; margin-bottom: 4px; }
+
+    /* FORM ELEMENTS */
+    .field { display: flex; flex-direction: column; gap: 3px; }
+    .field label { font-size: 11px; font-weight: 600; }
+    .field input[type=text], .field input[type=email], .field input[type=password] {
+      border: 1px solid #000; border-radius: 3px; padding: 7px 9px;
+      font-size: 12px; width: 100%; background: #fff; color: #000;
+    }
+    .field input::placeholder { color: #888; }
+    .input-pw { position: relative; }
+    .input-pw input { padding-right: 28px; width: 100%; border: 1px solid #000; border-radius: 3px; padding: 7px 9px; font-size: 12px; }
+    .input-pw .eye { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 13px; cursor: pointer; color: #000; }
+
+    /* CHECKBOX */
+    label.checkbox { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; }
+    label.checkbox input { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* BUTTONS */
+    .btn-primary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #000; color: #fff;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-secondary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-google {
+      display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .g-icon { font-size: 14px; font-weight: 900; font-style: italic; }
+
+    /* LINK */
+    .wf-link { font-size: 12px; color: #000; text-decoration: underline; cursor: pointer; }
+    .links-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; }
+
+    /* BANNERS / INFO */
+    .banner { font-size: 11px; padding: 8px 10px; border: 1px solid #000; border-radius: 4px; display: flex; gap: 6px; align-items: flex-start; line-height: 1.4; }
+    .banner-info { background: #f0f0f0; }
+    .banner-warn { background: #f0f0f0; }
+
+    /* LABELS / HINTS */
+    .info-label { font-size: 12px; color: #000; line-height: 1.5; text-align: center; }
+    .hint-text { font-size: 11px; color: #888; font-style: italic; }
+    .state-hint { font-size: 10px; color: #888; font-style: italic; margin-top: 2px; }
+
+    /* PASSWORD CHECKLIST */
+    .pw-check { display: flex; gap: 8px; flex-wrap: wrap; font-size: 10px; }
+    .pw-check .ok { color: #000; }
+    .pw-check .ok::before { content: "✓ "; }
+    .pw-check .fail { color: #888; }
+    .pw-check .fail::before { content: "✗ "; }
+
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #888; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #ccc; }
+
+    /* MODAL BOX */
+    .modal-box { border: 2px solid #000; border-radius: 6px; padding: 12px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+    .modal-title { font-size: 12px; font-weight: 700; border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+    .modal-desc { font-size: 11px; color: #000; line-height: 1.5; }
+    .modal-actions { display: flex; gap: 8px; margin-top: 4px; }
+    .modal-actions .btn-secondary, .modal-actions .btn-primary { flex: 1; font-size: 11px; padding: 7px 8px; }
+
+    /* ICON PLACEHOLDER */
+    .icon-lg { text-align: center; font-size: 28px; margin-bottom: 4px; }
+
+    /* BACK NAV */
+    .back-nav { font-size: 12px; color: #000; display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 4px; }
+
+    /* CARD */
+    .wf-card { border: 1px solid #ccc; border-radius: 4px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; }
+    .wf-card-body { flex: 1; }
+    .wf-card-title { font-size: 12px; font-weight: 700; }
+    .wf-card-sub { font-size: 11px; color: #000; }
+    .wf-card-action { flex-shrink: 0; }
+
+    /* CAPTCHA placeholder */
+    .captcha-box { border: 1px dashed #888; border-radius: 4px; padding: 8px; text-align: center; font-size: 10px; color: #888; background: #f0f0f0; }
+
+    /* FOOTER */
+    .wf-footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid #ccc; font-size: 10px; color: #888; display: flex; justify-content: space-between; }
+
+    /* SCREEN DESCRIPTION TABLE (Phase F.5) */
+    .wf-desc-section { margin-top: 32px; }
+    .wf-desc-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #000; }
+    .wf-desc-table { width: 100%; border-collapse: collapse; background: #fff; font-size: 12px; }
+    .wf-desc-table th, .wf-desc-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; }
+    .wf-desc-table th { background: #f0f0f0; font-weight: 700; font-size: 11px; text-transform: uppercase; }
+    .wf-desc-table td:first-child, .wf-desc-table th:first-child { width: 36px; text-align: center; }
+    .wf-desc-table td:nth-child(2) { width: 150px; }
+    .wf-desc-table td:nth-child(3) { width: 110px; }
+    .wf-desc-table td:nth-child(4) { width: 90px; }
+    .wf-desc-screen-header td { background: #000; color: #fff; font-weight: 700; font-size: 12px; }
+  </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.documentElement.classList.add('in-iframe');</script>
+<div class="wf-breadcrumb"><a href="library-management-platform-wireframe.html">← Mục lục wireframe (tất cả flow)</a></div>
+<div class="wf-page" data-device="mobile">
+
+  <div class="wf-header">
+    <div class="wf-feature-label">Feature: library-management-platform / Wireframe</div>
+    <div class="wf-flow-title">Công nợ và thanh toán</div>
+    <div class="wf-flow-meta">4 màn hình · Device: mobile · Tạo: 2026-10-07 · Nguồn: srs/library-management-platform-userflow.md + tài liệu nghiệp vụ</div>
+    <div class="wf-flow-desc">Thủ thư quầy tra cứu công nợ của người đọc và thu tiền mặt tại quầy (R1A); Quản trị viên xem ledger append-only và thực hiện miễn/điều chỉnh/đảo/hoàn có kiểm soát (R1B). Kênh thanh toán baseline = tiền mặt tại quầy (OQ-08); thanh toán online là ứng viên R3.</div>
+  </div>
+
+  <div class="wf-rows">
+
+    <div class="wf-screen" id="s1">
+      <div class="wf-step-badge">1</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Danh sách công nợ</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="wf-app-brand">QuanLyThuVien</div>
+          <div class="wf-screen-title">Công nợ người đọc</div>
+          <div class="field">
+            <label>Người đọc</label>
+            <input type="text" placeholder="Quét QR thẻ hoặc nhập mã / tên người đọc">
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">RD-000123 · Nguyễn Văn A</div>
+              <div class="wf-card-sub">Tổng nợ chưa thanh toán: 69.000đ</div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Trạng thái khoản nợ</label>
+            <label class="checkbox"><input type="radio" name="fine-status" checked> Chưa thanh toán (UNPAID)</label>
+            <label class="checkbox"><input type="radio" name="fine-status"> Đã thanh toán (PAID)</label>
+            <label class="checkbox"><input type="radio" name="fine-status"> Đã miễn (WAIVED)</label>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">FINE-000451 · Quá hạn</div>
+              <div class="wf-card-sub">Số dư 24.000đ · UNPAID · Loan LOAN-00567</div>
+            </div>
+            <span class="wf-card-action">›</span>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">FINE-000452 · Hư hỏng (Vừa)</div>
+              <div class="wf-card-sub">Số dư 45.000đ · UNPAID · Report RPT-00045</div>
+            </div>
+            <span class="wf-card-action">›</span>
+          </div>
+          <p class="hint-text">Số dư suy từ ledger append-only (BR-LMP-007): Σ ASSESSMENT + Σ ADJUSTMENT(+) − Σ PAYMENT − Σ WAIVER − Σ ADJUSTMENT(−) − Σ REVERSAL (PROPOSAL — công thức).</p>
+          <p class="hint-text">Empty state: "Người đọc không có khoản nợ nào."</p>
+        </div>
+      </div>
+      <div class="wf-screen-label">fine-list</div>
+    </div>
+
+    <div class="wf-screen" id="s2">
+      <div class="wf-step-badge">2</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Chi tiết công nợ</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="back-nav">← Danh sách công nợ</div>
+          <div class="wf-app-brand">QuanLyThuVien</div>
+          <div class="wf-screen-title">FINE-000451</div>
+          <div class="banner banner-info">Trạng thái: <b>UNPAID</b> · Số dư hiện tại: <b>24.000đ</b></div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">Nguồn phát sinh</div>
+              <div class="wf-card-sub">Quá hạn 12 ngày · Loan LOAN-00567 · Người đọc RD-000123</div>
+            </div>
+            <span class="wf-card-action">›</span>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">Ledger (append-only)</div>
+              <div class="wf-card-sub">ASSESSMENT +24.000đ · 02/10 09:14 · Hệ thống — đóng Loan quá hạn (BR-05)</div>
+              <div class="wf-card-sub">— chưa có event nào khác —</div>
+            </div>
+          </div>
+          <button class="btn-primary" type="button">Thu tiền mặt (R1A)</button>
+          <button class="btn-secondary" type="button">Sự kiện tài chính &amp; tác vụ (R1B)</button>
+          <p class="hint-text">Fine ở PAID/WAIVED (terminal): nút Thu tiền bị vô hiệu — chỉ cho tác vụ tham chiếu event gốc (E-LMP-015).</p>
+          <p class="hint-text">Thủ thư quầy: tác vụ WAIVER/ADJUSTMENT/REVERSAL/REFUND bị khoá/mask theo quyền (E-LMP-016, BR-LMP-015).</p>
+        </div>
+      </div>
+      <div class="wf-screen-label">fine-detail</div>
+    </div>
+
+    <div class="wf-screen" id="s3">
+      <div class="wf-step-badge">3</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Thu tiền mặt</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="back-nav">← Chi tiết công nợ</div>
+          <div class="wf-app-brand">QuanLyThuVien</div>
+          <div class="wf-screen-title">Thu tiền mặt — FINE-000451</div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">Số dư khi mở màn: 24.000đ</div>
+              <div class="wf-card-sub">Kiểm tra lại ≤ số dư tại commit — CAS trên ledger (E-LMP-005)</div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Số tiền thu (đ) *</label>
+            <input type="text" placeholder="Nhập số tiền mặt đã nhận">
+          </div>
+          <div class="field">
+            <label>Phương thức</label>
+            <input type="text" value="Tiền mặt tại quầy" readonly>
+          </div>
+          <p class="hint-text">Kênh baseline = tiền mặt tại quầy (OQ-08); thanh toán online = ứng viên R3. Chính sách thu thiếu (partial payment) chưa chốt — OQ-LMP-005 (Open).</p>
+          <p class="hint-text">Submit kèm idempotency key do client phát sinh (BR-LMP-008, AT-FIN-02) — retry/double-submit không tạo PAYMENT thứ hai.</p>
+          <button class="btn-primary" type="button">Xác nhận thu</button>
+          <button class="btn-secondary" type="button">Hủy</button>
+          <div class="divider"><span>Trạng thái kết quả / lỗi</span></div>
+          <div class="banner banner-info">Thành công: append PAYMENT → tính lại số dư → PAID khi = 0 → AuditEvent + outbox notify (1 transaction). Hiển thị receipt_no duy nhất (PROPOSAL — DEC-D3-08); in biên nhận đầy đủ ở R1B → chuyển màn Sự kiện tài chính.</div>
+          <div class="banner banner-warn"><b>E-LMP-009</b> — Ghi thanh toán thất bại (critical): rollback, Fine giữ UNPAID, cho retry idempotent cùng key.</div>
+          <div class="banner banner-warn"><b>E-LMP-010</b> — Submit lặp cùng idempotency key: hiển thị payment event + receipt_no đã ghi, không tạo event thứ hai.</div>
+          <div class="banner banner-warn"><b>E-LMP-013</b> — Audit write thất bại (critical): rollback toàn bộ business write + alert vận hành — fail-closed (BR-LMP-013).</div>
+          <div class="banner banner-warn"><b>E-LMP-005</b> — Số dư đổi sau khi mở màn (hai thủ thư thu đồng thời): hiển thị số dư mới, nhập lại; không silent overwrite.</div>
+        </div>
+      </div>
+      <div class="wf-screen-label">fine-payment</div>
+    </div>
+
+    <div class="wf-screen" id="s4">
+      <div class="wf-step-badge">4</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Sự kiện tài chính</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="back-nav">← Chi tiết công nợ</div>
+          <div class="wf-app-brand">QuanLyThuVien</div>
+          <div class="wf-screen-title">Sự kiện tài chính — FINE-000451 <span class="wf-shared-badge">R1B</span></div>
+          <div class="banner banner-info">Số dư = Σ events (append-only): <b>0đ — PAID</b></div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">PAYMENT −24.000đ</div>
+              <div class="wf-card-sub">03/10 10:02 · Thủ thư quầy · receipt BN-2026-000123 · Tiền mặt</div>
+            </div>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">ASSESSMENT +24.000đ</div>
+              <div class="wf-card-sub">02/10 09:14 · Hệ thống · Quá hạn 12 ngày</div>
+            </div>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">RECONCILIATION 0đ <span class="wf-shared-badge">PROPOSAL</span></div>
+              <div class="wf-card-sub">Job cuối ca/ngày đối chiếu tiền mặt vs Σ PAYMENT (AT-FIN-03); lệch → alert vận hành</div>
+            </div>
+          </div>
+          <div class="divider"><span>Tác vụ nâng cao — Quản trị viên (R1B)</span></div>
+          <button class="btn-secondary" type="button">Miễn phạt — WAIVER (lý do bắt buộc)</button>
+          <button class="btn-secondary" type="button">Điều chỉnh — ADJUSTMENT ±</button>
+          <button class="btn-secondary" type="button">Đảo bút toán — REVERSAL (tham chiếu event gốc)</button>
+          <button class="btn-secondary" type="button">Hoàn tiền — REFUND</button>
+          <p class="hint-text">Mọi tác vụ: reason + audit cùng transaction. SoD: người duyệt ≠ người tạo ASSESSMENT thủ công cùng khoản (PROPOSAL — DEC-D3-04). Ngưỡng duyệt cấp cao &amp; policy = Open (OQ-LMP-005/009) — không hard-code.</p>
+          <p class="hint-text">Trên Fine PAID/WAIVED: chỉ REVERSAL/ADJUSTMENT/REFUND có tham chiếu event gốc (E-LMP-015); không reopen — nghĩa vụ mới thì mở Fine mới.</p>
+          <div class="modal-box">
+            <div class="modal-title">Xác thực lại — E-LMP-017 (step-up)</div>
+            <div class="modal-desc">Waiver/adjustment/reversal/refund yêu cầu xác thực lại trước khi ghi; điều hướng tới màn [5] Phiên hết hạn / step-up của auth-flow (màn chung), thành công quay lại trạng thái an toàn.</div>
+            <div class="field">
+              <label>Xác thực lại</label>
+              <input type="password" placeholder="Nhập lại thông tin xác thực">
+            </div>
+            <div class="modal-actions">
+              <button class="btn-secondary" type="button">Hủy</button>
+              <button class="btn-primary" type="button">Xác nhận</button>
+            </div>
+          </div>
+          <p class="hint-text">Thủ thư quầy mở màn này: nút tác vụ bị khoá/mask (E-LMP-016) + audit access attempt (BR-LMP-015).</p>
+        </div>
+      </div>
+      <div class="wf-screen-label">financial-events</div>
+    </div>
+
+  </div>
+
+  <div class="wf-desc-section">
+    <div class="wf-desc-title">Mô tả màn hình</div>
+    <table class="wf-desc-table">
+      <thead>
+        <tr><th>#</th><th>Items</th><th>Control type</th><th>Data type</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 1: Danh sách công nợ (fine-list)</td></tr>
+        <tr><td>1</td><td>Ô tìm người đọc</td><td>Textbox</td><td>Text</td><td>Xác định reader để hiển thị công nợ của họ (UC bước 1). Nhập mã thẻ/tên hoặc quét QR — QR chỉ là locator, quyền xác thực sau locate (BR-LMP-011, FR-LMP-026). Locate thành công → hiển thị list Fine; mã không tồn tại → error panel E-LMP-003, cho nhập lại.</td></tr>
+        <tr><td>2</td><td>Thẻ tóm tắt người đọc</td><td>Label</td><td>ReadOnly</td><td>Reader đã chọn + tổng nợ UNPAID để thủ thư đối chiếu nhanh. Field PII/tài chính tuân masking theo quyền (BR-LMP-015); thiếu quyền → mask + audit access attempt (E-LMP-016).</td></tr>
+        <tr><td>3</td><td>Bộ lọc trạng thái khoản nợ</td><td>Radio button</td><td>Check</td><td>Chọn nhóm Fine: UNPAID (mặc định — UC chỉ hiển thị khoản mở) / PAID / WAIVED (2 trạng thái terminal). Đổi → reload list tại chỗ.</td></tr>
+        <tr><td>4</td><td>Thẻ khoản nợ (danh sách)</td><td>Link</td><td>Click</td><td>Mỗi card = 1 Fine: mã, lý do assess (quá hạn BR-05 / hư hỏng BR-07 / mất BR-06 — rule FACT, giá trị đề xuất chờ OQ-04/OQ-LMP-010), số dư, trạng thái, ref nguồn (Loan/Report). Click → fine-detail [26] (transition "Chọn khoản nợ — luôn").</td></tr>
+        <tr><td>5</td><td>Ghi chú công thức số dư</td><td>Label</td><td>ReadOnly</td><td>Minh bạch balance = Σ ASSESSMENT + Σ ADJUSTMENT(+) − Σ PAYMENT − Σ WAIVER − Σ ADJUSTMENT(−) − Σ REVERSAL (PROPOSAL — công thức; nguyên tắc append-only là FACT, đo bởi SC-LMP-04).</td></tr>
+        <tr><td>6</td><td>Empty state</td><td>Label</td><td>ReadOnly</td><td>Reader không có khoản nợ → "Người đọc không có khoản nợ nào"; vẫn cho đổi bộ lọc hoặc chọn reader khác.</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 2: Chi tiết công nợ (fine-detail)</td></tr>
+        <tr><td>1</td><td>Điều hướng quay lại</td><td>Link</td><td>Click</td><td>"← Danh sách công nợ" → fine-list [25].</td></tr>
+        <tr><td>2</td><td>Banner trạng thái + số dư</td><td>Label</td><td>ReadOnly</td><td>Trạng thái Fine (UNPAID/PAID/WAIVED) + balance suy từ ledger tại thời điểm tải; sau conflict E-LMP-005 phải reload và hiển thị trạng thái mới — không silent overwrite.</td></tr>
+        <tr><td>3</td><td>Thẻ nguồn phát sinh</td><td>Link</td><td>Click</td><td>Lý do assess + ref Loan/DamageReport/Reader liên quan; click mở resource gốc để đối chiếu (điều hướng ngoài flow — xem transitions).</td></tr>
+        <tr><td>4</td><td>Ledger breakdown</td><td>Label</td><td>ReadOnly</td><td>Danh sách FinancialEvent của Fine: type, ±amount, receipt_no, thời điểm, actor, reason — append-only, không UPDATE/DELETE (BR-LMP-007); sai chỉ sửa bằng REVERSAL trỏ event gốc.</td></tr>
+        <tr><td>5</td><td>Nút "Thu tiền mặt (R1A)"</td><td>Button</td><td>Click</td><td>→ fine-payment [27] khi Fine UNPAID (transition [26]→[27], R1A). Disabled khi PAID/WAIVED — terminal chỉ cho tác vụ tham chiếu event gốc (E-LMP-015).</td></tr>
+        <tr><td>6</td><td>Nút "Sự kiện tài chính &amp; tác vụ"</td><td>Button</td><td>Click</td><td>→ financial-events [28] khi R1B và policy đã duyệt (transition [26]→[28] "Xem ledger/tác vụ — R1B và policy đã duyệt").</td></tr>
+        <tr><td>7</td><td>Ghi chú phân quyền tác vụ</td><td>Label</td><td>ReadOnly</td><td>Thủ thư quầy chỉ được PAYMENT; WAIVER/ADJUSTMENT/REVERSAL/REFUND = Quản trị viên + finance approver (PROPOSAL — DEC-D3-04, OQ-LMP-005/009). Vi phạm → deny mặc định + mask field + audit access attempt (E-LMP-016, BR-LMP-015).</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 3: Thu tiền mặt (fine-payment)</td></tr>
+        <tr><td>1</td><td>Điều hướng quay lại</td><td>Link</td><td>Click</td><td>"← Chi tiết công nợ" → fine-detail [26]; cũng là route khi lỗi/retry (transition [27]→[26], E-LMP-009/010/013).</td></tr>
+        <tr><td>2</td><td>Thẻ số dư tham chiếu</td><td>Label</td><td>ReadOnly</td><td>Balance tại load — chỉ tham chiếu: hệ thống kiểm tra lại ≤ balance tại commit bằng CAS trên phiên bản ledger/Fine (UC ext 4e); lệch → từ chối kèm số dư mới.</td></tr>
+        <tr><td>3</td><td>Ô số tiền thu</td><td>Textbox</td><td>Text</td><td>Bắt buộc; &gt; 0 và ≤ balance tại commit. Thu thiếu = partial payment — policy Open (OQ-LMP-005), không tự chốt; Fine vẫn UNPAID khi thu thiếu (không có trạng thái PARTIALLY_PAID — PROPOSAL).</td></tr>
+        <tr><td>4</td><td>Ô phương thức thanh toán</td><td>Textbox</td><td>ReadOnly</td><td>Cố định "Tiền mặt tại quầy" — kênh baseline duy nhất (OQ-08); thanh toán online = ứng viên R3, không render.</td></tr>
+        <tr><td>5</td><td>Ghi chú idempotency</td><td>Label</td><td>ReadOnly</td><td>Submit kèm operation_id/idempotency key do client phát sinh (BR-LMP-008, AT-FIN-02); retry/double-submit trả kết quả gốc — không PAYMENT thứ hai (E-LMP-006/010).</td></tr>
+        <tr><td>6</td><td>Nút "Xác nhận thu"</td><td>Button</td><td>Click</td><td>Trigger 1 transaction: append PAYMENT{amount, receipt_no unique, collected_by} → recalc balance → PAID khi = 0 → AuditEvent + outbox NotificationEvent. Thành công → financial-events [28] (transition [27]→[28]).</td></tr>
+        <tr><td>7</td><td>Nút "Hủy"</td><td>Button</td><td>Click</td><td>Quay fine-detail [26], không ghi gì.</td></tr>
+        <tr><td>8</td><td>Banner thành công</td><td>Label</td><td>ReadOnly</td><td>Hiển thị receipt_no duy nhất (PROPOSAL — DEC-D3-08); in biên nhận đầy đủ ở R1B (FR-S08/DEC-P2-04); delivery notify xem notification-status.</td></tr>
+        <tr><td>9</td><td>Banner E-LMP-009</td><td>Label</td><td>ReadOnly</td><td>Payment failed (critical): rollback transaction, Fine giữ UNPAID — không mất nghĩa vụ; cho retry idempotent cùng key; wording rõ trên error panel.</td></tr>
+        <tr><td>10</td><td>Banner E-LMP-010</td><td>Label</td><td>ReadOnly</td><td>Duplicate notice: operation_id đã commit → trả kết quả + receipt_no gốc (query-by-operation recovery), không tạo PAYMENT thứ hai.</td></tr>
+        <tr><td>11</td><td>Banner E-LMP-013</td><td>Label</td><td>ReadOnly</td><td>Audit write failed (critical): rollback toàn bộ business write + alert vận hành — fail-closed, không để PAYMENT tồn tại thiếu audit (BR-LMP-013, NFR-LMP-006).</td></tr>
+        <tr><td>12</td><td>Banner E-LMP-005</td><td>Label</td><td>ReadOnly</td><td>Hai actor thu cùng Fine (operation_id khác): transaction thua nhận conflict + số dư mới — không silent overwrite; Fine đã PAID bởi transaction thắng → xử lý như thao tác trên terminal (ext 5d).</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 4: Sự kiện tài chính (financial-events)</td></tr>
+        <tr><td>1</td><td>Điều hướng quay lại</td><td>Link</td><td>Click</td><td>"← Chi tiết công nợ" → fine-detail [26].</td></tr>
+        <tr><td>2</td><td>Banner số dư ledger</td><td>Label</td><td>ReadOnly</td><td>Số dư = Σ toàn bộ events append-only kèm trạng thái Fine (đối soát được — SC-LMP-04).</td></tr>
+        <tr><td>3</td><td>Danh sách FinancialEvent</td><td>Label</td><td>ReadOnly</td><td>Mỗi event: type (ASSESSMENT/PAYMENT/WAIVER/ADJUSTMENT/REVERSAL/REFUND/RECONCILIATION), ±amount, receipt_no, thời điểm, actor, reason, ref event gốc khi có. Append-only (BR-LMP-007).</td></tr>
+        <tr><td>4</td><td>Event RECONCILIATION</td><td>Label</td><td>ReadOnly</td><td>Chiều 0; job cuối ca/ngày đối chiếu tiền mặt ghi nhận vs Σ PAYMENT — lệch → append event + alert vận hành (PROPOSAL — AT-FIN-03, DEC-D3-08); ai approve override = Open (OQ-LMP-009).</td></tr>
+        <tr><td>5</td><td>Nút WAIVER</td><td>Button</td><td>Click</td><td>Quản trị viên, reason bắt buộc; balance → 0 thì Fine → WAIVED terminal; vượt ngưỡng cần duyệt cấp cao (ngưỡng = OQ-LMP-005/009 — không hard-code); → step-up E-LMP-017 trước khi ghi (transition [28]→[5]).</td></tr>
+        <tr><td>6</td><td>Nút ADJUSTMENT ±</td><td>Button</td><td>Click</td><td>Quản trị viên + lý do bắt buộc; cùng SoD và ngưỡng duyệt như WAIVER (PROPOSAL — DEC-D3-04).</td></tr>
+        <tr><td>7</td><td>Nút REVERSAL</td><td>Button</td><td>Click</td><td>Phải tham chiếu event gốc đã ghi — cơ chế sửa sai duy nhất vì ledger không sửa/xóa (BR-LMP-007).</td></tr>
+        <tr><td>8</td><td>Nút REFUND</td><td>Button</td><td>Click</td><td>Khi đã thu thừa — theo policy finance (OQ-LMP-005); reversal/refund sau Fine đóng tạo dư âm → REFUND + reconcile, không reopen Fine (PROPOSAL).</td></tr>
+        <tr><td>9</td><td>Modal step-up E-LMP-017</td><td>Textbox + Button</td><td>Text/Click</td><td>Re-auth trước tác vụ nhạy cảm (FR-LMP-007); điều hướng tới [5] session-expired của auth-flow (màn chung); xác thực lại thành công → quay lại ghi event + audit cùng transaction.</td></tr>
+        <tr><td>10</td><td>Ghi chú SoD + masking</td><td>Label</td><td>ReadOnly</td><td>Người duyệt ≠ người tạo ASSESSMENT thủ công cùng khoản — vi phạm từ chối + audit (PROPOSAL — DEC-D3-04); Thủ thư quầy thấy nút khoá/mask + audit access attempt (E-LMP-016, BR-LMP-015); audit write fail → rollback (E-LMP-013).</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wf-footer">
+    <span>library-management-platform / fine-payment-flow</span>
+    <span>Tạo bởi /wireframe-html · 2026-10-07</span>
+  </div>
+
+</div>
+</body>
+</html>

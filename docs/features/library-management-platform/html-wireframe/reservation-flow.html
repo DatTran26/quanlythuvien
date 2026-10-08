@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>library-management-platform — Đặt trước và hàng đợi | Wireframe</title>
+  <style>
+    /* RESET */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f0f0;
+      color: #000;
+      padding: 32px 24px;
+    }
+    .wf-page { max-width: 1400px; margin: 0 auto; }
+
+    /* BREADCRUMB về cửa-vào TOC — chỉ hiện khi mở file flow TRỰC TIẾP, ẩn khi trong iframe của {feature}-wireframe.html */
+    .wf-breadcrumb { max-width: 1400px; margin: 0 auto 16px; }
+    .wf-breadcrumb a { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #000; text-decoration: none; border: 1px solid #000; border-radius: 4px; padding: 6px 12px; background: #fff; }
+    .wf-breadcrumb a:hover { background: #f0f0f0; }
+    html.in-iframe .wf-breadcrumb { display: none; }
+
+    /* HEADER */
+    .wf-header { margin-bottom: 28px; border-bottom: 2px solid #000; padding-bottom: 14px; background: #fff; padding: 16px 20px; }
+    .wf-feature-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; }
+    .wf-flow-title { font-size: 22px; font-weight: 700; margin-top: 4px; }
+    .wf-flow-meta { font-size: 12px; color: #888; margin-top: 6px; }
+    .wf-flow-desc { font-size: 13px; color: #000; margin-top: 8px; line-height: 1.5; }
+
+    /* FLOW ROW — screens xếp ngang, TỰ WRAP theo bề rộng device (KHÔNG ép 3/row) */
+    .wf-rows { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px 16px; }
+    .wf-row-divider { display: none; } /* không còn chia row cứng — wrap tự nhiên */
+
+    /* SCREEN WRAPPER — bề rộng = device thật, KHÔNG phải 33% trừu tượng. */
+    .wf-screen { flex: 0 0 auto; }
+    .wf-page[data-device="mobile"]  .wf-screen { width: 375px; }
+    .wf-page[data-device="tablet"]  .wf-screen { width: 768px; }
+    .wf-page[data-device="desktop"] .wf-screen { width: 1024px; max-width: 100%; }
+    .wf-page:not([data-device]) .wf-screen { width: 375px; } /* fallback mobile-first */
+    .wf-device-tag { display: inline-block; font-size: 10px; color: #000; border: 1px solid #ccc; border-radius: 3px; padding: 1px 6px; margin-bottom: 6px; }
+    .wf-step-badge {
+      font-size: 10px; font-weight: 700; color: #fff;
+      background: #000; border-radius: 50%;
+      width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 6px;
+    }
+    .wf-screen-label { text-align: center; font-size: 11px; color: #000; margin-top: 6px; }
+    .wf-shared-badge { font-size: 9px; color: #888; border: 1px solid #ccc; border-radius: 3px; padding: 0 4px; margin-left: 4px; }
+    .wf-arrow { display: flex; align-items: center; padding-top: 48px; font-size: 22px; color: #000; flex-shrink: 0; }
+
+    /* SCREEN FRAME (device chrome) */
+    .wf-screen-frame { border: 2px solid #000; border-radius: 8px; overflow: hidden; background: #fff; }
+    .wf-screen-bar { background: #f0f0f0; border-bottom: 1px solid #000; padding: 6px 10px; display: flex; align-items: center; gap: 5px; }
+    .wf-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid #888; background: #fff; flex-shrink: 0; }
+    .wf-bar-title { font-size: 11px; font-weight: 600; flex: 1; text-align: center; }
+    .wf-screen-content { padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+    /* FORM CONTAINER */
+    .wf-form { width: 100%; max-width: 380px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .wf-form.card { border: 1px solid #ccc; border-radius: 8px; padding: 20px; background: #fff; }
+
+    /* APP BRAND */
+    .wf-app-brand { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: #000; padding-bottom: 4px; border-bottom: 1px solid #f0f0f0; margin-bottom: 4px; }
+    .wf-screen-title { font-size: 15px; font-weight: 700; text-align: center; margin-bottom: 4px; }
+
+    /* FORM ELEMENTS */
+    .field { display: flex; flex-direction: column; gap: 3px; }
+    .field label { font-size: 11px; font-weight: 600; }
+    .field input[type=text], .field input[type=email], .field input[type=password] {
+      border: 1px solid #000; border-radius: 3px; padding: 7px 9px;
+      font-size: 12px; width: 100%; background: #fff; color: #000;
+    }
+    .field input::placeholder { color: #888; }
+    .input-pw { position: relative; }
+    .input-pw input { padding-right: 28px; width: 100%; border: 1px solid #000; border-radius: 3px; padding: 7px 9px; font-size: 12px; }
+    .input-pw .eye { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 13px; cursor: pointer; color: #000; }
+
+    /* CHECKBOX */
+    label.checkbox { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; }
+    label.checkbox input { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* BUTTONS */
+    .btn-primary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #000; color: #fff;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-secondary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-google {
+      display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .g-icon { font-size: 14px; font-weight: 900; font-style: italic; }
+
+    /* LINK */
+    .wf-link { font-size: 12px; color: #000; text-decoration: underline; cursor: pointer; }
+    .links-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; }
+
+    /* BANNERS / INFO */
+    .banner { font-size: 11px; padding: 8px 10px; border: 1px solid #000; border-radius: 4px; display: flex; gap: 6px; align-items: flex-start; line-height: 1.4; }
+    .banner-info { background: #f0f0f0; }
+    .banner-warn { background: #f0f0f0; }
+
+    /* LABELS / HINTS */
+    .info-label { font-size: 12px; color: #000; line-height: 1.5; text-align: center; }
+    .hint-text { font-size: 11px; color: #888; font-style: italic; }
+    .state-hint { font-size: 10px; color: #888; font-style: italic; margin-top: 2px; }
+
+    /* PASSWORD CHECKLIST */
+    .pw-check { display: flex; gap: 8px; flex-wrap: wrap; font-size: 10px; }
+    .pw-check .ok { color: #000; }
+    .pw-check .ok::before { content: "✓ "; }
+    .pw-check .fail { color: #888; }
+    .pw-check .fail::before { content: "✗ "; }
+
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #888; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #ccc; }
+
+    /* MODAL BOX */
+    .modal-box { border: 2px solid #000; border-radius: 6px; padding: 12px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+    .modal-title { font-size: 12px; font-weight: 700; border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+    .modal-desc { font-size: 11px; color: #000; line-height: 1.5; }
+    .modal-actions { display: flex; gap: 8px; margin-top: 4px; }
+    .modal-actions .btn-secondary, .modal-actions .btn-primary { flex: 1; font-size: 11px; padding: 7px 8px; }
+
+    /* ICON PLACEHOLDER */
+    .icon-lg { text-align: center; font-size: 28px; margin-bottom: 4px; }
+
+    /* BACK NAV */
+    .back-nav { font-size: 12px; color: #000; display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 4px; }
+
+    /* CARD */
+    .wf-card { border: 1px solid #ccc; border-radius: 4px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; }
+    .wf-card-body { flex: 1; }
+    .wf-card-title { font-size: 12px; font-weight: 700; }
+    .wf-card-sub { font-size: 11px; color: #000; }
+    .wf-card-action { flex-shrink: 0; }
+
+    /* CAPTCHA placeholder */
+    .captcha-box { border: 1px dashed #888; border-radius: 4px; padding: 8px; text-align: center; font-size: 10px; color: #888; background: #f0f0f0; }
+
+    /* FOOTER */
+    .wf-footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid #ccc; font-size: 10px; color: #888; display: flex; justify-content: space-between; }
+
+    /* SCREEN DESCRIPTION TABLE (Phase F.5) */
+    .wf-desc-section { margin-top: 32px; }
+    .wf-desc-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #000; }
+    .wf-desc-table { width: 100%; border-collapse: collapse; background: #fff; font-size: 12px; }
+    .wf-desc-table th, .wf-desc-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; }
+    .wf-desc-table th { background: #f0f0f0; font-weight: 700; font-size: 11px; text-transform: uppercase; }
+    .wf-desc-table td:first-child, .wf-desc-table th:first-child { width: 36px; text-align: center; }
+    .wf-desc-table td:nth-child(2) { width: 150px; }
+    .wf-desc-table td:nth-child(3) { width: 110px; }
+    .wf-desc-table td:nth-child(4) { width: 90px; }
+    .wf-desc-screen-header td { background: #000; color: #fff; font-weight: 700; font-size: 12px; }
+  </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.documentElement.classList.add('in-iframe');</script>
+<div class="wf-breadcrumb"><a href="library-management-platform-wireframe.html">← Mục lục wireframe (tất cả flow)</a></div>
+<div class="wf-page" data-device="mobile">
+
+  <div class="wf-header">
+    <div class="wf-feature-label">Feature: library-management-platform / Wireframe</div>
+    <div class="wf-flow-title">Đặt trước và hàng đợi giữ chỗ</div>
+    <div class="wf-flow-meta">4 màn hình · Device: mobile · Tạo: 2026-10-07 · Nguồn: srs/library-management-platform-userflow.md + tài liệu nghiệp vụ</div>
+    <div class="wf-flow-desc">Đặt trước + hàng đợi giữ chỗ — toàn bộ flow thuộc R2 (future/not in pilot; OQ-LMP-003 resolved-as-PROPOSAL bởi DEC-P2-05): chỉ đặt khi khả dụng = 0, FIFO theo created_at, giữ chỗ có hạn, expiry advance nguyên tử.</div>
+  </div>
+
+  <div class="wf-rows">
+
+    <div class="wf-screen" id="s1">
+      <div class="wf-step-badge">1</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Tìm tài liệu để đặt</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="wf-app-brand">QuanLyThuVien</div>
+          <div class="wf-screen-title">Tìm tài liệu để đặt trước <span class="wf-shared-badge">R2</span></div>
+          <div class="field">
+            <label>Tìm đầu sách</label>
+            <input type="text" placeholder="Tên sách, tác giả, ISBN…">
+          </div>
+          <p class="hint-text">Số lượng khả dụng tính từ Copy.status=AVAILABLE + is_loanable — không lưu counter (BR-11 / CP-AVL-01 — FACT).</p>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">Cấu trúc dữ liệu &amp; giải thuật</div>
+              <div class="wf-card-sub">Khả dụng: 0 bản</div>
+            </div>
+            <a class="wf-link wf-card-action" href="#s2">Đặt trước</a>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">Giải tích 1</div>
+              <div class="wf-card-sub">Khả dụng: 2 bản → mượn trực tiếp tại quầy</div>
+            </div>
+            <span class="wf-card-action">—</span>
+          </div>
+          <div class="banner banner-info"><span><b>Quy tắc BR-08 (FACT)</b> — nút "Đặt trước" chỉ xuất hiện khi số lượng khả dụng = 0. Còn bản khả dụng mà cố đặt → E-LMP-008 (Reservation unavailable), điều hướng mượn trực tiếp. Người đọc tự đặt (self-service) chỉ trên dữ liệu của chính mình — ma trận quyền "riêng"; Thủ thư/Quản trị viên đặt thay mặt tại quầy.</span></div>
+          <p class="hint-text">Actor: Người đọc (self-service) · Thủ thư/QTV (thay mặt) · Hệ thống (cron expiry 15 phút — FACT nguồn §8). Feature flag CAP-RESERVE bật — rollback = đóng băng hàng chờ (roadmap §6).</p>
+        </div>
+      </div>
+      <div class="wf-screen-label">reservation-search</div>
+    </div>
+
+    <div class="wf-screen" id="s2">
+      <div class="wf-step-badge">2</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Đặt trước</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="back-nav"><a class="wf-link" href="#s1">← Tìm tài liệu</a></div>
+          <div class="wf-app-brand">QuanLyThuVien</div>
+          <div class="wf-screen-title">Đặt trước <span class="wf-shared-badge">R2</span></div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">Cấu trúc dữ liệu &amp; giải thuật</div>
+              <div class="wf-card-sub">Khả dụng: 0 bản · hàng chờ hiện tại: 1</div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Người đọc</label>
+            <input type="text" placeholder="Self-service: chính mình · Thủ thư thay mặt: nhập mã reader">
+          </div>
+          <p class="hint-text">Người đọc tự đặt chỉ chọn được chính mình (quyền "riêng"); Thủ thư/QTV nhập mã reader thay mặt — FACT ma trận quyền nguồn §2.</p>
+          <div class="pw-check">
+            <span class="ok">Reader active + đủ điều kiện BR-LMP-003 (không khóa, không quá hạn, nợ trong ngưỡng — OQ-LMP-010)</span>
+            <span class="ok">Đặt trước đang mở &lt; ngưỡng (đề xuất 3 — OQ-LMP-010/OQ-04)</span>
+            <span class="ok">Chưa có Reservation mở cùng đầu sách (dedup — PROPOSAL, RES-T01)</span>
+          </div>
+          <button class="btn-primary" type="button">Gửi yêu cầu đặt trước</button>
+          <button class="btn-secondary" type="button">Hủy</button>
+          <p class="hint-text">Tạo Reservation WAITING ở cuối hàng chờ FIFO theo created_at (RES-T01, BR-09 — FACT) + AuditEvent trong cùng transaction (BR-LMP-013) → hiển thị vị trí trên <a class="wf-link" href="#s3">reservation-queue</a>.</p>
+          <div class="divider"><span>Trạng thái lỗi</span></div>
+          <div class="banner banner-warn"><span><b>E-LMP-008</b> — Không đủ điều kiện đặt: còn bản khả dụng (vi phạm BR-08) → từ chối + hiển thị số bản khả dụng + điều hướng <a class="wf-link" href="checkout-flow.html">checkout</a>; reader đã đạt ngưỡng đặt trước mở / đã có reservation cùng title / bị khóa → nêu rõ lý do trên form, không ghi Reservation.</span></div>
+          <div class="banner banner-warn"><span><b>E-LMP-005 / E-LMP-015</b> — Race allocation / cancel-vs-allocate: CAS Reservation.status + Copy.version, chỉ một transaction thắng → "Sách vừa được cập nhật…" + reload fresh state; action trên reservation terminal (FULFILLED/EXPIRED/CANCELLED) → E-LMP-015, chỉ hiển thị action hợp lệ.</span></div>
+        </div>
+      </div>
+      <div class="wf-screen-label">reservation-form</div>
+    </div>
+
+    <div class="wf-screen" id="s3">
+      <div class="wf-step-badge">3</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Hàng đợi đặt trước</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="wf-app-brand">QuanLyThuVien</div>
+          <div class="wf-screen-title">Hàng đợi đặt trước <span class="wf-shared-badge">R2</span></div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">RES-00077 · Cấu trúc dữ liệu &amp; giải thuật</div>
+              <div class="wf-card-sub">WAITING · vị trí #2 trong hàng (FIFO theo created_at — BR-09)</div>
+            </div>
+            <a class="wf-link wf-card-action" href="#s3">Hủy</a>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">RES-00078 · Nhập môn AI</div>
+              <div class="wf-card-sub">READY · COPY-00888 ON_HOLD · giữ tới 09/10 14:00 (đề xuất 48h — OQ-LMP-010)</div>
+            </div>
+            <a class="wf-link wf-card-action" href="notification-audit-flow.html">Notify</a>
+          </div>
+          <p class="hint-text">Khi Copy về kho (trả COPY-T04, sửa xong T13, found T16, re-hold T19): allocation nguyên tử một transaction (AT-RSV-01 — PROPOSAL): Copy→ON_HOLD + held_copy_id + hold_expires_at = now + hold_expiry policy (đề xuất 48h — OQ-LMP-010; BR-10 FACT về cơ chế) + Reservation WAITING→READY (RES-T02) + outbox "Sách đã sẵn sàng. Vui lòng đến nhận trong hạn giữ." + audit.</p>
+          <button class="btn-secondary" type="button">Tạo đặt trước mới</button>
+          <p class="hint-text">Empty: "Chưa có hàng đợi — tạo đặt trước mới" → <a class="wf-link" href="#s1">reservation-search</a>. Hủy: WAITING→CANCELLED rời queue (RES-T05); READY→CANCELLED + giải phóng copy / advance queue nguyên tử (RES-T06).</p>
+          <div class="divider"><span>Trạng thái lỗi / nền</span></div>
+          <div class="banner banner-warn"><span><b>E-LMP-012 / E-LMP-018</b> — Notify thất bại: READY đã commit không tự hủy vì notify lỗi; hold_expires_at vẫn chạy (FACT). Outbox retry → dead-letter + cảnh báo vận hành (NFR-LMP-007 — chi tiết <a class="wf-link" href="notification-audit-flow.html">uc-notification-audit</a>); escalation cho Thủ thư trực quầy — PROPOSAL DEC-D3-08.</span></div>
+          <div class="banner banner-info"><span><b>Cron hết hạn giữ (FACT §8)</b> — job mỗi 15 phút: CAS READY→EXPIRED khi now &gt; hold_expires_at (RES-T04); cùng transaction giải phóng Copy — queue còn người → COPY-T19 re-hold nguyên tử (đầu queue mới + reset hold_expires_at + notify), queue rỗng → COPY-T18 AVAILABLE; không lộ trạng thái trung gian (AT-RSV-04). Notify "đặt trước hết hạn giữ" + audit.</span></div>
+          <div class="banner banner-info"><span><b>Ghi chú nghiệp vụ</b> — Copy ON_HOLD bị báo hư hỏng → COPY-T08: PENDING_REVIEW + Reservation READY quay WAITING giữ vị trí (DEC-D3-06 — PROPOSAL). skip/suspend không có trong nguồn — Open DEC-D3-03, chỉ thêm khi domain approved.</span></div>
+        </div>
+      </div>
+      <div class="wf-screen-label">reservation-queue</div>
+    </div>
+
+    <div class="wf-screen" id="s4">
+      <div class="wf-step-badge">4</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Nhận bản giữ</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="back-nav"><a class="wf-link" href="#s3">← Hàng đợi</a></div>
+          <div class="wf-app-brand">QuanLyThuVien</div>
+          <div class="wf-screen-title">Nhận bản giữ <span class="wf-shared-badge">R2</span></div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">RES-00078 · Nhập môn AI</div>
+              <div class="wf-card-sub">READY · COPY-00888 ON_HOLD · hạn nhận 09/10 14:00 · Reader RD-000123</div>
+            </div>
+          </div>
+          <p class="hint-text">Thủ thư kiểm tra: reservation READY thuộc đúng reader đang đến + hold_expires_at chưa qua (BR-LMP-002 — copy ON_HOLD chỉ checkout cho đúng lượt).</p>
+          <button class="btn-primary" type="button">Xác nhận nhận sách → checkout</button>
+          <button class="btn-secondary" type="button">Hủy lượt giữ</button>
+          <p class="hint-text">Một transaction (COPY-T02, extend <a class="wf-link" href="checkout-flow.html">uc-checkout</a>): Loan ACTIVE tạo + Copy ON_HOLD→ON_LOAN + Reservation READY→FULFILLED (RES-T03) + audit + outbox xác nhận → "End: Reservation đã pickup".</p>
+          <div class="divider"><span>Trạng thái lỗi</span></div>
+          <div class="banner banner-warn"><span><b>E-LMP-005</b> — Race với cron expiry: reader đến sát hạn, trong lúc xác nhận cron RES-T04 (hoặc check now&gt;hold_expires_at tại commit) làm READY→EXPIRED → CAS READY→FULFILLED thất bại → hiển thị trạng thái mới EXPIRED, không tạo Loan. Recovery: reload; copy đã advance người kế hoặc về AVAILABLE — nếu vẫn AVAILABLE và reader còn nhu cầu → <a class="wf-link" href="checkout-flow.html">checkout trực tiếp</a> (copy không còn gắn hold) hoặc đặt lại cuối queue.</span></div>
+          <div class="banner banner-warn"><span><b>E-LMP-008</b> — Đến nhận khi EXPIRED / CANCELLED: hiển thị reservation bị hủy/hết hạn → hủy yêu cầu, đặt lại cuối queue nếu còn nhu cầu, hoặc quay lại tra cứu. Grace period tại quầy (cho phép pickup vài phút sau hạn khi reader đã có mặt) — Open OQ-LMP-010: không tự quyết; nếu chốt thì cấu hình trong hold_expiry policy, áp thống nhất cả cron RES-T04.</span></div>
+          <div class="banner banner-info"><span><b>Copy giữ bị báo hư hỏng</b> — COPY-T08 (PROPOSAL DEC-D3-06): ON_HOLD→PENDING_REVIEW; Reservation READY quay WAITING giữ vị trí hàng chờ; notify người đặt → xử lý tại <a class="wf-link" href="damage-lost-found-flow.html">damage-lost-found-flow</a>.</span></div>
+        </div>
+      </div>
+      <div class="wf-screen-label">reservation-pickup</div>
+    </div>
+
+  </div>
+
+  <div class="wf-desc-section">
+    <div class="wf-desc-title">Mô tả màn hình</div>
+    <table class="wf-desc-table">
+      <thead>
+        <tr><th>#</th><th>Items</th><th>Control type</th><th>Data type</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 1: Tìm tài liệu để đặt (reservation-search)</td></tr>
+        <tr><td>1</td><td>Ô tìm đầu sách</td><td>Textbox</td><td>Text</td><td>Tra cứu theo tên/tác giả/ISBN; kết quả kèm số lượng khả dụng tính từ Copy.status + is_loanable, không lưu counter (BR-11 / CP-AVL-01 — FACT).</td></tr>
+        <tr><td>2</td><td>Link "Đặt trước" trên kết quả</td><td>Link</td><td>Click</td><td>Chỉ xuất hiện khi khả dụng = 0 (BR-08 — FACT) → reservation-form [22]; còn bản khả dụng → không cho đặt, điều hướng mượn trực tiếp; cố đặt → E-LMP-008.</td></tr>
+        <tr><td>3</td><td>Banner quy tắc + phân quyền</td><td>Label</td><td>ReadOnly</td><td>Người đọc self-service chỉ trên dữ liệu của mình (quyền "riêng"); Thủ thư/QTV đặt thay mặt (FACT ma trận nguồn §2); hệ thống chạy cron expiry/advance/notify (§8).</td></tr>
+        <tr><td>4</td><td>Ghi chú release boundary</td><td>Label</td><td>ReadOnly</td><td>Toàn flow thuộc R2 (OQ-LMP-003 → DEC-P2-05, future/not in pilot); CAP-RESERVE feature flag, rollback = đóng băng hàng chờ.</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 2: Đặt trước (reservation-form)</td></tr>
+        <tr><td>1</td><td>Thẻ đầu sách</td><td>Label</td><td>ReadOnly</td><td>Title + khả dụng = 0 + độ dài hàng chờ hiện tại.</td></tr>
+        <tr><td>2</td><td>Ô người đọc</td><td>Textbox</td><td>Text</td><td>Self-service mặc định chính mình; Thủ thư/QTV nhập mã reader thay mặt — FACT ma trận quyền.</td></tr>
+        <tr><td>3</td><td>Checklist điều kiện</td><td>Label</td><td>ReadOnly</td><td>Reader đủ điều kiện BR-LMP-003; đặt trước mở &lt; ngưỡng (đề xuất 3 — OQ-LMP-010); chưa có reservation cùng title (dedup — PROPOSAL RES-T01).</td></tr>
+        <tr><td>4</td><td>Nút "Gửi yêu cầu đặt trước"</td><td>Button</td><td>Click</td><td>Tạo WAITING cuối queue FIFO created_at (RES-T01, BR-09 — FACT) + audit cùng transaction → reservation-queue [23] (transition [22]→[23]).</td></tr>
+        <tr><td>5</td><td>Nút "Hủy"</td><td>Button</td><td>Click</td><td>→ reservation-search [21].</td></tr>
+        <tr><td>6</td><td>Banner E-LMP-008 / E-LMP-005 / E-LMP-015</td><td>Label</td><td>ReadOnly</td><td>Còn khả dụng hoặc vi phạm ngưỡng/dedup/eligibility → từ chối kèm lý do trên form (không ghi Reservation); race → CAS + reload; action trên terminal state → E-LMP-015, chỉ action hợp lệ.</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 3: Hàng đợi đặt trước (reservation-queue)</td></tr>
+        <tr><td>1</td><td>Danh sách reservation</td><td>Card list</td><td>Text</td><td>Mỗi reservation: id, title, trạng thái WAITING (vị trí #N — FIFO BR-09) / READY (copy giữ + hold_expires_at, đề xuất 48h — OQ-LMP-010); link trạng thái notify → notification-status [32].</td></tr>
+        <tr><td>2</td><td>Link "Hủy" trên card</td><td>Link</td><td>Click</td><td>WAITING→CANCELLED rời queue (RES-T05 — FACT); READY→CANCELLED + giải phóng copy/advance nguyên tử (RES-T06); terminal state → E-LMP-015, chỉ action hợp lệ.</td></tr>
+        <tr><td>3</td><td>Ghi chú allocation nguyên tử</td><td>Label</td><td>ReadOnly</td><td>Copy về kho → một transaction (AT-RSV-01): Copy→ON_HOLD + held_copy_id + hold_expires_at + WAITING→READY (RES-T02) + outbox + audit; không lộ trạng thái trung gian.</td></tr>
+        <tr><td>4</td><td>Nút "Tạo đặt trước mới" / empty</td><td>Button</td><td>Click</td><td>→ reservation-search [21]; empty1: "Chưa có hàng đợi — tạo đặt trước mới".</td></tr>
+        <tr><td>5</td><td>Banner E-LMP-012/018 notify</td><td>Label</td><td>ReadOnly</td><td>READY commit không tự hủy vì notify lỗi, hold_expires_at vẫn chạy (FACT); outbox retry → dead-letter + cảnh báo (NFR-LMP-007); escalation — PROPOSAL DEC-D3-08.</td></tr>
+        <tr><td>6</td><td>Banner cron expiry + edge</td><td>Label</td><td>ReadOnly</td><td>Job 15 phút READY→EXPIRED (RES-T04 — FACT); advance nguyên tử: re-hold đầu queue (COPY-T19) hoặc về AVAILABLE (T18), không lộ trạng thái giữa (AT-RSV-04); copy giữ bị hư hỏng → READY quay WAITING giữ vị trí (DEC-D3-06); skip/suspend — Open DEC-D3-03.</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 4: Nhận bản giữ (reservation-pickup)</td></tr>
+        <tr><td>1</td><td>Thẻ reservation READY</td><td>Label</td><td>ReadOnly</td><td>Reservation READY + copy ON_HOLD + hạn nhận + reader — kiểm tra đúng reader + hold_expires_at chưa qua (BR-LMP-002).</td></tr>
+        <tr><td>2</td><td>Nút "Xác nhận nhận sách → checkout"</td><td>Button</td><td>Click</td><td>Một transaction (COPY-T02, extend uc-checkout): Loan ACTIVE + Copy ON_HOLD→ON_LOAN + Reservation→FULFILLED (RES-T03) + audit + outbox → "End: Reservation đã pickup".</td></tr>
+        <tr><td>3</td><td>Nút "Hủy lượt giữ"</td><td>Button</td><td>Click</td><td>→ reservation-queue [23] (hủy/hết hạn → quay queue).</td></tr>
+        <tr><td>4</td><td>Banner E-LMP-005 race expiry</td><td>Label</td><td>ReadOnly</td><td>Cron RES-T04 expire giữa lúc xác nhận → CAS fail → hiển thị EXPIRED, không tạo Loan; copy còn AVAILABLE → checkout trực tiếp, hoặc đặt lại cuối queue.</td></tr>
+        <tr><td>5</td><td>Banner E-LMP-008 + grace period</td><td>Label</td><td>ReadOnly</td><td>Đến nhận khi EXPIRED/CANCELLED → hủy yêu cầu / đặt lại / tra cứu; grace period sau hạn tại quầy — Open OQ-LMP-010, không tự quyết.</td></tr>
+        <tr><td>6</td><td>Banner copy giữ hư hỏng</td><td>Label</td><td>ReadOnly</td><td>COPY-T08 (DEC-D3-06 — PROPOSAL): ON_HOLD→PENDING_REVIEW, READY→WAITING giữ vị trí, notify → damage-lost-found-flow.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wf-footer">
+    <span>library-management-platform / reservation-flow</span>
+    <span>Tạo bởi /wireframe-html · 2026-10-07</span>
+  </div>
+
+</div>
+</body>
+</html>
+
