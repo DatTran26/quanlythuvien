@@ -1,12 +1,12 @@
 ---
 type: brainstorm
-feature: library-management-platform
+scope: product
 status: draft
-updated: 2026-10-05
+updated: 2026-10-08
 links:
   - docs/he_thong_quan_ly_thu_vien.md
   - docs/_shared/project-profile.md
-  - docs/features/library-management-platform/domain/lifecycle-inventory.md
+  - docs/_shared/domain/lifecycle-inventory.md
   - docs/_product/decision-register.md
   - plans/reports/ba-audit-261005-0018-library-management-roadmap.md
 ---
@@ -154,7 +154,7 @@ Ghi tình trạng → Bình thường / Hư hỏng / Mất
 | Reservation | WAITING/READY | CANCELLED | Người đọc hoặc nhân viên hủy | Không |
 | Reservation | READY | EXPIRED | Hết 48 giờ | Không |
 
-State machine đầy đủ của Copy đã được dựng lại thành artifact riêng tại `docs/features/library-management-platform/domain/lifecycle-inventory.md` dưới nhãn **PROPOSAL** (DEC-D3-01/DEC-D3-02, liên quan OQ-LMP-004) — nguồn gốc đã mất nên đây là reconstruction chờ domain approval, không phải "phục hồi từ nguồn". Bảng trên chỉ ghi các transition đã có căn cứ từ tài liệu nguồn.
+State machine đầy đủ của Copy đã được dựng lại thành artifact riêng tại `docs/_shared/domain/lifecycle-inventory.md` dưới nhãn **PROPOSAL** (DEC-D3-01/DEC-D3-02, liên quan OQ-LMP-004) — nguồn gốc đã mất nên đây là reconstruction chờ domain approval, không phải "phục hồi từ nguồn". Bảng trên chỉ ghi các transition đã có căn cứ từ tài liệu nguồn.
 
 ### 6.4 Interrupted Transactions
 
@@ -258,12 +258,12 @@ State machine đầy đủ của Copy đã được dựng lại thành artifact
 
 - [ ] OQ-BS-1 (trước ghi `OQ-1`): Chính sách lưu giữ và xử lý yêu cầu dữ liệu cá nhân nào được người phụ trách pháp lý phê duyệt?
 - [ ] OQ-BS-2 (trước ghi `OQ-2`): File Excel thực tế có cấu trúc, chất lượng và mã QR cũ như thế nào?
-- [ ] OQ-BS-3 (trước ghi `OQ-3`): Sơ đồ 7 trạng thái Copy và chi tiết luồng trả gốc có thể phục hồi từ nguồn nào? — Đã reconstruct-as-PROPOSAL tại `domain/lifecycle-inventory.md` (DEC-D3-01/02); vẫn mở cho tới khi domain approver xác nhận hoặc nguồn gốc được tìm lại.
+- [ ] OQ-BS-3 (trước ghi `OQ-3`): Sơ đồ 7 trạng thái Copy và chi tiết luồng trả gốc có thể phục hồi từ nguồn nào? — Đã reconstruct-as-PROPOSAL tại `docs/_shared/domain/lifecycle-inventory.md` (DEC-D3-01/02); vẫn mở cho tới khi domain approver xác nhận hoặc nguồn gốc được tìm lại.
 
 ## 12. Next Steps
 
 - Lập product roadmap R0–R3 theo dependency và readiness gate.
-- Phục hồi state machine Copy và flow trả trước khi khóa SRS — PROPOSAL đã có (`domain/lifecycle-inventory.md`); còn bước domain approval qua `decision-register.md`.
+- Phục hồi state machine Copy và flow trả trước khi khóa SRS — PROPOSAL đã có (`docs/_shared/domain/lifecycle-inventory.md`); còn bước domain approval qua `decision-register.md`.
 - Tách capability thành các feature/epic có thể truy vết.
 - Viết URD/BRD/PRD rồi SRS theo từng workstream sau khi roadmap được duyệt.
 

@@ -7,7 +7,7 @@ links:
   - docs/_product/priority-crosswalk.md
   - docs/_product/readiness-gates.md
   - docs/_product/decision-register.md
-  - docs/features/library-management-platform/brainstorms/product-roadmap-baseline.md
+  - docs/_product/product-roadmap-baseline.md
   - plans/reports/ba-audit-261005-0018-library-management-roadmap.md
 ---
 

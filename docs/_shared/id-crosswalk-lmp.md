@@ -70,18 +70,18 @@ Cách đọc:
 
 | Mã LMP | Đích | Mã mới | Ghi chú | Nguồn | Đã chuyển |
 |---|---|---|---|---|---|
-| NFR-LMP-001 | `core` | `NFR-core-001` |  | `srs/library-management-platform-spec.md:108` |  |
+| NFR-LMP-001 | `core` | `NFR-core-001` |  | `srs/library-management-platform-spec.md:108` || phase 2 |
 | NFR-LMP-002 | `catalog-admin` | `NFR-catalog-admin-001` |  | `srs/library-management-platform-spec.md:109` |  |
-| NFR-LMP-003 | `core` | `NFR-core-002` |  | `srs/library-management-platform-spec.md:110` |  |
-| NFR-LMP-004 | `core` | `NFR-core-003` |  | `srs/library-management-platform-spec.md:111` |  |
-| NFR-LMP-005 | `core` | `NFR-core-004` |  | `srs/library-management-platform-spec.md:112` |  |
-| NFR-LMP-006 | `core` | `NFR-core-005` |  | `srs/library-management-platform-spec.md:113` |  |
+| NFR-LMP-003 | `core` | `NFR-core-002` |  | `srs/library-management-platform-spec.md:110` || phase 2 |
+| NFR-LMP-004 | `core` | `NFR-core-003` |  | `srs/library-management-platform-spec.md:111` || phase 2 |
+| NFR-LMP-005 | `core` | `NFR-core-004` |  | `srs/library-management-platform-spec.md:112` || phase 2 |
+| NFR-LMP-006 | `core` | `NFR-core-005` |  | `srs/library-management-platform-spec.md:113` || phase 2 |
 | NFR-LMP-007 | `notification-core` | `NFR-notification-core-001` |  | `srs/library-management-platform-spec.md:114` |  |
-| NFR-LMP-008 | `core` | `NFR-core-006` |  | `srs/library-management-platform-spec.md:115` |  |
-| NFR-LMP-009 | `core` | `NFR-core-007` |  | `srs/library-management-platform-spec.md:116` |  |
-| NFR-LMP-010 | `core` | `NFR-core-008` |  | `srs/library-management-platform-spec.md:117` |  |
+| NFR-LMP-008 | `core` | `NFR-core-006` |  | `srs/library-management-platform-spec.md:115` || phase 2 |
+| NFR-LMP-009 | `core` | `NFR-core-007` |  | `srs/library-management-platform-spec.md:116` || phase 2 |
+| NFR-LMP-010 | `core` | `NFR-core-008` |  | `srs/library-management-platform-spec.md:117` || phase 2 |
 | NFR-LMP-011 | `data-import` | `NFR-data-import-001` |  | `srs/library-management-platform-spec.md:118` |  |
-| NFR-LMP-012 | `core` | `NFR-core-009` |  | `srs/library-management-platform-spec.md:119` |  |
+| NFR-LMP-012 | `core` | `NFR-core-009` |  | `srs/library-management-platform-spec.md:119` || phase 2 |
 
 ## 3. Business Rule
 
@@ -89,42 +89,42 @@ Cách đọc:
 |---|---|---|---|---|---|
 | BR-LMP-001 | `checkout` | `BR-checkout-001` |  | `srs/library-management-platform-spec.md:125` |  |
 | BR-LMP-002 | `checkout` | `BR-checkout-002` |  | `srs/library-management-platform-spec.md:126` |  |
-| BR-LMP-003 | `core` | `BR-core-001` |  | `srs/library-management-platform-spec.md:127` |  |
+| BR-LMP-003 | `core` | `BR-core-001` |  | `srs/library-management-platform-spec.md:127` || phase 2 |
 | BR-LMP-004 | `renewal` | `BR-renewal-001` |  | `srs/library-management-platform-spec.md:128` |  |
 | BR-LMP-005 | `reservation` | `BR-reservation-001` |  | `srs/library-management-platform-spec.md:129` |  |
 | BR-LMP-006 | `reservation` | `BR-reservation-002` |  | `srs/library-management-platform-spec.md:130` |  |
-| BR-LMP-007 | `core` | `BR-core-002` |  | `srs/library-management-platform-spec.md:131` |  |
+| BR-LMP-007 | `core` | `BR-core-002` |  | `srs/library-management-platform-spec.md:131` || phase 2 |
 | BR-LMP-008 | `fine-collection-basic` | `BR-fine-collection-basic-001` |  | `srs/library-management-platform-spec.md:132` |  |
 | BR-LMP-009 | `damage-lifecycle` | `BR-damage-lifecycle-001` |  | `srs/library-management-platform-spec.md:133` |  |
 | BR-LMP-010 | `lost-handling` | `BR-lost-handling-001` |  | `srs/library-management-platform-spec.md:134` |  |
 | BR-LMP-011 | `copy-inventory` | `BR-copy-inventory-001` |  | `srs/library-management-platform-spec.md:135` |  |
 | BR-LMP-012 | `damage-lifecycle` | `BR-damage-lifecycle-002` |  | `srs/library-management-platform-spec.md:136` |  |
-| BR-LMP-013 | `core` | `BR-core-003` |  | `srs/library-management-platform-spec.md:137` |  |
+| BR-LMP-013 | `core` | `BR-core-003` |  | `srs/library-management-platform-spec.md:137` || phase 2 |
 | BR-LMP-014 | `data-import` | `BR-data-import-001` |  | `srs/library-management-platform-spec.md:138` |  |
-| BR-LMP-015 | `core` | `BR-core-004` |  | `srs/library-management-platform-spec.md:139` |  |
-| BR-LMP-016 | `core` | `BR-core-005` |  | `srs/library-management-platform-spec.md:140` |  |
-| BR-LMP-017 | `core` | `BR-core-006` |  | `srs/library-management-platform-spec.md:141` |  |
+| BR-LMP-015 | `core` | `BR-core-004` |  | `srs/library-management-platform-spec.md:139` || phase 2 |
+| BR-LMP-016 | `core` | `BR-core-005` |  | `srs/library-management-platform-spec.md:140` || phase 2 |
+| BR-LMP-017 | `core` | `BR-core-006` |  | `srs/library-management-platform-spec.md:141` || phase 2 |
 
 ## 4. Error
 
 | Mã LMP | Đích | Mã mới | Ghi chú | Nguồn | Đã chuyển |
 |---|---|---|---|---|---|
-| E-LMP-001 | `core` | `E-core-001` |  | `srs/library-management-platform-spec.md:147` |  |
-| E-LMP-002 | `core` | `E-core-002` |  | `srs/library-management-platform-spec.md:148` |  |
-| E-LMP-003 | `core` | `E-core-003` |  | `srs/library-management-platform-spec.md:149` |  |
+| E-LMP-001 | `core` | `E-core-001` |  | `srs/library-management-platform-spec.md:147` || phase 2 |
+| E-LMP-002 | `core` | `E-core-002` |  | `srs/library-management-platform-spec.md:148` || phase 2 |
+| E-LMP-003 | `core` | `E-core-003` |  | `srs/library-management-platform-spec.md:149` || phase 2 |
 | E-LMP-004 | `checkout` | `E-checkout-001` |  | `srs/library-management-platform-spec.md:150` |  |
-| E-LMP-005 | `core` | `E-core-004` |  | `srs/library-management-platform-spec.md:151` |  |
-| E-LMP-006 | `core` | `E-core-005` |  | `srs/library-management-platform-spec.md:152` |  |
-| E-LMP-007 | `core` | `E-core-006` |  | `srs/library-management-platform-spec.md:153` |  |
+| E-LMP-005 | `core` | `E-core-004` |  | `srs/library-management-platform-spec.md:151` || phase 2 |
+| E-LMP-006 | `core` | `E-core-005` |  | `srs/library-management-platform-spec.md:152` || phase 2 |
+| E-LMP-007 | `core` | `E-core-006` |  | `srs/library-management-platform-spec.md:153` || phase 2 |
 | E-LMP-008 | `reservation` | `E-reservation-001` |  | `srs/library-management-platform-spec.md:154` |  |
 | E-LMP-009 | `fine-collection-basic` | `E-fine-collection-basic-001` |  | `srs/library-management-platform-spec.md:155` |  |
 | E-LMP-010 | `fine-collection-basic` | `E-fine-collection-basic-002` |  | `srs/library-management-platform-spec.md:156` |  |
 | E-LMP-011 | `damage-lifecycle` | `E-damage-lifecycle-001` |  | `srs/library-management-platform-spec.md:157` |  |
 | E-LMP-012 | `notification-core` | `E-notification-core-001` |  | `srs/library-management-platform-spec.md:158` |  |
-| E-LMP-013 | `core` | `E-core-007` |  | `srs/library-management-platform-spec.md:159` |  |
+| E-LMP-013 | `core` | `E-core-007` |  | `srs/library-management-platform-spec.md:159` || phase 2 |
 | E-LMP-014 | `data-import` | `E-data-import-001` |  | `srs/library-management-platform-spec.md:160` |  |
-| E-LMP-015 | `core` | `E-core-008` |  | `srs/library-management-platform-spec.md:161` |  |
-| E-LMP-016 | `core` | `E-core-009` |  | `srs/library-management-platform-spec.md:162` |  |
+| E-LMP-015 | `core` | `E-core-008` |  | `srs/library-management-platform-spec.md:161` || phase 2 |
+| E-LMP-016 | `core` | `E-core-009` |  | `srs/library-management-platform-spec.md:162` || phase 2 |
 | E-LMP-017 | `access-control` | `E-access-control-001` |  | `srs/library-management-platform-spec.md:163` |  |
 | E-LMP-018 | `notification-core` | `E-notification-core-002` |  | `srs/library-management-platform-spec.md:164` |  |
 
@@ -147,18 +147,18 @@ OQ trong spec là canonical. OQ trùng ở userflow gộp về cùng mã mới. 
 
 | Mã LMP | Đích | Mã mới | Ghi chú | Nguồn | Đã chuyển |
 |---|---|---|---|---|---|
-| OQ-LMP-001 | `core` | `OQ-core-001` | Cấp sản phẩm — ghi kèm decision-register | `srs/library-management-platform-spec.md:245` |  |
+| OQ-LMP-001 | `core` | `OQ-core-001` | Cấp sản phẩm — ghi kèm decision-register | `srs/library-management-platform-spec.md:245` || phase 2 |
 | OQ-LMP-002 | `data-import` | `OQ-data-import-001` |  | `srs/library-management-platform-spec.md:246` |  |
 | OQ-LMP-003 | `reservation` | `OQ-reservation-001` |  | `srs/library-management-platform-spec.md:247` |  |
-| OQ-LMP-004 | `core` | `OQ-core-002` | Tương đương OQ-BS-3 | `srs/library-management-platform-spec.md:248` |  |
+| OQ-LMP-004 | `core` | `OQ-core-002` | Tương đương OQ-BS-3 | `srs/library-management-platform-spec.md:248` || phase 2 |
 | OQ-LMP-005 | `fine-collection-adv` | `OQ-fine-collection-adv-001` |  | `srs/library-management-platform-spec.md:249` |  |
-| OQ-LMP-006 | `core` | `OQ-core-003` | Tương đương OQ-BS-1 | `srs/library-management-platform-spec.md:250` |  |
+| OQ-LMP-006 | `core` | `OQ-core-003` | Tương đương OQ-BS-1 | `srs/library-management-platform-spec.md:250` || phase 2 |
 | OQ-LMP-007 | `access-control` | `OQ-access-control-001` |  | `srs/library-management-platform-spec.md:251` |  |
 | OQ-LMP-008 | `notification-core` | `OQ-notification-core-001` |  | `srs/library-management-platform-spec.md:252` |  |
 | OQ-LMP-009 | `fine-collection-adv` | `OQ-fine-collection-adv-002` |  | `srs/library-management-platform-spec.md:253` |  |
 | OQ-LMP-010 | `policy-config` | `OQ-policy-config-001` |  | `srs/library-management-platform-spec.md:254` |  |
-| OQ-LMP-011 | `core` | `OQ-core-004` |  | `srs/library-management-platform-spec.md:255` |  |
-| OQ-LMP-012 | `core` | `OQ-core-005` |  | `srs/library-management-platform-spec.md:256` |  |
+| OQ-LMP-011 | `core` | `OQ-core-004` |  | `srs/library-management-platform-spec.md:255` || phase 2 |
+| OQ-LMP-012 | `core` | `OQ-core-005` |  | `srs/library-management-platform-spec.md:256` || phase 2 |
 | OQ-LMP-013 | `damage-lifecycle` | `OQ-damage-lifecycle-001` |  | `srs/library-management-platform-spec.md:257` |  |
 | OQ-LMP-014 | `account-admin` | `OQ-account-admin-001` |  | `srs/library-management-platform-spec.md:258` |  |
 | OQ-LMP-015 | `reader-self-service` | `OQ-reader-self-service-001` | Trùng userflow OQ-a1 — gộp | `srs/library-management-platform-spec.md:259` |  |
@@ -395,10 +395,10 @@ Chủ của CHK = chủ của FR đầu tiên trong cột Nguồn của CHK (FR 
 | CHK-LMP-088 | `notification-core` | `CHK-notification-core-002` | FR-LMP-019a | FR-LMP-019, BR-LMP-016 | `test/checklist/checklist-feature.md:160` |  |
 | CHK-LMP-089 | `notification-core` | `CHK-notification-core-003` | FR-LMP-019a | FR-LMP-019, E-LMP-012, E-LMP-018 | `test/checklist/checklist-feature.md:161` |  |
 | CHK-LMP-090 | `notification-core` | `CHK-notification-core-004` | FR-LMP-019a | FR-LMP-019, BR-LMP-016, E-LMP-018 | `test/checklist/checklist-feature.md:162` |  |
-| CHK-LMP-091 | `core` | `CHK-core-001` | NFR-LMP-008 | NFR-LMP-008 | `test/checklist/checklist-feature.md:168` |  |
-| CHK-LMP-092 | `core` | `CHK-core-002` | NFR-LMP-008 | NFR-LMP-008, NFR-LMP-009 | `test/checklist/checklist-feature.md:172` |  |
-| CHK-LMP-093 | `core` | `CHK-core-003` | NFR-LMP-009 | NFR-LMP-009 | `test/checklist/checklist-feature.md:173` |  |
-| CHK-LMP-094 | `core` | `CHK-core-004` | NFR-LMP-012 | NFR-LMP-012 | `test/checklist/checklist-feature.md:177` |  |
+| CHK-LMP-091 | `core` | `CHK-core-001` | NFR-LMP-008 | NFR-LMP-008 | `test/checklist/checklist-feature.md:168` || phase 2 |
+| CHK-LMP-092 | `core` | `CHK-core-002` | NFR-LMP-008 | NFR-LMP-008, NFR-LMP-009 | `test/checklist/checklist-feature.md:172` || phase 2 |
+| CHK-LMP-093 | `core` | `CHK-core-003` | NFR-LMP-009 | NFR-LMP-009 | `test/checklist/checklist-feature.md:173` || phase 2 |
+| CHK-LMP-094 | `core` | `CHK-core-004` | NFR-LMP-012 | NFR-LMP-012 | `test/checklist/checklist-feature.md:177` || phase 2 |
 | CHK-LMP-095 | `checkout` | `CHK-checkout-009` | FR-LMP-008 | FR-LMP-008 | `test/checklist/checklist-feature.md:181` |  |
 | CHK-LMP-096 | `checkout` | `CHK-checkout-010` | FR-LMP-008 | FR-LMP-008, NFR-LMP-003 | `test/checklist/checklist-feature.md:182` |  |
 | CHK-LMP-097 | `access-control` | `CHK-access-control-008` | FR-LMP-006 | FR-LMP-006, E-LMP-017 | `test/checklist/checklist-feature.md:183` |  |

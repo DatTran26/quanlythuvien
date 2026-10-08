@@ -5,7 +5,7 @@ updated: 2026-10-08
 links:
   - docs/he_thong_quan_ly_thu_vien.md
   - docs/_shared/project-profile.md
-  - docs/features/library-management-platform/domain/lifecycle-inventory.md
+  - docs/_shared/domain/lifecycle-inventory.md
 ---
 
 # Decision register — Hệ thống Quản lý Thư viện
@@ -14,7 +14,7 @@ links:
 
 | ID | Chủ đề | Loại | Owner | Approver | Due gate | Hard-stop? | Status | Evidence / source |
 |----|--------|------|-------|----------|----------|------------|--------|--------------------|
-| DEC-D3-01 | Copy state machine 7 trạng thái — reconstruction vì sơ đồ gốc mất (`[embedded content]`); toàn bộ transition table §2.2 của lifecycle-inventory | PROPOSAL | BA lead | Thủ thư trưởng (domain approver) | Trước khi Phase 4 khoá state diagram trong SRS | Có — OQ-LMP-004 | Open | `domain/lifecycle-inventory.md` §2 |
+| DEC-D3-01 | Copy state machine 7 trạng thái — reconstruction vì sơ đồ gốc mất (`[embedded content]`); toàn bộ transition table §2.2 của lifecycle-inventory | PROPOSAL | BA lead | Thủ thư trưởng (domain approver) | Trước khi Phase 4 khoá state diagram trong SRS | Có — OQ-LMP-004 | Open | `docs/_shared/domain/lifecycle-inventory.md` §2 |
 | DEC-D3-02 | Flow trả sách "3 bước, 2 quyết định" — reconstruction; chi tiết PROPOSAL, thứ tự "đóng Loan + tính phạt trước" là FACT | PROPOSAL | BA lead | Thủ thư trưởng | Cùng DEC-D3-01 | Có — OQ-LMP-004 | Open | `lifecycle-inventory.md` §2.4 |
 | DEC-D3-03 | Reservation `skip`/`suspend` — nguồn không có; chỉ đưa vào baseline khi domain approved | Open | BA lead | Product owner | Trước Phase 4 | Không | Open — hiện KHÔNG nằm trong baseline | `lifecycle-inventory.md` §4 |
 | DEC-D3-04 | Partial payment + quyền hạn waiver/adjustment/reversal/refund + SoD | PROPOSAL | BA lead | Finance owner + Thủ thư trưởng | Trước release có thu phạt | Có — OQ-LMP-005/009 | Open | `lifecycle-inventory.md` §5 |

@@ -4,7 +4,7 @@ status: draft
 updated: 2026-10-05
 links:
   - docs/he_thong_quan_ly_thu_vien.md
-  - docs/features/library-management-platform/brainstorms/product-roadmap-baseline.md
+  - docs/_product/product-roadmap-baseline.md
   - plans/reports/ba-audit-261005-0018-library-management-roadmap.md
   - docs/_product/prd.md
   - docs/_product/roadmap.md
