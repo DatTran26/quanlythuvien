@@ -17,3 +17,18 @@ Thumbs.db
 *.pem
 *.key
 secrets/
+
+# Private BA-Kit tooling (kept locally, not shared)
+.1devtool/
+.agents-standard/
+.agents/
+.claude/
+.codex/
+.cursor/
+.devin/
+_templates/
+scripts/
+AGENTS.md
+CLAUDE.md
+answer.md
+nul
