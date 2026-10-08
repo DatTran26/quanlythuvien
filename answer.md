@@ -7,16 +7,16 @@
 - Kế hoạch BA: `plans/261004-1734-library-management-full-ba-workflow/`.
 - Giai đoạn hiện tại: Phase 5 — user flow và HTML wireframe.
 - User flow là nguồn chia flow chung cho bước wireframe sau này.
-- Thiết bị chính đã chọn cho màn hình quầy và quản trị: desktop 1024px.
-- Reader portal R2 theo hướng mobile-first nhưng vẫn là đề xuất, chờ Product Owner duyệt qua OQ-LMP-015.
+- Thiết bị canonical cho toàn bộ HTML wireframe: Mobile 375 theo quyết định người dùng ngày 2026-10-07.
+- Device production và responsive target của Reader portal R2 vẫn là đề xuất, chờ Product Owner duyệt qua OQ-LMP-015.
 
 ## 2. Sáu quyết định nghiệp vụ ban đầu
 
 ### 2.1. Thiết bị mục tiêu
 
-- Xác nhận desktop 1024px là thiết bị chính cho Thủ thư và Quản trị viên.
-- Reader portal R2 đề xuất responsive mobile-first.
-- Mobile-first cho portal không được coi là đã phê duyệt cho đến khi OQ-LMP-015 được người có thẩm quyền duyệt.
+- Xác nhận Mobile 375 là thiết bị canonical cho HTML wireframe của Thủ thư và Quản trị viên.
+- Reader portal R2 vẫn cần quyết định responsive production riêng.
+- Quyết định wireframe Mobile 375 không tự động đóng OQ-LMP-015 về device production của portal.
 
 ### 2.2. Phạm vi user flow
 

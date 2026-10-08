@@ -2,15 +2,15 @@
 type: srs-userflow
 feature: library-management-platform
 updated: 2026-10-07
-primary_device: desktop
+primary_device: mobile
 stage: flow-approved
 flow_approved_at: 2026-10-07
-flow_hash: "1c2d7131"
+flow_hash: "c4d1b86d"
 ---
 
 # Library Management Platform — User Flow
 
-> Nguồn chia flow duy nhất cho wireframe và prototype của feature này. Màn quầy/quản trị dùng khung desktop 1024px. Portal Người đọc R2 theo hướng mobile-first nhưng còn chờ OQ-LMP-015.
+> Nguồn chia flow duy nhất cho wireframe và prototype của feature này. Bộ HTML wireframe dùng khung Mobile 375 theo quyết định ngày 2026-10-07. Phạm vi production của portal Người đọc R2 và màn reader R1B vẫn chờ OQ-LMP-015 và OQ-LMP-016.
 
 ## 1. User Flow (tổng)
 

@@ -74,7 +74,7 @@ graph LR
 
 | Hạng mục | Nội dung |
 |---|---|
-| Scope | CAP-RENEW + gia hạn online (FR-R06, FR-S06, BR-04); CAP-FINE nâng cao (biên nhận, miễn/điều chỉnh theo thẩm quyền — cần financial-control decision, `PROPOSAL` DEC-P2-08); CAP-NOTIFY đầy đủ (FR-C04 trung tâm thông báo, đánh dấu đã đọc); CAP-AUDIT viewer (FR-L10); FR-S09 danh sách quá hạn cho Nhân viên; FR-S10 quản lý người đọc giới hạn; FR-R09 người đọc xem công nợ; deliverable vận hành: SOP, runbook, owner cho từng tác vụ nền, kênh hỗ trợ pilot. |
+| Scope | CAP-RENEW + gia hạn online (FR-R06, FR-S06, BR-04); CAP-FINE nâng cao (biên nhận, miễn/điều chỉnh theo thẩm quyền — cần financial-control decision, `PROPOSAL` DEC-P2-04); CAP-NOTIFY đầy đủ (FR-C04 trung tâm thông báo, đánh dấu đã đọc); CAP-AUDIT viewer (FR-L10); FR-S09 danh sách quá hạn cho Nhân viên; FR-S10 quản lý người đọc giới hạn; FR-R09 người đọc xem công nợ; deliverable vận hành: SOP, runbook, owner cho từng tác vụ nền, kênh hỗ trợ pilot. |
 | Dependency | R1A exit đạt; GATE-DEC phần financial-control (miễn/điều chỉnh phạt, thẩm quyền) và privacy/retention **phải Resolved + Approved trước GATE-GNG**; BR-04 điều kiện "có người đặt trước" chạy trên hàng chờ rỗng cho tới R2 — không phải dependency đảo (DEC-P2-05). |
 | Entry criteria | R1A ổn định trên dữ liệu thật nội bộ (dogfood tại quầy); không còn lỗi blocker mở. |
 | Exit criteria | GATE-UAT đạt (scenario traceability đầy đủ, không còn blocker); GATE-TRN đạt (SOP + diễn tập Nhân viên/Thủ thư); GATE-OPS đạt (restore drill thành công, runbook, job owner); GATE-PILOT đạt (người dùng/thiết bị/dữ liệu đại diện, tiêu chí dừng, kênh hỗ trợ); **GATE-GNG ký go-live**. |

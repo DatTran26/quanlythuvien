@@ -43,14 +43,13 @@ Sản phẩm số hóa hoạt động của một thư viện vật lý: quản 
 - Thu phạt tại quầy bằng tiền mặt trong MVP.
 - Không hỗ trợ offline, thanh toán trực tuyến, sách điện tử hoặc nhiều chi nhánh trong baseline đầu tiên.
 
-## Baseline quyết định
+## Baseline đề xuất (chưa phê duyệt)
 
-| Chủ đề | Baseline | Ngày |
-|---|---|---|
-| Đăng ký người đọc | Tự đăng ký; chỉ được mượn sau khi nhân viên kích hoạt | 2026-10-05 |
-| Phiếu mượn | Một bản sao tương ứng một Loan; biên nhận nhóm theo lần xác nhận | 2026-10-05 |
-| Thông báo | Trong ứng dụng và email cho sự kiện quan trọng; chưa có SMS/Zalo/push | 2026-10-05 |
-| Hư hỏng | Bản sao bị chặn lưu thông ngay khi báo cáo và chờ thủ thư xử lý | 2026-10-05 |
-| Import | Có nhập Excel cho đầu sách và bản sao, kèm dry-run và đối soát | 2026-10-05 |
-| Mở rộng | Attendance, online payment, multi-branch và offline là candidate, chưa cam kết | 2026-10-05 |
-
+| Chủ đề | Đề xuất | Trạng thái | Ngày |
+|---|---|---|---|
+| Đăng ký người đọc | Tự đăng ký; chỉ được mượn sau khi nhân viên kích hoạt | `PROPOSAL` — chờ GATE-DEC | 2026-10-05 |
+| Phiếu mượn | Một bản sao tương ứng một Loan; biên nhận nhóm theo lần xác nhận | `PROPOSAL` — chờ domain approval | 2026-10-05 |
+| Thông báo | Trong ứng dụng và email cho sự kiện quan trọng; chưa có SMS/Zalo/push | `PROPOSAL` — chờ GATE-DEC | 2026-10-05 |
+| Hư hỏng | Bản sao bị chặn lưu thông ngay khi báo cáo và chờ thủ thư xử lý | `PROPOSAL` — chờ domain approval | 2026-10-05 |
+| Import | Có nhập Excel cho đầu sách và bản sao, kèm dry-run và đối soát | `PROPOSAL` — file đại diện còn thiếu | 2026-10-05 |
+| Mở rộng | Attendance, online payment, multi-branch và offline là candidate, chưa cam kết | `PROPOSAL` — chưa cam kết release | 2026-10-05 |

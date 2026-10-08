@@ -26,7 +26,7 @@ links:
 | Functional Req (nguồn) | `FR-<AREA>NN` | `FR-C01..C04`, `FR-R01..R09`, `FR-L01..L10`, `FR-S01..S11` | `docs/he_thong_quan_ly_thu_vien.md` | C=common, R=reader, L=librarian, S=staff; xem crosswalk §3 |
 | Functional Req (SRS) | `FR-LMP-NNN` | `FR-LMP-001`…`FR-LMP-028` | SRS §3 | Series canonical hạ nguồn |
 | Business Rule (nguồn) | `BR-NN` | `BR-01`…`BR-13` | `docs/he_thong_quan_ly_thu_vien.md` | Giá trị thật chờ OQ-04 |
-| Business Rule (SRS) | `BR-LMP-NNN` | `BR-LMP-001`…`BR-LMP-016` | SRS §5 | Crosswalk với BR-NN ở §3 |
+| Business Rule (SRS) | `BR-LMP-NNN` | `BR-LMP-001`…`BR-LMP-017` | SRS §5 | Crosswalk với BR-NN ở §3 |
 | Non-Functional Req (nguồn) | `NFR-NN` | `NFR-01`…`NFR-08` | `docs/he_thong_quan_ly_thu_vien.md`, roadmap | — |
 | Non-Functional Req (SRS) | `NFR-LMP-NNN` | `NFR-LMP-001`…`NFR-LMP-012` | SRS §4 | — |
 | Error | `E-LMP-NNN` | `E-LMP-001`…`E-LMP-018` | SRS §6 | — |

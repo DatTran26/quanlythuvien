@@ -19,7 +19,7 @@ links:
 
 | Item | State | Evidence / owner | Gate |
 |------|-------|------------------|------|
-| Baseline governance | Draft — chờ L1 | `docs/_shared/project-profile.md`, `brainstorms/product-roadmap-baseline.md`, `decision-register.md` đã tồn tại; 18 DEC entry đều `Open`; `docs/_shared/id-registry.md` chưa tạo | Owner: BA lead + stakeholder |
+| Baseline governance | Draft — chờ L1 | `docs/_shared/project-profile.md`, `brainstorms/product-roadmap-baseline.md`, `decision-register.md` và `docs/_shared/id-registry.md` đã tồn tại; 18 DEC entry đều `Open` | Owner: BA lead + stakeholder |
 | PRD / release approval | Draft — chờ L1 | `docs/_product/prd.md`, `roadmap.md`, `priority-crosswalk.md`, `readiness-gates.md` đã tồn tại dạng PROPOSAL | Owner: product owner |
 | Domain lifecycle inventory | PROPOSAL — chờ domain approver | `domain/lifecycle-inventory.md` đã tồn tại; Copy state machine + flow trả là reconstruction (DEC-D3-01/02 `Open`) | Owner: domain approver (Thủ thư trưởng) |
 | SRS L1 content approval | Pending | Được sinh trong phiên Phase 4–8, chưa có phê duyệt người dùng | Owner: BA lead / stakeholder |
@@ -112,11 +112,11 @@ Mọi quyền thao tác trong các UC/model phải dùng đúng naming SRS ở c
 | NFR-LMP-005 | privacy | PII người đọc được mask theo quyền; retention/deletion chưa định nghĩa cho tới khi approved. | P0 | R0 | Permission test + privacy review; policy là OQ; non-waivable trước GATE-GNG |
 | NFR-LMP-006 | auditability | Audit write thất bại phải làm hành động nhạy cảm thất bại theo cùng transaction. | P0 | R0 | Fault injection audit + transaction rollback |
 | NFR-LMP-007 | reliability | Outbox notification phải retry có kiểm soát và có trạng thái lỗi/dead-letter để xử lý. | P0 | R1A | Retry simulation + dead-letter evidence |
-| NFR-LMP-008 | usability | Màn hình quầy phải thao tác được bằng bàn phím và hiển thị trạng thái rõ ràng trên desktop 1024px. | P0 | R1A | Keyboard walkthrough + wireframe review |
+| NFR-LMP-008 | usability | Màn hình quầy phải hiển thị trạng thái rõ ràng trong khung Mobile 375 và vẫn thao tác được bằng bàn phím khi có bàn phím phần cứng. | P0 | R1A | Keyboard walkthrough + wireframe review |
 | NFR-LMP-009 | accessibility | Điều khiển có label/name, focus visible, lỗi mô tả rõ; mục tiêu WCAG level chờ chốt. | P1 | R2 | A11y checklist + assistive smoke test |
 | NFR-LMP-010 | observability | Ghi log nghiệp vụ đủ để điều tra lỗi mà không lộ secrets/PII không cần thiết. | P1 | R1B | Log inspection + redaction review |
 | NFR-LMP-011 | data quality | Import phải có dry-run, lỗi theo dòng và số liệu đối soát trước khi commit. | P0 | R0 | Import fixture test + reconciliation report; GATE-MIG |
-| NFR-LMP-012 | compatibility | Responsive cơ bản; primary device desktop 1024 cho thủ thư, mobile/tablet là P1 nếu có portal. | P1 | R2 | Browser/device smoke matrix |
+| NFR-LMP-012 | compatibility | HTML wireframe canonical dùng Mobile 375; responsive desktop/tablet và device production của portal vẫn cần browser/device smoke matrix riêng. | P1 | R2 | Browser/device smoke matrix |
 
 ## 5. Business Rules
 
@@ -238,7 +238,7 @@ Nhóm màn hình chính: đăng nhập/access, dashboard, danh mục, chi tiết
 | Reservation trọn vòng có một release owner duy nhất là R2; luồng trả R1A không phân bổ hàng chờ (D5 = "không có hàng chờ") | FR-LMP-012/013; PROPOSAL DEC-P2-05 |
 | Cấu hình loan/renewal/hold/fine là policy do quản trị viên quản lý | BR-LMP-003/004/005 |
 | Upload ảnh cần trong damage/lost flow từ R1A (báo cáo hư hỏng có ảnh 1–5 thuộc CAP-DAMAGE R1A) | FR-LMP-025 |
-| Desktop 1024 là primary device | Userflow/wireframe device |
+| Mobile 375 là primary device của HTML wireframe theo quyết định người dùng ngày 2026-10-07 | Userflow/wireframe device |
 
 ## 12. Open Questions
 
@@ -256,7 +256,7 @@ Nhóm màn hình chính: đăng nhập/access, dashboard, danh mục, chi tiết
 - [ ] OQ-LMP-012 — Actor/staff reference model: `*_by`/`actor_ref`/`recipient_ref` trỏ tài khoản hệ thống không nằm trong 13 entity §8 — tách entity hay giữ ref logic? Liên quan OQ-LMP-007 (identity model). Owner: security/IT. Gate: ERD + audit.
 - [ ] OQ-LMP-013 — `DamageReport.photo_refs`: list nhúng hay entity Attachment riêng? Liên quan OQ-LMP-006 (retention). Owner: domain/tech. Gate: ERD + uc-damage-lost-found.
 - [ ] OQ-LMP-014 — Kế thừa OQ-01 nguồn: sau khi tách `Quản trị viên` khỏi `Thủ thư` nguồn (mapping §2 — PROPOSAL), ai quản lý tài khoản Quản trị viên và cơ chế chống tự nâng quyền? Owner: security/IT. Gate: FR-LMP-006/007 + ma trận RBAC.
-- [ ] OQ-LMP-015 — Device target cho cổng self-service Người đọc (R2): mobile-first responsive là PROPOSAL; desktop 1024px đã chốt cho màn quầy/quản trị. Owner: product owner. Gate: wireframe/prototype portal R2.
+- [ ] OQ-LMP-015 — HTML wireframe chung đã chốt Mobile 375; device production và responsive target riêng cho cổng self-service Người đọc R2 vẫn là PROPOSAL. Owner: product owner. Gate: prototype/production portal R2.
 - [ ] OQ-LMP-016 — FR-LMP-024 (người đọc xem công nợ, FR-R09 nguồn): xây màn reader tối thiểu ở R1B hay chuyển toàn bộ sang portal R2? Hiện chưa có UC/screen owner. Owner: product owner. Gate: tạo `uc-reader-self-service` + userflow/wireframe reader.
 - [ ] OQ-LMP-017 — Thủ thư quầy có quyền xem báo cáo vận hành (reports-flow) không? Quyền này lệch ma trận nguồn — hiện PROPOSAL, chỉ Quản trị viên chắc chắn. Owner: domain approver. Gate: RBAC reports + userflow reports-flow.
 - [ ] OQ-LMP-018 — Ai được approve commit import khi dry-run chưa pass; điều kiện và chứng cứ override là gì? Owner: data owner + Thủ thư trưởng/product owner. Gate: GATE-MIG + uc-admin-import.
