@@ -153,3 +153,10 @@
 | 2026-10-08 | /srs | @dattran26 | `docs/features/trend-reports/srs/trend-reports-flows.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
 | 2026-10-08 | /srs | @dattran26 | `docs/features/trend-reports/usecases/trend-reports-usecase-index.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
 | 2026-10-08 | /srs | @dattran26 | `docs/features/trend-reports/usecases/uc-trend-reports.md` | SRS Tầng 2 (use case/flows) tách từ feature gộp |
+| 2026-10-09 | /user-flow | @dattran26 | `docs/features/access-control/srs/access-control-userflow.md` | user flow access-control, Mobile 375, flow-approved |
+| 2026-10-09 | /user-flow | @dattran26 | `docs/features/account-admin/srs/account-admin-userflow.md` | user flow account-admin, Mobile 375, flow-approved |
+| 2026-10-09 | /user-flow | @dattran26 | `docs/features/catalog-admin/srs/catalog-admin-userflow.md` | user flow catalog-admin, Mobile 375, flow-approved |
+| 2026-10-09 | /user-flow | @dattran26 | `docs/features/copy-inventory/srs/copy-inventory-userflow.md` | user flow copy-inventory, Mobile 375, flow-approved |
+| 2026-10-09 | /user-flow | @dattran26 | `docs/features/data-import/srs/data-import-userflow.md` | user flow data-import, Mobile 375, flow-approved |
+| 2026-10-09 | /user-flow | @dattran26 | `docs/features/policy-config/srs/policy-config-userflow.md` | user flow policy-config, Mobile 375, flow-approved |
+| 2026-10-09 | /user-flow | @dattran26 | `docs/features/reader-onboarding/srs/reader-onboarding-userflow.md` | user flow reader-onboarding, Mobile 375, flow-approved |
