@@ -25,3 +25,4 @@
 | 2026-10-08 | /test-checklist | DatTran26 | `docs/features/library-management-platform/test/test-strategy.md` | draft core-functional strategy, Mobile 375 |
 | 2026-10-08 | /test-checklist | DatTran26 | `docs/features/library-management-platform/test/checklist/checklist-feature.md` | generated 97 items (12 categories) |
 | 2026-10-08 | /test-checklist | DatTran26 | `docs/features/library-management-platform/test/checklist/library-management-platform-checklist-index.md` | generated 97 items (12 categories) cho checklist-feature |
+| 2026-10-08 | manual | DatTran26 | `docs/_product/decision-register.md` | manual edit |
