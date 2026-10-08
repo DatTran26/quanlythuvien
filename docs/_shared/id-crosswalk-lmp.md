@@ -26,43 +26,43 @@ Cách đọc:
 | FR-LMP-001 |  | `catalog-admin` | `FR-catalog-admin-001` | Quản lý danh mục sách | R0 | P0 |  | `srs/library-management-platform-spec.md:75` | SRS (2026-10-08) |
 | FR-LMP-002 |  | `copy-inventory` | `FR-copy-inventory-001` | Quản lý bản sao sách | R0 | P0 |  | `srs/library-management-platform-spec.md:76` | SRS (2026-10-08) |
 | FR-LMP-003 | a | `catalog-admin` | `FR-catalog-admin-002` | Tra cứu khả dụng phía Thủ thư/Quản trị viên | R0 | P0 | DEC-SF-07 | `srs/library-management-platform-spec.md:77` | SRS (2026-10-08) |
-| FR-LMP-003 | b | `reader-self-service` | `FR-reader-self-service-001` | Tra cứu sách phía Người đọc (FR-R02) | R1A | P0 | DEC-SF-07 | `srs/library-management-platform-spec.md:77` |  |
+| FR-LMP-003 | b | `reader-self-service` | `FR-reader-self-service-001` | Tra cứu sách phía Người đọc (FR-R02) | R1A | P0 | DEC-SF-07 | `srs/library-management-platform-spec.md:77` | SRS (2026-10-08) |
 | FR-LMP-004 | a | `reader-onboarding` | `FR-reader-onboarding-001` | Cấp mới và kích hoạt tài khoản người đọc tại quầy | R0 | P0 | DEC-SF-03 | `srs/library-management-platform-spec.md:78` | SRS (2026-10-08) |
 | FR-LMP-004 | b | `account-admin` | `FR-account-admin-001` | Cập nhật, xóa mềm tài khoản người đọc (FR-L05) | R0 | P0 | DEC-SF-04 | `srs/library-management-platform-spec.md:78` | SRS (2026-10-08) |
 | FR-LMP-005 |  | `account-admin` | `FR-account-admin-002` | Thủ thư sửa/khóa tạm, mở lại người đọc (FR-S10) | R1B | P1 | DEC-SF-04 | `srs/library-management-platform-spec.md:79` | SRS (2026-10-08) |
 | FR-LMP-006 |  | `access-control` | `FR-access-control-001` | Đăng nhập và phân quyền | R0 | P0 |  | `srs/library-management-platform-spec.md:80` | SRS (2026-10-08) |
 | FR-LMP-007 |  | `access-control` | `FR-access-control-002` | Step-up và session reset | R0 | P0 |  | `srs/library-management-platform-spec.md:81` | SRS (2026-10-08) |
-| FR-LMP-008 |  | `checkout` | `FR-checkout-001` | Mượn nhiều bản sao nguyên tử | R1A | P0 |  | `srs/library-management-platform-spec.md:82` |  |
-| FR-LMP-009 |  | `checkout` | `FR-checkout-002` | Idempotency và concurrency mượn | R1A | P0 |  | `srs/library-management-platform-spec.md:83` |  |
-| FR-LMP-010 |  | `return-handling` | `FR-return-handling-001` | Trả sách | R1A | P0 |  | `srs/library-management-platform-spec.md:84` |  |
+| FR-LMP-008 |  | `checkout` | `FR-checkout-001` | Mượn nhiều bản sao nguyên tử | R1A | P0 |  | `srs/library-management-platform-spec.md:82` | SRS (2026-10-08) |
+| FR-LMP-009 |  | `checkout` | `FR-checkout-002` | Idempotency và concurrency mượn | R1A | P0 |  | `srs/library-management-platform-spec.md:83` | SRS (2026-10-08) |
+| FR-LMP-010 |  | `return-handling` | `FR-return-handling-001` | Trả sách | R1A | P0 |  | `srs/library-management-platform-spec.md:84` | SRS (2026-10-08) |
 | FR-LMP-011 |  | `renewal` | `FR-renewal-001` | Gia hạn tại quầy và gia hạn online | R1B | P1 | DEC-SF-02 | `srs/library-management-platform-spec.md:85` |  |
 | FR-LMP-012 |  | `reservation` | `FR-reservation-001` | Đặt trước và hàng đợi | R2 | P1 |  | `srs/library-management-platform-spec.md:86` |  |
 | FR-LMP-013 |  | `reservation` | `FR-reservation-002` | Hết hạn giữ chỗ | R2 | P1 |  | `srs/library-management-platform-spec.md:87` |  |
-| FR-LMP-014 |  | `overdue-fines` | `FR-overdue-fines-001` | Ghi nhận tiền phạt | R1A | P0 |  | `srs/library-management-platform-spec.md:88` |  |
-| FR-LMP-015 | a | `fine-collection-basic` | `FR-fine-collection-basic-001` | Thu tiền mặt tối thiểu, idempotent | R1A | P0 | DEC-P2-04 | `srs/library-management-platform-spec.md:89` |  |
+| FR-LMP-014 |  | `overdue-fines` | `FR-overdue-fines-001` | Ghi nhận tiền phạt | R1A | P0 |  | `srs/library-management-platform-spec.md:88` | SRS (2026-10-08) |
+| FR-LMP-015 | a | `fine-collection-basic` | `FR-fine-collection-basic-001` | Thu tiền mặt tối thiểu, idempotent | R1A | P0 | DEC-P2-04 | `srs/library-management-platform-spec.md:89` | SRS (2026-10-08) |
 | FR-LMP-015 | b | `fine-collection-adv` | `FR-fine-collection-adv-001` | Biên nhận đầy đủ | R1B | P1 | DEC-P2-04 | `srs/library-management-platform-spec.md:89` |  |
 | FR-LMP-016 |  | `fine-collection-adv` | `FR-fine-collection-adv-002` | Miễn/điều chỉnh/hoàn tiền | R1B | P1 |  | `srs/library-management-platform-spec.md:90` |  |
-| FR-LMP-017 |  | `damage-lifecycle` | `FR-damage-lifecycle-001` | Báo cáo hư hỏng | R1A | P0 |  | `srs/library-management-platform-spec.md:91` |  |
-| FR-LMP-018 | a | `lost-handling` | `FR-lost-handling-001` | Ghi nhận mất + nghĩa vụ bồi thường tối thiểu | R1A | P0 | DEC-SF-06 | `srs/library-management-platform-spec.md:92` |  |
-| FR-LMP-018 | b | `lost-handling` | `FR-lost-handling-002` | Tìm lại sau khi mất + đối soát nghĩa vụ | R1B | P1 | DEC-SF-06 | `srs/library-management-platform-spec.md:92` |  |
-| FR-LMP-019 | a | `notification-core` | `FR-notification-core-001` | Outbox bền + in-app/email sự kiện quan trọng | R1A | P0 | DEC-P2-01 | `srs/library-management-platform-spec.md:93` |  |
+| FR-LMP-017 |  | `damage-lifecycle` | `FR-damage-lifecycle-001` | Báo cáo hư hỏng | R1A | P0 |  | `srs/library-management-platform-spec.md:91` | SRS (2026-10-08) |
+| FR-LMP-018 | a | `lost-handling` | `FR-lost-handling-001` | Ghi nhận mất + nghĩa vụ bồi thường tối thiểu | R1A | P0 | DEC-SF-06 | `srs/library-management-platform-spec.md:92` | SRS (2026-10-08) |
+| FR-LMP-018 | b | `lost-handling` | `FR-lost-handling-002` | Tìm lại sau khi mất + đối soát nghĩa vụ | R1B | P1 | DEC-SF-06 | `srs/library-management-platform-spec.md:92` | SRS (2026-10-08) |
+| FR-LMP-019 | a | `notification-core` | `FR-notification-core-001` | Outbox bền + in-app/email sự kiện quan trọng | R1A | P0 | DEC-P2-01 | `srs/library-management-platform-spec.md:93` | SRS (2026-10-08) |
 | FR-LMP-019 | b | `notification-audit-ui` | `FR-notification-audit-ui-001` | Trung tâm thông báo (FR-C04) | R1B | P1 | DEC-SF-09 | `srs/library-management-platform-spec.md:93` |  |
 | FR-LMP-020 | a | `ops-foundation` | `FR-ops-foundation-001` | Ghi audit cùng transaction | R0 | P0 | DEC-P2-06 | `srs/library-management-platform-spec.md:94` | SRS (2026-10-08) |
 | FR-LMP-020 | b | `notification-audit-ui` | `FR-notification-audit-ui-002` | Audit viewer (FR-L10) | R1B | P1 | DEC-P2-06 | `srs/library-management-platform-spec.md:94` |  |
 | FR-LMP-021 |  | `policy-config` | `FR-policy-config-001` | Quản trị cấu hình nghiệp vụ | R0 | P0 |  | `srs/library-management-platform-spec.md:95` | SRS (2026-10-08) |
 | FR-LMP-022 |  | `data-import` | `FR-data-import-001` | Import và đối soát | R0 | P0 |  | `srs/library-management-platform-spec.md:96` | SRS (2026-10-08) |
-| FR-LMP-023 | a | `ops-reports` | `FR-ops-reports-001` | Báo cáo vận hành RP-01/02/04 | R1A | P0 (PRD) / P1 (SRS cũ) | Cần chốt ở phase 3 | `srs/library-management-platform-spec.md:97` |  |
+| FR-LMP-023 | a | `ops-reports` | `FR-ops-reports-001` | Báo cáo vận hành RP-01/02/04 | R1A | P0 (PRD) / P1 (SRS cũ) | Cần chốt ở phase 3 | `srs/library-management-platform-spec.md:97` | SRS (2026-10-08) |
 | FR-LMP-023 | b | `trend-reports` | `FR-trend-reports-001` | Báo cáo xu hướng RP-03/05/06/07 | R2 | P1 |  | `srs/library-management-platform-spec.md:97` |  |
-| FR-LMP-024 | a | `reader-self-service` | `FR-reader-self-service-002` | Xem khoản đang mượn (FR-R04) | R1A | P0 | DEC-SF-02 | `srs/library-management-platform-spec.md:98` |  |
-| FR-LMP-024 | b | `reader-self-service` | `FR-reader-self-service-003` | Xem công nợ (FR-R09) | R1B | P1 | DEC-SF-02 | `srs/library-management-platform-spec.md:98` |  |
+| FR-LMP-024 | a | `reader-self-service` | `FR-reader-self-service-002` | Xem khoản đang mượn (FR-R04) | R1A | P0 | DEC-SF-02 | `srs/library-management-platform-spec.md:98` | SRS (2026-10-08) |
+| FR-LMP-024 | b | `reader-self-service` | `FR-reader-self-service-003` | Xem công nợ (FR-R09) | R1B | P1 | DEC-SF-02 | `srs/library-management-platform-spec.md:98` | SRS (2026-10-08) |
 | FR-LMP-024 | c | `reservation` | `FR-reservation-003` | Đặt/hủy đặt trước trên cổng Người đọc (FR-R07/R08) | R2 | P1 | DEC-SF-02 | `srs/library-management-platform-spec.md:98` |  |
 | FR-LMP-024 | d | `expansion-candidates` | `FR-expansion-candidates-001` | Thanh toán online (OQ-08 nguồn) | R3 | P2 | DEC-SF-02 | `srs/library-management-platform-spec.md:98` |  |
-| FR-LMP-025 |  | `damage-lifecycle` | `FR-damage-lifecycle-002` | Quản lý ảnh bằng chứng | R1A | P1 |  | `srs/library-management-platform-spec.md:99` |  |
+| FR-LMP-025 |  | `damage-lifecycle` | `FR-damage-lifecycle-002` | Quản lý ảnh bằng chứng | R1A | P1 |  | `srs/library-management-platform-spec.md:99` | SRS (2026-10-08) |
 | FR-LMP-026 |  | `copy-inventory` | `FR-copy-inventory-002` | QR/barcode locator | R0 | P0 |  | `srs/library-management-platform-spec.md:100` | SRS (2026-10-08) |
 | FR-LMP-027 |  | `notification-audit-ui` | `FR-notification-audit-ui-003` | Truy vết lịch sử nghiệp vụ | R1B | P1 |  | `srs/library-management-platform-spec.md:101` |  |
 | FR-LMP-028 |  | `expansion-candidates` | `FR-expansion-candidates-002` | Phân tích nâng cao | R3 | P2 |  | `srs/library-management-platform-spec.md:102` |  |
-| — (mới) |  | `reader-self-service` | `FR-reader-self-service-004` | Thẻ thư viện QR (FR-R03) | R1A | P0 | DEC-SF-02 — SRS cũ thiếu | Nguồn `he_thong_quan_ly_thu_vien.md` |  |
-| — (mới) |  | `reader-self-service` | `FR-reader-self-service-005` | Lịch sử mượn (FR-R05) | R1A | P0 | DEC-SF-02 — SRS cũ thiếu | Nguồn `he_thong_quan_ly_thu_vien.md` |  |
+| — (mới) |  | `reader-self-service` | `FR-reader-self-service-004` | Thẻ thư viện QR (FR-R03) | R1A | P0 | DEC-SF-02 — SRS cũ thiếu | Nguồn `he_thong_quan_ly_thu_vien.md` | SRS (2026-10-08) |
+| — (mới) |  | `reader-self-service` | `FR-reader-self-service-005` | Lịch sử mượn (FR-R05) | R1A | P0 | DEC-SF-02 — SRS cũ thiếu | Nguồn `he_thong_quan_ly_thu_vien.md` | SRS (2026-10-08) |
 | — (mới) |  | `account-admin` | `FR-account-admin-003` | Quản lý tài khoản Thủ thư (FR-L06) | R0 | P0 | DEC-SF-04 — SRS cũ thiếu | Nguồn `he_thong_quan_ly_thu_vien.md` | SRS (2026-10-08) |
 | — (mới) |  | `ops-foundation` | `FR-ops-foundation-002` | Backup hằng ngày giữ 30 bản + diễn tập restore (NFR-07) | R0 | P0 | DEC-SF-05 — SRS cũ thiếu | Nguồn `he_thong_quan_ly_thu_vien.md` | SRS (2026-10-08) |
 | — (mới) |  | `access-control` | `FR-access-control-003` | Quên và đặt lại mật khẩu | R0 | P0 | SRS Tầng 1 thêm — nguồn SRC-FR-C02 | Nguồn tài liệu hệ thống | SRS (2026-10-08) |
@@ -70,6 +70,8 @@ Cách đọc:
 | — (mới) |  | `access-control` | `FR-access-control-005` | Khóa tạm khi đăng nhập sai | R0 | P0 | SRS Tầng 1 thêm — uc-access-control ext 2b | Nguồn tài liệu hệ thống | SRS (2026-10-08) |
 | — (mới) |  | `catalog-admin` | `FR-catalog-admin-003` | Quản lý danh mục | R0 | P0 | SRS Tầng 1 thêm — nguồn SRC-FR-L04 | Nguồn tài liệu hệ thống | SRS (2026-10-08) |
 | — (mới) |  | `copy-inventory` | `FR-copy-inventory-003` | Sinh QR hàng loạt và in nhãn | R0 | P0 | SRS Tầng 1 thêm — nguồn SRC-FR-L03 | Nguồn tài liệu hệ thống | SRS (2026-10-08) |
+| — (mới) |  | `checkout` | `FR-checkout-003` | In biên nhận mượn | R1A | P0 | SRS Tầng 1 thêm — brainstorm checkout OQ-2 | Brainstorm checkout | SRS (2026-10-08) |
+| — (mới) |  | `ops-reports` | `FR-ops-reports-002` | Danh sách quá hạn cho Thủ thư | R1B | P1 | SRS Tầng 1 thêm — nguồn SRC-FR-S09 | Nguồn tài liệu hệ thống | SRS (2026-10-08) |
 
 ## 2. Non-Functional Requirement
 
@@ -81,7 +83,7 @@ Cách đọc:
 | NFR-LMP-004 | `core` | `NFR-core-003` |  | `srs/library-management-platform-spec.md:111` || phase 2 |
 | NFR-LMP-005 | `core` | `NFR-core-004` |  | `srs/library-management-platform-spec.md:112` || phase 2 |
 | NFR-LMP-006 | `core` | `NFR-core-005` |  | `srs/library-management-platform-spec.md:113` || phase 2 |
-| NFR-LMP-007 | `notification-core` | `NFR-notification-core-001` |  | `srs/library-management-platform-spec.md:114` |  |
+| NFR-LMP-007 | `notification-core` | `NFR-notification-core-001` |  | `srs/library-management-platform-spec.md:114` | SRS (2026-10-08) |
 | NFR-LMP-008 | `core` | `NFR-core-006` |  | `srs/library-management-platform-spec.md:115` || phase 2 |
 | NFR-LMP-009 | `core` | `NFR-core-007` |  | `srs/library-management-platform-spec.md:116` || phase 2 |
 | NFR-LMP-010 | `core` | `NFR-core-008` |  | `srs/library-management-platform-spec.md:117` || phase 2 |
@@ -92,18 +94,18 @@ Cách đọc:
 
 | Mã LMP | Đích | Mã mới | Ghi chú | Nguồn | Đã chuyển |
 |---|---|---|---|---|---|
-| BR-LMP-001 | `checkout` | `BR-checkout-001` |  | `srs/library-management-platform-spec.md:125` |  |
-| BR-LMP-002 | `checkout` | `BR-checkout-002` |  | `srs/library-management-platform-spec.md:126` |  |
+| BR-LMP-001 | `checkout` | `BR-checkout-001` |  | `srs/library-management-platform-spec.md:125` | SRS (2026-10-08) |
+| BR-LMP-002 | `checkout` | `BR-checkout-002` |  | `srs/library-management-platform-spec.md:126` | SRS (2026-10-08) |
 | BR-LMP-003 | `core` | `BR-core-001` |  | `srs/library-management-platform-spec.md:127` || phase 2 |
 | BR-LMP-004 | `renewal` | `BR-renewal-001` |  | `srs/library-management-platform-spec.md:128` |  |
 | BR-LMP-005 | `reservation` | `BR-reservation-001` |  | `srs/library-management-platform-spec.md:129` |  |
 | BR-LMP-006 | `reservation` | `BR-reservation-002` |  | `srs/library-management-platform-spec.md:130` |  |
 | BR-LMP-007 | `core` | `BR-core-002` |  | `srs/library-management-platform-spec.md:131` || phase 2 |
-| BR-LMP-008 | `fine-collection-basic` | `BR-fine-collection-basic-001` |  | `srs/library-management-platform-spec.md:132` |  |
-| BR-LMP-009 | `damage-lifecycle` | `BR-damage-lifecycle-001` |  | `srs/library-management-platform-spec.md:133` |  |
-| BR-LMP-010 | `lost-handling` | `BR-lost-handling-001` |  | `srs/library-management-platform-spec.md:134` |  |
+| BR-LMP-008 | `fine-collection-basic` | `BR-fine-collection-basic-001` |  | `srs/library-management-platform-spec.md:132` | SRS (2026-10-08) |
+| BR-LMP-009 | `damage-lifecycle` | `BR-damage-lifecycle-001` |  | `srs/library-management-platform-spec.md:133` | SRS (2026-10-08) |
+| BR-LMP-010 | `lost-handling` | `BR-lost-handling-001` |  | `srs/library-management-platform-spec.md:134` | SRS (2026-10-08) |
 | BR-LMP-011 | `copy-inventory` | `BR-copy-inventory-001` |  | `srs/library-management-platform-spec.md:135` | SRS (2026-10-08) |
-| BR-LMP-012 | `damage-lifecycle` | `BR-damage-lifecycle-002` |  | `srs/library-management-platform-spec.md:136` |  |
+| BR-LMP-012 | `damage-lifecycle` | `BR-damage-lifecycle-002` |  | `srs/library-management-platform-spec.md:136` | SRS (2026-10-08) |
 | BR-LMP-013 | `core` | `BR-core-003` |  | `srs/library-management-platform-spec.md:137` || phase 2 |
 | BR-LMP-014 | `data-import` | `BR-data-import-001` |  | `srs/library-management-platform-spec.md:138` | SRS (2026-10-08) |
 | BR-LMP-015 | `core` | `BR-core-004` |  | `srs/library-management-platform-spec.md:139` || phase 2 |
@@ -117,32 +119,32 @@ Cách đọc:
 | E-LMP-001 | `core` | `E-core-001` |  | `srs/library-management-platform-spec.md:147` || phase 2 |
 | E-LMP-002 | `core` | `E-core-002` |  | `srs/library-management-platform-spec.md:148` || phase 2 |
 | E-LMP-003 | `core` | `E-core-003` |  | `srs/library-management-platform-spec.md:149` || phase 2 |
-| E-LMP-004 | `checkout` | `E-checkout-001` |  | `srs/library-management-platform-spec.md:150` |  |
+| E-LMP-004 | `checkout` | `E-checkout-001` |  | `srs/library-management-platform-spec.md:150` | SRS (2026-10-08) |
 | E-LMP-005 | `core` | `E-core-004` |  | `srs/library-management-platform-spec.md:151` || phase 2 |
 | E-LMP-006 | `core` | `E-core-005` |  | `srs/library-management-platform-spec.md:152` || phase 2 |
 | E-LMP-007 | `core` | `E-core-006` |  | `srs/library-management-platform-spec.md:153` || phase 2 |
 | E-LMP-008 | `reservation` | `E-reservation-001` |  | `srs/library-management-platform-spec.md:154` |  |
-| E-LMP-009 | `fine-collection-basic` | `E-fine-collection-basic-001` |  | `srs/library-management-platform-spec.md:155` |  |
-| E-LMP-010 | `fine-collection-basic` | `E-fine-collection-basic-002` |  | `srs/library-management-platform-spec.md:156` |  |
-| E-LMP-011 | `damage-lifecycle` | `E-damage-lifecycle-001` |  | `srs/library-management-platform-spec.md:157` |  |
-| E-LMP-012 | `notification-core` | `E-notification-core-001` |  | `srs/library-management-platform-spec.md:158` |  |
+| E-LMP-009 | `fine-collection-basic` | `E-fine-collection-basic-001` |  | `srs/library-management-platform-spec.md:155` | SRS (2026-10-08) |
+| E-LMP-010 | `fine-collection-basic` | `E-fine-collection-basic-002` |  | `srs/library-management-platform-spec.md:156` | SRS (2026-10-08) |
+| E-LMP-011 | `damage-lifecycle` | `E-damage-lifecycle-001` |  | `srs/library-management-platform-spec.md:157` | SRS (2026-10-08) |
+| E-LMP-012 | `notification-core` | `E-notification-core-001` |  | `srs/library-management-platform-spec.md:158` | SRS (2026-10-08) |
 | E-LMP-013 | `core` | `E-core-007` |  | `srs/library-management-platform-spec.md:159` || phase 2 |
 | E-LMP-014 | `data-import` | `E-data-import-001` |  | `srs/library-management-platform-spec.md:160` | SRS (2026-10-08) |
 | E-LMP-015 | `core` | `E-core-008` |  | `srs/library-management-platform-spec.md:161` || phase 2 |
 | E-LMP-016 | `core` | `E-core-009` |  | `srs/library-management-platform-spec.md:162` || phase 2 |
 | E-LMP-017 | `access-control` | `E-access-control-001` |  | `srs/library-management-platform-spec.md:163` | SRS (2026-10-08) |
-| E-LMP-018 | `notification-core` | `E-notification-core-002` |  | `srs/library-management-platform-spec.md:164` |  |
+| E-LMP-018 | `notification-core` | `E-notification-core-002` |  | `srs/library-management-platform-spec.md:164` | SRS (2026-10-08) |
 
 ## 5. Success Criteria
 
 | Mã LMP | Phần | Đích | Mã mới | Nội dung phần | Nguồn | Đã chuyển |
 |---|---|---|---|---|---|---|
-| SC-LMP-01 | a | `checkout` | `SC-checkout-01` | Phần mượn | `srs/library-management-platform-spec.md:170` |  |
-| SC-LMP-01 | b | `return-handling` | `SC-return-handling-01` | Phần trả | `srs/library-management-platform-spec.md:170` |  |
-| SC-LMP-02 |  | `checkout` | `SC-checkout-02` |  | `srs/library-management-platform-spec.md:171` |  |
+| SC-LMP-01 | a | `checkout` | `SC-checkout-01` | Phần mượn | `srs/library-management-platform-spec.md:170` | SRS (2026-10-08) |
+| SC-LMP-01 | b | `return-handling` | `SC-return-handling-01` | Phần trả | `srs/library-management-platform-spec.md:170` | SRS (2026-10-08) |
+| SC-LMP-02 |  | `checkout` | `SC-checkout-02` |  | `srs/library-management-platform-spec.md:171` | SRS (2026-10-08) |
 | SC-LMP-03 |  | `reservation` | `SC-reservation-01` |  | `srs/library-management-platform-spec.md:172` |  |
-| SC-LMP-04 |  | `overdue-fines` | `SC-overdue-fines-01` |  | `srs/library-management-platform-spec.md:173` |  |
-| SC-LMP-05 |  | `notification-core` | `SC-notification-core-01` |  | `srs/library-management-platform-spec.md:174` |  |
+| SC-LMP-04 |  | `overdue-fines` | `SC-overdue-fines-01` |  | `srs/library-management-platform-spec.md:173` | SRS (2026-10-08) |
+| SC-LMP-05 |  | `notification-core` | `SC-notification-core-01` |  | `srs/library-management-platform-spec.md:174` | SRS (2026-10-08) |
 | SC-LMP-06 |  | `ops-foundation` | `SC-ops-foundation-01` |  | `srs/library-management-platform-spec.md:175` | SRS (2026-10-08) |
 | SC-LMP-07 |  | `data-import` | `SC-data-import-01` |  | `srs/library-management-platform-spec.md:176` | SRS (2026-10-08) |
 
@@ -159,16 +161,16 @@ OQ trong spec là canonical. OQ trùng ở userflow gộp về cùng mã mới. 
 | OQ-LMP-005 | `fine-collection-adv` | `OQ-fine-collection-adv-001` |  | `srs/library-management-platform-spec.md:249` |  |
 | OQ-LMP-006 | `core` | `OQ-core-003` | Tương đương OQ-BS-1 | `srs/library-management-platform-spec.md:250` || phase 2 |
 | OQ-LMP-007 | `access-control` | `OQ-access-control-001` |  | `srs/library-management-platform-spec.md:251` | SRS (2026-10-08) |
-| OQ-LMP-008 | `notification-core` | `OQ-notification-core-001` |  | `srs/library-management-platform-spec.md:252` |  |
+| OQ-LMP-008 | `notification-core` | `OQ-notification-core-001` |  | `srs/library-management-platform-spec.md:252` | SRS (2026-10-08) |
 | OQ-LMP-009 | `fine-collection-adv` | `OQ-fine-collection-adv-002` |  | `srs/library-management-platform-spec.md:253` |  |
 | OQ-LMP-010 | `policy-config` | `OQ-policy-config-001` |  | `srs/library-management-platform-spec.md:254` | SRS (2026-10-08) |
 | OQ-LMP-011 | `core` | `OQ-core-004` |  | `srs/library-management-platform-spec.md:255` || phase 2 |
 | OQ-LMP-012 | `core` | `OQ-core-005` |  | `srs/library-management-platform-spec.md:256` || phase 2 |
-| OQ-LMP-013 | `damage-lifecycle` | `OQ-damage-lifecycle-001` |  | `srs/library-management-platform-spec.md:257` |  |
+| OQ-LMP-013 | `damage-lifecycle` | `OQ-damage-lifecycle-001` |  | `srs/library-management-platform-spec.md:257` | SRS (2026-10-08) |
 | OQ-LMP-014 | `account-admin` | `OQ-account-admin-001` |  | `srs/library-management-platform-spec.md:258` | SRS (2026-10-08) |
-| OQ-LMP-015 | `reader-self-service` | `OQ-reader-self-service-001` | Trùng userflow OQ-a1 — gộp | `srs/library-management-platform-spec.md:259` |  |
-| OQ-LMP-016 | `reader-self-service` | `OQ-reader-self-service-002` | Trùng userflow OQ-a2 — gộp | `srs/library-management-platform-spec.md:260` |  |
-| OQ-LMP-017 | `ops-reports` | `OQ-ops-reports-001` | Trùng userflow OQ-a3 — gộp | `srs/library-management-platform-spec.md:261` |  |
+| OQ-LMP-015 | `reader-self-service` | `OQ-reader-self-service-001` | Trùng userflow OQ-a1 — gộp | `srs/library-management-platform-spec.md:259` | SRS (2026-10-08) |
+| OQ-LMP-016 | `reader-self-service` | `OQ-reader-self-service-002` | Trùng userflow OQ-a2 — gộp | `srs/library-management-platform-spec.md:260` | SRS (2026-10-08) |
+| OQ-LMP-017 | `ops-reports` | `OQ-ops-reports-001` | Trùng userflow OQ-a3 — gộp | `srs/library-management-platform-spec.md:261` | SRS (2026-10-08) |
 | OQ-LMP-018 | `data-import` | `OQ-data-import-002` | Trùng userflow OQ-a4 — gộp | `srs/library-management-platform-spec.md:262` | SRS (2026-10-08) |
 
 ## 7. Use case
@@ -197,8 +199,8 @@ Slug use case mới là đề xuất; chốt khi chạy `/srs` Tầng 2 của t�
 | `uc-notification-audit` | `notification-audit-ui` | `uc-notification-audit-view` | Trung tâm thông báo, audit viewer, lịch sử |  |
 | `uc-admin-import` | `policy-config` | `uc-policy-config` | Cấu hình |  |
 | `uc-admin-import` | `data-import` | `uc-data-import` | Import, dry-run, commit, đối soát |  |
-| — (mới) | `reader-self-service` | `uc-reader-self-service` | Viết mới (DEC-SF-02) |  |
-| — (mới) | `ops-reports` | `uc-ops-reports` | Viết mới |  |
+| — (mới) | `reader-self-service` | `uc-reader-self-service` | Viết mới (DEC-SF-02) | SRS (2026-10-08) |
+| — (mới) | `ops-reports` | `uc-ops-reports` | Viết mới | SRS (2026-10-08) |
 | — (mới) | `trend-reports` | `uc-trend-reports` | Viết mới |  |
 
 ## 8. Flow, màn hình

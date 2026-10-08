@@ -69,3 +69,13 @@
 | 2026-10-08 | /srs | @dattran26 | `docs/features/policy-config/srs/policy-config-spec.md` | SRS Tầng 1 policy-config: 1 FR, tách từ spec gộp |
 | 2026-10-08 | /srs | @dattran26 | `docs/features/reader-onboarding/srs/reader-onboarding-spec.md` | SRS Tầng 1 reader-onboarding: 1 FR, tách từ spec gộp |
 | 2026-10-08 | /srs | @dattran26 | `docs/_shared/id-crosswalk-lmp.md` | thêm 5 FR mới lô R0, đánh dấu đã chuyển SRS lô R0 |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/checkout/srs/checkout-spec.md` | SRS Tầng 1 checkout: 3 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/damage-lifecycle/srs/damage-lifecycle-spec.md` | SRS Tầng 1 damage-lifecycle: 2 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/fine-collection-basic/srs/fine-collection-basic-spec.md` | SRS Tầng 1 fine-collection-basic: 1 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/lost-handling/srs/lost-handling-spec.md` | SRS Tầng 1 lost-handling: 2 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/notification-core/srs/notification-core-spec.md` | SRS Tầng 1 notification-core: 1 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/ops-reports/srs/ops-reports-spec.md` | SRS Tầng 1 ops-reports: 2 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/overdue-fines/srs/overdue-fines-spec.md` | SRS Tầng 1 overdue-fines: 1 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/reader-self-service/srs/reader-self-service-spec.md` | SRS Tầng 1 reader-self-service: 5 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/return-handling/srs/return-handling-spec.md` | SRS Tầng 1 return-handling: 1 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/_shared/id-crosswalk-lmp.md` | thêm 2 FR mới lô R1A, đánh dấu đã chuyển SRS lô R1A |
