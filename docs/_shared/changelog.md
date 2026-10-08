@@ -160,3 +160,24 @@
 | 2026-10-09 | /user-flow | @dattran26 | `docs/features/data-import/srs/data-import-userflow.md` | user flow data-import, Mobile 375, flow-approved |
 | 2026-10-09 | /user-flow | @dattran26 | `docs/features/policy-config/srs/policy-config-userflow.md` | user flow policy-config, Mobile 375, flow-approved |
 | 2026-10-09 | /user-flow | @dattran26 | `docs/features/reader-onboarding/srs/reader-onboarding-userflow.md` | user flow reader-onboarding, Mobile 375, flow-approved |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/access-control/html-wireframe/access-control-wireframe.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/access-control/html-wireframe/access-control-wireframe-html-index.md` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/access-control/html-wireframe/auth-flow.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/reader-onboarding/html-wireframe/reader-onboarding-flow.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/reader-onboarding/html-wireframe/reader-onboarding-wireframe.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/reader-onboarding/html-wireframe/reader-onboarding-wireframe-html-index.md` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/account-admin/html-wireframe/account-admin-flow.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/account-admin/html-wireframe/account-admin-wireframe.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/account-admin/html-wireframe/account-admin-wireframe-html-index.md` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/catalog-admin/html-wireframe/catalog-admin-flow.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/catalog-admin/html-wireframe/catalog-admin-wireframe.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/catalog-admin/html-wireframe/catalog-admin-wireframe-html-index.md` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/copy-inventory/html-wireframe/copy-inventory-flow.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/copy-inventory/html-wireframe/copy-inventory-wireframe.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/copy-inventory/html-wireframe/copy-inventory-wireframe-html-index.md` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/data-import/html-wireframe/data-import-flow.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/data-import/html-wireframe/data-import-wireframe.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/data-import/html-wireframe/data-import-wireframe-html-index.md` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/policy-config/html-wireframe/policy-config-flow.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/policy-config/html-wireframe/policy-config-wireframe.html` | Wireframe HTML lô R0 tách theo feature |
+| 2026-10-09 | /wireframe-html | @dattran26 | `docs/features/policy-config/html-wireframe/policy-config-wireframe-html-index.md` | Wireframe HTML lô R0 tách theo feature |

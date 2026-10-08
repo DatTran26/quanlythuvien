@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>catalog-admin — Đầu sách và danh mục | Wireframe</title>
+  <style>
+    /* RESET */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f0f0;
+      color: #000;
+      padding: 32px 24px;
+    }
+    .wf-page { max-width: 1400px; margin: 0 auto; }
+
+    /* BREADCRUMB về cửa-vào TOC — chỉ hiện khi mở file flow TRỰC TIẾP, ẩn khi trong iframe của {feature}-wireframe.html */
+    .wf-breadcrumb { max-width: 1400px; margin: 0 auto 16px; }
+    .wf-breadcrumb a { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #000; text-decoration: none; border: 1px solid #000; border-radius: 4px; padding: 6px 12px; background: #fff; }
+    .wf-breadcrumb a:hover { background: #f0f0f0; }
+    html.in-iframe .wf-breadcrumb { display: none; }
+
+    /* HEADER */
+    .wf-header { margin-bottom: 28px; border-bottom: 2px solid #000; padding-bottom: 14px; background: #fff; padding: 16px 20px; }
+    .wf-feature-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; }
+    .wf-flow-title { font-size: 22px; font-weight: 700; margin-top: 4px; }
+    .wf-flow-meta { font-size: 12px; color: #888; margin-top: 6px; }
+    .wf-flow-desc { font-size: 13px; color: #000; margin-top: 8px; line-height: 1.5; }
+
+    /* FLOW ROW — screens xếp ngang, TỰ WRAP theo bề rộng device (KHÔNG ép 3/row) */
+    .wf-rows { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px 16px; }
+    .wf-row-divider { display: none; } /* không còn chia row cứng — wrap tự nhiên */
+
+    /* SCREEN WRAPPER — bề rộng = device thật, KHÔNG phải 33% trừu tượng.
+       data-device trên .wf-page quyết định: mobile 375 / tablet 768 / desktop 1440.
+       Frame giữ tỉ lệ thật của thiết bị → không còn "size sai / trông giả". */
+    .wf-screen { flex: 0 0 auto; }
+    .wf-page[data-device="mobile"]  .wf-screen { width: 375px; }
+    .wf-page[data-device="tablet"]  .wf-screen { width: 768px; }
+    .wf-page[data-device="desktop"] .wf-screen { width: 1024px; max-width: 100%; }
+    .wf-page:not([data-device]) .wf-screen { width: 375px; } /* fallback mobile-first */
+    .wf-device-tag { display: inline-block; font-size: 10px; color: #000; border: 1px solid #ccc; border-radius: 3px; padding: 1px 6px; margin-bottom: 6px; }
+    .wf-step-badge {
+      font-size: 10px; font-weight: 700; color: #fff;
+      background: #000; border-radius: 50%;
+      width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 6px;
+    }
+    .wf-screen-label { text-align: center; font-size: 11px; color: #000; margin-top: 6px; }
+    .wf-shared-badge { font-size: 9px; color: #888; border: 1px solid #ccc; border-radius: 3px; padding: 0 4px; margin-left: 4px; }
+    .wf-arrow { display: flex; align-items: center; padding-top: 48px; font-size: 22px; color: #000; flex-shrink: 0; }
+
+    /* SCREEN FRAME (device chrome) */
+    .wf-screen-frame { border: 2px solid #000; border-radius: 8px; overflow: hidden; background: #fff; }
+    .wf-screen-bar { background: #f0f0f0; border-bottom: 1px solid #000; padding: 6px 10px; display: flex; align-items: center; gap: 5px; }
+    .wf-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid #888; background: #fff; flex-shrink: 0; }
+    .wf-bar-title { font-size: 11px; font-weight: 600; flex: 1; text-align: center; }
+    .wf-screen-content { padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+    /* FORM CONTAINER — form/auth/dialog KHÔNG trải rộng hết khung desktop.
+       Bọc nội dung form trong .wf-form (box căn giữa, hẹp) — input/nút full-width TRONG box này,
+       không phải full khung. Trên mobile 375 thì .wf-form ~= full width tự nhiên. */
+    .wf-form { width: 100%; max-width: 380px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .wf-form.card { border: 1px solid #ccc; border-radius: 8px; padding: 20px; background: #fff; } /* optional: viền box rõ */
+
+    /* APP BRAND */
+    .wf-app-brand { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: #000; padding-bottom: 4px; border-bottom: 1px solid #f0f0f0; margin-bottom: 4px; }
+    .wf-screen-title { font-size: 15px; font-weight: 700; text-align: center; margin-bottom: 4px; }
+
+    /* FORM ELEMENTS */
+    .field { display: flex; flex-direction: column; gap: 3px; }
+    .field label { font-size: 11px; font-weight: 600; }
+    .field input[type=text], .field input[type=email], .field input[type=password], .field select, .field textarea {
+      border: 1px solid #000; border-radius: 3px; padding: 7px 9px;
+      font-size: 12px; width: 100%; background: #fff; color: #000;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: #888; }
+    .input-pw { position: relative; }
+    .input-pw input { padding-right: 28px; width: 100%; border: 1px solid #000; border-radius: 3px; padding: 7px 9px; font-size: 12px; }
+    .input-pw .eye { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 13px; cursor: pointer; color: #000; }
+
+    /* CHECKBOX */
+    label.checkbox { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; }
+    label.checkbox input { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* BUTTONS */
+    .btn-primary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #000; color: #fff;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-secondary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-google {
+      display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .g-icon { font-size: 14px; font-weight: 900; font-style: italic; }
+
+    /* LINK */
+    .wf-link { font-size: 12px; color: #000; text-decoration: underline; cursor: pointer; }
+    .links-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; }
+
+    /* BANNERS / INFO */
+    .banner { font-size: 11px; padding: 8px 10px; border: 1px solid #000; border-radius: 4px; display: flex; gap: 6px; align-items: flex-start; line-height: 1.4; }
+    .banner-info { background: #f0f0f0; }
+    .banner-warn { background: #f0f0f0; }
+
+    /* LABELS / HINTS */
+    .info-label { font-size: 12px; color: #000; line-height: 1.5; text-align: center; }
+    .hint-text { font-size: 11px; color: #888; font-style: italic; }
+    .state-hint { font-size: 10px; color: #888; font-style: italic; margin-top: 2px; }
+
+    /* PASSWORD CHECKLIST */
+    .pw-check { display: flex; gap: 8px; flex-wrap: wrap; font-size: 10px; }
+    .pw-check .ok { color: #000; }
+    .pw-check .ok::before { content: "✓ "; }
+    .pw-check .fail { color: #888; }
+    .pw-check .fail::before { content: "✗ "; }
+
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #888; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #ccc; }
+
+    /* MODAL BOX */
+    .modal-box { border: 2px solid #000; border-radius: 6px; padding: 12px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+    .modal-title { font-size: 12px; font-weight: 700; border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+    .modal-desc { font-size: 11px; color: #000; line-height: 1.5; }
+    .modal-actions { display: flex; gap: 8px; margin-top: 4px; }
+    .modal-actions .btn-secondary, .modal-actions .btn-primary { flex: 1; font-size: 11px; padding: 7px 8px; }
+
+    /* ICON PLACEHOLDER */
+    .icon-lg { text-align: center; font-size: 28px; margin-bottom: 4px; }
+
+    /* BACK NAV */
+    .back-nav { font-size: 12px; color: #000; display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 4px; }
+
+    /* CARD */
+    .wf-card { border: 1px solid #ccc; border-radius: 4px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; }
+    .wf-card-body { flex: 1; }
+    .wf-card-title { font-size: 12px; font-weight: 700; }
+    .wf-card-sub { font-size: 11px; color: #000; }
+    .wf-card-action { flex-shrink: 0; }
+
+    /* CAPTCHA placeholder */
+    .captcha-box { border: 1px dashed #888; border-radius: 4px; padding: 8px; text-align: center; font-size: 10px; color: #888; background: #f0f0f0; }
+
+    /* FOOTER */
+    .wf-footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid #ccc; font-size: 10px; color: #888; display: flex; justify-content: space-between; }
+
+    /* SCREEN DESCRIPTION TABLE (Phase F.5) */
+    .wf-desc-section { margin-top: 32px; }
+    .wf-desc-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #000; }
+    .wf-desc-table { width: 100%; border-collapse: collapse; background: #fff; font-size: 12px; }
+    .wf-desc-table th, .wf-desc-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; }
+    .wf-desc-table th { background: #f0f0f0; font-weight: 700; font-size: 11px; text-transform: uppercase; }
+    .wf-desc-table td:first-child, .wf-desc-table th:first-child { width: 36px; text-align: center; }
+    .wf-desc-table td:nth-child(2) { width: 150px; }  /* Items */
+    .wf-desc-table td:nth-child(3) { width: 110px; }  /* Control type */
+    .wf-desc-table td:nth-child(4) { width: 90px; }   /* Data type */
+    /* col 5 (Description) = phần còn lại */
+    .wf-desc-screen-header td { background: #000; color: #fff; font-weight: 700; font-size: 12px; }
+  </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.documentElement.classList.add('in-iframe');</script>
+<div class="wf-breadcrumb"><a href="catalog-admin-wireframe.html">← Mục lục wireframe (catalog-admin)</a></div>
+<div class="wf-page" data-device="mobile">
+
+  <div class="wf-header">
+    <div class="wf-feature-label">Feature: catalog-admin / Wireframe</div>
+    <div class="wf-flow-title">Đầu sách và danh mục</div>
+    <div class="wf-flow-meta">4 màn hình · Device: mobile · Cập nhật: 2026-10-09 · Nguồn: srs/catalog-admin-userflow.md + srs/catalog-admin-spec.md</div>
+    <div class="wf-flow-desc">Quản trị viên và Thủ thư tra cứu đầu sách; Quản trị viên tạo, sửa, vô hiệu đầu sách và quản lý danh mục thể loại, tác giả, nhà xuất bản, vị trí kệ.</div>
+  </div>
+
+  <div class="wf-rows">
+    <div class="wf-screen" id="s1">
+      <div class="wf-step-badge">1</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Tra cứu danh mục [1]</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div>
+          <div class="wf-screen-title">Tra cứu danh mục <span class="wf-shared-badge">R0/R1A</span></div>
+          <div class="field">
+            <label for="s1-query">Tiêu đề, tác giả hoặc ISBN</label>
+            <input id="s1-query" type="text" placeholder="Nhập tiêu đề, tác giả hoặc ISBN">
+          </div>
+          <button class="btn-primary" type="button">Tìm</button>
+          <p class="hint-text">Ngưỡng phản hồi ≤2s @50.000 bản sao là PROPOSAL (NFR-catalog-admin-001). Đầu sách đã vô hiệu hóa không xuất hiện trong tra cứu mới.</p>
+          <a class="wf-link" href="#s3">Tạo đầu sách</a>
+          <a class="wf-link" href="#s4">Quản lý danh mục</a>
+          <p class="state-hint">Tra cứu: Thủ thư và Quản trị viên (FR-catalog-admin-002). Tạo, sửa, vô hiệu đầu sách và quản lý danh mục: chỉ Quản trị viên (DEC-SF-01). Thiếu quyền: E-core-002, ở lại màn này.</p>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">Tiêu đề đầu sách</div>
+              <div class="wf-card-sub">Tác giả · ISBN · Khả dụng (tính toán, không lưu counter)</div>
+            </div>
+            <a class="wf-link wf-card-action" href="#s2">Chi tiết</a>
+          </div>
+          <p class="info-label">Khả dụng (AVAILABLE và loanable) · Đang giữ (ON_HOLD) · Đang mượn (ON_LOAN) · Không khả dụng (PENDING_REVIEW / IN_REPAIR / LOST / DISPOSED)</p>
+          <p class="state-hint">Phần is_loanable trong công thức khả dụng là PROPOSAL (CP-AVL-01, DEC-D3-09). SRC-BR11 “khả dụng = tính từ trạng thái” là FACT.</p>
+          <div class="banner banner-info"><span>Không thấy đầu sách khớp từ khóa (E-core-003). Không tạo bản ghi từ ô tìm.</span></div>
+          <div class="banner banner-warn"><span>E-core-002 — Không có quyền tra cứu hoặc tạo. Quay về danh sách an toàn; denial được audit.</span></div>
+        </div>
+      </div>
+      <div class="wf-screen-label">catalog-search</div>
+    </div>
+
+    <div class="wf-screen" id="s2">
+      <div class="wf-step-badge">2</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Chi tiết đầu sách [2]</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div>
+          <div class="back-nav"><a class="wf-link" href="#s1">← Tra cứu danh mục</a></div>
+          <div class="wf-screen-title">Chi tiết đầu sách</div>
+          <p class="info-label">Tiêu đề · Tác giả · Thể loại · Nhà xuất bản · Năm · ISBN · Mô tả khi có</p>
+          <p class="info-label">Giá (VND, FACT từ ERD) · Tham chiếu ảnh bìa (cover_ref, FACT) · is_active (FACT)</p>
+          <p class="hint-text">is_loanable cấp đầu sách là PROPOSAL (DEC-D3-09). Default chờ OQ-10 — không điền giá trị mặc định.</p>
+          <div class="banner banner-info"><span>Số bản sao tính lại, không lưu counter: khả dụng · đang giữ ON_HOLD · đang mượn ON_LOAN · không khả dụng PENDING_REVIEW / IN_REPAIR / LOST / DISPOSED (FR-catalog-admin-002).</span></div>
+          <a class="wf-link" href="#s3">Sửa đầu sách</a>
+          <p class="state-hint">Chỉ Quản trị viên (DEC-SF-01). Vô hiệu hóa theo BR-core-006.</p>
+          <a class="wf-link" href="../../copy-inventory/html-wireframe/copy-inventory-flow.html#s1">Xem bản sao</a>
+          <div class="modal-box">
+            <div class="modal-title">Vô hiệu hóa đầu sách</div>
+            <p class="modal-desc">BR-core-006 (FACT, nguồn SRC-BR12): đã có lịch sử Loan, Reservation hoặc DamageReport thì chỉ đặt is_active=false, không xóa cứng. Xóa cứng chỉ khi chưa phát sinh lịch sử. Audit cùng transaction (BR-core-003).</p>
+            <div class="modal-actions">
+              <button class="btn-primary" type="button">Vô hiệu hóa</button>
+              <button class="btn-secondary" type="button">Hủy</button>
+            </div>
+            <button class="btn-secondary" type="button" disabled>Xóa cứng</button>
+            <p class="state-hint">Disabled khi đã có lịch sử — E-core-008. Giải thích lý do, không xóa.</p>
+          </div>
+          <div class="banner banner-warn"><span>E-core-002 — Thiếu quyền sửa/vô hiệu hóa. Ở chế độ chỉ đọc nếu actor vẫn được tra cứu.</span></div>
+        </div>
+      </div>
+      <div class="wf-screen-label">bibliographic-detail</div>
+    </div>
+
+    <div class="wf-screen" id="s3">
+      <div class="wf-step-badge">3</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Biểu mẫu đầu sách [3]</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div>
+          <div class="back-nav"><a class="wf-link" href="#s2">← Chi tiết đầu sách</a></div>
+          <div class="wf-screen-title">Biểu mẫu đầu sách <span class="wf-shared-badge">R0</span></div>
+          <div class="wf-form">
+            <div class="field">
+              <label for="s3-title">Tiêu đề (title_name)</label>
+              <input id="s3-title" type="text" placeholder="Tiêu đề đầu sách">
+            </div>
+            <div class="field">
+              <label for="s3-authors">Tác giả (authors)</label>
+              <input id="s3-authors" type="text" placeholder="Tác giả">
+            </div>
+            <p class="state-hint">Danh mục Author phụ trợ, không tách entity ở mức SRS. Không bịa danh sách tác giả.</p>
+            <div class="field">
+              <label for="s3-categories">Thể loại (categories)</label>
+              <input id="s3-categories" type="text" placeholder="Thể loại">
+            </div>
+            <div class="field">
+              <label for="s3-publisher">Nhà xuất bản (publisher)</label>
+              <input id="s3-publisher" type="text" placeholder="Nhà xuất bản">
+            </div>
+            <p class="state-hint">Thể loại và vị trí nền là PROPOSAL nếu đã có PolicyConfig. Không bịa option danh mục.</p>
+            <div class="field">
+              <label for="s3-year">Năm xuất bản (publish_year)</label>
+              <input id="s3-year" type="text" placeholder="Năm">
+            </div>
+            <div class="field">
+              <label for="s3-isbn">ISBN (isbn)</label>
+              <input id="s3-isbn" type="text" placeholder="ISBN">
+            </div>
+            <p class="state-hint">Field ISBN là FACT. Unique là PROPOSAL. Định dạng ISBN được nhắc nhưng chưa có charset/ISBN-10/13 — không bịa rule.</p>
+            <div class="field">
+              <label for="s3-description">Mô tả (description, khi có)</label>
+              <textarea id="s3-description" rows="3" placeholder="Mô tả khi có"></textarea>
+            </div>
+            <div class="field">
+              <label for="s3-price">Giá (price, VND)</label>
+              <input id="s3-price" type="text" placeholder="Giá bìa">
+            </div>
+            <p class="state-hint">FACT từ ERD; không nằm trong câu liệt kê FR-catalog-admin-001. Không có ngưỡng giá trong nguồn catalog.</p>
+            <div class="field">
+              <label for="s3-cover">Tham chiếu ảnh bìa (cover_ref)</label>
+              <input id="s3-cover" type="text" placeholder="Tham chiếu ảnh">
+            </div>
+            <p class="state-hint">FACT từ ERD. Không có dung lượng/định dạng ảnh bìa — không render upload.</p>
+            <label class="checkbox" for="s3-loanable"><input id="s3-loanable" type="checkbox"> Cho mượn được theo đầu sách (is_loanable) — PROPOSAL</label>
+            <p class="state-hint">DEC-D3-09. Default chờ OQ-10. Không tick sẵn vì nguồn chưa chốt mặc định.</p>
+            <label class="checkbox" for="s3-active"><input id="s3-active" type="checkbox"> Còn hiệu lực (is_active)</label>
+            <p class="state-hint">FACT. Giá trị mặc định lúc tạo chưa có nguồn — không tick sẵn.</p>
+            <button class="btn-primary" type="button">Lưu đầu sách</button>
+            <p class="hint-text">Hợp lệ và không xung đột phiên bản thì về <a class="wf-link" href="#s2">chi tiết đầu sách [2]</a>. Audit cùng transaction (BR-core-003). Audit fail thì rollback (E-core-007).</p>
+            <a class="wf-link" href="#s1">Hủy, về tra cứu</a>
+            <div class="banner banner-warn"><span>E-core-001 — Thiếu trường bắt buộc hoặc sai định dạng (ISBN, năm, thể loại). Giữ dữ liệu đã nhập. Tập trường bắt buộc chưa được liệt kê từng field — không bịa required-set.</span></div>
+            <div class="banner banner-warn"><span>E-core-003 — Trùng unique business key. Không tạo bản ghi thứ hai. Nhập mã khác hoặc <a class="wf-link" href="#s2">mở bản ghi hiện có</a>.</span></div>
+            <div class="modal-box">
+              <div class="modal-title">Xung đột đồng thời (E-core-004)</div>
+              <p class="modal-desc">Bản ghi đã được actor khác commit sau khi mở form (SRC-BR13). Không ghi đè im lặng. Cách hiển thị diff là PROPOSAL — không merge tự động. Nhập lại trên trạng thái mới hoặc hủy.</p>
+              <div class="modal-actions">
+                <button class="btn-primary" type="button">Tải trạng thái mới</button>
+                <button class="btn-secondary" type="button">Hủy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-screen-label">bibliographic-form</div>
+    </div>
+
+    <div class="wf-screen" id="s4">
+      <div class="wf-step-badge">4</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Quản lý danh mục [4]</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div>
+          <div class="back-nav"><a class="wf-link" href="#s1">← Tra cứu danh mục</a></div>
+          <div class="wf-screen-title">Quản lý danh mục</div>
+          <div class="field">
+            <label for="s4-type">Loại danh mục</label>
+            <select id="s4-type"><option>Thể loại</option><option>Tác giả</option><option>Nhà xuất bản</option><option>Vị trí kệ</option></select>
+          </div>
+          <div class="field">
+            <label for="s4-query">Tìm trong danh mục</label>
+            <input id="s4-query" type="text" placeholder="Tên mục danh mục">
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">Tên mục danh mục</div>
+              <div class="wf-card-sub">Số đầu sách đang dùng · Trạng thái: Đang dùng / Vô hiệu</div>
+            </div>
+            <a class="wf-link wf-card-action" href="#s4">Sửa</a>
+          </div>
+          <div class="modal-box">
+            <div class="modal-title">Thêm hoặc sửa mục</div>
+            <div class="field"><label for="s4-name">Tên</label><input id="s4-name" type="text" placeholder="Tên hiển thị"></div>
+            <div class="modal-actions">
+              <button class="btn-primary" type="button">Lưu</button>
+              <button class="btn-secondary" type="button">Hủy</button>
+            </div>
+          </div>
+          <button class="btn-secondary" type="button">Vô hiệu mục</button>
+          <p class="state-hint">Mục đã được đầu sách hoặc bản sao dùng chỉ vô hiệu, không xóa cứng (BR-core-006). Mục vô hiệu không hiện trong biểu mẫu mới.</p>
+          <div class="banner banner-warn"><span>E-core-003 — Tên mục đã tồn tại trong cùng loại danh mục.</span></div>
+          <div class="banner banner-warn"><span>E-core-002 — Chỉ Quản trị viên quản lý danh mục. Từ chối, ghi audit.</span></div>
+        </div>
+      </div>
+      <div class="wf-screen-label">category-admin</div>
+    </div>
+  </div>
+
+  <div class="wf-desc-section">
+    <div class="wf-desc-title">Mô tả màn hình</div>
+    <table class="wf-desc-table">
+      <thead>
+        <tr><th>#</th><th>Items</th><th>Control type</th><th>Data type</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 1: Tra cứu danh mục [1]</td></tr>
+        <tr><td>1</td><td>Tiêu đề, tác giả hoặc ISBN</td><td>Textbox</td><td>Text</td><td>Mục đích: tìm đầu sách theo tiêu đề/tác giả/ISBN (UC bước 1, FR-catalog-admin-001). Một ô từ khóa vì nguồn không tách ba control lọc riêng. Không có charset hay độ dài tối đa — không bịa. Rỗng vẫn ở màn [1]. Người đọc chỉ tra cứu (FR-catalog-admin-002); CRUD là Quản trị viên (FACT).</td></tr>
+        <tr><td>2</td><td>Tìm</td><td>Button</td><td>Click</td><td>Chạy tra cứu và giữ actor ở catalog-search. Kết quả có thì chọn để sang [2]. Không thấy bản ghi: E-core-003, không tạo đầu sách từ ô tìm. Ngưỡng ≤2s @50.000 bản sao là PROPOSAL (NFR-catalog-admin-001). Bản is_active=false không hiện trong tra cứu mới (UC 5c2) nhưng lịch sử cũ vẫn đọc được khi mở đúng bản ghi.</td></tr>
+        <tr><td>3</td><td>Tạo đầu sách</td><td>Link</td><td>Click</td><td>Sang biểu mẫu [3] khi có quyền (transition userflow). Chỉ Quản trị viên (DEC-SF-01); Thủ thư không thấy link này. Thiếu quyền: E-core-002 banner, audit denial (BR-core-004), không mở form.</td></tr>
+        <tr><td>4</td><td>Chi tiết</td><td>Link</td><td>Click</td><td>Chọn một kết quả còn tồn tại để sang bibliographic-detail [2]. Card chỉ là khung hiển thị tiêu đề/tác giả/ISBN, không phải dữ liệu mẫu nghiệp vụ.</td></tr>
+        <tr><td>5</td><td>Số bản sao theo nhóm</td><td>Label</td><td>ReadOnly</td><td>FR-catalog-admin-002: khả dụng, đang giữ (ON_HOLD), đang mượn (ON_LOAN), không khả dụng (PENDING_REVIEW/IN_REPAIR/LOST/DISPOSED). FACT: khả dụng tính từ trạng thái, không lưu counter (SRC-BR11, CP-AVL-01). PROPOSAL: điều kiện is_loanable trong công thức (DEC-D3-09).</td></tr>
+        <tr><td>6</td><td>Không thấy đầu sách</td><td>Label</td><td>ReadOnly</td><td>E-core-003 khi mã/từ khóa không ra bản ghi. Ở lại [1]. Không partial write.</td></tr>
+        <tr><td>7</td><td>Từ chối quyền</td><td>Label</td><td>ReadOnly</td><td>E-core-002 khi actor không có quyền object/action. Quay về danh sách an toàn và audit denial. Field nhạy cảm nếu có thì mask E-core-009; màn này không hiển thị PII người đọc.</td></tr>
+
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 2: Chi tiết đầu sách [2]</td></tr>
+        <tr><td>1</td><td>Quay lại tra cứu</td><td>Link</td><td>Click</td><td>Về catalog-search [1]. Không ghi dữ liệu.</td></tr>
+        <tr><td>2</td><td>Thông tin thư mục</td><td>Label</td><td>ReadOnly</td><td>Hiển thị field FR-catalog-admin-001: tiêu đề, tác giả, thể loại, nhà xuất bản, năm, ISBN, mô tả khi có. Thêm FACT từ ERD nhưng không có trong câu FR-catalog-admin-001: price (VND), cover_ref, is_active. is_loanable là PROPOSAL, default OQ-10 — không điền mặc định. Không có ngưỡng giá hay luật ảnh bìa.</td></tr>
+        <tr><td>3</td><td>Số bản sao theo nhóm</td><td>Label</td><td>ReadOnly</td><td>Cùng bốn nhóm FR-catalog-admin-002 / CP-AVL-04. available_count là derived, không sửa trên màn này. Phần loanable trong công thức là PROPOSAL.</td></tr>
+        <tr><td>4</td><td>Sửa đầu sách</td><td>Link</td><td>Click</td><td>Sang bibliographic-form [3] khi có quyền (BR-core-006 nếu mục đích là vô hiệu hóa). Thiếu quyền: E-core-002, giữ chế độ đọc.</td></tr>
+        <tr><td>5</td><td>Xem bản sao</td><td>Link</td><td>Click</td><td>Sang copy-inventory (copy-inventory · copy-inventory). Userflow: điều kiện “Luôn”.</td></tr>
+        <tr><td>6</td><td>Vô hiệu hóa</td><td>Button</td><td>Click</td><td>Đặt is_active=false khi bản ghi đã có lịch sử Loan/Reservation/DamageReport. FACT BR-core-006. Audit cùng transaction; audit fail thì E-core-007 rollback. Không dùng chữ “Xóa” cho nhánh này.</td></tr>
+        <tr><td>7</td><td>Hủy vô hiệu hóa</td><td>Button</td><td>Click</td><td>Đóng xác nhận, giữ nguyên is_active. Không ghi.</td></tr>
+        <tr><td>8</td><td>Xóa cứng</td><td>Button</td><td>Click</td><td>Chỉ khi chưa phát sinh lịch sử (UC 5c2). Disabled và giải thích E-core-008 khi đã có lịch sử. Không bịa thêm điều kiện ngoài Loan/Reservation/DamageReport đã nêu.</td></tr>
+        <tr><td>9</td><td>Từ chối quyền</td><td>Label</td><td>ReadOnly</td><td>E-core-002. Actor còn quyền tra cứu thì ở lại [2] chỉ đọc.</td></tr>
+
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 3: Biểu mẫu đầu sách [3]</td></tr>
+        <tr><td>1</td><td>Quay lại chi tiết</td><td>Link</td><td>Click</td><td>Về [2] khi đang sửa. Tạo mới từ [1] có link hủy riêng về tra cứu. Cả hai đều không commit.</td></tr>
+        <tr><td>2</td><td>Tiêu đề</td><td>Textbox</td><td>Text</td><td>title_name, FACT, FR-catalog-admin-001. Nguồn nói có trường bắt buộc nhưng không liệt kê field nào bắt buộc — không gắn required giả. Lỗi định dạng/thiếu: E-core-001, giữ dữ liệu.</td></tr>
+        <tr><td>3</td><td>Tác giả</td><td>Textbox</td><td>Text</td><td>authors, FACT, tham chiếu danh mục Author, không tách entity SRS. Không bịa danh sách hay độ dài.</td></tr>
+        <tr><td>4</td><td>Thể loại</td><td>Textbox</td><td>Text</td><td>categories, FACT. UC 3a: thể loại không hợp lệ → E-core-001. Danh mục giá trị chưa có; cấu hình nền là PROPOSAL. Ô chữ, không dropdown bịa option.</td></tr>
+        <tr><td>5</td><td>Nhà xuất bản</td><td>Textbox</td><td>Text</td><td>publisher, FACT, tham chiếu Publisher phụ trợ. Không bịa danh sách NXB.</td></tr>
+        <tr><td>6</td><td>Năm xuất bản</td><td>Textbox</td><td>Text</td><td>publish_year, FACT. UC 3a nêu năm sai định dạng nhưng không nêu khoảng năm hay charset — không bịa. E-core-001 giữ dữ liệu.</td></tr>
+        <tr><td>7</td><td>ISBN</td><td>Textbox</td><td>Text</td><td>isbn, FACT field; unique là PROPOSAL (ERD: nguồn không nói rõ unique). UC 3a nêu định dạng ISBN nhưng không nêu ISBN-10/13, checksum, ký tự. Trùng business key: E-core-003, không tạo bản thứ hai, được mở bản hiện có.</td></tr>
+        <tr><td>8</td><td>Mô tả</td><td>Text area</td><td>Text</td><td>description, FACT, “khi có” (FR-catalog-admin-001) nên không diễn giải thành bắt buộc. Không có giới hạn ký tự trong nguồn.</td></tr>
+        <tr><td>9</td><td>Giá</td><td>Textbox</td><td>Text</td><td>price, FACT từ ERD (VND), không có trong câu FR-catalog-admin-001. Không có min/max trong luồng catalog — không bịa. Không dùng làm ngưỡng phạt trên màn này.</td></tr>
+        <tr><td>10</td><td>Tham chiếu ảnh bìa</td><td>Textbox</td><td>Text</td><td>cover_ref, FACT từ ERD. Không có dung lượng, định dạng hay số ảnh — không render Browse. Không áp rule ảnh 1–5 của DamageReport.</td></tr>
+        <tr><td>11</td><td>Cho mượn được theo đầu sách</td><td>Checkbox</td><td>Check</td><td>is_loanable, PROPOSAL DEC-D3-09. Default OQ-10 chưa chốt nên không tick sẵn. Đổi thuộc tính không phải transition Copy; vẫn audit (CP-AVL-03, PROPOSAL).</td></tr>
+        <tr><td>12</td><td>Còn hiệu lực</td><td>Checkbox</td><td>Check</td><td>is_active, FACT. Vô hiệu hóa bản đã có lịch sử đi qua xác nhận ở [2], không xóa cứng (BR-core-006). Mặc định lúc tạo chưa có nguồn.</td></tr>
+        <tr><td>13</td><td>Lưu đầu sách</td><td>Button</td><td>Click</td><td>Validation và concurrency đạt thì sang [2] (userflow). Ghi BibliographicRecord + audit một transaction (BR-core-003, NFR-core-005). E-core-001/E-core-003 ở lại form. E-core-004 mở hộp xung đột. E-core-007 rollback nếu audit fail.</td></tr>
+        <tr><td>14</td><td>Hủy, về tra cứu</td><td>Link</td><td>Click</td><td>Bỏ nhập liệu chưa lưu, về [1].</td></tr>
+        <tr><td>15</td><td>Lỗi validation</td><td>Label</td><td>ReadOnly</td><td>E-core-001 inline. Giữ dữ liệu. Không partial write. Required-set và charset chưa có nguồn.</td></tr>
+        <tr><td>16</td><td>Trùng định danh</td><td>Label</td><td>ReadOnly</td><td>E-core-003. Nhập mã khác hoặc mở bản ghi gốc. Không merge im lặng.</td></tr>
+        <tr><td>17</td><td>Tải trạng thái mới</td><td>Button</td><td>Click</td><td>Recovery E-core-004 / SRC-BR13: bỏ bản nhập đè lên version mới, ở lại [3] để sửa. Diff UI là PROPOSAL. Không merge tự động.</td></tr>
+        <tr><td>18</td><td>Hủy xung đột</td><td>Button</td><td>Click</td><td>Không commit. Userflow cho nhánh lỗi quay lại [3] để sửa hoặc tải lại.</td></tr>
+
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 4: Quản lý danh mục [4]</td></tr>
+        <tr><td>1</td><td>Quay lại tra cứu</td><td>Link</td><td>Click</td><td>Về catalog-search [1]. Không ghi dữ liệu.</td></tr>
+        <tr><td>2</td><td>Loại danh mục</td><td>Select</td><td>Enum</td><td>Mục đích: chọn loại cần quản lý — Thể loại, Tác giả, Nhà xuất bản, Vị trí kệ (FR-catalog-admin-003). Đổi loại thì danh sách tải lại.</td></tr>
+        <tr><td>3</td><td>Tìm trong danh mục</td><td>Textbox</td><td>Text</td><td>Lọc mục theo tên trong loại đang chọn. Không có kết quả: danh sách trống, không tạo mục từ ô tìm.</td></tr>
+        <tr><td>4</td><td>Thẻ mục</td><td>Card</td><td>ReadOnly</td><td>Tên, số đầu sách đang dùng, trạng thái Đang dùng / Vô hiệu. Link Sửa mở hộp thêm/sửa với giá trị hiện tại.</td></tr>
+        <tr><td>5</td><td>Thêm hoặc sửa mục</td><td>Modal</td><td>Form</td><td>Tên bắt buộc (E-core-001). Trùng tên trong cùng loại: E-core-003. Hai người sửa cùng lúc: E-core-004, tải lại bản mới, không ghi đè. Ghi audit cùng giao dịch (BR-core-003). Thuộc tính thêm cho vị trí kệ (khu, tầng) chưa có nguồn — chỉ giữ tên.</td></tr>
+        <tr><td>6</td><td>Vô hiệu mục</td><td>Button</td><td>Click</td><td>Mục đã được dùng chỉ vô hiệu, không xóa cứng (BR-core-006). Đầu sách cũ giữ nguyên tham chiếu; mục vô hiệu không hiện trong biểu mẫu mới. Đã vô hiệu: E-core-008.</td></tr>
+        <tr><td>7</td><td>Thông báo quyền</td><td>Label</td><td>ReadOnly</td><td>Chỉ Quản trị viên (FR-catalog-admin-003). Thủ thư: E-core-002, quay về catalog-search, ghi audit.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wf-footer">
+    <span>catalog-admin / catalog-admin-flow</span>
+    <span>/wireframe-html · 2026-10-09</span>
+  </div>
+
+</div>
+</body>
+</html>
