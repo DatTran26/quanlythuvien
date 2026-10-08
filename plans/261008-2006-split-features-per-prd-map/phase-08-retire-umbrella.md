@@ -21,13 +21,13 @@ Xóa `docs/features/library-management-platform/` khi chắc chắn không mất
 5. **Dọn stale**: hook có thể đã đánh `stale` hàng loạt trong quá trình chuyển. Liệt kê mọi doc `stale` sinh ra trong nhánh này, trình một lượt duyệt gỡ (theo `status-lifecycle.md`, thoát stale qua review).
 6. **Retire ID**: `id-registry.md` đánh `*-LMP-*` là retired, trỏ crosswalk. Không tái sử dụng.
 7. **Rebuild KG** (`kg-build.mjs`), kiểm: 0 broken ref do namespace, `Độ phủ` gần 100%, mục "Phải Read tay" không còn short-form ID. Chạy `facts` cho từng feature, đối chiếu đếm với crosswalk.
-8. **mermaid-verify** cho mọi file mermaid trong `docs/features/*/srs/` và `docs/_shared/domain/`.
+8. **Sơ đồ mermaid**: không kiểm bằng máy trên Windows (người dùng bỏ qua 2026-10-08); rà bằng mắt các sơ đồ trong `docs/features/*/srs/` và `docs/_shared/domain/` theo `diagram-selection.md` Mục "Mermaid syntax safety".
 
 ## Tiêu chí xong
 
 - Thư mục feature gộp không còn.
 - 0 tham chiếu `library-management-platform` hay `*-LMP-*` ngoài crosswalk và plan lịch sử.
-- KG và mermaid-verify sạch.
+- KG sạch; sơ đồ đã rà bằng mắt.
 
 ## Rollback
 

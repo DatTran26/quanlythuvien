@@ -53,7 +53,7 @@ Sau bước 9: chạy `/srs` Phase G (review tự động) và Phase H (xử lý
 - [ ] Đủ 9 output ở bảng trên (hoặc có lý do bỏ ghi trong PRD feature).
 - [ ] Mọi item ma trận phân bổ cho `{f}` xuất hiện với mã mới; cột "đã chuyển" trong `id-crosswalk-lmp.md` đánh dấu.
 - [ ] `node .claude/skills/kg/engine/kg-query.mjs facts {f}` không có broken ref nội bộ feature.
-- [ ] `mermaid-verify.mjs` exit 0 cho `{F}/srs/*.md`.
+- [ ] Sơ đồ mermaid trong `{F}/srs/*.md` đã rà bằng mắt theo `diagram-selection.md` Mục "Mermaid syntax safety" (không kiểm bằng máy trên Windows).
 - [ ] Mọi FR P0 có ít nhất một story; FR P1/P2 không có story thì ghi lý do trong story index.
 - [ ] Review tự động `/srs` Phase G không còn BLOCKING.
 - [ ] Dòng feature trong `docs/_product/prd.md` Feature Map cột "Chi tiết hóa" cập nhật qua L2.

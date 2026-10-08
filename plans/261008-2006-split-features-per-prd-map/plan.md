@@ -46,10 +46,10 @@ Feature Map trong `docs/_product/prd.md` Mục 7 định nghĩa 23 feature có s
 
 | # | Phase | File | Phụ thuộc | Cổng duyệt |
 |---|---|---|---|---|
-| 0 | Chuẩn bị, đóng băng, spike công cụ | [phase-00-preparation.md](phase-00-preparation.md) | — | Team đồng ý đóng băng |
-| 1 | Ma trận phân bổ và bảng đối chiếu ID | [phase-01-allocation-matrix.md](phase-01-allocation-matrix.md) | 0 | Duyệt ma trận + xung đột |
+| 0 | Chuẩn bị, đóng băng, spike công cụ — **xong 2026-10-08** (bỏ qua mermaid-verify theo người dùng) | [phase-00-preparation.md](phase-00-preparation.md) | — | Team đồng ý đóng băng |
+| 1 | Ma trận phân bổ và bảng đối chiếu ID — xung đột X1–X9 **đã quyết** (DEC-SF-01..09) | [phase-01-allocation-matrix.md](phase-01-allocation-matrix.md) | 0 | Duyệt ma trận |
 | 2 | Dựng tầng dùng chung `docs/_shared/` | [phase-02-shared-layer.md](phase-02-shared-layer.md) | 1 | L1/L2 từng file |
-| 3 | Dựng khung 23 thư mục + nối PRD | [phase-03-feature-skeletons.md](phase-03-feature-skeletons.md) | 2 | L1 một lần |
+| 3 | Chuẩn hóa tầng sản phẩm theo /prd → /roadmap + khung 23 thư mục | [phase-03-product-layer-and-skeletons.md](phase-03-product-layer-and-skeletons.md) | 2 | L2 PRD, L2 roadmap (duyệt điểm RICE) |
 | 4 | Pilot end-to-end: `checkout` | [phase-04-pilot-checkout.md](phase-04-pilot-checkout.md) | 3 | Retro pilot, chốt công thức |
 | 5 | Rollout R0 (8 feature) | [phase-05-rollout-r0.md](phase-05-rollout-r0.md) | 4 | Duyệt từng feature |
 | 6 | Rollout R1A (8 feature còn lại) | [phase-06-rollout-r1a.md](phase-06-rollout-r1a.md) | 5 | Duyệt từng feature |
@@ -73,7 +73,8 @@ Ma trận phân bổ nháp (đầu vào phase 1): [feature-allocation-draft.md](
 - [ ] `grep -rE '(FR|NFR|BR|E|SC|OQ|CHK)-LMP-' docs/` chỉ còn trong bảng đối chiếu.
 - [ ] `docs/features/library-management-platform/` không còn tồn tại.
 - [ ] KG build: 0 broken ref do namespace; mục "Phải Read tay" không còn short-form ID.
-- [ ] `mermaid-verify.mjs` exit 0 cho mọi file mermaid (cần Chrome Headless — phase 0).
+- [ ] Sơ đồ mermaid: **không kiểm bằng máy** trên môi trường này (`mermaid-verify.mjs` không hỗ trợ Windows, người dùng chọn bỏ qua 2026-10-08) — kiểm bằng mắt khi review.
+- [ ] Tầng sản phẩm: PRD có Feature Map đủ cột + 23 khối 7.x; roadmap có xếp hạng ưu tiên, feature theo slug, sơ đồ phụ thuộc mức feature.
 - [ ] Ma trận phân bổ: 100% item nguồn có đích, 0 item mồ côi, 0 item hai chủ.
 - [ ] Review chéo (senior-ba, qa-reviewer, pm-reviewer) không còn BLOCKING.
 
