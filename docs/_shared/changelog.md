@@ -79,3 +79,9 @@
 | 2026-10-08 | /srs | @dattran26 | `docs/features/reader-self-service/srs/reader-self-service-spec.md` | SRS Tầng 1 reader-self-service: 5 FR, tách từ spec gộp |
 | 2026-10-08 | /srs | @dattran26 | `docs/features/return-handling/srs/return-handling-spec.md` | SRS Tầng 1 return-handling: 1 FR, tách từ spec gộp |
 | 2026-10-08 | /srs | @dattran26 | `docs/_shared/id-crosswalk-lmp.md` | thêm 2 FR mới lô R1A, đánh dấu đã chuyển SRS lô R1A |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/fine-collection-adv/srs/fine-collection-adv-spec.md` | SRS Tầng 1 fine-collection-adv: 3 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/notification-audit-ui/srs/notification-audit-ui-spec.md` | SRS Tầng 1 notification-audit-ui: 3 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/renewal/srs/renewal-spec.md` | SRS Tầng 1 renewal: 1 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/reservation/srs/reservation-spec.md` | SRS Tầng 1 reservation: 3 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/features/trend-reports/srs/trend-reports-spec.md` | SRS Tầng 1 trend-reports: 1 FR, tách từ spec gộp |
+| 2026-10-08 | /srs | @dattran26 | `docs/_shared/id-crosswalk-lmp.md` | thêm 1 FR mới lô R1B, đánh dấu đã chuyển SRS lô R1B/R2/R3 |
