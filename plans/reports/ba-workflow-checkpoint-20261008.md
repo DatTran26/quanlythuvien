@@ -4,6 +4,8 @@
 
 Ghi lại trạng thái kiểm chứng trước khi tiếp tục hoàn thiện toàn bộ quy trình BA và chạy lại `ak-ship`.
 
+> Mốc mới nhất là mục **Checkpoint 15:43**. Các mục phía trên là snapshot trong ngày và có chỗ đã lỗi thời.
+
 ## Đã hoàn thành và kiểm chứng
 
 - Phase 5: user flow và HTML wireframe đã hoàn tất.
@@ -57,3 +59,46 @@ Các đường dẫn không thuộc phạm vi ship:
 - Đã tạo story index cùng 18 user story draft, bao phủ 17/17 FR P0.
 - Mọi story giữ trạng thái `draft`, có ghi chú được xây từ SRS draft và chưa đạt Definition of Ready.
 - Acceptance Criteria chưa được sinh; bước kế tiếp là chạy `ac` với L1/L2 riêng, không tự chốt các OQ về identity, ngưỡng nghiệp vụ, Excel, tài chính, privacy hoặc notification.
+
+## Checkpoint 15:43 — tài liệu chưa đủ để khóa baseline
+
+Kết luận: bộ tài liệu đủ để review tiếp Phase 6. Chưa đủ để khóa baseline, viết test, hoặc giao dev làm toàn bộ phạm vi.
+
+### Đã có
+
+- Phase 3 completed. Phase 5 completed: user flow đã duyệt, wireframe HTML Mobile 375, 11 luồng / 38 màn hình.
+- Phase 4 SRS còn `status: draft`, plan ghi `In-review`. PRD/roadmap còn chờ L1 approval. Phase 1 còn in-progress.
+- 18 user story đã có trong `docs/features/library-management-platform/userstories/`. Tất cả vẫn `draft`.
+- Acceptance Criteria đã ghi cho US-013 (4 AC) và US-014 (6 AC). Hai story vẫn BLOCKING DoR vì OQ-LMP-005, OQ-LMP-009 và OQ-LMP-010 chưa chốt công thức phạt, thu một phần, đối soát và thẩm quyền tài chính.
+- Use case thu tiền gán E-LMP-005 cho hai khoản thu đồng thời. Error Matrix vẫn mô tả mã này cho xung đột bản sao hoặc đặt chỗ, gắn FR-LMP-009 và FR-LMP-012.
+
+### Chưa đủ
+
+- 16 story US-001 đến US-012 và US-015 đến US-018 vẫn chỉ có placeholder Acceptance Criteria.
+- Phase 7 chưa có test strategy, checklist hay test case.
+- Phase 8 chưa có traceability, quality review hay handoff bàn giao.
+- OQ-LMP-001 đến OQ-LMP-018 vẫn mở. OQ-LMP-001 chặn việc đánh artifact là `approved`.
+- Plan tổng vẫn `in-progress`. Phase 6, 7 và 8 trong plan index vẫn `Pending`.
+
+### Git
+
+- Nhánh `develop-dat`, HEAD `0525d55` (`docs: add BA skill guide for library docs`).
+- Local đang ahead `origin/develop-dat` 7 commit. Chưa push, chưa mở PR. PR đích khi push là `develop`, không phải `main`.
+- Năm commit tài liệu trong phiên này: `fd2a44f`, `f7b8d02`, `45b71ca`, `5bc69d4`, `0525d55`.
+- Chưa commit: sửa skill BA-Kit, `docs/_shared/kg/`, `.1devtool/tasks/`, file `nul`.
+
+### Bước kế tiếp
+
+1. Chạy `/ac` cho 16 story còn placeholder. Story dính OQ mở giữ Not Ready, không bịa ngưỡng.
+2. Nếu muốn E-LMP-005 thành contract của thu tiền, sửa Error Matrix trước khi coi AC-004 của US-014 là đã chốt mã lỗi.
+3. Sau khi AC đủ cho phạm vi đem đi test, mới chạy Phase 7 rồi Phase 8.
+4. Push và PR vào `develop` do người dùng thực hiện.
+
+## Checkpoint 15:50 — đã sinh AC cho 18 story, chưa sang Phase 7
+
+- Đã ghi Acceptance Criteria cho US-001 đến US-012 và US-015 đến US-018. Cùng US-013 và US-014, cả 18 story đều có AC có ID.
+- Mọi story vẫn `draft`. Mỗi story có BLOCKING DoR cho quyết định chưa chốt. Không bịa ngưỡng, công thức phạt, mapping Excel, mô hình danh tính hay số lần gửi lại.
+- US-015 không khẳng định cách ly bản sao ngay khi báo hư hỏng, vì quyết định này vẫn mở.
+- Phase 6 trong plan index vẫn `Pending` vì AC chưa được duyệt và chưa đạt Definition of Ready.
+- Phase 7 và Phase 8 chưa chạy. Checklist và test case chưa được sinh, vì story Not Ready không được đưa vào bộ test hoàn chỉnh.
+- Các AC và checkpoint này nằm trên `develop-dat`. Chưa push. PR đích là `develop`.
