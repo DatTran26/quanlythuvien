@@ -22,3 +22,6 @@
 | 2026-10-08 | /ac | DatTran26 | `docs/features/library-management-platform/userstories/us-016.md` | [us-016] generated 5 ACs (outcome/rule/error) |
 | 2026-10-08 | /ac | DatTran26 | `docs/features/library-management-platform/userstories/us-017.md` | [us-017] generated 4 ACs (outcome/rule/error) |
 | 2026-10-08 | /ac | DatTran26 | `docs/features/library-management-platform/userstories/us-018.md` | [us-018] generated 2 ACs (outcome/rule/error) |
+| 2026-10-08 | /test-checklist | DatTran26 | `docs/features/library-management-platform/test/test-strategy.md` | draft core-functional strategy, Mobile 375 |
+| 2026-10-08 | /test-checklist | DatTran26 | `docs/features/library-management-platform/test/checklist/checklist-feature.md` | generated 97 items (12 categories) |
+| 2026-10-08 | /test-checklist | DatTran26 | `docs/features/library-management-platform/test/checklist/library-management-platform-checklist-index.md` | generated 97 items (12 categories) cho checklist-feature |

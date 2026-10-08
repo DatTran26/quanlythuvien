@@ -4,7 +4,7 @@
 
 Ghi lại trạng thái kiểm chứng trước khi tiếp tục hoàn thiện toàn bộ quy trình BA và chạy lại `ak-ship`.
 
-> Mốc mới nhất là mục **Checkpoint 15:43**. Các mục phía trên là snapshot trong ngày và có chỗ đã lỗi thời.
+> Mốc mới nhất là mục **Checkpoint 18:00 — checklist draft, chưa có test case**. Các mục phía trên là snapshot trong ngày và có chỗ đã lỗi thời.
 
 ## Đã hoàn thành và kiểm chứng
 
@@ -21,8 +21,8 @@ Ghi lại trạng thái kiểm chứng trước khi tiếp tục hoàn thiện t
 - Phase 1 còn thiếu Excel/sơ đồ nguồn hoặc reconstruction approval, hard-stop decisions và approval evidence.
 - Phase 2 còn thiếu L1 approval evidence cho PRD/roadmap.
 - Phase 4 còn thiếu L1/L2 approval evidence, domain approval và lần kiểm tra orphan reference cuối.
-- Phase 6 chưa có story map, user stories và acceptance criteria.
-- Phase 7 chưa có test strategy, checklist và test cases 1:1.
+- Phase 6 đã có 18 story và AC, nhưng mọi story vẫn `draft` và còn BLOCKING DoR nên chưa khóa baseline.
+- Phase 7 đã có chiến lược test và checklist draft 97 mục. Checklist chưa được duyệt nên chưa có test case 1:1.
 - Phase 8 chưa có traceability matrix, final quality review, operational-readiness evidence và handoff.
 
 Các approval thuộc stakeholder/domain/security/legal không được tự giả lập. Artifact liên quan phải giữ trạng thái Open/Blocked/Not Ready cùng owner và gate cho đến khi có bằng chứng thật.
@@ -102,3 +102,15 @@ Kết luận: bộ tài liệu đủ để review tiếp Phase 6. Chưa đủ đ
 - Phase 6 trong plan index vẫn `Pending` vì AC chưa được duyệt và chưa đạt Definition of Ready.
 - Phase 7 và Phase 8 chưa chạy. Checklist và test case chưa được sinh, vì story Not Ready không được đưa vào bộ test hoàn chỉnh.
 - Các AC và checkpoint này nằm trên `develop-dat`. Chưa push. PR đích là `develop`.
+
+## Checkpoint 18:00 — checklist draft, chưa có test case
+
+- Đã có `test/test-strategy.md`: tiếng Việt, Mobile 375, dữ liệu giả, profile Core-functional. Ngưỡng định lượng vẫn khóa theo OQ-LMP-010.
+- Đã có checklist feature 97 mục, CHK-LMP-001 đến CHK-LMP-097, `next_chk_id` 98. P1 = 87, P2 = 10, tự động hóa được 69 mục, 28 mục cần kiểm tra ngoài UI.
+- Index giữ Coverage và bảng Retired CHK-IDs còn trống. Không có mục `excluded-approved`.
+- Các nghĩa vụ chưa có oracle được giữ `blocked` hoặc `tbd`: gia hạn, đặt trước, miễn giảm, báo cáo vận hành, cổng người đọc, phân tích R3, khóa người đọc, mapping Excel, SLA và số lần gửi lại.
+- Upload ảnh hợp lệ, lịch sử nghiệp vụ đầy đủ và việc giữ dữ liệu sau lỗi validation mới phủ một phần.
+- E-LMP-005 trên checklist thu tiền theo use case; Error Matrix vẫn mô tả mã này là xung đột bản sao hoặc đặt trước. Matrix chưa sửa.
+- E-LMP-004 trên checklist theo AC rollback cả phiếu; Error Matrix còn câu cho loại từng bản sao. Matrix chưa sửa.
+- Phase 7 trong plan là In-progress. Phase 6 vẫn Pending vì AC chưa được duyệt. Phase 8 chưa chạy vì chưa có test case và checklist chưa được duyệt.
+- Chưa push. PR đích là `develop`.

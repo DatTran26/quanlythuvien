@@ -1,6 +1,6 @@
 ---
 title: "Phase 7: QA checklist và test cases"
-status: pending
+status: in-progress
 priority: P1
 effort: "2 review cycles"
 dependencies: [4, 5, 6]
@@ -11,6 +11,10 @@ dependencies: [4, 5, 6]
 ## Mục tiêu
 
 Dùng `test-checklist` rồi `test-cases` để tạo baseline QA có coverage theo obligation và cardinality 1:1 từ checklist đến test case.
+
+## Trạng thái 2026-10-08
+
+Checklist feature đã được sinh ở trạng thái `draft`: 97 mục, `next_chk_id` 98, 12 nhóm. Coverage còn `blocked`, `tbd` và `partial` nên scope chưa đóng. Test case chưa được sinh vì checklist chưa được duyệt và story vẫn Not Ready.
 
 ## Yêu cầu
 
@@ -40,8 +44,8 @@ Dùng `test-checklist` rồi `test-cases` để tạo baseline QA có coverage t
 
 ## Todo
 
-- [ ] Hoàn thiện source inventory/obligation matrix.
-- [ ] Sinh và duyệt checklist.
+- [x] Hoàn thiện source inventory/obligation matrix ở trạng thái draft.
+- [ ] Sinh và duyệt checklist. Bản draft đã có; chưa có evidence duyệt.
 - [ ] Partition nếu vượt ngưỡng quản lý.
 - [ ] Sinh test case 1:1.
 - [ ] Kiểm tra schema/cardinality/traceability.
