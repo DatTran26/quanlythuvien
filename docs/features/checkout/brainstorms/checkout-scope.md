@@ -246,6 +246,4 @@ Lý do theo trạng thái bản sao:
 
 ## 12. Next Steps
 
-- `/urd checkout`
-- `/brd checkout`
-- `/prd checkout`
+- `/srs checkout`

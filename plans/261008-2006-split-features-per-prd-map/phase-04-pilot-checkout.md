@@ -32,7 +32,7 @@ Nội dung có sẵn dày nhất (FR-LMP-008/009, BR-LMP-001/002, E-LMP-004, uc-
 
 ## Các bước
 
-1. Chạy 9 bước của `feature-recipe.md`.
+1. Chạy 6 bước của `feature-recipe.md`.
 2. Đo: số điểm duyệt thực tế, thời gian, số lần phải hỏi lại, số câu hỏi mở phát sinh.
 3. Kiểm "xong" theo `feature-recipe.md` Mục cuối.
 4. **Retro**: ghi `plans/reports/split-pilot-retro-261008-{hhmm}.md` — cái gì chạy tốt, cái gì phải sửa trong công thức, chỗ skill không hỗ trợ cấu trúc `_shared` (vd `/srs` đòi erd/states riêng, `/user-flow` không biết navigation-map). Sửa `feature-recipe.md` trước khi sang phase 5.

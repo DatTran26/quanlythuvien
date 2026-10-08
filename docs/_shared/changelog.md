@@ -36,3 +36,12 @@
 | 2026-10-08 | /brainstorm | @dattran26 | `docs/_product/prd.md` | resolved OQ-4: R1A chỉ loại biên nhận thu phạt, biên nhận mượn có từ R1A |
 | 2026-10-08 | /brainstorm | @dattran26 | `docs/features/checkout/brainstorms/checkout-scope.md` | resolved OQ-4: R1A chỉ loại biên nhận thu phạt, biên nhận mượn có từ R1A |
 | 2026-10-08 | /brainstorm | @dattran26 | `docs/_product/prd.md` | mark checkout đang chi tiết hóa (1 brainstorm) |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/access-control/brainstorms/access-control-scope.md` | brainstorm access-control, Micro từ nguồn, 4 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/account-admin/brainstorms/account-admin-scope.md` | brainstorm account-admin, Micro từ nguồn, 1 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/catalog-admin/brainstorms/catalog-admin-scope.md` | brainstorm catalog-admin, Micro từ nguồn, 2 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/copy-inventory/brainstorms/copy-inventory-scope.md` | brainstorm copy-inventory, Micro từ nguồn, 2 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/data-import/brainstorms/data-import-scope.md` | brainstorm data-import, Micro từ nguồn, 3 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/ops-foundation/brainstorms/ops-foundation-scope.md` | brainstorm ops-foundation, Micro từ nguồn, 3 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/policy-config/brainstorms/policy-config-scope.md` | brainstorm policy-config, Micro từ nguồn, 2 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/reader-onboarding/brainstorms/reader-onboarding-scope.md` | brainstorm reader-onboarding, Micro từ nguồn, 4 OQ hold |
+| 2026-10-08 | /brainstorm | @dattran26 | `docs/features/checkout/brainstorms/checkout-scope.md` | next steps đổi sang /srs (bỏ URD/BRD/PRD) |

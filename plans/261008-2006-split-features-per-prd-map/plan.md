@@ -23,10 +23,10 @@ Feature Map trong `docs/_product/prd.md` Mục 7 định nghĩa 23 feature có s
 
 | # | Quyết định |
 |---|---|
-| D1 | Chia đúng **23 feature** theo Feature Map. `expansion-candidates` (R3) chỉ có khung + PRD envelope, không viết SRS. |
+| D1 | Chia đúng **23 feature** theo Feature Map. `expansion-candidates` (R3) chỉ có khung + brainstorm, không viết SRS. |
 | D2 | Phần dùng chung (ERD tổng, vòng đời trạng thái, NFR/BR/lỗi xuyên hệ thống) chuyển vào **`docs/_shared/`**. Thư mục `docs/features/library-management-platform/` bị xóa sau khi chuyển xong. |
 | D3 | **Đánh mã ID mới theo feature** (`FR-checkout-001`…). Mã `*-LMP-*` chuyển sang retired, có bảng đối chiếu. |
-| D4 | Mỗi feature đi **đủ quy trình**: brainstorm → URD → BRD → PRD → SRS → models → UX → story/AC → checklist. |
+| D4 | Mỗi feature đi quy trình: brainstorm → SRS → models → UX → story/AC → checklist. **Không viết URD, BRD, PRD cấp feature** (người dùng bỏ ngày 2026-10-08): PRD sản phẩm Mục 7.x là mô tả cấp sản phẩm của từng feature. |
 
 ## Kết quả mong muốn
 
@@ -62,14 +62,14 @@ Ma trận phân bổ nháp (đầu vào phase 1): [feature-allocation-draft.md](
 
 ## Ước lượng khối lượng
 
-- 22 feature chạy đủ chuỗi + 1 feature chỉ có envelope. Mỗi feature khoảng 12–16 điểm duyệt (L1/L2/HARD STOP user-flow), tổng khoảng 300 điểm duyệt. Phase 1 gom duyệt theo lô để giảm tải (xem `feature-recipe.md` Mục "Gom duyệt").
-- Runtime **không có** skill `/urd`, `/brd`, `/prd-epic`. URD/BRD/PRD feature viết từ `_templates/urd.md`, `brd.md`, `prd.md` với cùng approval gate L1/L2 như các skill BA.
+- 22 feature chạy đủ chuỗi + 1 feature chỉ có envelope. Mỗi feature khoảng 9–12 điểm duyệt (L1/L2/HARD STOP user-flow); rollout gom duyệt theo lô (xem `feature-recipe.md` Mục "Gom duyệt").
+- Runtime không có skill `/urd`, `/brd`, `/prd-epic`, và quy trình không dùng các bước này (D4).
 
 ## Tiêu chí hoàn thành
 
 - [ ] 23 thư mục feature tồn tại, frontmatter đúng `feature: {slug}`.
-- [ ] 22 feature có đủ: brainstorm, URD, BRD, PRD, `srs/{feature}-spec.md`, use case, userflow (`stage: flow-approved`), wireframe HTML, user story có AC, checklist. Feature thiếu artifact phải ghi lý do trong PRD feature.
-- [ ] `expansion-candidates` có PRD envelope + brainstorm, ghi rõ không build.
+- [ ] 22 feature có đủ: brainstorm, `srs/{feature}-spec.md`, use case, userflow (`stage: flow-approved`), wireframe HTML, user story có AC, checklist. Feature thiếu artifact phải ghi lý do trong PRD feature.
+- [ ] `expansion-candidates` có brainstorm, ghi rõ không build.
 - [ ] `grep -rE '(FR|NFR|BR|E|SC|OQ|CHK)-LMP-' docs/` chỉ còn trong bảng đối chiếu.
 - [ ] `docs/features/library-management-platform/` không còn tồn tại.
 - [ ] KG build: 0 broken ref do namespace; mục "Phải Read tay" không còn short-form ID.

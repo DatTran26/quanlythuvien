@@ -21,13 +21,13 @@ Hoàn tất các feature sau pilot. Nhóm này đa phần **chưa có story**, n
 | 3 | `notification-audit-ui` | R1B | FR-019 (trung tâm), FR-020 (viewer), FR-027, audit-log + history-timeline | Thêm màn trung tâm thông báo (X9); viết story mới |
 | 4 | `reservation` | R2 | FR-012/013, BR-005/006, E-008, SC-03, uc-reservation, 4 màn, OQ-LMP-003 | Viết story mới; tham chiếu BR-002 của `checkout` |
 | 5 | `trend-reports` | R2 | FR-023 (RP-03/05/06/07) | Dùng màn `report-dashboard` của `ops-reports`, chỉ thêm trạng thái/dataset R2 |
-| 6 | `expansion-candidates` | R3 | FR-028 | **Chỉ** brainstorm + PRD envelope (mỗi candidate: mục tiêu, giả định, điều kiện mở). Không URD/BRD/SRS. Ghi lý do trong PRD |
+| 6 | `expansion-candidates` | R3 | FR-028 | **Chỉ** brainstorm (mỗi candidate: mục tiêu, giả định, điều kiện mở). Không SRS. PRD sản phẩm 7.23 đã ghi không cam kết |
 
 ## Các bước
 
-Như phase 5, trừ `expansion-candidates` chỉ chạy bước 1 và 4 của công thức.
+Như phase 5, trừ `expansion-candidates` chỉ chạy bước 1 của công thức.
 
 ## Tiêu chí xong phase
 
-- 5 feature đạt "xong", `expansion-candidates` có brainstorm + PRD envelope.
+- 5 feature đạt "xong", `expansion-candidates` có brainstorm.
 - Crosswalk: 100% item LMP có cột "đã chuyển".

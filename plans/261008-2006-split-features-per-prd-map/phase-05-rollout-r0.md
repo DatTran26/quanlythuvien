@@ -27,7 +27,7 @@ Chạy `feature-recipe.md` (bản đã sửa sau pilot) cho 8 feature nền tả
 
 ## Các bước cho mỗi feature
 
-1. Chạy 9 bước `feature-recipe.md`.
+1. Chạy 6 bước `feature-recipe.md`.
 2. Đánh dấu "đã chuyển (phase 5)" trong `id-crosswalk-lmp.md` cho item của feature.
 3. Kiểm "xong" theo công thức.
 4. Cập nhật dòng Feature Map cột "Chi tiết hóa".

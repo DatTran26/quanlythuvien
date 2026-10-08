@@ -35,7 +35,7 @@ Quy tắc phân bổ:
 | 20 | `notification-audit-ui` | R1B | 019 (trung tâm thông báo), 020 (audit viewer), 027 | uc-notification-audit (phần xem) | notification-audit-flow (phần sau) | audit-log, history-timeline, + màn trung tâm thông báo (mới) | — | Màn trung tâm thông báo theo FR-C04 (DEC-SF-09) |
 | 21 | `reservation` | R2 | 012, 013, 024 (phần đặt/hủy trên portal) | uc-reservation | reservation-flow | reservation-search, reservation-form, reservation-queue, reservation-pickup | — | Gồm cả đặt trước online của người đọc (DEC-SF-02); chưa có story |
 | 22 | `trend-reports` | R2 | 023 (RP-03/05/06/07) | — | reports-flow (dataset R2) | report-dashboard (trạng thái R2, chủ là `ops-reports`) | — | |
-| 23 | `expansion-candidates` | R3 | 028 | — | — | — | — | Chỉ PRD envelope + brainstorm, không SRS |
+| 23 | `expansion-candidates` | R3 | 028 | — | — | — | — | Chỉ brainstorm, không SRS |
 
 ## 2. Requirement khác FR
 
