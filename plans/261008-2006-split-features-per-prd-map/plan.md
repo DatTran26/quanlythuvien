@@ -1,7 +1,7 @@
 ---
 title: "Tách bộ tài liệu thành 23 feature theo Feature Map"
 description: "Chuyển feature gộp library-management-platform thành 23 thư mục feature theo docs/_product/prd.md Mục 7, phần dùng chung vào docs/_shared/, đánh lại ID theo feature và đi đủ quy trình brainstorm → URD → BRD → PRD → SRS → models → UX → story/AC → checklist cho từng feature."
-status: pending
+status: in-progress
 priority: P1
 effort: "10 phases, khoảng 23 chuỗi tài liệu"
 issue: ""
@@ -56,6 +56,8 @@ Feature Map trong `docs/_product/prd.md` Mục 7 định nghĩa 23 feature có s
 | 7 | Rollout R1B, R2, R3 (6 feature) | [phase-07-rollout-r1b-r2-r3.md](phase-07-rollout-r1b-r2-r3.md) | 6 | Duyệt từng feature |
 | 8 | Gỡ feature gộp, sửa link, retire ID | [phase-08-retire-umbrella.md](phase-08-retire-umbrella.md) | 7 | Kiểm 0 link gãy |
 | 9 | Review chéo, traceability, bàn giao | [phase-09-review-handoff.md](phase-09-review-handoff.md) | 8 | Người dùng duyệt PR |
+
+Tiến độ hiện tại và việc tiếp theo: [checkpoint-2026-10-09.md](checkpoint-2026-10-09.md) (phase 4–7 đang chạy theo tầng, duyệt theo lô release).
 
 Công thức chạy cho một feature (dùng ở phase 4–7): [feature-recipe.md](feature-recipe.md).
 Ma trận phân bổ nháp (đầu vào phase 1): [feature-allocation-draft.md](feature-allocation-draft.md).
