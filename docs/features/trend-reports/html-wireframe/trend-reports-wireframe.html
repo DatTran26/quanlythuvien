@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>trend-reports — Mục lục HTML wireframe</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f0f0f0;color:#000}.layout{display:grid;grid-template-columns:310px 1fr;min-height:100vh}.sidebar{background:#fff;border-right:2px solid #000;padding:18px;position:sticky;top:0;height:100vh;overflow:auto}.brand{font-size:18px;font-weight:800;border-bottom:2px solid #000;padding-bottom:12px}.meta{font-size:11px;color:#888;line-height:1.5;margin:8px 0 14px}.flow{border:1px solid #ccc;margin-bottom:8px;background:#fff}.flow>a{display:block;color:#000;text-decoration:none;font-size:12px;font-weight:700;padding:8px}.flow>a:hover,.flow>a:focus{background:#000;color:#fff;outline:2px solid #000;outline-offset:2px}.screens{border-top:1px solid #ccc;padding:5px 8px;display:flex;flex-wrap:wrap;gap:4px}.screens a{font-size:10px;color:#000;text-decoration:underline}.main{padding:20px;min-width:0}.header{background:#fff;border:2px solid #000;padding:14px;margin-bottom:14px}.header h1{font-size:22px}.header p{font-size:12px;line-height:1.5;margin-top:6px}.flow-map{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.flow-map a{border:1px solid #000;color:#000;background:#fff;padding:5px 7px;font-size:10px;text-decoration:none}.viewer{width:100%;height:calc(100vh - 160px);border:2px solid #000;background:#fff}.fallback{font-size:11px;color:#888;margin-top:6px}@media(max-width:760px){.layout{grid-template-columns:1fr}.sidebar{position:static;height:auto;border-right:0;border-bottom:2px solid #000}.viewer{height:75vh}}
+  </style>
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar" aria-label="Mục lục wireframe">
+    <div class="brand">trend-reports</div><div class="meta">HTML wireframe · Mobile 375<br>1 flow · 1 màn hình<br>flow_hash: 728b2f6f</div>
+    <div class="flow"><a href="trend-reports-flow.html" data-flow="trend-reports-flow.html">01 · Báo cáo xu hướng (1)</a><div class="screens"><a href="trend-reports-flow.html#s1" title="trend-dashboard">[1] trend-dashboard</a></div></div>
+  </nav>
+  <main class="main"><header class="header"><h1>trend-reports — Wireframe</h1><p>Wireframe đen trắng khung Mobile 375, bám user flow đã duyệt. Chuyển màn sang feature khác xem docs/_shared/navigation-map.md.</p><div class="flow-map"><a href="trend-reports-flow.html">Báo cáo xu hướng</a></div></header><iframe id="viewer" class="viewer" name="wireframe-viewer" title="Flow wireframe" src="trend-reports-flow.html"></iframe><p class="fallback">Nếu iframe bị trình duyệt chặn khi mở local file, chọn trực tiếp một flow trong mục lục.</p></main>
+</div>
+<script>
+  const viewer=document.getElementById('viewer');
+  document.querySelectorAll('[data-flow]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();viewer.src=link.getAttribute('href');}));
+  document.querySelectorAll('.screens a').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();viewer.src=link.getAttribute('href');}));
+</script>
+</body>
+</html>

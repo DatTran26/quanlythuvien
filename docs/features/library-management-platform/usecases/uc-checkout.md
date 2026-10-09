@@ -6,7 +6,7 @@ updated: 2026-10-05
 links:
   - docs/features/library-management-platform/usecases/library-management-platform-usecase-index.md
   - docs/features/library-management-platform/srs/library-management-platform-spec.md
-  - docs/features/library-management-platform/domain/lifecycle-inventory.md
+  - docs/_shared/domain/lifecycle-inventory.md
   - docs/_product/decision-register.md
 ---
 
@@ -106,7 +106,7 @@ Người đọc đến quầy mượn sách; Thủ thư bắt đầu phiên chec
 - FR: FR-LMP-008 (mượn nhiều bản sao nguyên tử), FR-LMP-009 (idempotency & concurrency), FR-LMP-026 (QR locator — R0); liên quan FR-LMP-020 (audit), FR-LMP-019 (outbox).
 - NFR: NFR-LMP-003 (nguyên tử, chống double-write), NFR-LMP-006, NFR-LMP-007, NFR-LMP-008 (quầy thao tác bàn phím).
 - BR: BR-LMP-001 (all-or-nothing), BR-LMP-002 (chỉ mượn từ `AVAILABLE`/`ON_HOLD` đúng chủ), BR-LMP-003 (reader eligibility — ngưỡng OQ-LMP-010), BR-LMP-011, BR-LMP-013, BR-LMP-016.
-- Atomicity spec: AT-CHK-01..05 (`domain/lifecycle-inventory.md` §7.1); transitions COPY-T01/T02, LOAN-T01, RES-T03.
+- Atomicity spec: AT-CHK-01..05 (`docs/_shared/domain/lifecycle-inventory.md` §7.1); transitions COPY-T01/T02, LOAN-T01, RES-T03.
 - Errors covered: E-LMP-001, E-LMP-003, E-LMP-004, E-LMP-005, E-LMP-006, E-LMP-007, E-LMP-015.
 - Open: **OQ-LMP-010** (loan limit, hạn mượn, ngưỡng nợ chặn mượn); DEC-P2-05 (nhánh reservation đúng lượt chỉ từ R2).
 - UC liên quan: `uc-access-control` (include), `uc-reservation` (extend — R2), `uc-fine-payment`, `uc-reader-admin` (khắc phục eligibility).
