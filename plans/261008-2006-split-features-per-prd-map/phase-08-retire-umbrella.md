@@ -1,6 +1,6 @@
 ---
 title: "Phase 8: Gỡ feature gộp, sửa link, retire ID"
-status: pending
+status: completed
 priority: P1
 effort: "nửa ngày"
 dependencies: [7]

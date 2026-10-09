@@ -2,12 +2,12 @@
 type: domain-model
 scope: shared
 status: draft
-updated: 2026-10-08
+updated: 2026-10-09
 links:
   - docs/he_thong_quan_ly_thu_vien.md
   - docs/_shared/project-profile.md
   - docs/_product/product-roadmap-baseline.md
-  - docs/features/library-management-platform/srs/library-management-platform-spec.md
+  - docs/_shared/core-spec.md
   - docs/_product/decision-register.md
   - plans/reports/ba-audit-261005-0018-library-management-roadmap.md
   - plans/261004-1734-library-management-full-ba-workflow/phase-03-domain-models-and-state-recovery.md
@@ -29,7 +29,7 @@ Artifact bền của Phase 3 (domain model và phục hồi state). Phase 4 cons
 
 ## 1. Thuật ngữ và mô hình thực thể tổng
 
-Thuật ngữ theo `docs/_shared/project-profile.md`. Cột "SRS alias" ánh xạ sang namespace đang dùng trong `library-management-platform-spec.md` để truy vết chéo.
+Thuật ngữ theo `docs/_shared/project-profile.md`. Cột "SRS alias" ánh xạ sang namespace đang dùng trong `core-spec.md` và SRS từng feature để truy vết chéo.
 
 | Thuật ngữ (profile) | Entity / tên mã | Vai trò trong domain | SRS alias |
 |---------------------|-----------------|----------------------|-----------|

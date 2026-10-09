@@ -1,23 +1,23 @@
 ---
 type: id-crosswalk
 status: draft
-updated: 2026-10-08
+updated: 2026-10-09
 links:
   - docs/_shared/id-registry.md
   - docs/_product/decision-register.md
-  - docs/features/library-management-platform/srs/library-management-platform-spec.md
+  - docs/_shared/core-spec.md
 ---
 
 # Bảng đối chiếu mã LMP → mã theo feature
 
-Mỗi dòng ánh xạ một item của feature gộp `library-management-platform` sang đúng một đích (feature hoặc phần dùng chung) và một mã mới, theo quyết định DEC-SF-01..09 trong `docs/_product/decision-register.md`. Mã `*-LMP-*` sẽ retired sau khi tách xong; bảng này là nơi duy nhất còn giữ chúng.
+Mỗi dòng ánh xạ một item của feature gộp đã gỡ (`library-management-platform`, xóa 2026-10-09) sang đúng một đích (feature hoặc phần dùng chung) và một mã mới, theo quyết định DEC-SF-01..09 trong `docs/_product/decision-register.md`. Mã `*-LMP-*` đã retired; bảng này là nơi duy nhất còn giữ chúng trong tài liệu sống.
 
 Cách đọc:
 
 - **Phần**: mã LMP bị tách cho nhiều feature hoặc nhiều release thì mỗi phần một dòng (`a`, `b`…). Trống = không tách.
 - **Đích `core`**: phần dùng chung, sống ở `docs/_shared/core-spec.md` (NFR/BR/E/OQ) hoặc `docs/_shared/domain/` (entity, state machine, transition).
 - **Đã chuyển**: điền phase khi item đã có mặt ở file đích với mã mới. Trống = chưa chuyển.
-- Nguồn ghi theo đường dẫn tương đối trong `docs/features/library-management-platform/`.
+- Nguồn là đường dẫn lịch sử trong git (thư mục `docs/features/library-management-platform/` đã gỡ 2026-10-09). Khôi phục file gốc từ tag `pre-split-features` nếu cần đối chiếu.
 
 ## 1. Functional Requirement
 

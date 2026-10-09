@@ -2,16 +2,16 @@
 type: srs-states
 scope: shared
 status: draft
-updated: 2026-10-08
+updated: 2026-10-09
 links:
-  - docs/features/library-management-platform/srs/library-management-platform-spec.md
+  - docs/_shared/core-spec.md
   - docs/_shared/domain/lifecycle-inventory.md
   - docs/_product/product-roadmap-baseline.md
   - docs/_product/decision-register.md
   - docs/_shared/id-registry.md
 ---
 
-# library-management-platform — State Diagrams (SRS Tier 2)
+# Domain — State Diagrams (SRS Tier 2)
 
 > Draft cho file đích `docs/_shared/domain/library-states.md`. Nguồn transition chuẩn là `docs/_shared/domain/lifecycle-inventory.md` — mọi transition ID trong inventory (`COPY-T00..T19`, `LOAN-T01..T05`, `RES-T01..T06`, `DMG-T01..T04`) xuất hiện đúng một lần trong đúng một diagram của file này, kèm bảng đối chiếu nhãn nguồn. File này không bịa transition mới; phần nào là reconstruction đều ghi nhãn `PROPOSAL`/`Open` kèm decision gate.
 

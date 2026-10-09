@@ -237,3 +237,4 @@
 | 2026-10-09 | /wireframe-html | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/trend-reports/html-wireframe/trend-reports-wireframe.html` | Wireframe HTML trend-reports |
 | 2026-10-09 | /userstory | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/trend-reports/userstories/trend-reports-story-index.md` | story index trend-reports |
 | 2026-10-09 | /test-checklist | @dattran26 | `D:/Projects/QuanLyThuVIen/docs/features/trend-reports/test/checklist/checklist-feature.md` | checklist trend-reports |
+| 2026-10-09 | /kg | @dattran26 | `docs/features/library-management-platform/` | Phase 8: gỡ feature gộp; retarget link sống; retire series LMP qua `id-crosswalk-lmp.md` |

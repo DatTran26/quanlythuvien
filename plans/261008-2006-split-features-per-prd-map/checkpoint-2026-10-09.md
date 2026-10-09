@@ -22,15 +22,15 @@ Nhánh `docs/split-features` (sau đó merge `develop-dat`). Plan gốc: [plan.m
 | 4. User flow + wireframe HTML | **R0 + R1A + R1B+R2 xong** (22 feature; `ops-foundation`/`overdue-fines` không có màn; `expansion-candidates` không vẽ) | R0: `a865085`/`8e06bf5`; còn lại: Max 2026-10-09 |
 | 5. User story + AC | **22/22 xong** (draft, chuyển từ LMP + FR mới) | Max 2026-10-09 |
 | 6. Checklist | **22/22 xong** (draft, `CHK-{feature}-NNN`) | Max 2026-10-09 |
-| Phase 8 (gỡ feature gộp) | Chưa xóa LMP — **cần xác nhận user** | — |
-| Phase 9 (PR vào `develop`) | Đang làm khi user yêu cầu merge `develop-dat` | — |
+| Phase 8 (gỡ feature gộp) | **Xong** — user xác nhận xóa 2026-10-09; `git rm -r docs/features/library-management-platform/` | Max 2026-10-09 |
+| Phase 9 (PR vào `develop`) | PR #4 `develop-dat` → `develop` (bổ sung commit Phase 8) | — |
 
 Lô R0 tầng 4: 7 feature có UI (`access-control`, `reader-onboarding`, `account-admin`, `catalog-admin`, `copy-inventory`, `data-import`, `policy-config`); `ops-foundation` không có màn hình nên không có user flow/wireframe.
 
 ## Việc tiếp theo (theo thứ tự)
 
 1. Soát 🔶 trong [max-decisions-2026-10-09.md](max-decisions-2026-10-09.md) và lô user flow/wireframe (Max đã tự chốt HARD STOP).
-2. Phase 8: quét mã `*-LMP-*` còn sót trong feature gộp, sửa link, xóa `docs/features/library-management-platform/` (**phải hỏi người dùng xác nhận rõ trước khi xóa**).
+2. Phase 8: **đã xóa** `docs/features/library-management-platform/` sau khi retarget link sống; mã `*-LMP-*` chỉ còn ở `id-crosswalk-lmp.md` (bảng retired), `id-registry.md` (dòng retired), changelog lịch sử, và plan lịch sử.
 3. Review chéo /srs Phase G nếu cần; Feature Map đã đánh ✅ 6 tầng (draft) trừ `expansion-candidates`.
 
 ## Cách làm wireframe (để lô sau làm giống R0)

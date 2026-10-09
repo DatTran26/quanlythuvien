@@ -62,4 +62,4 @@ Trạng thái chi tiết hóa xem cột "Chi tiết hóa" trong `_product/prd.md
 
 ## Trạng thái chuyển đổi
 
-Bộ tài liệu đang được tách từ feature gộp `features/library-management-platform/` sang 23 thư mục feature theo `plans/261008-2006-split-features-per-prd-map/`. Feature gộp còn giữ tới khi tách xong; tra mã cũ `*-LMP-*` ở `_shared/id-crosswalk-lmp.md`.
+Feature gộp đã gỡ 2026-10-09. Tài liệu sống nằm ở 23 thư mục `features/{slug}/` theo Feature Map. Tra mã cũ (series đã retired) ở `_shared/id-crosswalk-lmp.md`.

@@ -5,7 +5,7 @@ Ngày: 2026-10-09. Người dùng ủy quyền Max tự trả lời mọi câu p
 ## Ủy quyền
 
 - HARD STOP `/user-flow`, L1 `/wireframe-html`, L1 `/userstory`, L1 `/ac`, L1 `/test-checklist`: **chốt / Apply Y**.
-- Không commit, không push, không PR, không xóa `docs/features/library-management-platform/` (Phase 8 phải hỏi lại).
+- Không commit, không push, không PR, không xóa `docs/features/library-management-platform/` (Phase 8 phải hỏi lại). **Cập nhật:** user xác nhận xóa 2026-10-09 — Phase 8 đã chạy.
 - Không bịa số nghiệp vụ chưa chốt. OQ nguồn giữ nguyên.
 
 ## Quyết định 🔶 đã chốt
