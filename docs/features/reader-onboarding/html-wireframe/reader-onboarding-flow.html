@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>reader-onboarding — Cấp tài khoản tại quầy | Wireframe</title>
+  <style>
+    /* RESET */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f0f0;
+      color: #000;
+      padding: 32px 24px;
+    }
+    .wf-page { max-width: 1400px; margin: 0 auto; }
+
+    /* BREADCRUMB về cửa-vào TOC — chỉ hiện khi mở file flow TRỰC TIẾP, ẩn khi trong iframe của {feature}-wireframe.html */
+    .wf-breadcrumb { max-width: 1400px; margin: 0 auto 16px; }
+    .wf-breadcrumb a { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #000; text-decoration: none; border: 1px solid #000; border-radius: 4px; padding: 6px 12px; background: #fff; }
+    .wf-breadcrumb a:hover { background: #f0f0f0; }
+    html.in-iframe .wf-breadcrumb { display: none; }
+
+    /* HEADER */
+    .wf-header { margin-bottom: 28px; border-bottom: 2px solid #000; padding-bottom: 14px; background: #fff; padding: 16px 20px; }
+    .wf-feature-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; }
+    .wf-flow-title { font-size: 22px; font-weight: 700; margin-top: 4px; }
+    .wf-flow-meta { font-size: 12px; color: #888; margin-top: 6px; }
+    .wf-flow-desc { font-size: 13px; color: #000; margin-top: 8px; line-height: 1.5; }
+
+    /* FLOW ROW — screens xếp ngang, TỰ WRAP theo bề rộng device (KHÔNG ép 3/row) */
+    .wf-rows { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px 16px; }
+    .wf-row-divider { display: none; } /* không còn chia row cứng — wrap tự nhiên */
+
+    /* SCREEN WRAPPER — bề rộng = device thật, KHÔNG phải 33% trừu tượng.
+       data-device trên .wf-page quyết định: mobile 375 / tablet 768 / desktop 1440.
+       Frame giữ tỉ lệ thật của thiết bị → không còn "size sai / trông giả". */
+    .wf-screen { flex: 0 0 auto; }
+    .wf-page[data-device="mobile"]  .wf-screen { width: 375px; }
+    .wf-page[data-device="tablet"]  .wf-screen { width: 768px; }
+    .wf-page[data-device="desktop"] .wf-screen { width: 1024px; max-width: 100%; }
+    .wf-page:not([data-device]) .wf-screen { width: 375px; } /* fallback mobile-first */
+    .wf-device-tag { display: inline-block; font-size: 10px; color: #000; border: 1px solid #ccc; border-radius: 3px; padding: 1px 6px; margin-bottom: 6px; }
+    .wf-step-badge {
+      font-size: 10px; font-weight: 700; color: #fff;
+      background: #000; border-radius: 50%;
+      width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 6px;
+    }
+    .wf-screen-label { text-align: center; font-size: 11px; color: #000; margin-top: 6px; }
+    .wf-shared-badge { font-size: 9px; color: #888; border: 1px solid #ccc; border-radius: 3px; padding: 0 4px; margin-left: 4px; }
+    .wf-arrow { display: flex; align-items: center; padding-top: 48px; font-size: 22px; color: #000; flex-shrink: 0; }
+
+    /* SCREEN FRAME (device chrome) */
+    .wf-screen-frame { border: 2px solid #000; border-radius: 8px; overflow: hidden; background: #fff; }
+    .wf-screen-bar { background: #f0f0f0; border-bottom: 1px solid #000; padding: 6px 10px; display: flex; align-items: center; gap: 5px; }
+    .wf-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid #888; background: #fff; flex-shrink: 0; }
+    .wf-bar-title { font-size: 11px; font-weight: 600; flex: 1; text-align: center; }
+    .wf-screen-content { padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+    .wf-form { width: 100%; max-width: 380px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .wf-form.card { border: 1px solid #ccc; border-radius: 8px; padding: 20px; background: #fff; }
+
+    /* APP BRAND */
+    .wf-app-brand { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: #000; padding-bottom: 4px; border-bottom: 1px solid #f0f0f0; margin-bottom: 4px; }
+    .wf-screen-title { font-size: 15px; font-weight: 700; text-align: center; margin-bottom: 4px; }
+
+    /* FORM ELEMENTS */
+    .field { display: flex; flex-direction: column; gap: 3px; }
+    .field label { font-size: 11px; font-weight: 600; }
+    .field input[type=text], .field input[type=email], .field input[type=password], .field select, .field textarea {
+      border: 1px solid #000; border-radius: 3px; padding: 7px 9px;
+      font-size: 12px; width: 100%; background: #fff; color: #000;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: #888; }
+    .input-pw { position: relative; }
+    .input-pw input { padding-right: 28px; width: 100%; border: 1px solid #000; border-radius: 3px; padding: 7px 9px; font-size: 12px; }
+    .input-pw .eye { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 13px; cursor: pointer; color: #000; }
+
+    /* CHECKBOX */
+    label.checkbox { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; }
+    label.checkbox input { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* BUTTONS */
+    .btn-primary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #000; color: #fff;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-secondary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-google {
+      display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .g-icon { font-size: 14px; font-weight: 900; font-style: italic; }
+
+    /* LINK */
+    .wf-link { font-size: 12px; color: #000; text-decoration: underline; cursor: pointer; }
+    .links-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; }
+
+    /* BANNERS / INFO */
+    .banner { font-size: 11px; padding: 8px 10px; border: 1px solid #000; border-radius: 4px; display: flex; gap: 6px; align-items: flex-start; line-height: 1.4; }
+    .banner-info { background: #f0f0f0; }
+    .banner-warn { background: #f0f0f0; }
+
+    /* LABELS / HINTS */
+    .info-label { font-size: 12px; color: #000; line-height: 1.5; text-align: center; }
+    .hint-text { font-size: 11px; color: #888; font-style: italic; }
+    .state-hint { font-size: 10px; color: #888; font-style: italic; margin-top: 2px; }
+
+    /* PASSWORD CHECKLIST */
+    .pw-check { display: flex; gap: 8px; flex-wrap: wrap; font-size: 10px; }
+    .pw-check .ok { color: #000; }
+    .pw-check .ok::before { content: "✓ "; }
+    .pw-check .fail { color: #888; }
+    .pw-check .fail::before { content: "✗ "; }
+
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #888; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #ccc; }
+
+    /* MODAL BOX */
+    .modal-box { border: 2px solid #000; border-radius: 6px; padding: 12px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+    .modal-title { font-size: 12px; font-weight: 700; border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+    .modal-desc { font-size: 11px; color: #000; line-height: 1.5; }
+    .modal-actions { display: flex; gap: 8px; margin-top: 4px; }
+    .modal-actions .btn-secondary, .modal-actions .btn-primary { flex: 1; font-size: 11px; padding: 7px 8px; }
+
+    /* ICON PLACEHOLDER */
+    .icon-lg { text-align: center; font-size: 28px; margin-bottom: 4px; }
+
+    /* BACK NAV */
+    .back-nav { font-size: 12px; color: #000; display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 4px; }
+
+    /* CARD */
+    .wf-card { border: 1px solid #ccc; border-radius: 4px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; }
+    .wf-card-body { flex: 1; }
+    .wf-card-title { font-size: 12px; font-weight: 700; }
+    .wf-card-sub { font-size: 11px; color: #000; }
+    .wf-card-action { flex-shrink: 0; }
+
+    /* CAPTCHA placeholder */
+    .captcha-box { border: 1px dashed #888; border-radius: 4px; padding: 8px; text-align: center; font-size: 10px; color: #888; background: #f0f0f0; }
+
+    /* FOOTER */
+    .wf-footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid #ccc; font-size: 10px; color: #888; display: flex; justify-content: space-between; }
+
+    /* SCREEN DESCRIPTION TABLE (Phase F.5) */
+    .wf-desc-section { margin-top: 32px; }
+    .wf-desc-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #000; }
+    .wf-desc-table { width: 100%; border-collapse: collapse; background: #fff; font-size: 12px; }
+    .wf-desc-table th, .wf-desc-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; }
+    .wf-desc-table th { background: #f0f0f0; font-weight: 700; font-size: 11px; text-transform: uppercase; }
+    .wf-desc-table td:first-child, .wf-desc-table th:first-child { width: 36px; text-align: center; }
+    .wf-desc-table td:nth-child(2) { width: 150px; }
+    .wf-desc-table td:nth-child(3) { width: 110px; }
+    .wf-desc-table td:nth-child(4) { width: 90px; }
+    .wf-desc-screen-header td { background: #000; color: #fff; font-weight: 700; font-size: 12px; }
+  </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.documentElement.classList.add('in-iframe');</script>
+<div class="wf-breadcrumb"><a href="reader-onboarding-wireframe.html">← Mục lục wireframe (reader-onboarding)</a></div>
+<div class="wf-page" data-device="mobile">
+
+  <div class="wf-header">
+    <div class="wf-feature-label">Feature: reader-onboarding / Wireframe</div>
+    <div class="wf-flow-title">Cấp tài khoản tại quầy</div>
+    <div class="wf-flow-meta">1 màn hình · Device: mobile · Cập nhật: 2026-10-09 · Nguồn: srs/reader-onboarding-userflow.md + srs/reader-onboarding-spec.md</div>
+    <div class="wf-flow-desc">Thủ thư hoặc Quản trị viên nhập hồ sơ người đọc, kiểm trùng, kích hoạt và cấp thẻ QR tại quầy. Không có tự đăng ký online (DEC-SF-03).</div>
+  </div>
+
+  <div class="wf-rows">
+    <div class="wf-screen" id="s1">
+      <div class="wf-step-badge">1</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Biểu mẫu người đọc [1]</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div>
+          <div class="back-nav"><a class="wf-link" href="../../account-admin/html-wireframe/account-admin-flow.html#s1">← Danh sách người đọc</a></div>
+          <div class="wf-screen-title">Biểu mẫu người đọc <span class="wf-shared-badge">R0</span></div>
+          <div class="wf-form">
+            <div class="field">
+              <label for="s2-name">Họ tên (full_name)</label>
+              <input id="s2-name" type="text" placeholder="Họ tên">
+            </div>
+            <div class="field">
+              <label for="s2-email">Email (email)</label>
+              <input id="s2-email" type="text" placeholder="Email">
+            </div>
+            <div class="field">
+              <label for="s2-phone">Điện thoại (phone)</label>
+              <input id="s2-phone" type="text" placeholder="Điện thoại">
+            </div>
+            <div class="field">
+              <label for="s2-dob">Ngày sinh (dob)</label>
+              <input id="s2-dob" type="text" placeholder="Ngày sinh">
+            </div>
+            <div class="field">
+              <label for="s2-address">Địa chỉ (address)</label>
+              <input id="s2-address" type="text" placeholder="Địa chỉ">
+            </div>
+            <p class="state-hint">PII FACT. “Liên hệ tối thiểu” không được liệt kê field nào — hiện đủ field liên hệ trong ERD, không thêm field. Pattern email/điện thoại/ngày chưa có — không bịa. Mask khi thiếu quyền: E-core-009.</p>
+            <div class="field">
+              <label for="s2-card">Mã thẻ QR (card_code)</label>
+              <input id="s2-card" type="text" placeholder="Mã thẻ duy nhất">
+            </div>
+            <p class="state-hint">FACT, unique, locator của thẻ (không phải credential). UC còn nói “mã độc giả”; ERD chỉ có reader_id (PK) và card_code (UK). Không thêm mã thứ ba.</p>
+            <button class="btn-secondary" type="button">Kích hoạt và cấp thẻ</button>
+            <p class="state-hint">FACT theo flows F2: cấp và kích hoạt tại quầy, không tự đăng ký online (DEC-SF-03). Điều kiện nguồn: mã thẻ duy nhất và tài khoản còn hiệu lực. Không bịa thêm điều kiện kích hoạt.</p>
+            <div class="field">
+              <label for="s2-expiry">Hạn thẻ (card_expiry)</label>
+              <input id="s2-expiry" type="text" placeholder="Hạn thẻ nếu có">
+            </div>
+            <p class="state-hint">FACT, “nếu có” (FR-reader-onboarding-001). Câu “hạn 1 năm” chỉ là default OQ-05, chưa phải policy đã duyệt — không dùng làm validation.</p>
+            <div class="field">
+              <label for="s2-status">Trạng thái tài khoản (status)</label>
+              <select id="s2-status">
+                <option>Chọn trạng thái</option>
+                <option>ACTIVE</option>
+                <option>LOCKED</option>
+                <option>DELETED</option>
+              </select>
+            </div>
+            <p class="state-hint">ERD FACT: ACTIVE / LOCKED / DELETED. UC viết active↔blocked — chưa có bảng ánh xạ, form hiển thị giá trị ERD. Nguồn không chốt default lúc tạo — dòng đầu không phải enum. Khóa/mở có lý do thực hiện ở (reader-detail · account-admin).</p>
+            <p class="info-label">Liên kết tài khoản đăng nhập (auth_account_ref) chờ OQ-access-control-001 và OQ-core-005. Không có ô mật khẩu trên màn này.</p>
+            <button class="btn-primary" type="button">Lưu hồ sơ</button>
+            <p class="hint-text">Hợp lệ thì sang <a class="wf-link" href="../../account-admin/html-wireframe/account-admin-flow.html#s2">chi tiết người đọc (reader-detail · account-admin)</a>. Audit cùng transaction (BR-core-003). Audit fail: E-core-007, rollback.</p>
+            <a class="wf-link" href="../../account-admin/html-wireframe/account-admin-flow.html#s2">Về chi tiết khi đang sửa</a>
+            <div class="banner banner-warn"><span>E-core-001 — Thiếu trường bắt buộc hoặc sai định dạng liên hệ / hạn thẻ. Giữ dữ liệu. Nguồn không nêu required-set hay charset.</span></div>
+            <div class="banner banner-warn"><span>E-core-003 — Trùng mã thẻ/định danh, hoặc mã không tồn tại. Không tạo hồ sơ thứ hai. Nhập mã khác hoặc mở hồ sơ đang giữ mã đó.</span></div>
+            <div class="modal-box">
+              <div class="modal-title">Xung đột đồng thời (E-core-004)</div>
+              <p class="modal-desc">Hồ sơ đổi sau khi mở form (SRC-BR13). Không ghi đè im lặng — quan trọng với trạng thái khóa. Diff là PROPOSAL, không merge tự động. ERD Reader không có field version; UC vẫn nói CAS trên version.</p>
+              <div class="modal-actions">
+                <button class="btn-primary" type="button">Tải trạng thái mới</button>
+                <button class="btn-secondary" type="button">Hủy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-screen-label">reader-form</div>
+    </div>
+  </div>
+
+  <div class="wf-desc-section">
+    <div class="wf-desc-title">Mô tả màn hình</div>
+    <table class="wf-desc-table">
+      <thead>
+        <tr><th>#</th><th>Items</th><th>Control type</th><th>Data type</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 1: Biểu mẫu người đọc [1]</td></tr>
+        <tr><td>1</td><td>Quay lại danh sách</td><td>Link</td><td>Click</td><td>Về (reader-list · account-admin), không lưu. Điểm vào tạo mới là danh sách.</td></tr>
+        <tr><td>2</td><td>Họ tên</td><td>Textbox</td><td>Text</td><td>full_name, FACT, PII. Không có độ dài/charset. Thiếu quyền field: ô mask E-core-009, không lộ giá trị cũ. “Liên hệ tối thiểu” không liệt kê field; họ tên vẫn là field ERD nên có mặt.</td></tr>
+        <tr><td>3</td><td>Email</td><td>Textbox</td><td>Text</td><td>email, FACT, PII. UC 3a nói sai định dạng liên hệ nhưng không nêu pattern — không bịa regex. Cũng không biến email thành tài khoản đăng nhập: identity là OQ-access-control-001.</td></tr>
+        <tr><td>4</td><td>Điện thoại</td><td>Textbox</td><td>Text</td><td>phone, FACT, PII. Không có độ dài, mã vùng hay charset trong nguồn.</td></tr>
+        <tr><td>5</td><td>Ngày sinh</td><td>Textbox</td><td>Text</td><td>dob, FACT, PII. Không có định dạng ngày — không bịa mask. Không suy ra tuổi hay điều kiện mượn từ ngày sinh.</td></tr>
+        <tr><td>6</td><td>Địa chỉ</td><td>Textbox</td><td>Text</td><td>address, FACT, PII. Không có cấu trúc tỉnh/huyện trong nguồn — một ô.</td></tr>
+        <tr><td>7</td><td>Mã thẻ QR</td><td>Textbox</td><td>Text</td><td>card_code, FACT, UK, locator thẻ không phải credential (BR-copy-inventory-001). Unique cùng “mã độc giả” theo UC; ERD không có field mã độc giả riêng ngoài reader_id. Trùng: E-core-003. Charset/độ dài chưa có.</td></tr>
+        <tr><td>8</td><td>Kích hoạt và cấp thẻ</td><td>Button</td><td>Click</td><td>Flows F2: cấp card_code duy nhất và kích hoạt tại quầy. Cấp và kích hoạt tại quầy (DEC-SF-03). Thành công: reader active theo BR-core-001. Mã trùng hoặc tài khoản không hiệu lực: E-core-003. Không bịa bước kích hoạt ngoài hai điều kiện đó.</td></tr>
+        <tr><td>9</td><td>Hạn thẻ</td><td>Textbox</td><td>Text</td><td>card_expiry, FACT, “nếu có” (FR-reader-onboarding-001). UC 3a nêu sai định dạng hạn thẻ nhưng không nêu pattern. “Hạn 1 năm” là default OQ-05, không dùng làm rule. Không bắt buộc hóa field này.</td></tr>
+        <tr><td>10</td><td>Trạng thái tài khoản</td><td>Dropdown</td><td>Select</td><td>status ERD FACT: ACTIVE, LOCKED, DELETED. UC viết active↔blocked — lệch chữ, chưa ánh xạ. Nguồn không chốt giá trị mặc định lúc tạo. Khóa/mở kèm lý do là hành động R1B trên (reader-detail · account-admin), không commit từ dropdown này. DELETED trên form không vượt BR-core-006: còn Loan mở hoặc nợ thì E-core-008.</td></tr>
+        <tr><td>11</td><td>Liên kết tài khoản</td><td>Label</td><td>ReadOnly</td><td>auth_account_ref chờ OQ-access-control-001 và OQ-core-005. PROPOSAL ở precondition UC (tài khoản local khi phát hành thẻ) không được vẽ thành form đăng nhập. Không có mật khẩu.</td></tr>
+        <tr><td>12</td><td>Lưu hồ sơ</td><td>Button</td><td>Click</td><td>Validation và concurrency đạt thì sang (reader-detail · account-admin). Ghi + audit một transaction (BR-core-003, NFR-core-005). E-core-001/E-core-003 ở lại [1]. E-core-004 mở hộp xung đột. E-core-007 rollback nếu audit fail. Chỉ actor được phép tạo/sửa field.</td></tr>
+        <tr><td>13</td><td>Về chi tiết khi đang sửa</td><td>Link</td><td>Click</td><td>Bỏ thay đổi chưa lưu, về (reader-detail · account-admin). Khớp đường sửa (reader-detail · account-admin) → [1].</td></tr>
+        <tr><td>14</td><td>Lỗi validation</td><td>Label</td><td>ReadOnly</td><td>E-core-001 cho liên hệ hoặc hạn thẻ. Giữ dữ liệu, không partial write. Required-set chưa được liệt kê từng field.</td></tr>
+        <tr><td>15</td><td>Trùng hoặc không thấy mã</td><td>Label</td><td>ReadOnly</td><td>E-core-003. Không tạo hồ sơ trùng định danh. Mở hồ sơ đang giữ mã hoặc nhập mã khác.</td></tr>
+        <tr><td>16</td><td>Tải trạng thái mới</td><td>Button</td><td>Click</td><td>Recovery E-core-004 / SRC-BR13. Đặc biệt không ghi đè một lần khóa/mở đã commit. Diff UI là PROPOSAL. ERD Reader không khai báo version trong khi UC nói CAS trên version — khoảng trống nguồn, không bịa field version.</td></tr>
+        <tr><td>17</td><td>Hủy xung đột</td><td>Button</td><td>Click</td><td>Không commit. Userflow: lỗi quay về trạng thái an toàn tại (reader-detail · account-admin) sau khi sửa; form giữ actor cho đến khi hủy hoặc lưu.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wf-footer">
+    <span>reader-onboarding / reader-onboarding-flow</span>
+    <span>/wireframe-html · 2026-10-09</span>
+  </div>
+
+</div>
+</body>
+</html>

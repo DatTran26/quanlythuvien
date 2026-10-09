@@ -5,8 +5,8 @@ status: draft
 updated: 2026-10-05
 links:
   - docs/features/library-management-platform/srs/library-management-platform-spec.md
-  - docs/features/library-management-platform/domain/lifecycle-inventory.md
-  - docs/features/library-management-platform/brainstorms/product-roadmap-baseline.md
+  - docs/_shared/domain/lifecycle-inventory.md
+  - docs/_product/product-roadmap-baseline.md
   - docs/features/library-management-platform/usecases/library-management-platform-usecase-index.md
   - docs/_product/roadmap.md
   - docs/_product/decision-register.md
@@ -15,7 +15,7 @@ links:
 
 # library-management-platform — Flow Models (SRS Tier 2)
 
-> Draft Phase 4 — SRS Tier 2 flow models. File đích cuối: `docs/features/library-management-platform/srs/library-management-platform-flows.md`. Nội dung được dựng từ các nguồn: spec.md (FR/BR/Error Matrix), `domain/lifecycle-inventory.md` (state transitions — nhãn PROPOSAL chờ DEC-D3-01/02), `brainstorms/product-roadmap-baseline.md` (§5 core flows, §6.1 D1–D6, §6.4 interrupted transactions, §6.5 edge cases), `docs/_product/roadmap.md` (release boundary R0–R3) và `decision-register.md`.
+> Draft Phase 4 — SRS Tier 2 flow models. File đích cuối: `docs/features/library-management-platform/srs/library-management-platform-flows.md`. Nội dung được dựng từ các nguồn: spec.md (FR/BR/Error Matrix), `docs/_shared/domain/lifecycle-inventory.md` (state transitions — nhãn PROPOSAL chờ DEC-D3-01/02), `docs/_product/product-roadmap-baseline.md` (§5 core flows, §6.1 D1–D6, §6.4 interrupted transactions, §6.5 edge cases), `docs/_product/roadmap.md` (release boundary R0–R3) và `decision-register.md`.
 
 ## 0. Quy ước và invariant dùng chung
 
