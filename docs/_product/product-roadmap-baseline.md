@@ -154,7 +154,7 @@ Ghi tình trạng → Bình thường / Hư hỏng / Mất
 | Reservation | WAITING/READY | CANCELLED | Người đọc hoặc nhân viên hủy | Không |
 | Reservation | READY | EXPIRED | Hết 48 giờ | Không |
 
-State machine đầy đủ của Copy đã được dựng lại thành artifact riêng tại `docs/_shared/domain/lifecycle-inventory.md` dưới nhãn **PROPOSAL** (DEC-D3-01/DEC-D3-02, liên quan OQ-LMP-004) — nguồn gốc đã mất nên đây là reconstruction chờ domain approval, không phải "phục hồi từ nguồn". Bảng trên chỉ ghi các transition đã có căn cứ từ tài liệu nguồn.
+State machine đầy đủ của Copy đã được dựng lại thành artifact riêng tại `docs/_shared/domain/lifecycle-inventory.md` dưới nhãn **PROPOSAL** (DEC-D3-01/DEC-D3-02, liên quan OQ-core-002) — nguồn gốc đã mất nên đây là reconstruction chờ domain approval, không phải "phục hồi từ nguồn". Bảng trên chỉ ghi các transition đã có căn cứ từ tài liệu nguồn.
 
 ### 6.4 Interrupted Transactions
 

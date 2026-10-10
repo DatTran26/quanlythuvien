@@ -2,10 +2,10 @@
 type: navigation-map
 scope: shared
 status: draft
-updated: 2026-10-08
+updated: 2026-10-09
 links:
   - docs/_shared/id-crosswalk-lmp.md
-  - docs/features/library-management-platform/srs/library-management-platform-userflow.md
+  - docs/features/access-control/srs/access-control-userflow.md
 ---
 
 # Bản đồ điều hướng giữa các feature

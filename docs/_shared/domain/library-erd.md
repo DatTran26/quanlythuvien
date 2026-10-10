@@ -2,20 +2,20 @@
 type: srs-erd
 scope: shared
 status: draft
-updated: 2026-10-08
+updated: 2026-10-09
 links:
-  - docs/features/library-management-platform/srs/library-management-platform-spec.md
+  - docs/_shared/core-spec.md
   - docs/_shared/domain/lifecycle-inventory.md
-  - docs/features/library-management-platform/usecases/library-management-platform-usecase-index.md
+  - docs/features/access-control/usecases/access-control-usecase-index.md
   - docs/_product/product-roadmap-baseline.md
   - docs/he_thong_quan_ly_thu_vien.md
   - docs/_shared/id-registry.md
   - docs/_product/decision-register.md
 ---
 
-# library-management-platform — ERD + Data Dictionary (draft Phase 4)
+# Domain — ERD + Data Dictionary (draft Phase 4)
 
-> Draft SRS Tier 2. File đích khi approved: `docs/_shared/domain/library-erd.md` (đã khai báo trong frontmatter spec §links).
+> Draft SRS Tier 2. File đích khi approved: `docs/_shared/domain/library-erd.md` (đã khai báo trong frontmatter `core-spec.md` §links).
 >
 > **Mức độ mô hình: data model nghiệp vụ.** Không chỉ định physical type, DB engine, index, phân vùng — đó là ranh giới SRS ↔ thiết kế kỹ thuật. Cột "Kiểu nghiệp vụ" dùng tập kiểu logic: `định danh`, `mã`, `văn bản`, `số nguyên`, `tiền (VND)`, `thời điểm`, `ngày`, `boolean`, `enum`, `tham chiếu logic`, `danh sách tham chiếu`, `snapshot`.
 
