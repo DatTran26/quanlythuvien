@@ -1,7 +1,7 @@
 ---
 type: design-system
 status: approved
-updated: 2026-10-09
+updated: 2026-10-10
 links:
   - docs/he_thong_quan_ly_thu_vien.md
 ---
@@ -228,277 +228,42 @@ Container của màu ngữ nghĩa ở chế độ tối dùng lại cặp nền/
 | Thanh điều hướng dưới | Nền `surface`; mục đang chọn: icon/chữ `primary` trên viên `primaryContainer`; mục khác: `textSecondary` |
 | Tiền phạt / số tiền nợ | `error` khi chưa trả; `textPrimary` khi đã trả |
 
-## 8. Code mẫu Flutter
+## 8. Code Flutter
+
+Code thật nằm trong `frontend/lib/core/theme/`. Tài liệu không chép lại code để hai nơi không lệch nhau; đọc thẳng file.
 
 ### 8.1 File token — nơi duy nhất được chứa mã màu
 
-`lib/core/theme/app_colors.dart`
+`frontend/lib/core/theme/app_colors.dart`
 
-```dart
-import 'package:flutter/material.dart';
+| Thành phần | Nội dung |
+|---|---|
+| `lightScheme`, `darkScheme` | `ColorScheme` Material 3 theo Mục 5 |
+| `AppColors.light`, `AppColors.dark` | `ThemeExtension` chứa màu ngoài `ColorScheme`: `background`, `textSecondary`, `divider`, `disabled*`, `primaryPressed`, `errorPressed`, `success`, `warning`, `info`, 7 cặp `status*` |
+| `successContainer`, `warningContainer`, `errorContainer`, `infoContainer` | Cặp nền/chữ cho banner, ô thông báo (Mục 3.3; chế độ tối dùng lại cặp trạng thái theo Mục 4) |
+| `ColorPair` | Cặp nền + chữ |
+| `copyStatus()`, `loanStatus()`, `reservationStatus()`, `fineStatus()`, `damageStatus()` | Ánh xạ mã trạng thái → cặp màu chip theo bảng Mục 3.4. **Chỗ duy nhất** chọn màu chip, cả nhóm dùng chung |
 
-/// Cặp màu nền + chữ cho chip trạng thái và banner.
-@immutable
-class ColorPair {
-  const ColorPair(this.background, this.foreground);
-  final Color background;
-  final Color foreground;
-
-  static ColorPair lerp(ColorPair a, ColorPair b, double t) => ColorPair(
-        Color.lerp(a.background, b.background, t)!,
-        Color.lerp(a.foreground, b.foreground, t)!,
-      );
-}
-
-/// Màu bổ sung ngoài ColorScheme của Material 3.
-@immutable
-class AppColors extends ThemeExtension<AppColors> {
-  const AppColors({
-    required this.background,
-    required this.textSecondary,
-    required this.divider,
-    required this.disabledBackground,
-    required this.disabledText,
-    required this.primaryPressed,
-    required this.errorPressed,
-    required this.success,
-    required this.warning,
-    required this.info,
-    required this.statusAvailable,
-    required this.statusOnLoan,
-    required this.statusReserved,
-    required this.statusPending,
-    required this.statusRepair,
-    required this.statusDanger,
-    required this.statusNeutral,
-  });
-
-  final Color background;
-  final Color textSecondary;
-  final Color divider;
-  final Color disabledBackground;
-  final Color disabledText;
-  final Color primaryPressed;
-  final Color errorPressed;
-  final Color success;
-  final Color warning;
-  final Color info;
-  final ColorPair statusAvailable;
-  final ColorPair statusOnLoan;
-  final ColorPair statusReserved;
-  final ColorPair statusPending;
-  final ColorPair statusRepair;
-  final ColorPair statusDanger;
-  final ColorPair statusNeutral;
-
-  static const light = AppColors(
-    background: Color(0xFFF6F8F7),
-    textSecondary: Color(0xFF56615C),
-    divider: Color(0xFFE7EBE9),
-    disabledBackground: Color(0xFFE7EBE9),
-    disabledText: Color(0xFF8A948F),
-    primaryPressed: Color(0xFF175747),
-    errorPressed: Color(0xFFA61B1B),
-    success: Color(0xFF1E7B45),
-    warning: Color(0xFFA15C07),
-    info: Color(0xFF1D5FA8),
-    statusAvailable: ColorPair(Color(0xFFDDF3E5), Color(0xFF17663A)),
-    statusOnLoan: ColorPair(Color(0xFFDDE9F8), Color(0xFF1B5296)),
-    statusReserved: ColorPair(Color(0xFFEAE3FA), Color(0xFF5B3FA8)),
-    statusPending: ColorPair(Color(0xFFFDEBD0), Color(0xFF8A4B00)),
-    statusRepair: ColorPair(Color(0xFFF1E4D8), Color(0xFF7A4A21)),
-    statusDanger: ColorPair(Color(0xFFFBE1E1), Color(0xFFA61B1B)),
-    statusNeutral: ColorPair(Color(0xFFE7EBE9), Color(0xFF4B5551)),
-  );
-
-  static const dark = AppColors(
-    background: Color(0xFF0F1412),
-    textSecondary: Color(0xFFA9B3AE),
-    divider: Color(0xFF222A27),
-    disabledBackground: Color(0xFF222A27),
-    disabledText: Color(0xFF66706B),
-    primaryPressed: Color(0xFF9BE0C9),
-    errorPressed: Color(0xFFFFA59D),
-    success: Color(0xFF6FD39A),
-    warning: Color(0xFFF0A548),
-    info: Color(0xFF8AB8F0),
-    statusAvailable: ColorPair(Color(0xFF12402A), Color(0xFF9FE0B8)),
-    statusOnLoan: ColorPair(Color(0xFF12305A), Color(0xFFA9C9F2)),
-    statusReserved: ColorPair(Color(0xFF33265E), Color(0xFFCDBEF5)),
-    statusPending: ColorPair(Color(0xFF4A2E05), Color(0xFFF7CD8E)),
-    statusRepair: ColorPair(Color(0xFF3F2A17), Color(0xFFE3C4A6)),
-    statusDanger: ColorPair(Color(0xFF4F1414), Color(0xFFF5AFAF)),
-    statusNeutral: ColorPair(Color(0xFF2A3230), Color(0xFFBAC3BF)),
-  );
-
-  @override
-  AppColors copyWith() => this;
-
-  @override
-  AppColors lerp(ThemeExtension<AppColors>? other, double t) {
-    if (other is! AppColors) return this;
-    return AppColors(
-      background: Color.lerp(background, other.background, t)!,
-      textSecondary: Color.lerp(textSecondary, other.textSecondary, t)!,
-      divider: Color.lerp(divider, other.divider, t)!,
-      disabledBackground:
-          Color.lerp(disabledBackground, other.disabledBackground, t)!,
-      disabledText: Color.lerp(disabledText, other.disabledText, t)!,
-      primaryPressed: Color.lerp(primaryPressed, other.primaryPressed, t)!,
-      errorPressed: Color.lerp(errorPressed, other.errorPressed, t)!,
-      success: Color.lerp(success, other.success, t)!,
-      warning: Color.lerp(warning, other.warning, t)!,
-      info: Color.lerp(info, other.info, t)!,
-      statusAvailable:
-          ColorPair.lerp(statusAvailable, other.statusAvailable, t),
-      statusOnLoan: ColorPair.lerp(statusOnLoan, other.statusOnLoan, t),
-      statusReserved: ColorPair.lerp(statusReserved, other.statusReserved, t),
-      statusPending: ColorPair.lerp(statusPending, other.statusPending, t),
-      statusRepair: ColorPair.lerp(statusRepair, other.statusRepair, t),
-      statusDanger: ColorPair.lerp(statusDanger, other.statusDanger, t),
-      statusNeutral: ColorPair.lerp(statusNeutral, other.statusNeutral, t),
-    );
-  }
-}
-
-/// ColorScheme Material 3 theo Mục 5.
-const lightScheme = ColorScheme(
-  brightness: Brightness.light,
-  primary: Color(0xFF1F6F5C),
-  onPrimary: Color(0xFFFFFFFF),
-  primaryContainer: Color(0xFFD3EDE4),
-  onPrimaryContainer: Color(0xFF0B3B30),
-  secondary: Color(0xFF9A5B13),
-  onSecondary: Color(0xFFFFFFFF),
-  secondaryContainer: Color(0xFFFCE8CC),
-  onSecondaryContainer: Color(0xFF4A2A00),
-  error: Color(0xFFC62828),
-  onError: Color(0xFFFFFFFF),
-  errorContainer: Color(0xFFFBE1E1),
-  onErrorContainer: Color(0xFFA61B1B),
-  surface: Color(0xFFFFFFFF),
-  onSurface: Color(0xFF1A1F1D),
-  onSurfaceVariant: Color(0xFF56615C),
-  outline: Color(0xFF8A948F),
-  outlineVariant: Color(0xFFE7EBE9),
-  scrim: Color(0xFF000000),
-);
-
-const darkScheme = ColorScheme(
-  brightness: Brightness.dark,
-  primary: Color(0xFF7DD3B8),
-  onPrimary: Color(0xFF003829),
-  primaryContainer: Color(0xFF0F4F40),
-  onPrimaryContainer: Color(0xFFC2EBDC),
-  secondary: Color(0xFFF2B66B),
-  onSecondary: Color(0xFF3A2100),
-  secondaryContainer: Color(0xFF5A3A0C),
-  onSecondaryContainer: Color(0xFFFCE8CC),
-  error: Color(0xFFFF8A80),
-  onError: Color(0xFF5C0A0A),
-  errorContainer: Color(0xFF4F1414),
-  onErrorContainer: Color(0xFFF5AFAF),
-  surface: Color(0xFF171D1B),
-  onSurface: Color(0xFFE3E8E5),
-  onSurfaceVariant: Color(0xFFA9B3AE),
-  outline: Color(0xFF76817C),
-  outlineVariant: Color(0xFF222A27),
-  scrim: Color(0xFF000000),
-);
-```
-
-> `errorPressed` chế độ tối `#FFA59D` là màu sáng hơn `error` một bậc (cùng logic `primaryPressed`); chữ `onError` `#5C0A0A` trên nền này vẫn đạt trên 6:1.
+Hàm ánh xạ nhận mã theo enum backend (`apps/api`) và cả tên trong tài liệu khi hai bên khác nhau: khoản phạt `OPEN` = `UNPAID`, báo cáo hư hỏng `DISPOSED` = `DISPOSE`. Mã chưa biết rơi về `statusNeutral`.
 
 ### 8.2 Gắn vào theme
 
-`lib/core/theme/app_theme.dart`
+`frontend/lib/core/theme/app_theme.dart` có `buildTheme(Brightness)` áp quy cách Mục 6 và Mục 7: AppBar, nút, ô nhập, thẻ, chip, snackbar, dialog, bottom sheet, thanh điều hướng dưới, NavigationRail, TabBar, scrim 40%.
+
+Trong `MaterialApp`:
 
 ```dart
-import 'package:flutter/material.dart';
-
-import 'app_colors.dart';
-
-ThemeData buildTheme(Brightness brightness) {
-  final isDark = brightness == Brightness.dark;
-  final scheme = isDark ? darkScheme : lightScheme;
-  final colors = isDark ? AppColors.dark : AppColors.light;
-
-  const shape = RoundedRectangleBorder(
-    borderRadius: BorderRadius.all(Radius.circular(12)),
-  );
-  const size = Size.fromHeight(48);
-  const padding = EdgeInsets.symmetric(horizontal: 20);
-  const text = TextStyle(fontSize: 15, fontWeight: FontWeight.w500);
-
-  return ThemeData(
-    useMaterial3: true,
-    colorScheme: scheme,
-    scaffoldBackgroundColor: colors.background,
-    extensions: [colors],
-    appBarTheme: AppBarTheme(
-      backgroundColor: scheme.primary,
-      foregroundColor: scheme.onPrimary,
-    ),
-    filledButtonTheme: FilledButtonThemeData(
-      style: FilledButton.styleFrom(
-        minimumSize: size,
-        padding: padding,
-        shape: shape,
-        textStyle: text,
-        disabledBackgroundColor: colors.disabledBackground,
-        disabledForegroundColor: colors.disabledText,
-      ),
-    ),
-    outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        minimumSize: size,
-        padding: padding,
-        shape: shape,
-        textStyle: text,
-        side: BorderSide(color: scheme.outline),
-      ),
-    ),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        minimumSize: size,
-        padding: padding,
-        shape: shape,
-        textStyle: text,
-      ),
-    ),
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: scheme.surface,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: scheme.outline),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: scheme.outline),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: scheme.primary, width: 2),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: scheme.error, width: 2),
-      ),
-    ),
-    cardTheme: CardThemeData(
-      color: scheme.surface,
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: BorderSide(color: colors.divider),
-      ),
-    ),
-  );
-}
+theme: buildTheme(Brightness.light),
+darkTheme: buildTheme(Brightness.dark),
 ```
 
-Trong `MaterialApp`: `theme: buildTheme(Brightness.light), darkTheme: buildTheme(Brightness.dark)`.
+Ghi chú khi dùng:
+
+1. **Kích thước nút** là cao 48px, rộng theo nội dung. Không dùng `Size.fromHeight(48)`: nó đặt chiều rộng tối thiểu vô hạn, nút trong `Row` sẽ lỗi layout. Nút chính full-width thì bọc `SizedBox(width: double.infinity)`.
+2. **Filled** gắn thẳng vào theme (nền `primary`, nhấn `primaryPressed`). Theme Filled cũng áp lên `FilledButton.tonal`, nên **Tonal, Danger và nút nhỏ phải truyền `style`** từ `AppButtonStyles`.
+3. **Viền focus** 2px `info` nằm sát mép nút; Flutter không hỗ trợ khoảng hở 2px như Mục 6.3.
+4. **TabBar** trong theme tô cho trường hợp đặt trong thân màn. Đặt trong `AppBar.bottom` (nền `primary`) thì truyền `labelColor` và `indicatorColor` là `scheme.onPrimary`.
+5. **Snackbar lỗi** truyền `backgroundColor: scheme.error`; mặc định theme là kiểu thành công/thông tin.
 
 ### 8.3 Cách dùng trong widget
 
@@ -507,32 +272,35 @@ Trong `MaterialApp`: `theme: buildTheme(Brightness.light), darkTheme: buildTheme
 final scheme = Theme.of(context).colorScheme;
 final colors = Theme.of(context).extension<AppColors>()!;
 
-// Nút — KHÔNG truyền màu, theme đã lo
-FilledButton(onPressed: _confirm, child: const Text('Xác nhận mượn'));
-FilledButton.tonal(onPressed: _scan, child: const Text('Quét thêm sách'));
+// Nút
+FilledButton(onPressed: _confirm, child: const Text('Xác nhận mượn'));     // Filled: theme lo
+FilledButton.tonal(
+  style: AppButtonStyles.tonal(context),
+  onPressed: _scan,
+  child: const Text('Quét thêm sách'),
+);
 OutlinedButton(onPressed: _renew, child: const Text('Gia hạn'));
 TextButton(onPressed: _history, child: const Text('Xem lịch sử'));
-
-// Nút Danger
-FilledButton(
-  style: FilledButton.styleFrom(
-    backgroundColor: scheme.error,
-    foregroundColor: scheme.onError,
-  ),
+FilledButton(                                                             // Danger
+  style: AppButtonStyles.danger(context),
   onPressed: _confirmDispose,
   child: const Text('Thanh lý sách'),
 );
+OutlinedButton(                                                           // nút nhỏ trong danh sách
+  style: AppButtonStyles.small(context),
+  onPressed: _renewOne,
+  child: const Text('Gia hạn'),
+);
 
-// Chip trạng thái — ánh xạ mã trạng thái sang token tại MỘT chỗ duy nhất
-ColorPair copyStatusColor(AppColors c, String status) => switch (status) {
-      'AVAILABLE' => c.statusAvailable,
-      'ON_LOAN' => c.statusOnLoan,
-      'ON_HOLD' => c.statusReserved,
-      'PENDING_REVIEW' => c.statusPending,
-      'IN_REPAIR' => c.statusRepair,
-      'LOST' => c.statusDanger,
-      _ => c.statusNeutral, // DISPOSED và mã chưa biết
-    };
+// Chip trạng thái — lấy cặp màu từ hàm ánh xạ chung
+final pair = colors.copyStatus(copy.status);
+Chip(
+  backgroundColor: pair.background,
+  label: Text('Sẵn sàng', style: TextStyle(color: pair.foreground)),
+);
+
+// Banner
+final info = colors.warningContainer; // nền info.background, chữ + icon info.foreground
 ```
 
 ❌ **Không viết:** `color: Color(0xFF1F6F5C)`, `color: Colors.green`, `color: Colors.red.shade700` trong widget.
@@ -565,7 +333,7 @@ Có token phù hợp → dùng luôn, **dừng ở đây**.
 
 ### Bước 3 — Thêm vào code và tài liệu trong CÙNG một PR
 
-1. `lib/core/theme/app_colors.dart`: thêm field, giá trị `light` + `dark`, và dòng trong `lerp`.
+1. `frontend/lib/core/theme/app_colors.dart`: thêm field, giá trị `light` + `dark`, và dòng trong `lerp`.
 2. File này (`docs/design/color-system.md`): thêm dòng vào bảng tương ứng (Mục 3, 4, và Mục 3.4 nếu là trạng thái), ghi mã hex + mục đích + tỉ lệ tương phản; thêm dòng vào Mục 11.
 3. Dùng token mới trong widget qua `Theme.of(context).extension<AppColors>()`.
 
@@ -585,7 +353,7 @@ Cần **ít nhất 1 thành viên khác duyệt** trước khi merge vào `devel
 
 1. Tìm màu viết cứng trong phần code thay đổi:
    ```bash
-   git diff origin/develop -- 'app/lib/**/*.dart' | grep -nE "Color\(0x|Colors\.[a-z]"
+   git diff origin/develop -- 'frontend/lib/**/*.dart' | grep -nE "Color\(0x|Colors\.[a-z]"
    ```
    Có kết quả nằm ngoài `app_colors.dart` → yêu cầu sửa sang token. (Ngoại lệ: `Colors.transparent`.)
 2. Đối chiếu tỉ lệ tương phản trong PR với công cụ đo.
@@ -607,3 +375,4 @@ Cần **ít nhất 1 thành viên khác duyệt** trước khi merge vào `devel
 | Ngày | Nội dung | Người |
 |---|---|---|
 | 2026-10-09 | Tạo bảng màu sáng/tối, màu trạng thái, quy cách nút và quy trình thêm màu | Hoàng |
+| 2026-10-10 | Code theme thật ở `frontend/lib/core/theme/`; Mục 8 trỏ sang code thay vì chép mẫu; sửa kích thước nút (bỏ `Size.fromHeight`), thêm `AppButtonStyles` (Tonal, Danger, nút nhỏ), container ngữ nghĩa và hàm ánh xạ trạng thái dùng chung | Hoàng |
