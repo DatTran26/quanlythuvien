@@ -10,6 +10,7 @@ tags: [docs, product, ba, critical]
 blockedBy: ["stakeholder-approval-authority", "representative-excel-source", "missing-copy-and-return-diagrams"]
 blocks: []
 created: 2026-10-05
+superseded_by: plans/261008-2006-split-features-per-prd-map/plan.md
 ---
 
 # Quy trình BA đầy đủ cho Hệ thống Quản lý Thư viện

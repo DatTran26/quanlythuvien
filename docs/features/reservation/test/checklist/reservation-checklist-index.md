@@ -1,0 +1,20 @@
+---
+type: test-checklist-index
+feature: reservation
+status: draft
+updated: 2026-10-09
+next_chk_id: 4
+links:
+  - docs/features/reservation/srs/reservation-spec.md
+  - docs/features/reservation/test/test-strategy.md
+---
+
+# Test Checklists — reservation
+
+Baseline nghĩa vụ từ SRS/US/AC đang `draft`. Chưa duyệt, chưa sinh test case.
+
+## Checklists
+
+| Scope | File | Items | Status | Updated |
+|-------|------|-------|--------|---------|
+| feature | [checklist-feature.md](checklist-feature.md) | 3 | draft | 2026-10-09 |
