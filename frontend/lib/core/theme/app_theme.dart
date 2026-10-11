@@ -228,11 +228,24 @@ ThemeData buildTheme(Brightness brightness) {
 
     // Chip trạng thái: bo tròn hoàn toàn, chữ 13px w500.
     // Màu nền/chữ truyền theo từng chip: colors.copyStatus(...), colors.loanStatus(...)…
-    chipTheme: const ChipThemeData(
-      shape: StadiumBorder(),
+    // Chip lọc (FilterChip, ChoiceChip) không truyền màu: dùng màu mặc định dưới đây,
+    // chữ đổi theo sáng/tối. Thiếu màu chữ thì chip rơi về chữ đen, không đọc được ở chế độ tối.
+    chipTheme: ChipThemeData(
+      shape: const StadiumBorder(),
       side: BorderSide.none,
-      labelStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-      padding: EdgeInsets.symmetric(horizontal: 4),
+      backgroundColor: colors.divider,
+      selectedColor: scheme.primaryContainer,
+      checkmarkColor: scheme.onPrimaryContainer,
+      labelStyle: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w500,
+        color: WidgetStateColor.resolveWith(
+          (states) => states.contains(WidgetState.selected)
+              ? scheme.onPrimaryContainer
+              : scheme.onSurface,
+        ),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
     ),
 
     // Snackbar thành công/thông tin: nền textPrimary, chữ surface.
