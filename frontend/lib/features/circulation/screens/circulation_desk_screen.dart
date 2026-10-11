@@ -15,6 +15,20 @@ import '../../../features/access/data/auth_store.dart';
 import '../../../features/notification/widgets/notification_bell.dart';
 import '../widgets/desk_action_card.dart';
 
+/// Quầy được mở đè lên trang chủ. Pop về đúng route đó, kể cả khi drawer đang mở.
+void _openLibraryHome(BuildContext context) {
+  final nav = Navigator.of(context);
+  var foundHome = false;
+  nav.popUntil((route) {
+    final isHome = route.settings.name == AppRoutes.dashboard;
+    if (isHome) foundHome = true;
+    return isHome || route.isFirst;
+  });
+  if (!foundHome) {
+    nav.pushReplacementNamed(AppRoutes.dashboard);
+  }
+}
+
 class CirculationDeskScreen extends StatelessWidget {
   const CirculationDeskScreen({super.key});
 
@@ -22,8 +36,21 @@ class CirculationDeskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // Drawer chiếm nút trái mặc định, nên tự gắn nút về trang chủ.
+        leading: IconButton(
+          tooltip: 'Trang chủ',
+          icon: const BackButtonIcon(),
+          onPressed: () => _openLibraryHome(context),
+        ),
         title: const Text('Quầy lưu thông'),
         actions: [
+          Builder(
+            builder: (context) => IconButton(
+              tooltip: 'Menu quầy',
+              icon: const Icon(Icons.menu),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+          ),
           if (AppSession.userId != null) NotificationBell(userId: AppSession.userId!),
         ],
       ),
@@ -152,6 +179,12 @@ class _DeskDrawer extends StatelessWidget {
               child: Text('Thư viện', style: context.textTheme.titleLarge?.copyWith(color: scheme.onPrimary)),
             ),
           ),
+          ListTile(
+            leading: const Icon(Icons.home_outlined),
+            title: const Text('Trang chủ'),
+            onTap: () => _openLibraryHome(context),
+          ),
+          const Divider(),
           // Các màn TV2 không có thẻ riêng trên quầy
           ListTile(
             leading: const Icon(Icons.update),
