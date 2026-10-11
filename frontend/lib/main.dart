@@ -1,16 +1,24 @@
-// TẠM THỜI để chạy thử các màn TV2. main.dart là phần của TV1 (Đạt): khi Đạt làm khung app,
-// giữ 3 điểm sau: initializeDateFormatting('vi'), theme/darkTheme, onGenerateRoute.
-
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import 'core/network/api_client.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/app_routes.dart';
+import 'core/routing/navigator_key.dart';
 import 'core/theme/app_theme.dart';
+import 'features/access/data/auth_store.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initializeDateFormatting('vi'); // DateFormat(..., 'vi') cần dữ liệu ngôn ngữ (bài 02-checkout/01)
+  await initializeDateFormatting('vi');
+  await AuthStore.restore();
+  ApiClient.instance.onUnauthorized = () {
+    appNavigatorKey.currentState?.pushNamed(
+      AppRoutes.sessionExpired,
+      arguments: 'Phiên đăng nhập đã hết. Nhập lại mật khẩu để tiếp tục.',
+    );
+  };
   runApp(const MainApp());
 }
 
@@ -22,12 +30,17 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'Quản lý thư viện',
       debugShowCheckedModeBanner: false,
-      // Bắt buộc: các màn lấy màu bằng Theme.of(context).extension<AppColors>()!,
-      // thiếu theme thì extension là null và màn báo lỗi đỏ.
+      navigatorKey: appNavigatorKey,
       theme: buildTheme(Brightness.light),
       darkTheme: buildTheme(Brightness.dark),
-      // Mở thẳng màn quầy; nút ← ở quầy quay về trang chủ (TV1, đang là màn tạm).
-      initialRoute: AppRoutes.circulationDesk,
+      locale: const Locale('vi'),
+      supportedLocales: const [Locale('vi'), Locale('en')],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      initialRoute: AppRoutes.dashboard,
       onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }

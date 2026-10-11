@@ -1,8 +1,32 @@
-// Ghép tên route -> màn hình, đọc arguments có kiểu rõ ràng.
-// Bài: Hoang/01-nen-tang/04-dieu-huong-routing.md mục 2.2
-// TV1 (Đạt) quản lý file này; route của người khác chưa làm thì trỏ về PlaceholderScreen.
+// Ghép tên route -> màn hình.
+// TV1 quản lý file này. Route chưa làm thì trỏ về PlaceholderScreen.
 
 import 'package:flutter/material.dart';
+import 'package:frontend/features/access/screens/dashboard_screen.dart';
+import 'package:frontend/features/access/screens/forgot_password_screen.dart';
+import 'package:frontend/features/access/screens/login_screen.dart';
+import 'package:frontend/features/access/screens/reset_password_screen.dart';
+import 'package:frontend/features/access/screens/session_expired_screen.dart';
+import 'package:frontend/features/accounts/screens/reader_list_screen.dart';
+import 'package:frontend/features/catalog/screens/bibliographic_detail_screen.dart';
+import 'package:frontend/features/catalog/screens/bibliographic_form_screen.dart';
+import 'package:frontend/features/catalog/screens/catalog_search_screen.dart';
+import 'package:frontend/features/catalog/screens/category_admin_screen.dart';
+import 'package:frontend/features/fine/data/fine_api.dart';
+import 'package:frontend/features/fine/screens/fine_list_screen.dart';
+import 'package:frontend/features/imports/screens/import_report_screen.dart';
+import 'package:frontend/features/imports/screens/import_upload_screen.dart';
+import 'package:frontend/features/inventory/screens/copy_form_screen.dart';
+import 'package:frontend/features/inventory/screens/copy_inventory_screen.dart';
+import 'package:frontend/features/notification/data/notification_api.dart';
+import 'package:frontend/features/notification/screens/audit_log_screen.dart';
+import 'package:frontend/features/notification/screens/notification_center_screen.dart';
+import 'package:frontend/features/notification/screens/notification_status_screen.dart';
+import 'package:frontend/features/notification/widgets/access_denied_view.dart';
+import 'package:frontend/features/ops/screens/backup_runs_screen.dart';
+import 'package:frontend/features/policy/screens/admin_config_screen.dart';
+import 'package:frontend/features/reader_portal/data/portal_api.dart';
+import 'package:frontend/features/reader_portal/screens/reader_portal_shell.dart';
 
 import '../../features/circulation/models/book_copy.dart';
 import '../../features/circulation/models/checkout_session.dart';
@@ -34,43 +58,96 @@ import 'placeholder_screens.dart';
 abstract final class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
-    final Widget page = switch (settings.name) {
-      // TV1 — chưa làm
-      AppRoutes.dashboard => const PlaceholderScreen(title: 'Trang chủ', owner: 'TV1 (Đạt)'),
-      AppRoutes.sessionExpired => StepUpPlaceholderScreen(reason: args as String?),
+    final page = switch (settings.name) {
+      AppRoutes.dashboard => AppSession.isSignedIn ? const DashboardScreen() : const LoginScreen(),
+      AppRoutes.sessionExpired => SessionExpiredScreen(reason: args is String ? args : null),
+      AppRoutes.forgotPassword => const ForgotPasswordScreen(),
+      AppRoutes.resetPassword => const ResetPasswordScreen(),
 
-      // TV2 — lưu thông
-      AppRoutes.circulationDesk => const CirculationDeskScreen(),
-      AppRoutes.checkoutScan => const CheckoutScanScreen(),
-      AppRoutes.checkoutReview => CheckoutReviewScreen(session: args as CheckoutSession),
-      AppRoutes.checkoutConflict => CheckoutConflictScreen(copies: args as List<BookCopy>),
-      AppRoutes.returnScan => ReturnScanScreen(openCamera: args == true),
-      AppRoutes.returnResult => ReturnResultScreen(result: args as ReturnOutcome),
-      AppRoutes.renewalRequest => const RenewalRequestScreen(),
-      AppRoutes.renewalResult => RenewalResultScreen(results: args as List<RenewalItemResult>),
+      AppRoutes.catalogSearch => _staff(const CatalogSearchScreen()),
+      AppRoutes.bibliographicDetail => _staff(BibliographicDetailScreen(titleId: args as int)),
+      AppRoutes.bibliographicForm => _admin(BibliographicFormScreen(titleId: args as int?)),
+      AppRoutes.categoryAdmin => _admin(const CategoryAdminScreen()),
+      AppRoutes.copyInventory => _staff(CopyInventoryScreen(titleId: args as int)),
+      AppRoutes.copyForm => _admin(CopyFormScreen(titleId: args as int)),
+      AppRoutes.importUpload => _admin(const ImportUploadScreen()),
+      AppRoutes.importReport => _admin(ImportReportScreen(batchId: args as int)),
+      AppRoutes.adminConfig => _admin(const AdminConfigScreen()),
+      AppRoutes.backupRuns => _admin(const BackupRunsScreen()),
 
-      // TV2 — hư hỏng, mất
-      AppRoutes.damageForm => DamageReportFormScreen(initialCopyCode: args as String?),
-      AppRoutes.damageDetail => DamageReportDetailScreen(args: args as DamageDetailArgs, isAdmin: AppSession.isAdmin),
-      AppRoutes.lostRecord => LostRecordScreen(args: args),
-      AppRoutes.foundAfterLost => const FoundAfterLostScreen(),
+      AppRoutes.circulationDesk => _staff(const CirculationDeskScreen()),
+      AppRoutes.checkoutScan => _staff(const CheckoutScanScreen()),
+      AppRoutes.checkoutReview => _staff(CheckoutReviewScreen(session: args as CheckoutSession)),
+      AppRoutes.checkoutConflict => _staff(CheckoutConflictScreen(copies: args as List<BookCopy>)),
+      AppRoutes.returnScan => _staff(ReturnScanScreen(openCamera: args == true)),
+      AppRoutes.returnResult => _staff(ReturnResultScreen(result: args as ReturnOutcome)),
+      AppRoutes.renewalRequest => _staff(const RenewalRequestScreen()),
+      AppRoutes.renewalResult => _staff(RenewalResultScreen(results: args as List<RenewalItemResult>)),
+      AppRoutes.damageForm => _staff(DamageReportFormScreen(initialCopyCode: args as String?)),
+      AppRoutes.damageDetail => _staff(
+          DamageReportDetailScreen(args: args as DamageDetailArgs, isAdmin: AppSession.isAdmin),
+        ),
+      AppRoutes.lostRecord => _staff(LostRecordScreen(args: args)),
+      AppRoutes.foundAfterLost => _staff(const FoundAfterLostScreen()),
+      AppRoutes.reservationSearch => _staff(const ReservationShell()),
+      AppRoutes.reservationQueue => _staff(const ReservationShell(initialTab: 1)),
+      AppRoutes.reservationForm => _staff(ReservationFormScreen(title: args as TitleItem)),
+      AppRoutes.reservationPickup => _staff(ReservationPickupScreen(reservation: args as Reservation?)),
+      AppRoutes.reportDashboard => _staff(const ReportDashboardScreen()),
+      AppRoutes.overdueList => _staff(const OverdueListScreen()),
+      AppRoutes.trendDashboard => _staff(const TrendDashboardScreen()),
 
-      // TV2 — đặt trước
-      AppRoutes.reservationSearch => const ReservationShell(),
-      AppRoutes.reservationQueue => const ReservationShell(initialTab: 1),
-      AppRoutes.reservationForm => ReservationFormScreen(title: args as TitleItem),
-      AppRoutes.reservationPickup => ReservationPickupScreen(reservation: args as Reservation?),
+      AppRoutes.finePayment => _staff(FineListScreen(api: MockFineApi(), actorId: AppSession.userId ?? 0)),
+      AppRoutes.readerList => _staff(const ReaderListScreen()),
+      AppRoutes.readerPortal => _reader(
+          ReaderPortalShell(
+            api: MockPortalApi(readerId: AppSession.userId ?? 0),
+            userId: AppSession.userId ?? 0,
+          ),
+        ),
+      AppRoutes.notifications => _signedIn(
+          NotificationCenterScreen(userId: AppSession.userId ?? 0, api: MockNotificationApi()),
+        ),
+      AppRoutes.auditLog => _admin(AuditLogScreen(actorId: AppSession.userId ?? 0, api: MockNotificationApi())),
+      AppRoutes.notificationStatus => _admin(
+          NotificationStatusScreen(actorId: AppSession.userId ?? 0, api: MockNotificationApi()),
+        ),
 
-      // TV2 — báo cáo
-      AppRoutes.reportDashboard => const ReportDashboardScreen(),
-      AppRoutes.overdueList => const OverdueListScreen(),
-      AppRoutes.trendDashboard => const TrendDashboardScreen(),
-
-      // TV3 — chưa làm
-      AppRoutes.finePayment => const PlaceholderScreen(title: 'Thu phạt', owner: 'TV3 (Bảo)'),
-
-      _ => const PlaceholderScreen(), // màn chưa làm -> trang tạm
+      _ => const PlaceholderScreen(),
     };
     return MaterialPageRoute(builder: (_) => page, settings: settings);
+  }
+
+  static Widget _signedIn(Widget page) => AppSession.isSignedIn ? page : const LoginScreen();
+
+  static Widget _staff(Widget page) {
+    if (!AppSession.isSignedIn) return const LoginScreen();
+    if (!AppSession.isStaff) return const _DeniedScreen();
+    return page;
+  }
+
+  static Widget _admin(Widget page) {
+    if (!AppSession.isSignedIn) return const LoginScreen();
+    if (!AppSession.isAdmin) return const _DeniedScreen();
+    return page;
+  }
+
+  static Widget _reader(Widget page) {
+    if (!AppSession.isSignedIn) return const LoginScreen();
+    if (!AppSession.isReader) return const _DeniedScreen();
+    return page;
+  }
+}
+
+class _DeniedScreen extends StatelessWidget {
+  const _DeniedScreen();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: SafeArea(
+        child: AccessDeniedView(message: 'Tài khoản của bạn không có quyền mở màn này.'),
+      ),
+    );
   }
 }

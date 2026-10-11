@@ -11,6 +11,8 @@ import '../../../core/routing/app_routes.dart';
 import '../../../core/theme/theme_x.dart';
 import '../../../core/utils/format.dart';
 import '../../../core/widgets/info_banner.dart';
+import '../../../features/access/data/auth_store.dart';
+import '../../../features/notification/widgets/notification_bell.dart';
 import '../widgets/desk_action_card.dart';
 
 class CirculationDeskScreen extends StatelessWidget {
@@ -22,11 +24,7 @@ class CirculationDeskScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Quầy lưu thông'),
         actions: [
-          IconButton(
-            tooltip: 'Thông báo', // nhãn cho trình đọc màn hình
-            icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {}, // màn thông báo của TV3
-          ),
+          if (AppSession.userId != null) NotificationBell(userId: AppSession.userId!),
         ],
       ),
       drawer: const _DeskDrawer(),
@@ -184,18 +182,23 @@ class _DeskDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.person_search_outlined),
             title: const Text('Tra cứu người đọc'),
-            onTap: () => Navigator.pop(context), // màn của TV3
+            onTap: () => go(AppRoutes.readerList),
           ),
           ListTile(
             leading: const Icon(Icons.search),
             title: const Text('Tra cứu danh mục'),
-            onTap: () => Navigator.pop(context), // màn của TV1
+            onTap: () => go(AppRoutes.catalogSearch),
           ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Đăng xuất'),
-            onTap: () => Navigator.pop(context), // TV1 cung cấp hàm đăng xuất
+            onTap: () async {
+              final nav = Navigator.of(context);
+              nav.pop();
+              await AuthStore.signOut();
+              nav.pushNamedAndRemoveUntil(AppRoutes.dashboard, (_) => false);
+            },
           ),
         ],
       ),
