@@ -1,9 +1,21 @@
-// Model đầu sách trong kết quả tìm kiếm.
-// Bài: 07-reservation/01-reservation-search.md
-//
-// API: GET /titles?q= -> [{ id, name, author, isbn, priceVnd, loanable, active, category }]
-//
-// TODO:
-// - class TitleItem + fromJson.
-// - G7: API chưa có availableCount. Để sẵn field int? availableCount, khi backend thêm thì
-//   chỉ hiện nút "Đặt trước" khi availableCount == 0 (BR-08).
+// Đầu sách trong kết quả tìm kiếm. Bài: Hoang/07-reservation/01-reservation-search.md
+// API: GET /titles?q= -> [{ id, name, author, isbn, ... }]
+// G7: API chưa trả availableCount (số bản khả dụng) -> hiện null.
+
+class TitleItem {
+  TitleItem({required this.id, required this.name, required this.author, this.isbn, this.availableCount});
+
+  final int id;
+  final String name;
+  final String author;
+  final String? isbn;
+  final int? availableCount; // G7: hiện null
+
+  factory TitleItem.fromJson(Map<String, dynamic> j) => TitleItem(
+        id: (j['id'] as num).toInt(),
+        name: j['name'] as String,
+        author: j['author'] as String,
+        isbn: j['isbn'] as String?,
+        availableCount: (j['availableCount'] as num?)?.toInt(),
+      );
+}

@@ -250,6 +250,16 @@
       { "id": 8, "actorId": 2, "action": "DAMAGE_REPORT", "entityType": "DAMAGE_REPORT", "entityId": "1", "detail": "BC000005 mức MEDIUM", "createdAt": "2026-10-09T16:05:00" },
       { "id": 9, "actorId": 2, "action": "READER_CREATE", "entityType": "USER", "entityId": "8", "detail": "Tạo tài khoản chờ kích hoạt R10000006", "createdAt": "2026-10-09T15:30:00" },
       { "id": 10, "actorId": 3, "action": "LOGIN", "entityType": "USER", "entityId": "3", "detail": null, "createdAt": "2026-10-10T07:30:00" }
+    ],
+
+    "notificationOutbox": [
+      { "id": 1, "notificationId": 1, "channel": "EMAIL", "status": "SENT", "attempts": 1, "lastError": null, "updatedAt": "2026-10-09T18:00:05" },
+      { "id": 2, "notificationId": 2, "channel": "EMAIL", "status": "SENT", "attempts": 1, "lastError": null, "updatedAt": "2026-10-05T07:00:04" },
+      { "id": 3, "notificationId": 3, "channel": "EMAIL", "status": "RETRYING", "attempts": 2, "lastError": "Máy chủ email không phản hồi (timeout)", "updatedAt": "2026-10-10T07:20:00" },
+      { "id": 4, "notificationId": 4, "channel": "EMAIL", "status": "DEAD", "attempts": 5, "lastError": "Địa chỉ email không tồn tại", "updatedAt": "2026-10-01T07:00:00" },
+      { "id": 5, "notificationId": 5, "channel": "EMAIL", "status": "SENT", "attempts": 1, "lastError": null, "updatedAt": "2026-10-09T16:00:03" },
+      { "id": 6, "notificationId": 6, "channel": "EMAIL", "status": "SENT", "attempts": 2, "lastError": null, "updatedAt": "2026-10-03T10:05:00" },
+      { "id": 7, "notificationId": 7, "channel": "IN_APP", "status": "SENT", "attempts": 1, "lastError": null, "updatedAt": "2026-10-09T16:05:00" }
     ]
   }
 }
