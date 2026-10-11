@@ -6,6 +6,18 @@ abstract final class AppRoutes {
   // TV1
   static const dashboard = '/';
   static const sessionExpired = '/session-expired';
+  static const forgotPassword = '/forgot-password';
+  static const resetPassword = '/reset-password';
+  static const catalogSearch = '/catalog';
+  static const bibliographicDetail = '/catalog/detail';
+  static const bibliographicForm = '/catalog/form';
+  static const categoryAdmin = '/catalog/categories';
+  static const copyInventory = '/copies';
+  static const copyForm = '/copies/form';
+  static const importUpload = '/import';
+  static const importReport = '/import/report';
+  static const adminConfig = '/policy';
+  static const backupRuns = '/ops/backups';
 
   // TV2 — Hoàng
   static const circulationDesk = '/circulation';
@@ -28,6 +40,11 @@ abstract final class AppRoutes {
   static const overdueList = '/reports/overdue';
   static const trendDashboard = '/reports/trends';
 
-  // TV3 — Bảo (TV2 chỉ điều hướng tới)
+  // TV3 — Bảo
   static const finePayment = '/fines/payment';
+  static const readerList = '/readers';
+  static const readerPortal = '/portal';
+  static const notifications = '/notifications';
+  static const auditLog = '/audit';
+  static const notificationStatus = '/notifications/status';
 }
