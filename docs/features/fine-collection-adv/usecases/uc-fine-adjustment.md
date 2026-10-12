@@ -2,7 +2,7 @@
 type: usecase
 feature: fine-collection-adv
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/fine-collection-adv/usecases/fine-collection-adv-usecase-index.md
   - docs/features/fine-collection-adv/srs/fine-collection-adv-spec.md
@@ -15,7 +15,7 @@ links:
 
 ## Primary Actor
 
-Quản trị viên (miễn, điều chỉnh, đảo, hoàn). Thủ thư (in biên nhận, đối soát cuối ca).
+Thủ thư (miễn, điều chỉnh, đảo, hoàn). Nhân viên (in biên nhận, đối soát cuối ca).
 
 ## Stakeholders & Interests
 
@@ -41,7 +41,7 @@ Cần in biên nhận thu phạt; cần miễn, điều chỉnh, đảo, hoàn m
 
 ## Main Success Scenario
 
-1. Quản trị viên mở `financial-events` của một khoản phạt.
+1. Thủ thư mở `financial-events` của một khoản phạt.
 2. Chọn miễn, điều chỉnh, đảo hoặc hoàn; nhập số tiền và lý do.
 3. Hệ thống yêu cầu xác thực lại, kiểm quyền, kiểm thẩm quyền theo số tiền, kiểm người thao tác không phải người tạo khoản (BR-fine-collection-adv-001).
 4. Hệ thống ghi sự kiện mới và audit trong một giao dịch; số dư về 0 sau miễn thì khoản chuyển Đã miễn.
@@ -60,9 +60,9 @@ Cần in biên nhận thu phạt; cần miễn, điều chỉnh, đảo, hoàn m
 
 **4b. Audit lỗi (E-core-007):** hủy thao tác.
 
-**Nhánh R — Biên nhận (FR-fine-collection-adv-001):** Thủ thư in biên nhận cho khoản thu với mã khoản thu.
+**Nhánh R — Biên nhận (FR-fine-collection-adv-001):** Nhân viên in biên nhận cho khoản thu với mã khoản thu.
 
-**Nhánh S — Đối soát cuối ca (FR-fine-collection-adv-003):** Thủ thư nhập tiền mặt thực có; lệch so với tổng khoản thu thì ghi sự kiện đối soát và cảnh báo vận hành.
+**Nhánh S — Đối soát cuối ca (FR-fine-collection-adv-003):** Nhân viên nhập tiền mặt thực có; lệch so với tổng khoản thu thì ghi sự kiện đối soát và cảnh báo vận hành.
 
 ## Related Requirements
 

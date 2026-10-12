@@ -1,7 +1,7 @@
 ---
 type: srs-userflow
 feature: renewal
-updated: 2026-10-09
+updated: 2026-10-12
 primary_device: mobile
 stage: flow-approved
 flow_approved_at: 2026-10-09
@@ -36,7 +36,7 @@ flowchart TD
 
 | [#] | Slug | Màn hình | Mục đích | Thuộc flow |
 |-----|------|----------|----------|------------|
-| 1 | renewal-request | Yêu cầu gia hạn | Thủ thư tại quầy hoặc Người đọc trên cổng chọn khoản đang mượn. | renewal-flow |
+| 1 | renewal-request | Yêu cầu gia hạn | Nhân viên tại quầy hoặc Người đọc trên cổng chọn khoản đang mượn. | renewal-flow |
 | 2 | renewal-result | Kết quả gia hạn | Thành công hoặc lý do chặn. Số lần/cộng ngày còn OQ-renewal-001. | renewal-flow |
 
 ## 3. Danh sách flow

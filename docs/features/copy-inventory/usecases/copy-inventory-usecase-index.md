@@ -2,7 +2,7 @@
 type: usecase-index
 feature: copy-inventory
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/copy-inventory/srs/copy-inventory-spec.md
   - docs/features/copy-inventory/srs/copy-inventory-flows.md
@@ -14,7 +14,7 @@ links:
 
 | # | Slug | Level | Status | Actor primary | Covers FR | Screens | Errors (E-*) | OQ ref | Priority | Updated |
 |---|------|-------|--------|---------------|-----------|---------|--------------|--------|----------|---------|
-| 1 | [uc-copy-inventory](uc-copy-inventory.md) | sea | draft | Quản trị viên | FR-copy-inventory-001..003 | copy-inventory, copy-form | E-core-001, 002, 003, 008 | OQ-copy-inventory-001, 002 | P0 | 2026-10-08 |
+| 1 | [uc-copy-inventory](uc-copy-inventory.md) | sea | draft | Thủ thư | FR-copy-inventory-001..003 | copy-inventory, copy-form | E-core-001, 002, 003, 008 | OQ-copy-inventory-001, 002 | P0 | 2026-10-08 |
 
 ## Relationships
 

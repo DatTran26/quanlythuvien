@@ -2,7 +2,7 @@
 type: srs
 feature: fine-collection-basic
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/fine-collection-basic/brainstorms/fine-collection-basic-scope.md
   - docs/_product/prd.md
@@ -15,7 +15,7 @@ links:
 
 ## 1. Scope
 
-Thủ thư tra công nợ, thu tiền mặt tại quầy và ghi khoản thu vào sổ chỉ thêm; chống ghi trùng; hai quầy cùng thu thì quầy sau thấy số dư mới.
+Nhân viên tra công nợ, thu tiền mặt tại quầy và ghi khoản thu vào sổ chỉ thêm; chống ghi trùng; hai quầy cùng thu thì quầy sau thấy số dư mới.
 
 **Release:** R1A
 
@@ -25,7 +25,7 @@ Thủ thư tra công nợ, thu tiền mặt tại quầy và ghi khoản thu và
 
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
-| Thủ thư | người | Vận hành quầy | Có |
+| Nhân viên | người | Vận hành quầy | Có |
 | Người đọc | người | Mượn, trả, theo dõi khoản mượn | Có |
 | Bộ phận tài chính | stakeholder | Chính sách phạt, đối soát | Có như stakeholder |
 | Hệ thống | hệ thống | Thực thi rule, job, audit, outbox | Có |
@@ -36,7 +36,7 @@ Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.
 
 | ID | Title | Description | Priority | Release | Verify by | Source |
 |---|---|---|---|---|---|---|
-| FR-fine-collection-basic-001 | Thu tiền phạt bằng tiền mặt | Thủ thư ghi nhận thu tiền mặt cho một khoản phạt: số tiền > 0 và ≤ số dư tại thời điểm ghi; khoản thu có mã duy nhất, ghi vào sổ chỉ thêm; số dư về 0 thì khoản phạt Đã thanh toán; lặp yêu cầu không ghi hai lần. | P0 | R1A | test | Spec cũ (xem id-crosswalk-lmp) |
+| FR-fine-collection-basic-001 | Thu tiền phạt bằng tiền mặt | Nhân viên ghi nhận thu tiền mặt cho một khoản phạt: số tiền > 0 và ≤ số dư tại thời điểm ghi; khoản thu có mã duy nhất, ghi vào sổ chỉ thêm; số dư về 0 thì khoản phạt Đã thanh toán; lặp yêu cầu không ghi hai lần. | P0 | R1A | test | Spec cũ (xem id-crosswalk-lmp) |
 
 ## 4. Non-Functional Requirements (NFR)
 

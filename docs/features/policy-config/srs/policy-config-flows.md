@@ -1,18 +1,18 @@
 ---
 type: srs-flows
 feature: policy-config
-updated: 2026-10-08
+updated: 2026-10-12
 ---
 
 # policy-config — Flows
 
 ## Flow: Đổi tham số quy định
 
-**Trigger:** Quản trị viên đổi một tham số. · **UC:** uc-policy-config · **Release:** R0
+**Trigger:** Thủ thư đổi một tham số. · **UC:** uc-policy-config · **Release:** R0
 
 ```mermaid
 flowchart TD
-    Start(["Bắt đầu — Quản trị viên mở cấu hình"]) --> Pick["Chọn tham số, nhập giá trị mới và thời điểm hiệu lực"]
+    Start(["Bắt đầu — Thủ thư mở cấu hình"]) --> Pick["Chọn tham số, nhập giá trị mới và thời điểm hiệu lực"]
     Pick --> Valid{"Giá trị trong miền và thời điểm không ở quá khứ?"}
     Valid -->|"không"| Err["E-core-001 — báo lỗi, không lưu"]
     Err --> Pick

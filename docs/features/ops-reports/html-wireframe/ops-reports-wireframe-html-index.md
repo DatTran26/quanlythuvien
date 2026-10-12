@@ -8,7 +8,7 @@ device_width: 375
 flow_hash: e38292b1
 flows: 1
 screens: 2
-updated: 2026-10-09
+updated: 2026-10-12
 entry: ops-reports-wireframe.html
 links:
   - docs/features/ops-reports/srs/ops-reports-userflow.md
@@ -29,7 +29,7 @@ Mở [`ops-reports-wireframe.html`](ops-reports-wireframe.html) để duyệt m�
 
 ## Open gates
 
-- OQ-ops-reports-001 — Thủ thư quầy có quyền xem RP-01, RP-02, RP-04 không? Owner: domain approver.
+- OQ-ops-reports-001 — Nhân viên quầy có quyền xem RP-01, RP-02, RP-04 không? Owner: domain approver.
 - OQ-ops-reports-002 — Priority chính thức P0 (PRD) hay P1 (SRS cũ)? Owner: Product Owner.
 
 ## Sources

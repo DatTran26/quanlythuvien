@@ -1,7 +1,7 @@
 ---
 type: srs-flows
 feature: reader-onboarding
-updated: 2026-10-08
+updated: 2026-10-12
 ---
 
 # reader-onboarding — Flows
@@ -12,7 +12,7 @@ updated: 2026-10-08
 
 ```mermaid
 flowchart TD
-    Start(["Bắt đầu — Thủ thư mở biểu mẫu người đọc"]) --> Input["Nhập mã độc giả, họ tên, liên hệ, hạn thẻ"]
+    Start(["Bắt đầu — Nhân viên mở biểu mẫu người đọc"]) --> Input["Nhập mã độc giả, họ tên, liên hệ, hạn thẻ"]
     Input --> Valid{"Đủ trường bắt buộc và đúng định dạng?"}
     Valid -->|"không"| Err1["E-core-001 — báo lỗi tại trường, giữ dữ liệu"]
     Err1 --> Input

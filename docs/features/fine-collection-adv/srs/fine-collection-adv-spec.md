@@ -2,7 +2,7 @@
 type: srs
 feature: fine-collection-adv
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/fine-collection-adv/brainstorms/fine-collection-adv-scope.md
   - docs/_product/prd.md
@@ -15,7 +15,7 @@ links:
 
 ## 1. Scope
 
-Biên nhận thu phạt in; Quản trị viên miễn, điều chỉnh, đảo, hoàn tiền phạt có lý do, thẩm quyền, xác thực lại và audit; đối soát tiền thu cuối ca.
+Biên nhận thu phạt in; Thủ thư miễn, điều chỉnh, đảo, hoàn tiền phạt có lý do, thẩm quyền, xác thực lại và audit; đối soát tiền thu cuối ca.
 
 **Release:** R1B
 
@@ -25,8 +25,8 @@ Biên nhận thu phạt in; Quản trị viên miễn, điều chỉnh, đảo, 
 
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
-| Quản trị viên | người | Quản trị, duyệt ngoại lệ | Có |
-| Thủ thư | người | Vận hành quầy | Có |
+| Thủ thư | người | Quản trị, duyệt ngoại lệ | Có |
+| Nhân viên | người | Vận hành quầy | Có |
 | Bộ phận tài chính | stakeholder | Chính sách tài chính, đối soát | Có như stakeholder |
 | Hệ thống | hệ thống | Thực thi rule, job, audit, outbox | Có |
 
@@ -38,7 +38,7 @@ Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.
 |---|---|---|---|---|---|---|
 | FR-fine-collection-adv-001 | Biên nhận thu phạt | In biên nhận cho khoản thu phạt với mã khoản thu duy nhất; mẫu biên nhận chờ OQ-fine-collection-adv-003. | P1 | R1B | test | Spec cũ (xem id-crosswalk-lmp) |
 | FR-fine-collection-adv-002 | Miễn/điều chỉnh/hoàn tiền | Cho phép waiver, adjustment, reversal/refund có lý do, quyền và audit; partial-payment policy chờ duyệt. | P1 | R1B | test | Spec cũ (xem id-crosswalk-lmp) |
-| FR-fine-collection-adv-003 | Đối soát thu ngân cuối ca | Cuối ca, hệ thống tổng hợp khoản thu của quầy; Thủ thư nhập tiền mặt thực có; lệch thì ghi sự kiện đối soát và cảnh báo vận hành; người duyệt khi lệch chờ OQ-fine-collection-adv-002. | P1 | R1B | test | DEC-D3-08; uc-fine-payment ext 6a (cũ) |
+| FR-fine-collection-adv-003 | Đối soát thu ngân cuối ca | Cuối ca, hệ thống tổng hợp khoản thu của quầy; Nhân viên nhập tiền mặt thực có; lệch thì ghi sự kiện đối soát và cảnh báo vận hành; người duyệt khi lệch chờ OQ-fine-collection-adv-002. | P1 | R1B | test | DEC-D3-08; uc-fine-payment ext 6a (cũ) |
 
 ## 4. Non-Functional Requirements (NFR)
 
@@ -95,7 +95,7 @@ __Assumptions:__
 
 | Giả định | Invalidate nếu sai |
 |---|---|
-| Chỉ Quản trị viên được miễn, điều chỉnh, đảo, hoàn | Ma trận quyền |
+| Chỉ Thủ thư được miễn, điều chỉnh, đảo, hoàn | Ma trận quyền |
 
 ## 12. Open Questions
 

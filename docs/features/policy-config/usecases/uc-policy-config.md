@@ -2,7 +2,7 @@
 type: usecase
 feature: policy-config
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/policy-config/usecases/policy-config-usecase-index.md
   - docs/features/policy-config/srs/policy-config-spec.md
@@ -15,22 +15,22 @@ links:
 
 ## Primary Actor
 
-Quản trị viên.
+Thủ thư.
 
 ## Stakeholders & Interests
 
 | Stakeholder | Interest |
 |-------------|----------|
 | Thủ thư trưởng | Biết quy định đổi khi nào, ai đổi |
-| Thủ thư | Quy định áp đúng tại quầy |
+| Nhân viên | Quy định áp đúng tại quầy |
 
 ## Trigger
 
-Quản trị viên cần đổi một tham số quy định.
+Thủ thư cần đổi một tham số quy định.
 
 ## Preconditions
 
-- Quản trị viên đã xác thực (include `uc-access-control`).
+- Thủ thư đã xác thực (include `uc-access-control`).
 
 ## Guarantees
 
@@ -39,7 +39,7 @@ Quản trị viên cần đổi một tham số quy định.
 
 ## Main Success Scenario
 
-1. Quản trị viên mở `admin-config`, chọn tham số.
+1. Thủ thư mở `admin-config`, chọn tham số.
 2. Nhập giá trị mới và thời điểm hiệu lực.
 3. Hệ thống kiểm tra miền giá trị, lưu, ghi audit.
 4. Từ thời điểm hiệu lực, giao dịch mới dùng giá trị mới (BR-policy-config-001).

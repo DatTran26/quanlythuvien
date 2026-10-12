@@ -90,7 +90,7 @@ public class LibraryController {
 
     /** Thêm một đầu sách mới. */
     @PostMapping("/titles")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     Title createTitle(@RequestBody TitleRequest request) {
         return catalog.createTitle(request.name(), request.author(), request.isbn(), request.category(),
                 request.priceVnd(), request.loanable(), actor());
@@ -98,7 +98,7 @@ public class LibraryController {
 
     /** Thêm một bản sao và mã QR cho đầu sách. */
     @PostMapping("/titles/{id}/copies")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     BookCopy addCopy(@PathVariable long id, @RequestBody CopyRequest request) {
         return catalog.addCopy(id, request.code(), request.shelf(), actor());
     }
@@ -111,28 +111,28 @@ public class LibraryController {
 
     /** Xem quy định mượn hiện tại: số cuốn, số ngày, mức phạt. */
     @GetMapping("/policy")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     LendingPolicy policy() {
         return circulation.policy();
     }
 
-    /** Quản trị viên sửa quy định mượn. */
+    /** Thủ thư sửa quy định mượn. */
     @PutMapping("/policy")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('LIBRARIAN')")
     LendingPolicy updatePolicy(@RequestBody LendingPolicy policy) {
         return circulation.updatePolicy(policy, actor());
     }
 
-    /** Thủ thư cho mượn một bản sao. */
+    /** Nhân viên cho mượn một bản sao. */
     @PostMapping("/loans")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     CirculationService.LoanView loan(@RequestBody LoanRequest request) {
         return circulation.checkout(request.readerId(), request.copyCode(), actor());
     }
 
-    /** Thủ thư nhận trả sách. Nếu hư thì lập báo cáo và chặn lưu thông. */
+    /** Nhân viên nhận trả sách. Nếu hư thì lập báo cáo và chặn lưu thông. */
     @PostMapping("/loans/{id}/return")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     CirculationService.LoanView returnLoan(@PathVariable long id, @RequestBody ReturnRequest request) throws IOException {
         var loan = circulation.returnCopy(id, request.damaged(), request.severity(), request.note(), actor());
         if (request.damaged()) {
@@ -151,7 +151,7 @@ public class LibraryController {
 
     /** Ghi nhận mất sách, đóng phiếu và tạo khoản bồi thường. */
     @PostMapping("/loans/{id}/lost")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     CirculationService.LoanView lost(@PathVariable long id) {
         return circulation.markLost(id, actor());
     }
@@ -174,45 +174,45 @@ public class LibraryController {
         return fines.mine(actor());
     }
 
-    /** Thủ thư thu phạt tiền mặt và trả biên nhận. */
+    /** Nhân viên thu phạt tiền mặt và trả biên nhận. */
     @PostMapping("/fines/{id}/collect")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     FineService.Receipt collect(@PathVariable long id) {
         return fines.collect(id, actor());
     }
 
-    /** Quản trị viên miễn phạt, bắt buộc có lý do. */
+    /** Thủ thư miễn phạt, bắt buộc có lý do. */
     @PostMapping("/fines/{id}/waive")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('LIBRARIAN')")
     com.quanlythuvien.fine.Fine waive(@PathVariable long id, @RequestBody WaiveRequest request) {
         return fines.waive(id, request.reason(), actor());
     }
 
     /** Báo hư hỏng một bản sao, có thể kèm ảnh. Bản sao bị chặn mượn ngay. */
     @PostMapping(value = "/damage-reports", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     DamageReport damage(@RequestParam long copyId, @RequestParam(required = false) DamageSeverity severity,
                         @RequestParam(required = false) String note, @RequestPart(required = false) MultipartFile photo) throws IOException {
         return conditions.report(copyId, severity, note, photo, actor());
     }
 
-    /** Quản trị viên duyệt hư hỏng: bác bỏ, đưa đi sửa, hoặc thanh lý. */
+    /** Thủ thư duyệt hư hỏng: bác bỏ, đưa đi sửa, hoặc thanh lý. */
     @PostMapping("/damage-reports/{id}/disposition")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('LIBRARIAN')")
     DamageReport disposition(@PathVariable long id, @RequestBody DecisionRequest request) {
         return conditions.dispose(id, request.decision(), actor());
     }
 
     /** Đánh dấu bản sao đã sửa xong và đưa lại kho hoặc hàng chờ. */
     @PostMapping("/copies/{id}/repair-complete")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     BookCopy repairDone(@PathVariable long id) {
         return conditions.repairDone(id, actor());
     }
 
-    /** Xem ảnh hư hỏng đã lưu. Chỉ thủ thư và quản trị viên. */
+    /** Xem ảnh hư hỏng đã lưu. Chỉ nhân viên và thủ thư. */
     @GetMapping("/files/{name}")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     ResponseEntity<Resource> file(@PathVariable String name) {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_JPEG_VALUE)
@@ -221,49 +221,49 @@ public class LibraryController {
 
     /** Xem trước file Excel. Có dòng sai thì báo lỗi, không ghi database. */
     @PostMapping(value = "/import/titles/dry-run", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     ImportService.ImportPreview dryRun(@RequestPart MultipartFile file) throws IOException {
         return imports.dryRun(file.getInputStream());
     }
 
     /** Ghi file Excel vào kho sau khi mọi dòng đều hợp lệ. */
     @PostMapping(value = "/import/titles/commit", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     ImportService.ImportPreview commit(@RequestPart MultipartFile file) throws IOException {
         return imports.commit(file.getInputStream(), actor());
     }
 
     /** Danh sách phiếu đang quá hạn. */
     @GetMapping("/reports/overdue")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     java.util.List<com.quanlythuvien.circulation.Loan> overdue() {
         return reports.overdue();
     }
 
     /** Đếm bản sao theo từng trạng thái. */
     @GetMapping("/reports/inventory")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     java.util.List<Object[]> inventory() {
         return reports.inventory();
     }
 
     /** Đếm số lượt mượn và trả trong một khoảng ngày. */
     @GetMapping("/reports/trends")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     Map<String, Long> trends(@RequestParam LocalDate from, @RequestParam LocalDate to) {
         return reports.trends(from, to);
     }
 
     /** Xuất danh sách quá hạn ra file Excel. */
     @GetMapping(value = "/reports/overdue.xlsx", produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     byte[] overdueExcel() throws IOException {
         return reports.overdueExcel();
     }
 
     /** Xuất danh sách quá hạn ra file PDF. */
     @GetMapping(value = "/reports/overdue.pdf", produces = MediaType.APPLICATION_PDF_VALUE)
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     byte[] overduePdf() throws IOException {
         return reports.overduePdf();
     }
@@ -287,14 +287,14 @@ public class LibraryController {
 
     /** Xem 50 dòng nhật ký thao tác mới nhất. */
     @GetMapping("/audit")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     java.util.List<com.quanlythuvien.audit.AuditLog> audit() {
         return auditLogs.findAllByOrderByCreatedAtDesc(PageRequest.of(0, 50));
     }
 
     /** Chạy tay việc quét quá hạn và nhả sách giữ hết giờ. */
     @PostMapping("/admin/jobs/overdue")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('LIBRARIAN')")
     Map<String, Integer> runOverdue() {
         return Map.of("marked", circulation.sweepOverdue(), "holdsReleased", circulation.releaseExpiredHolds());
     }

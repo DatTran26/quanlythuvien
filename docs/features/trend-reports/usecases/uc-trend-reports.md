@@ -2,7 +2,7 @@
 type: usecase
 feature: trend-reports
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/trend-reports/usecases/trend-reports-usecase-index.md
   - docs/features/trend-reports/srs/trend-reports-spec.md
@@ -15,21 +15,21 @@ links:
 
 ## Primary Actor
 
-Quản trị viên.
+Thủ thư.
 
 ## Stakeholders & Interests
 
 | Stakeholder | Interest |
 |-------------|----------|
-| Quản trị viên | Quyết định mua, sửa, thanh lý dựa trên số liệu |
+| Thủ thư | Quyết định mua, sửa, thanh lý dựa trên số liệu |
 
 ## Trigger
 
-Quản trị viên cần số liệu xu hướng.
+Thủ thư cần số liệu xu hướng.
 
 ## Preconditions
 
-- Quản trị viên đã đăng nhập (include `uc-access-control`); có dữ liệu vận hành tích lũy.
+- Thủ thư đã đăng nhập (include `uc-access-control`); có dữ liệu vận hành tích lũy.
 
 ## Guarantees
 
@@ -38,7 +38,7 @@ Quản trị viên cần số liệu xu hướng.
 
 ## Main Success Scenario
 
-1. Quản trị viên mở `report-dashboard`, chọn RP-03, RP-05, RP-06 hoặc RP-07.
+1. Thủ thư mở `report-dashboard`, chọn RP-03, RP-05, RP-06 hoặc RP-07.
 2. Chọn khoảng thời gian; hệ thống hiện số liệu.
 3. Xuất Excel hoặc PDF.
 

@@ -2,7 +2,7 @@
 type: usecase
 feature: access-control
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/access-control/usecases/access-control-usecase-index.md
   - docs/features/access-control/srs/access-control-spec.md
@@ -17,7 +17,7 @@ links:
 
 ## Primary Actor
 
-Thủ thư / Quản trị viên / Người đọc — mọi actor cần xác thực trước khi dùng chức năng. Hệ thống là actor phụ thực thi quyết định truy cập.
+Nhân viên / Thủ thư / Người đọc — mọi actor cần xác thực trước khi dùng chức năng. Hệ thống là actor phụ thực thi quyết định truy cập.
 
 ## Stakeholders & Interests
 
@@ -25,7 +25,7 @@ Thủ thư / Quản trị viên / Người đọc — mọi actor cần xác th�
 |-------------|----------|
 | Bảo mật/pháp chế | PII mask theo quyền (NFR-core-004); mọi từ chối truy cập có audit; retention/deletion chưa định nghĩa — OQ-core-003 (non-waivable trước GATE-GNG) |
 | Thủ thư trưởng (domain approver) | Least privilege: actor chỉ thấy và làm đúng phạm vi vai trò được cấp |
-| Thủ thư (vận hành quầy) | Hết phiên/step-up không làm mất dữ liệu đã lưu hoặc ngữ cảnh làm việc an toàn |
+| Nhân viên (vận hành quầy) | Hết phiên/step-up không làm mất dữ liệu đã lưu hoặc ngữ cảnh làm việc an toàn |
 
 ## Trigger
 
@@ -60,14 +60,14 @@ Actor mở ứng dụng hoặc gọi một chức năng yêu cầu xác thực/�
 
 **2b. Vượt ngưỡng đăng nhập sai liên tiếp:**
 - 2b1. Sau N lần xác thực thất bại liên tiếp trên cùng tài khoản, hệ thống **khóa tạm** (temporary lockout) và từ chối mọi attempt tiếp theo trong thời gian khóa — hiển thị thông báo chung (E-core-002), không tiết lộ lý do khóa hay trạng thái tài khoản. Ngưỡng N và thời gian khóa là **PROPOSAL — OQ-policy-config-001** (policy value, cấu hình qua FR-policy-config-001; nguồn không định nghĩa ngưỡng này).
-- 2b2. Ghi audit mọi attempt và sự kiện khóa tạm; notify chủ tài khoản theo kênh thông báo hiệu lực (PROPOSAL). Recovery: chờ hết thời gian khóa hoặc Quản trị viên mở khóa qua `uc-account-admin`/quản trị tài khoản; cơ chế unlock (tự động theo thời gian vs admin) là Open — OQ-policy-config-001.
+- 2b2. Ghi audit mọi attempt và sự kiện khóa tạm; notify chủ tài khoản theo kênh thông báo hiệu lực (PROPOSAL). Recovery: chờ hết thời gian khóa hoặc Thủ thư mở khóa qua `uc-account-admin`/quản trị tài khoản; cơ chế unlock (tự động theo thời gian vs admin) là Open — OQ-policy-config-001.
 
-**4a. Actor thiếu quyền object/action (ví dụ Người đọc gọi chức năng quầy, Thủ thư gọi chức năng quản trị của Quản trị viên):**
+**4a. Actor thiếu quyền object/action (ví dụ Người đọc gọi chức năng quầy, Nhân viên gọi chức năng quản trị của Thủ thư):**
 - 4a1. Hệ thống từ chối, hiển thị access denied screen/banner (E-core-002), không thực thi action.
-- 4a2. Ghi audit denial kèm actor/action/resource. Recovery: điều hướng về danh sách/màn an toàn actor có quyền; cần quyền thì liên hệ Quản trị viên.
+- 4a2. Ghi audit denial kèm actor/action/resource. Recovery: điều hướng về danh sách/màn an toàn actor có quyền; cần quyền thì liên hệ Thủ thư.
 
 **4b. Quyền hoặc trạng thái tài khoản thay đổi khi phiên đang mở:**
-- 4b1. Hệ thống **re-evaluate quyền trên mỗi request**, không tin snapshot quyền lúc đăng nhập: tài khoản vừa bị khóa hoặc vừa bị thu hồi vai trò (bởi Quản trị viên — `uc-account-admin`) thì request kế tiếp bị từ chối ngay (E-core-002), không chờ phiên hết hạn.
+- 4b1. Hệ thống **re-evaluate quyền trên mỗi request**, không tin snapshot quyền lúc đăng nhập: tài khoản vừa bị khóa hoặc vừa bị thu hồi vai trò (bởi Thủ thư — `uc-account-admin`) thì request kế tiếp bị từ chối ngay (E-core-002), không chờ phiên hết hạn.
 - 4b2. Nếu phiên không còn hợp lệ (tài khoản bị khóa/xóa mềm, phiên bị thu hồi) → buộc re-auth, chuyển `session-expired` (E-access-control-001); hành động đang dở không commit. Recovery: actor xác thực lại với trạng thái/quyền mới nhất; quyền mới được cấp có hiệu lực ngay trên request kế tiếp, không cần đăng xuất (PROPOSAL — cơ chế re-evaluation).
 
 **5a. Actor thiếu quyền ở field nhạy cảm:**

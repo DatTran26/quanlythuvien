@@ -2,7 +2,7 @@
 type: usecase-index
 feature: data-import
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/data-import/srs/data-import-spec.md
   - docs/features/data-import/srs/data-import-flows.md
@@ -14,7 +14,7 @@ links:
 
 | # | Slug | Level | Status | Actor primary | Covers FR | Screens | Errors (E-*) | OQ ref | Priority | Updated |
 |---|------|-------|--------|---------------|-----------|---------|--------------|--------|----------|---------|
-| 1 | [uc-data-import](uc-data-import.md) | sea | draft | Quản trị viên/Thủ thư | FR-data-import-001 | import-upload, import-report | E-data-import-001, E-core-002, 004, 005, 007 | OQ-data-import-001..003 | P0 | 2026-10-08 |
+| 1 | [uc-data-import](uc-data-import.md) | sea | draft | Thủ thư/Nhân viên | FR-data-import-001 | import-upload, import-report | E-data-import-001, E-core-002, 004, 005, 007 | OQ-data-import-001..003 | P0 | 2026-10-08 |
 
 ## Relationships
 

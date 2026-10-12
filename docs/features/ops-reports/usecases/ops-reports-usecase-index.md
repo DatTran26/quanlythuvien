@@ -2,7 +2,7 @@
 type: usecase-index
 feature: ops-reports
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/ops-reports/srs/ops-reports-spec.md
   - docs/features/ops-reports/srs/ops-reports-flows.md
@@ -14,7 +14,7 @@ links:
 
 | # | Slug | Level | Status | Actor primary | Covers FR | Screens | Errors (E-*) | OQ ref | Priority | Updated |
 |---|------|-------|--------|---------------|-----------|---------|--------------|--------|----------|---------|
-| 1 | [uc-ops-reports](uc-ops-reports.md) | sea | draft | Quản trị viên/Thủ thư | FR-ops-reports-001, 002 | report-dashboard | E-core-002, 009 | OQ-ops-reports-001, 002 | P0/P1 | 2026-10-08 |
+| 1 | [uc-ops-reports](uc-ops-reports.md) | sea | draft | Thủ thư/Nhân viên | FR-ops-reports-001, 002 | report-dashboard | E-core-002, 009 | OQ-ops-reports-001, 002 | P0/P1 | 2026-10-08 |
 
 ## Relationships
 

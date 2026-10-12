@@ -2,7 +2,7 @@
 type: brainstorm
 feature: access-control
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_shared/core-spec.md
@@ -19,7 +19,7 @@ Mọi vai trò đăng nhập, đặt lại mật khẩu, quản lý hồ sơ c�
 ## 2. Context
 
 - Đây là điều kiện đầu tiên của mọi feature khác: chưa có danh tính và phân quyền thì chưa đưa dữ liệu thật vào hệ thống.
-- Hệ thống có 3 vai trò: Người đọc, Thủ thư (trực quầy), Quản trị viên (quản trị dữ liệu, cấu hình, báo cáo, nhật ký). Mọi kiểm tra quyền làm ở phía hệ thống, không chỉ ẩn nút trên giao diện.
+- Hệ thống có 3 vai trò: Người đọc, Nhân viên (trực quầy), Thủ thư (quản trị dữ liệu, cấu hình, báo cáo, nhật ký). Mọi kiểm tra quyền làm ở phía hệ thống, không chỉ ẩn nút trên giao diện.
 - Mô hình danh tính (tài khoản nội bộ, SSO hay dịch vụ danh tính ngoài) chưa chốt; nội dung dưới đây viết theo tài khoản nội bộ.
 
 ## 3. User Types (preliminary)
@@ -27,8 +27,8 @@ Mọi vai trò đăng nhập, đặt lại mật khẩu, quản lý hồ sơ c�
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
 | Người đọc | Không tự xem được tình trạng mượn của mình | Đăng nhập an toàn vào cổng người đọc |
-| Thủ thư | Mất dữ liệu đang nhập khi hết phiên giữa giao dịch | Vào thẳng màn quầy, hết phiên không mất việc đã lưu |
-| Quản trị viên | Không kiểm soát được ai xem dữ liệu cá nhân, tài chính | Quyền tối thiểu theo vai trò, mọi lần bị từ chối có dấu vết |
+| Nhân viên | Mất dữ liệu đang nhập khi hết phiên giữa giao dịch | Vào thẳng màn quầy, hết phiên không mất việc đã lưu |
+| Thủ thư | Không kiểm soát được ai xem dữ liệu cá nhân, tài chính | Quyền tối thiểu theo vai trò, mọi lần bị từ chối có dấu vết |
 
 ## 4. Capabilities Breakdown
 
@@ -101,9 +101,9 @@ Nhập email/mã thẻ + mật khẩu ──> Xác thực đúng? ──không�
 | From State | To State | Rule | Action | Result |
 |------------|----------|------|--------|--------|
 | Người đọc | Chức năng quầy hoặc quản trị | Không có quyền | Gọi chức năng | Từ chối, ghi audit |
-| Thủ thư | Chức năng quản trị của Quản trị viên | Không có quyền | Gọi chức năng | Từ chối, ghi audit |
-| Thủ thư | Dữ liệu cá nhân ngoài phạm vi phục vụ quầy | Thiếu quyền trường | Xem hồ sơ | Trường bị che |
-| Quản trị viên | Mọi chức năng quản trị | Có quyền | Gọi chức năng | Thực hiện |
+| Nhân viên | Chức năng quản trị của Thủ thư | Không có quyền | Gọi chức năng | Từ chối, ghi audit |
+| Nhân viên | Dữ liệu cá nhân ngoài phạm vi phục vụ quầy | Thiếu quyền trường | Xem hồ sơ | Trường bị che |
+| Thủ thư | Mọi chức năng quản trị | Có quyền | Gọi chức năng | Thực hiện |
 | Tài khoản vừa bị khóa khi phiên đang mở | — | Kiểm lại quyền ở thao tác kế tiếp | Thao tác bất kỳ | Từ chối ngay, buộc đăng nhập lại |
 
 ### 6.3 State Transitions
@@ -111,7 +111,7 @@ Nhập email/mã thẻ + mật khẩu ──> Xác thực đúng? ──không�
 | Entity | Từ | Sang | Trigger | Quay lại được? |
 |--------|------|----|---------|-------------|
 | Phiên | Đang hoạt động | Hết hạn | Hết thời gian phiên hoặc tài khoản bị khóa/thu hồi quyền | Có, đăng nhập lại |
-| Tài khoản | Đang hoạt động | Khóa tạm | Đăng nhập sai liên tiếp quá ngưỡng | Có, hết thời gian khóa hoặc Quản trị viên mở |
+| Tài khoản | Đang hoạt động | Khóa tạm | Đăng nhập sai liên tiếp quá ngưỡng | Có, hết thời gian khóa hoặc Thủ thư mở |
 
 ### 6.4 Interrupted Transactions
 
@@ -172,8 +172,8 @@ Nhập email/mã thẻ + mật khẩu ──> Xác thực đúng? ──không�
 ## 8. Assumptions
 
 - Dùng tài khoản nội bộ (email hoặc mã thẻ + mật khẩu) cho tới khi chốt mô hình danh tính.
-- Quản trị viên đầu tiên được tạo sẵn khi triển khai; Quản trị viên không sửa vai trò của nhau (mặc định OQ-01 nguồn).
-- Mở khóa tạm do hết thời gian khóa hoặc Quản trị viên mở thủ công.
+- Thủ thư đầu tiên được tạo sẵn khi triển khai; Thủ thư không sửa vai trò của nhau (mặc định OQ-01 nguồn).
+- Mở khóa tạm do hết thời gian khóa hoặc Thủ thư mở thủ công.
 
 ## 9. Risks
 
@@ -181,7 +181,7 @@ Nhập email/mã thẻ + mật khẩu ──> Xác thực đúng? ──không�
 |--------|----------|-------------------|-----------|
 | Compliance: quyền xem dữ liệu cá nhân chưa được pháp chế duyệt | thỉnh thoảng | Trì hoãn hoặc thu hẹp go-live | Chốt ma trận quyền trường trước GATE-GNG |
 | Process: mô hình danh tính chốt muộn | thỉnh thoảng | Làm lại luồng đăng nhập, quên mật khẩu | Chốt ở GATE-DEC trước R0 |
-| Adoption: khóa tạm làm kẹt quầy giờ cao điểm | hiếm | Quầy ngưng phục vụ | Quản trị viên mở khóa được ngay |
+| Adoption: khóa tạm làm kẹt quầy giờ cao điểm | hiếm | Quầy ngưng phục vụ | Thủ thư mở khóa được ngay |
 
 ## 10. Success Criteria (preliminary)
 
@@ -193,7 +193,7 @@ Nhập email/mã thẻ + mật khẩu ──> Xác thực đúng? ──không�
 - [ ] OQ-1: Mô hình danh tính: tài khoản nội bộ, SSO hay dịch vụ danh tính ngoài? (OQ-access-control-001; hold — security/IT)
 - [ ] OQ-2: Ngưỡng đăng nhập sai, thời gian khóa tạm, thời lượng phiên, hiệu lực link đặt lại mật khẩu? (hold — security/IT)
 - [ ] OQ-3: Quy tắc mật khẩu (độ dài, ký tự)? (hold — security/IT)
-- [ ] OQ-4: Mở khóa tạm tự động theo thời gian hay chỉ Quản trị viên mở? (hold)
+- [ ] OQ-4: Mở khóa tạm tự động theo thời gian hay chỉ Thủ thư mở? (hold)
 
 ## 12. Next Steps
 

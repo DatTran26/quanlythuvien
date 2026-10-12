@@ -2,7 +2,7 @@
 type: usecase
 feature: reader-self-service
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/reader-self-service/usecases/reader-self-service-usecase-index.md
   - docs/features/reader-self-service/srs/reader-self-service-spec.md
@@ -40,7 +40,7 @@ Người đọc mở cổng người đọc.
 ## Main Success Scenario
 
 1. Người đọc tra cứu sách theo tên, tác giả, ISBN, thể loại; xem số bản khả dụng và vị trí kệ.
-2. Người đọc mở thẻ thư viện QR để Thủ thư quét.
+2. Người đọc mở thẻ thư viện QR để Nhân viên quét.
 3. Người đọc xem sách đang mượn: hạn trả, số ngày còn lại hoặc đã quá hạn.
 4. Người đọc xem lịch sử mượn, lọc theo thời gian.
 5. (R1B) Người đọc xem công nợ và trạng thái từng khoản.

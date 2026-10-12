@@ -2,7 +2,7 @@
 type: usecase
 feature: checkout
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/checkout/usecases/checkout-usecase-index.md
   - docs/features/checkout/srs/checkout-spec.md
@@ -17,7 +17,7 @@ links:
 
 ## Primary Actor
 
-Thủ thư (vận hành quầy — đã xác thực và có quyền checkout qua `uc-access-control`; tương đương `Nhân viên` trực quầy của nguồn theo mapping spec §2).
+Nhân viên (vận hành quầy — đã xác thực và có quyền checkout qua `uc-access-control`; tương đương `Nhân viên` trực quầy của nguồn theo mapping spec §2).
 
 ## Stakeholders & Interests
 
@@ -29,11 +29,11 @@ Thủ thư (vận hành quầy — đã xác thực và có quyền checkout qua
 
 ## Trigger
 
-Người đọc đến quầy mượn sách; Thủ thư bắt đầu phiên checkout trên `circulation-desk`.
+Người đọc đến quầy mượn sách; Nhân viên bắt đầu phiên checkout trên `circulation-desk`.
 
 ## Preconditions
 
-- Thủ thư đã đăng nhập, có quyền checkout (include `uc-access-control`); session còn hiệu lực.
+- Nhân viên đã đăng nhập, có quyền checkout (include `uc-access-control`); session còn hiệu lực.
 - Reader tồn tại với thẻ QR còn hiệu lực; Copy đã đăng ký với QR/barcode duy nhất (uc-catalog-admin).
 - `PolicyConfig` có tham số hạn mượn và loan limit (giá trị — PROPOSAL OQ-policy-config-001; cấu hình thay đổi chỉ áp dụng cho giao dịch bắt đầu sau thời điểm hiệu lực — baseline §6.5).
 - Job quá hạn + fine ledger đã live trước khi chặn mượn BR-core-001 được bật (internal ordering — DEC-P2-02).
@@ -45,12 +45,12 @@ Người đọc đến quầy mượn sách; Thủ thư bắt đầu phiên chec
 
 ## Main Success Scenario
 
-1. Thủ thư mở `circulation-desk` → vào `checkout-scan` (phiên đã qua `uc-access-control`).
-2. Thủ thư quét QR thẻ người đọc; hệ thống dùng mã **chỉ để locate** Reader (BR-copy-inventory-001 — scan không phải authorization) và nạp hồ sơ + tình trạng.
+1. Nhân viên mở `circulation-desk` → vào `checkout-scan` (phiên đã qua `uc-access-control`).
+2. Nhân viên quét QR thẻ người đọc; hệ thống dùng mã **chỉ để locate** Reader (BR-copy-inventory-001 — scan không phải authorization) và nạp hồ sơ + tình trạng.
 3. Hệ thống kiểm tra đủ điều kiện mượn (D1 / BR-core-001) — đủ **3 điều kiện chặn** theo nguồn SRC-BR03 (FACT về tập điều kiện): (i) tài khoản Reader bị khóa/không `active`; (ii) Reader có sách quá hạn (Loan `OVERDUE` đang mở); (iii) nợ phạt vượt ngưỡng chặn mượn — ngưỡng là **PROPOSAL — OQ-policy-config-001** (baseline đề xuất 50.000đ theo SRC-BR03 nguồn, giá trị thật chờ OQ-04). Ngoài ra: số Loan đang mở + giỏ hiện tại không vượt loan limit (PROPOSAL — OQ-policy-config-001).
-4. Thủ thư quét từng Copy; với mỗi cuốn hệ thống kiểm tra ngay khi thêm (D2 / BR-checkout-002): `status=AVAILABLE` và `is_loanable` (hoặc `ON_HOLD` với Reservation `READY` của đúng reader này — nhánh R2, extend `uc-reservation`), không trùng trong giỏ, không trùng đầu sách đang mượn (baseline §7.1 giỏ mượn).
+4. Nhân viên quét từng Copy; với mỗi cuốn hệ thống kiểm tra ngay khi thêm (D2 / BR-checkout-002): `status=AVAILABLE` và `is_loanable` (hoặc `ON_HOLD` với Reservation `READY` của đúng reader này — nhánh R2, extend `uc-reservation`), không trùng trong giỏ, không trùng đầu sách đang mượn (baseline §7.1 giỏ mượn).
 5. Hệ thống hiển thị `checkout-review`: danh sách cuốn hợp lệ, hạn trả dự kiến theo policy.
-6. Thủ thư xác nhận → client phát sinh `operation_id` cho lần xác nhận (AT-CHK-02); hệ thống mở **một transaction**: CAS trên `Copy.version` với allowed-source-state (`AVAILABLE` hoặc `ON_HOLD` đúng chủ) → chuyển từng Copy `→ON_LOAN`, tạo N Loan `ACTIVE` + `due_at`, đóng Reservation liên quan `→FULFILLED` (R2), ghi audit + outbox event.
+6. Nhân viên xác nhận → client phát sinh `operation_id` cho lần xác nhận (AT-CHK-02); hệ thống mở **một transaction**: CAS trên `Copy.version` với allowed-source-state (`AVAILABLE` hoặc `ON_HOLD` đúng chủ) → chuyển từng Copy `→ON_LOAN`, tạo N Loan `ACTIVE` + `due_at`, đóng Reservation liên quan `→FULFILLED` (R2), ghi audit + outbox event.
 7. Commit → in biên nhận mượn theo FR-checkout-003 và hiển thị: "Đã tạo phiếu mượn. Hạn trả được hiển thị trong danh sách sách đang mượn." (baseline §7.3).
 
 ## Extensions
@@ -62,7 +62,7 @@ Người đọc đến quầy mượn sách; Thủ thư bắt đầu phiên chec
 - 2a4. Recovery: không vào bước quét sách cho tới khi locate được Reader hợp lệ.
 
 **3a. Reader không đủ điều kiện (D1 = NO) — một trong 3 điều kiện SRC-BR03 nguồn hoặc vượt loan limit:**
-- 3a1. Hệ thống chặn phiếu và hiển thị blocked panel nêu rõ lý do cụ thể (E-core-006): tài khoản bị khóa/không `active`; có sách quá hạn; nợ phạt vượt ngưỡng (ngưỡng PROPOSAL — OQ-policy-config-001, baseline đề xuất 50.000đ); hoặc đạt loan limit ("Người đọc đã đạt giới hạn N cuốn đang mượn." — N là PROPOSAL OQ-policy-config-001, baseline đề xuất 5). Không dùng lý do chung chung "block nghiệp vụ" — mỗi lý do hiển thị riêng để reader/Thủ thư biết cách khắc phục.
+- 3a1. Hệ thống chặn phiếu và hiển thị blocked panel nêu rõ lý do cụ thể (E-core-006): tài khoản bị khóa/không `active`; có sách quá hạn; nợ phạt vượt ngưỡng (ngưỡng PROPOSAL — OQ-policy-config-001, baseline đề xuất 50.000đ); hoặc đạt loan limit ("Người đọc đã đạt giới hạn N cuốn đang mượn." — N là PROPOSAL OQ-policy-config-001, baseline đề xuất 5). Không dùng lý do chung chung "block nghiệp vụ" — mỗi lý do hiển thị riêng để reader/Nhân viên biết cách khắc phục.
 - 3a2. Recovery: hiển thị hành động khắc phục tương ứng — trả sách (→ `uc-return`), thanh toán công nợ (→ `uc-fine-cash-payment`), mở khóa (→ `uc-account-admin`); hoặc hủy phiếu/đổi reader.
 
 **4a. Copy không hợp lệ để mượn (D2 = NO): `ON_LOAN`, `ON_HOLD` sai chủ, `PENDING_REVIEW`, `IN_REPAIR`, `LOST`, `DISPOSED`, hoặc `AVAILABLE` nhưng `is_loanable=false`:**

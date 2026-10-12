@@ -8,7 +8,7 @@ device_width: 375
 flow_hash: 408ffb6b
 flows: 1
 screens: 1
-updated: 2026-10-09
+updated: 2026-10-12
 entry: notification-core-wireframe.html
 links:
   - docs/features/notification-core/srs/notification-core-userflow.md
@@ -32,7 +32,7 @@ Mở [`notification-core-wireframe.html`](notification-core-wireframe.html) đ�
 - OQ-notification-core-001 — Kênh bắt buộc: chỉ in-app + email hay thêm kênh khác? Owner: Product Owner.
 - OQ-notification-core-002 — Số lần thử lại và khoảng cách thử? Owner: vận hành.
 - OQ-notification-core-003 — Danh sách sự kiện quan trọng gửi email? Owner: Product Owner.
-- OQ-notification-core-004 — Ai xử lý hàng lỗi, có báo Thủ thư trực quầy (DEC-D3-08)? Owner: Thủ thư trưởng.
+- OQ-notification-core-004 — Ai xử lý hàng lỗi, có báo Nhân viên trực quầy (DEC-D3-08)? Owner: Thủ thư trưởng.
 
 ## Sources
 

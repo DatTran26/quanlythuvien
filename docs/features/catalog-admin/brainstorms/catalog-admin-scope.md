@@ -2,7 +2,7 @@
 type: brainstorm
 feature: catalog-admin
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_shared/core-spec.md
@@ -14,7 +14,7 @@ links:
 
 ## 1. Idea Seed
 
-Quản trị viên quản lý đầu sách và danh mục (thể loại, tác giả, nhà xuất bản, vị trí kệ); Thủ thư và Quản trị viên tra cứu đầu sách cùng số bản đang khả dụng, đang giữ, đang mượn, không khả dụng.
+Thủ thư quản lý đầu sách và danh mục (thể loại, tác giả, nhà xuất bản, vị trí kệ); Nhân viên và Thủ thư tra cứu đầu sách cùng số bản đang khả dụng, đang giữ, đang mượn, không khả dụng.
 
 ## 2. Context
 
@@ -27,8 +27,8 @@ Quản trị viên quản lý đầu sách và danh mục (thể loại, tác gi
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Quản trị viên | Đầu sách trùng, thiếu thông tin | Tạo, sửa đầu sách với kiểm tra trùng |
-| Thủ thư | Không biết còn bản nào để mượn | Tra cứu nhanh số bản theo trạng thái |
+| Thủ thư | Đầu sách trùng, thiếu thông tin | Tạo, sửa đầu sách với kiểm tra trùng |
+| Nhân viên | Không biết còn bản nào để mượn | Tra cứu nhanh số bản theo trạng thái |
 
 ## 4. Capabilities Breakdown
 
@@ -55,18 +55,18 @@ Quản trị viên quản lý đầu sách và danh mục (thể loại, tác gi
 
 ### 5.1 Tạo hoặc sửa đầu sách
 
-1) Quản trị viên mở tra cứu, chọn tạo mới hoặc mở một đầu sách.
+1) Thủ thư mở tra cứu, chọn tạo mới hoặc mở một đầu sách.
 2) Nhập hoặc sửa thông tin; hệ thống kiểm tra trường bắt buộc và kiểm trùng.
 3) Lưu; hệ thống ghi audit, đầu sách xuất hiện trong tra cứu.
 
 ### 5.2 Tra cứu khả dụng
 
-1) Thủ thư tìm theo tên, tác giả, ISBN hoặc thể loại.
+1) Nhân viên tìm theo tên, tác giả, ISBN hoặc thể loại.
 2) Mở chi tiết đầu sách; hệ thống hiện số bản theo nhóm trạng thái và vị trí kệ.
 
 ### 5.3 Vô hiệu đầu sách
 
-1) Quản trị viên chọn vô hiệu hóa.
+1) Thủ thư chọn vô hiệu hóa.
 2) Hệ thống chặn nếu còn bản sao đang mượn hoặc đang giữ; đầu sách đã có lịch sử chỉ được vô hiệu, không xóa.
 
 ```
@@ -101,15 +101,15 @@ Lưu đầu sách ──> Có quyền? ──không──> Từ chối, ghi audi
 
 | From State | To State | Rule | Action | Result |
 |------------|----------|------|--------|--------|
-| Quản trị viên | Đầu sách, danh mục | Có quyền | Tạo, sửa, vô hiệu | Thực hiện |
-| Thủ thư | Đầu sách, danh mục | Chỉ xem | Tra cứu | Thực hiện |
-| Thủ thư | Tạo, sửa đầu sách | Không có quyền | Lưu | Từ chối |
+| Thủ thư | Đầu sách, danh mục | Có quyền | Tạo, sửa, vô hiệu | Thực hiện |
+| Nhân viên | Đầu sách, danh mục | Chỉ xem | Tra cứu | Thực hiện |
+| Nhân viên | Tạo, sửa đầu sách | Không có quyền | Lưu | Từ chối |
 
 ### 6.3 State Transitions
 
 | Entity | Từ | Sang | Trigger | Quay lại được? |
 |--------|------|----|---------|-------------|
-| Đầu sách | Đang dùng | Vô hiệu | Quản trị viên vô hiệu | TBD |
+| Đầu sách | Đang dùng | Vô hiệu | Thủ thư vô hiệu | TBD |
 
 ### 6.4 Interrupted Transactions
 

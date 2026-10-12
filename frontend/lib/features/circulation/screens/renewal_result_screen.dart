@@ -19,7 +19,7 @@ class RenewalResultScreen extends StatelessWidget {
         'RENEW_STATUS' => ('Phiếu đã quá hạn hoặc đã đóng.', 'Trả sách và thanh toán phạt nếu có.'),
         'RENEW_LIMIT' => ('Đã hết lượt gia hạn.', 'Vui lòng trả sách đúng hạn.'),
         'RENEW_QUEUE' => ('Có người đang đặt trước đầu sách này.', 'Vui lòng trả đúng hạn. Có thể đặt trước lại sau khi trả.'),
-        'READER_INACTIVE' => ('Tài khoản đang bị khóa hoặc chưa kích hoạt.', 'Liên hệ thủ thư để được hỗ trợ.'),
+        'READER_INACTIVE' => ('Tài khoản đang bị khóa hoặc chưa kích hoạt.', 'Liên hệ nhân viên để được hỗ trợ.'),
         'STALE_COPY' || 'CONFLICT' => ('Phiếu vừa thay đổi (đã trả hoặc ghi nhận mất).', 'Tải lại danh sách.'),
         _ => (fallback ?? 'Không gia hạn được.', 'Thử lại sau.'),
       };

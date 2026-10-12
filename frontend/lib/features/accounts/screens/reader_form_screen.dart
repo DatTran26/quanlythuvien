@@ -2,15 +2,16 @@
 // Bài: TV3 2 · Độ khó ⭐⭐
 // Spec: docs/features/reader-onboarding/srs/
 //
-// Mục đích: Thủ thư cấp tài khoản người đọc tại quầy: nhập hồ sơ, kiểm trùng,
+// Mục đích: Nhân viên cấp tài khoản người đọc tại quầy: nhập hồ sơ, kiểm trùng,
 // kích hoạt ngay và cấp mã thẻ QR (DEC-SF-03: không tự đăng ký online).
 // Đến từ: reader-list. Đi tới: reader-detail (lưu thành công).
 //
 // Lỗ hổng:
-// - T4: backend chưa có POST /readers cho thủ thư (chỉ có /auth/register tạo PENDING).
+// - T4: backend chưa có POST /readers cho nhân viên (chỉ có /auth/register tạo PENDING).
 // - Spec cần số điện thoại, hạn thẻ: mock và DB đều chưa có (OQ-05, OQ-reader-onboarding-001).
 
 import 'package:flutter/material.dart';
+import 'package:frontend/core/auth/session.dart';
 
 import '../data/account_api.dart';
 import '../models/app_user.dart';
@@ -24,9 +25,6 @@ class ReaderFormScreen extends StatefulWidget {
 }
 
 class _ReaderFormScreenState extends State<ReaderFormScreen> {
-  // Tạm coi người thao tác là Thủ thư #2. Khi có đăng nhập (TV1) thì lấy từ phiên.
-  static const _actorId = 2;
-
   final AccountApi _api = MockAccountApi();
   final _formKey = GlobalKey<FormState>();
   final _name = TextEditingController();
@@ -36,6 +34,8 @@ class _ReaderFormScreenState extends State<ReaderFormScreen> {
   String? _emailError;
   AppUser? _existing; // hồ sơ đã dùng email này (E-core-003)
   bool _saving = false;
+
+  int get _actorId => AppSession.userId!;
 
   @override
   void dispose() {

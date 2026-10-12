@@ -1,7 +1,7 @@
 ---
 type: srs-userflow
 feature: notification-audit-ui
-updated: 2026-10-09
+updated: 2026-10-12
 primary_device: mobile
 stage: flow-approved
 flow_approved_at: 2026-10-09
@@ -55,7 +55,7 @@ Chuyển màn sang feature khác ghi bằng chữ khi đích chưa có wireframe
 
 | Từ màn [#] | Đến màn [#] | Trigger | Điều kiện |
 |-----------|------------|---------|-----------|
-| Trung tâm [1] | Audit [2] | Mở nhật ký | Quản trị viên |
+| Trung tâm [1] | Audit [2] | Mở nhật ký | Thủ thư |
 | Audit [2] | Timeline [3] | Mở resource | Có quyền |
 | Audit [2] | (giữ) [2] | Mở resource | E-core-002 / E-core-009 |
 

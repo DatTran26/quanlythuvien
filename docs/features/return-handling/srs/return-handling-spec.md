@@ -2,7 +2,7 @@
 type: srs
 feature: return-handling
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/return-handling/brainstorms/return-handling-scope.md
   - docs/_product/prd.md
@@ -15,7 +15,7 @@ links:
 
 ## 1. Scope
 
-Thủ thư quét sách trả; hệ thống tìm phiếu đang mở, ghi tình trạng, đóng phiếu, ghi phạt quá hạn, chuyển bản sao về Sẵn sàng hoặc Chờ duyệt trong một giao dịch; quét lặp không tính phạt hai lần.
+Nhân viên quét sách trả; hệ thống tìm phiếu đang mở, ghi tình trạng, đóng phiếu, ghi phạt quá hạn, chuyển bản sao về Sẵn sàng hoặc Chờ duyệt trong một giao dịch; quét lặp không tính phạt hai lần.
 
 **Release:** R1A
 
@@ -25,7 +25,7 @@ Thủ thư quét sách trả; hệ thống tìm phiếu đang mở, ghi tình tr
 
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
-| Thủ thư | người | Vận hành quầy | Có |
+| Nhân viên | người | Vận hành quầy | Có |
 | Người đọc | người | Mượn, trả, theo dõi khoản mượn | Có |
 | Hệ thống | hệ thống | Thực thi rule, job, audit, outbox | Có |
 

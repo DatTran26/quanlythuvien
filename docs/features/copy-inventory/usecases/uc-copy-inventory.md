@@ -2,7 +2,7 @@
 type: usecase
 feature: copy-inventory
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/copy-inventory/usecases/copy-inventory-usecase-index.md
   - docs/features/copy-inventory/srs/copy-inventory-spec.md
@@ -16,13 +16,13 @@ links:
 
 ## Primary Actor
 
-Quản trị viên. Thủ thư dán nhãn sau khi in.
+Thủ thư. Nhân viên dán nhãn sau khi in.
 
 ## Stakeholders & Interests
 
 | Stakeholder | Interest |
 |-------------|----------|
-| Thủ thư | Mỗi cuốn một mã, quét đúng một bản sao |
+| Nhân viên | Mỗi cuốn một mã, quét đúng một bản sao |
 | Thủ thư trưởng | Kho khớp thực tế |
 
 ## Trigger
@@ -31,7 +31,7 @@ Có sách mới cần nhập kho, hoặc nhãn cũ hỏng cần in lại.
 
 ## Preconditions
 
-- Quản trị viên đã xác thực (include `uc-access-control`).
+- Thủ thư đã xác thực (include `uc-access-control`).
 - Đầu sách tồn tại và đang dùng (`uc-catalog-admin`).
 
 ## Guarantees
@@ -41,10 +41,10 @@ Có sách mới cần nhập kho, hoặc nhãn cũ hỏng cần in lại.
 
 ## Main Success Scenario
 
-1. Quản trị viên mở `copy-inventory` của một đầu sách, chọn thêm bản sao.
+1. Thủ thư mở `copy-inventory` của một đầu sách, chọn thêm bản sao.
 2. Nhập số bản, vị trí kệ, tình trạng ban đầu, cờ chỉ đọc tại chỗ nếu khác đầu sách.
 3. Hệ thống tạo N bản sao Sẵn sàng, sinh N mã QR duy nhất, ghi audit trong một giao dịch.
-4. Quản trị viên xuất file in nhãn; Thủ thư dán nhãn lên sách.
+4. Thủ thư xuất file in nhãn; Nhân viên dán nhãn lên sách.
 
 ## Extensions
 

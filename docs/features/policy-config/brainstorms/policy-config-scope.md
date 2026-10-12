@@ -2,7 +2,7 @@
 type: brainstorm
 feature: policy-config
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/decision-register.md
@@ -14,7 +14,7 @@ links:
 
 ## 1. Idea Seed
 
-Quản trị viên cấu hình tham số mượn, gia hạn, giữ chỗ, phạt, chặn mượn và kênh thông báo, có hiệu lực từ một thời điểm, không cần sửa phần mềm; phiếu đã tạo giữ quy định tại thời điểm tạo.
+Thủ thư cấu hình tham số mượn, gia hạn, giữ chỗ, phạt, chặn mượn và kênh thông báo, có hiệu lực từ một thời điểm, không cần sửa phần mềm; phiếu đã tạo giữ quy định tại thời điểm tạo.
 
 ## 2. Context
 
@@ -26,7 +26,7 @@ Quản trị viên cấu hình tham số mượn, gia hạn, giữ chỗ, phạt
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Quản trị viên | Đổi quy định phải chờ sửa phần mềm | Tự đổi tham số, chọn thời điểm hiệu lực |
+| Thủ thư | Đổi quy định phải chờ sửa phần mềm | Tự đổi tham số, chọn thời điểm hiệu lực |
 | Thủ thư trưởng | Không biết quy định đổi khi nào, ai đổi | Lịch sử thay đổi có người và thời điểm |
 
 ## 4. Capabilities Breakdown
@@ -50,7 +50,7 @@ Quản trị viên cấu hình tham số mượn, gia hạn, giữ chỗ, phạt
 
 ### 5.1 Đổi tham số
 
-1) Quản trị viên mở cấu hình, chọn tham số.
+1) Thủ thư mở cấu hình, chọn tham số.
 2) Nhập giá trị mới và thời điểm hiệu lực.
 3) Hệ thống kiểm tra miền giá trị, lưu, ghi audit trước/sau.
 4) Từ thời điểm hiệu lực, giao dịch mới dùng giá trị mới.
@@ -79,7 +79,7 @@ Không áp dụng.
 
 ### 6.5 Other Edge Cases
 
-- Hai Quản trị viên cùng sửa một tham số: người lưu sau thấy giá trị mới nhất trước khi lưu.
+- Hai Thủ thư cùng sửa một tham số: người lưu sau thấy giá trị mới nhất trước khi lưu.
 - Phiếu mượn đã tạo không đổi hạn trả khi đổi thời hạn mượn.
 
 ## 7. Validation, Limits & Wording

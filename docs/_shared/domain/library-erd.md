@@ -2,7 +2,7 @@
 type: srs-erd
 scope: shared
 status: draft
-updated: 2026-10-09
+updated: 2026-10-12
 links:
   - docs/_shared/core-spec.md
   - docs/_shared/domain/lifecycle-inventory.md
@@ -31,7 +31,7 @@ links:
 Quy ước chung (áp cho mọi entity, không lặp trong từng bảng):
 
 - Mọi entity nghiệp vụ có `created_at`/`updated_at` theo quy ước audit chung — `PROPOSAL` (chuẩn hóa; nguồn chỉ nêu `created_at` ở một số bảng). Field thời điểm mang nghĩa nghiệp vụ riêng (vd `Reservation.created_at` quyết định FIFO) vẫn liệt kê tường minh.
-- Mọi cột `*_by` / `actor_ref` / `recipient_ref` là **tham chiếu logic** tới tài khoản người dùng hệ thống (Thủ thư / Quản trị viên / Người đọc / Hệ thống — theo mapping spec §2). Tài khoản hệ thống **không nằm trong 13 aggregate §8 của spec** (ERD này vẽ 14 node: 13 aggregate + `ImportIssue` tách từ `ImportBatch`) — vẽ như FK cứng sẽ sai phạm vi → không vẽ quan hệ, xem `OQ-core-005` (Mục 6).
+- Mọi cột `*_by` / `actor_ref` / `recipient_ref` là **tham chiếu logic** tới tài khoản người dùng hệ thống (Nhân viên / Thủ thư / Người đọc / Hệ thống — theo mapping spec §2). Tài khoản hệ thống **không nằm trong 13 aggregate §8 của spec** (ERD này vẽ 14 node: 13 aggregate + `ImportIssue` tách từ `ImportBatch`) — vẽ như FK cứng sẽ sai phạm vi → không vẽ quan hệ, xem `OQ-core-005` (Mục 6).
 - QR/barcode chỉ là **locator**, không phải credential (BR-copy-inventory-001, FR-copy-inventory-002) — `qr_code`, `card_code` là business key duy nhất, không mang quyền.
 - Xóa mềm theo SRC-BR12: entity có lịch sử chỉ vô hiệu hóa (`status`/`is_active`), không xóa vật lý.
 - Soft FK sang danh mục phụ trợ (`Author`, `Category`, `Publisher`, `Shelf`): nguồn §7 gọi là "danh mục phụ trợ"; ở mức SRS chỉ ghi nhận thuộc tính tham chiếu, không khai entity riêng.
@@ -257,7 +257,7 @@ Nhãn tổng entity: **PROPOSAL** — SRS §8 tách `Loan`/`LoanItem`; nguồn �
 | `reader_id` | định danh | FK → Reader | FACT | Chủ phiếu; đủ điều kiện BR-core-001 tại thời điểm xác nhận |
 | `checked_out_at` | thời điểm | — | FACT | nguồn `borrowed_at` (mức phiếu) |
 | `operation_id` | mã | UK | PROPOSAL | Idempotency phiên checkout — AT-CHK-02; replay trả kết quả gốc (E-core-005) |
-| `created_by` | tham chiếu logic | — | FACT | Thủ thư xác nhận — nguồn `created_by` |
+| `created_by` | tham chiếu logic | — | FACT | Nhân viên xác nhận — nguồn `created_by` |
 | `loan_status` | enum | — | **derived** | Trạng thái phiếu suy từ các LoanItem (còn dòng mở = phiếu mở) — không lưu, tránh 2 nguồn sự thật |
 
 ### 3.5 `LoanItem` — Dòng mượn theo bản sao (chủ thể vòng đời mượn)
@@ -328,7 +328,7 @@ Nhãn tổng entity: **PROPOSAL** (vị trí gắn hạn trả/gia hạn/trạng
 | `report_id` | định danh | PK | FACT | |
 | `copy_id` | định danh | FK → Copy | FACT | |
 | `loan_item_id` | định danh | FK → LoanItem (tùy chọn) | FACT field / PROPOSAL đổi tên | nguồn `loan_id` — link khi phát hiện lúc trả (DMG-T01) |
-| `reported_by` | tham chiếu logic | — | FACT | Thủ thư tạo |
+| `reported_by` | tham chiếu logic | — | FACT | Nhân viên tạo |
 | `severity` | enum(`MINOR`/`MODERATE`/`SEVERE` = Nhẹ/Vừa/Nặng) | — | FACT | §6.4 nguồn; ánh xạ % bồi thường SRC-BR07 là policy |
 | `note` | văn bản | — | FACT | |
 | `photo_refs` | danh sách tham chiếu (1–5 phần tử) | — | FACT | SRC-NFR05: chỉ lưu tham chiếu object-storage, ≤500KB/ảnh; qua trust boundary BR-damage-lifecycle-002. Nhúng list hay tách entity `Attachment` — **OQ-damage-lifecycle-001** |
@@ -406,7 +406,7 @@ Nhãn tổng entity: **PROPOSAL** (vị trí gắn hạn trả/gia hạn/trạng
 | `status` | enum(`RECEIVED`,`DRY_RUN`,`COMMITTED`,`FAILED`) | — | PROPOSAL | Tối thiểu biểu đạt được dry-run/commit/fail; giá trị chi tiết chờ use case import chốt |
 | `total_rows` | số nguyên | — | FACT | Đối soát số lượng (NFR-data-import-001) |
 | `ok_count` / `error_count` / `skipped_count` | số nguyên | — | FACT | Reconcile phải đối chiếu số lượng + lỗi + bỏ qua (BR-data-import-001) |
-| `uploaded_by` | tham chiếu logic | — | FACT | Quản trị viên chạy import |
+| `uploaded_by` | tham chiếu logic | — | FACT | Thủ thư chạy import |
 | `committed_at` | thời điểm | — | PROPOSAL | Chỉ commit khi dry-run pass hoặc override được duyệt |
 | `override_approved_by` | tham chiếu logic (tùy chọn) | — | PROPOSAL | Commit với override cần phê duyệt — BR-data-import-001 |
 

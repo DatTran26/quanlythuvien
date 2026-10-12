@@ -100,7 +100,7 @@ class _CheckoutScanScreenState extends State<CheckoutScanScreen> {
       if (reader.isActive) {
         HapticFeedback.lightImpact();
         // Web: ô sách vừa bật -> focus sau khi khung hình mới vẽ xong.
-        // Điện thoại: không focus (tránh bật bàn phím), thủ thư dùng camera.
+        // Điện thoại: không focus (tránh bật bàn phím), nhân viên dùng camera.
         if (!context.isCompact) {
           WidgetsBinding.instance.addPostFrameCallback((_) => _copyFocus.requestFocus());
         }

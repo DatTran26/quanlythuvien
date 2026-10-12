@@ -2,7 +2,7 @@
 type: srs
 feature: notification-core
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/notification-core/brainstorms/notification-core-scope.md
   - docs/_product/prd.md
@@ -27,7 +27,7 @@ Mọi giao dịch phát sự kiện thông báo vào hàng đợi bền cùng gi
 |---|---|---|---|
 | Hệ thống | hệ thống | Thực thi rule, job, audit, outbox | Có |
 | Người đọc | người | Mượn, trả, theo dõi khoản mượn | Có |
-| Quản trị viên | người | Quản trị, duyệt ngoại lệ | Có |
+| Thủ thư | người | Quản trị, duyệt ngoại lệ | Có |
 
 Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.md` Mục 2.
 
@@ -102,4 +102,4 @@ __Assumptions:__
 - [ ] OQ-notification-core-001 — Kênh bắt buộc: chỉ in-app + email hay thêm kênh khác? Owner: Product Owner.
 - [ ] OQ-notification-core-002 — Số lần thử lại và khoảng cách thử? Owner: vận hành.
 - [ ] OQ-notification-core-003 — Danh sách sự kiện quan trọng gửi email? Owner: Product Owner.
-- [ ] OQ-notification-core-004 — Ai xử lý hàng lỗi, có báo Thủ thư trực quầy (DEC-D3-08)? Owner: Thủ thư trưởng.
+- [ ] OQ-notification-core-004 — Ai xử lý hàng lỗi, có báo Nhân viên trực quầy (DEC-D3-08)? Owner: Thủ thư trưởng.

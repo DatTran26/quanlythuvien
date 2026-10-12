@@ -2,7 +2,7 @@
 type: usecase
 feature: ops-foundation
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/ops-foundation/usecases/ops-foundation-usecase-index.md
   - docs/features/ops-foundation/srs/ops-foundation-spec.md
@@ -22,7 +22,7 @@ Hệ thống.
 | Stakeholder | Interest |
 |-------------|----------|
 | Bảo mật/pháp chế | Mọi thao tác nhạy cảm có dấu vết, dữ liệu cá nhân được che |
-| Quản trị viên | Tra được ai làm gì (xem ở `notification-audit-ui`) |
+| Thủ thư | Tra được ai làm gì (xem ở `notification-audit-ui`) |
 
 ## Trigger
 

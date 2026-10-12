@@ -13,8 +13,8 @@ void main() {
   testWidgets('quầy lưu thông quay về trang chủ bằng nút trái và mục trong menu', (tester) async {
     AppSession.signIn(
       id: 1,
-      nextRole: 'ADMIN',
-      name: 'Quản trị viên',
+      nextRole: 'LIBRARIAN',
+      name: 'Thủ thư',
       nextEmail: 'admin@library.local',
     );
     await tester.binding.setSurfaceSize(const Size(390, 844));

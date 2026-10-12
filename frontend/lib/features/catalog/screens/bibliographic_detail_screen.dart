@@ -62,7 +62,7 @@ class _BibliographicDetailScreenState extends State<BibliographicDetailScreen> {
                 icon: const Icon(Icons.inventory_2_outlined),
                 label: const Text('Xem bản sao'),
               ),
-              if (AppSession.isAdmin) ...[
+              if (AppSession.isLibrarian) ...[
                 const SizedBox(height: 8),
                 OutlinedButton.icon(
                   onPressed: () => Navigator.pushNamed(context, AppRoutes.bibliographicForm, arguments: title.id),

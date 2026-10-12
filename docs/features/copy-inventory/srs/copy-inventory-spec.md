@@ -2,7 +2,7 @@
 type: srs
 feature: copy-inventory
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/copy-inventory/brainstorms/copy-inventory-scope.md
   - docs/_product/prd.md
@@ -25,8 +25,8 @@ links:
 
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
-| Quản trị viên | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
-| Thủ thư | người | Vận hành quầy | Có |
+| Thủ thư | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
+| Nhân viên | người | Vận hành quầy | Có |
 | Hệ thống | hệ thống | Thực thi kiểm tra, ghi audit | Có |
 
 Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.md` Mục 2.
@@ -37,7 +37,7 @@ Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.
 |---|---|---|---|---|---|---|
 | FR-copy-inventory-001 | Quản lý bản sao sách | Đăng ký bản sao vật lý với mã định danh, vị trí, tình trạng ban đầu và trạng thái khả dụng. | P0 | R0 | demo/test | Spec cũ (xem id-crosswalk-lmp) |
 | FR-copy-inventory-002 | QR/barcode locator | Quét mã bản sao/phiếu chỉ để định vị bản ghi; mã không được dùng như bằng chứng uỷ quyền. | P0 | R0 | test/security | Spec cũ (xem id-crosswalk-lmp) |
-| FR-copy-inventory-003 | Sinh QR hàng loạt và in nhãn | Quản trị viên nhập N bản sao cho một đầu sách; hệ thống sinh N mã QR duy nhất và xuất file in nhãn; in lại nhãn hỏng dùng đúng mã cũ. | P0 | R0 | demo/test | SRC-FR-L03 (nguồn); brainstorm |
+| FR-copy-inventory-003 | Sinh QR hàng loạt và in nhãn | Thủ thư nhập N bản sao cho một đầu sách; hệ thống sinh N mã QR duy nhất và xuất file in nhãn; in lại nhãn hỏng dùng đúng mã cũ. | P0 | R0 | demo/test | SRC-FR-L03 (nguồn); brainstorm |
 
 ## 4. Non-Functional Requirements (NFR)
 

@@ -180,6 +180,12 @@ class _DamageReportFormScreenState extends State<DamageReportFormScreen> {
 
   Future<void> _submit() async {
     setState(() => _triedSubmit = true); // bật hiển thị lỗi cho chip/ảnh
+    // Gõ mã rồi bấm Gửi không kích hoạt onSubmitted, nên tra mã tại đây.
+    final typed = _codeCtrl.text.trim().toUpperCase();
+    if (typed.isNotEmpty && _copy?.code != typed) {
+      await _lookup(typed);
+      if (!mounted) return;
+    }
     final formOk = _formKey.currentState!.validate();
     if (!formOk || _copy == null || _severity == null || _photos.isEmpty || _submitting) return;
 

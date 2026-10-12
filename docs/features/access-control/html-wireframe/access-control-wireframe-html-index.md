@@ -8,7 +8,7 @@ device_width: 375
 flow_hash: d00261d8
 flows: 1
 screens: 5
-updated: 2026-10-09
+updated: 2026-10-12
 entry: access-control-wireframe.html
 links:
   - docs/features/access-control/srs/access-control-userflow.md
@@ -32,7 +32,7 @@ Mở [`access-control-wireframe.html`](access-control-wireframe.html) để duy�
 - OQ-access-control-001: Mô hình danh tính: tài khoản nội bộ, SSO hay dịch vụ danh tính ngoài?
 - OQ-access-control-002: Ngưỡng đăng nhập sai, thời gian khóa tạm, thời lượng phiên, hiệu lực link đặt lại mật khẩu?
 - OQ-access-control-003: Quy tắc mật khẩu (độ dài, ký tự)?
-- OQ-access-control-004: Mở khóa tạm tự động theo thời gian hay chỉ Quản trị viên mở?
+- OQ-access-control-004: Mở khóa tạm tự động theo thời gian hay chỉ Thủ thư mở?
 
 ## Sources
 

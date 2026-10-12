@@ -5,7 +5,7 @@
 String auditActionLabel(String action) => switch (action) {
   'USER_LOCK' => 'Khóa tài khoản',
   'USER_UNLOCK' => 'Mở khóa tài khoản',
-  'STAFF_CREATE' => 'Tạo tài khoản thủ thư',
+  'STAFF_CREATE' => 'Tạo tài khoản nhân viên',
   'READER_CREATE' => 'Cấp tài khoản người đọc',
   'READER_ACTIVATE' => 'Kích hoạt người đọc',
   'LOGIN' => 'Đăng nhập',

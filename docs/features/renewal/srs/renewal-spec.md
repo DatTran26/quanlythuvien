@@ -2,7 +2,7 @@
 type: srs
 feature: renewal
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/renewal/brainstorms/renewal-scope.md
   - docs/_product/prd.md
@@ -15,7 +15,7 @@ links:
 
 ## 1. Scope
 
-Gia hạn tại quầy (Thủ thư làm thay) và online (người đọc tự làm); chỉ gia hạn khi phiếu chưa quá hạn, còn lượt, không có người đặt trước và người đọc đủ điều kiện; từ chối nêu lý do cụ thể.
+Gia hạn tại quầy (Nhân viên làm thay) và online (người đọc tự làm); chỉ gia hạn khi phiếu chưa quá hạn, còn lượt, không có người đặt trước và người đọc đủ điều kiện; từ chối nêu lý do cụ thể.
 
 **Release:** R1B
 
@@ -26,7 +26,7 @@ Gia hạn tại quầy (Thủ thư làm thay) và online (người đọc tự l
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
 | Người đọc | người | Tự phục vụ | Có |
-| Thủ thư | người | Vận hành quầy | Có |
+| Nhân viên | người | Vận hành quầy | Có |
 | Hệ thống | hệ thống | Thực thi rule, job, audit, outbox | Có |
 
 Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.md` Mục 2.
@@ -35,7 +35,7 @@ Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.
 
 | ID | Title | Description | Priority | Release | Verify by | Source |
 |---|---|---|---|---|---|---|
-| FR-renewal-001 | Gia hạn tại quầy và online | Thủ thư hoặc người đọc gia hạn khoản mượn đủ điều kiện theo cấu hình; từ chối khi đã quá hạn, có người đặt trước đầu sách hoặc đã hết lượt gia hạn, nêu lý do cụ thể; gia hạn thành công thì cộng hạn trả, tăng đếm lượt, ghi audit, thông báo hạn mới. | P1 | R1B | test | Spec cũ (xem id-crosswalk-lmp) |
+| FR-renewal-001 | Gia hạn tại quầy và online | Nhân viên hoặc người đọc gia hạn khoản mượn đủ điều kiện theo cấu hình; từ chối khi đã quá hạn, có người đặt trước đầu sách hoặc đã hết lượt gia hạn, nêu lý do cụ thể; gia hạn thành công thì cộng hạn trả, tăng đếm lượt, ghi audit, thông báo hạn mới. | P1 | R1B | test | Spec cũ (xem id-crosswalk-lmp) |
 
 ## 4. Non-Functional Requirements (NFR)
 

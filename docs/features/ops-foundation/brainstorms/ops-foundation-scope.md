@@ -2,7 +2,7 @@
 type: brainstorm
 feature: ops-foundation
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/readiness-gates.md
@@ -19,14 +19,14 @@ Mọi thao tác nhạy cảm ghi audit cùng giao dịch, audit lỗi thì thao 
 ## 2. Context
 
 - Audit và backup phải có trước khi dữ liệu thật đi vào giao dịch (DEC-P2-06, roadmap R0).
-- Màn xem audit cho Quản trị viên thuộc `notification-audit-ui` (R1B); feature này chỉ ghi.
+- Màn xem audit cho Thủ thư thuộc `notification-audit-ui` (R1B); feature này chỉ ghi.
 - Backup/restore chưa có FR trong SRS cũ; DEC-SF-05 bổ sung. Diễn tập restore là bằng chứng của GATE-OPS.
 
 ## 3. User Types (preliminary)
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Quản trị viên | Không biết ai đã làm gì khi có sự cố | Mọi thao tác nhạy cảm có dấu vết |
+| Thủ thư | Không biết ai đã làm gì khi có sự cố | Mọi thao tác nhạy cảm có dấu vết |
 | Thủ thư trưởng | Sợ mất dữ liệu khi máy chủ hỏng | Backup đều và khôi phục được |
 | Hệ thống | — | Không có thao tác nhạy cảm nào thiếu audit |
 

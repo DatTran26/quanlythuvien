@@ -2,7 +2,7 @@
 type: srs
 feature: reader-onboarding
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/reader-onboarding/brainstorms/reader-onboarding-scope.md
   - docs/_product/prd.md
@@ -15,7 +15,7 @@ links:
 
 ## 1. Scope
 
-Thủ thư cấp tài khoản người đọc tại quầy: nhập hồ sơ, kiểm trùng định danh, kích hoạt và cấp thẻ QR. Không có tự đăng ký online (DEC-SF-03).
+Nhân viên cấp tài khoản người đọc tại quầy: nhập hồ sơ, kiểm trùng định danh, kích hoạt và cấp thẻ QR. Không có tự đăng ký online (DEC-SF-03).
 
 **Release:** R0
 
@@ -25,7 +25,7 @@ Thủ thư cấp tài khoản người đọc tại quầy: nhập hồ sơ, ki�
 
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
-| Thủ thư | người | Vận hành quầy | Có |
+| Nhân viên | người | Vận hành quầy | Có |
 | Người đọc | người | Nhận thẻ QR có hiệu lực | Có (gián tiếp) |
 | Hệ thống | hệ thống | Thực thi kiểm tra, ghi audit | Có |
 | Bảo mật/pháp chế | stakeholder | Kiểm soát dữ liệu cá nhân, retention | Có như stakeholder |
@@ -36,7 +36,7 @@ Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.
 
 | ID | Title | Description | Priority | Release | Verify by | Source |
 |---|---|---|---|---|---|---|
-| FR-reader-onboarding-001 | Cấp và kích hoạt tài khoản người đọc tại quầy | Thủ thư tạo hồ sơ người đọc gồm mã độc giả, họ tên, thông tin liên hệ tối thiểu và hạn thẻ nếu có; hệ thống kiểm trùng mã độc giả và mã QR thẻ, kích hoạt tài khoản và cấp thẻ QR trong một giao dịch có audit. | P0 | R0 | demo/test | Spec cũ (xem id-crosswalk-lmp) |
+| FR-reader-onboarding-001 | Cấp và kích hoạt tài khoản người đọc tại quầy | Nhân viên tạo hồ sơ người đọc gồm mã độc giả, họ tên, thông tin liên hệ tối thiểu và hạn thẻ nếu có; hệ thống kiểm trùng mã độc giả và mã QR thẻ, kích hoạt tài khoản và cấp thẻ QR trong một giao dịch có audit. | P0 | R0 | demo/test | Spec cũ (xem id-crosswalk-lmp) |
 
 ## 4. Non-Functional Requirements (NFR)
 
@@ -89,10 +89,10 @@ __Assumptions:__
 | Giả định | Invalidate nếu sai |
 |---|---|
 | Thẻ có hạn 1 năm, không thu phí (mặc định OQ-05 nguồn) | Trường hạn thẻ, job hết hạn thẻ |
-| Thủ thư được cấp tài khoản theo DEC-SF-03 | Ma trận quyền RBAC |
+| Nhân viên được cấp tài khoản theo DEC-SF-03 | Ma trận quyền RBAC |
 
 ## 12. Open Questions
 
 - [ ] OQ-reader-onboarding-001 — Bộ thông tin liên hệ bắt buộc của người đọc? Owner: domain approver.
 - [ ] OQ-reader-onboarding-002 — Thẻ có thời hạn và có thu phí không (OQ-05 nguồn)? Owner: Thủ thư trưởng.
-- [ ] OQ-reader-onboarding-003 — Thủ thư được cấp tài khoản thay vì chỉ vai trò quản trị như ma trận nguồn — Thủ thư trưởng xác nhận theo DEC-SF-03? Owner: Thủ thư trưởng.
+- [ ] OQ-reader-onboarding-003 — Nhân viên được cấp tài khoản thay vì chỉ vai trò quản trị như ma trận nguồn — Thủ thư trưởng xác nhận theo DEC-SF-03? Owner: Thủ thư trưởng.

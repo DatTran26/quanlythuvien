@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>account-admin — Quản trị tài khoản người đọc và Thủ thư | Wireframe</title>
+  <title>account-admin — Quản trị tài khoản người đọc và Nhân viên | Wireframe</title>
   <style>
     /* RESET */
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -173,9 +173,9 @@
 
   <div class="wf-header">
     <div class="wf-feature-label">Feature: account-admin / Wireframe</div>
-    <div class="wf-flow-title">Quản trị tài khoản người đọc và Thủ thư</div>
+    <div class="wf-flow-title">Quản trị tài khoản người đọc và Nhân viên</div>
     <div class="wf-flow-meta">3 màn hình · Device: mobile · Cập nhật: 2026-10-09 · Nguồn: srs/account-admin-userflow.md + srs/account-admin-spec.md</div>
-    <div class="wf-flow-desc">Tra cứu, xem chi tiết, sửa, khóa tạm, mở lại, vô hiệu tài khoản người đọc; Quản trị viên quản lý tài khoản Thủ thư (DEC-SF-04).</div>
+    <div class="wf-flow-desc">Tra cứu, xem chi tiết, sửa, khóa tạm, mở lại, vô hiệu tài khoản người đọc; Thủ thư quản lý tài khoản Nhân viên (DEC-SF-04).</div>
   </div>
 
   <div class="wf-rows">
@@ -190,7 +190,7 @@
         <div class="wf-screen-content">
           <div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div>
           <div class="wf-screen-title">Danh sách người đọc</div>
-          <div class="banner banner-info"><span>Màn quản trị dành cho Quản trị viên và Thủ thư. Người đọc tự xem thông tin của mình ở cổng người đọc (`reader-self-service`, DEC-SF-02).</span></div>
+          <div class="banner banner-info"><span>Màn quản trị dành cho Thủ thư và Nhân viên. Người đọc tự xem thông tin của mình ở cổng người đọc (`reader-self-service`, DEC-SF-02).</span></div>
           <div class="field">
             <label for="s1-query">Tìm hồ sơ người đọc</label>
             <input id="s1-query" type="text" placeholder="Từ khóa tra cứu">
@@ -198,8 +198,8 @@
           <p class="state-hint">UC chỉ nói tìm/lọc. Không liệt kê trường lọc — không thêm bộ lọc riêng. PII trên kết quả mask theo quyền field (E-core-009).</p>
           <button class="btn-primary" type="button">Tìm</button>
           <a class="wf-link" href="../../reader-onboarding/html-wireframe/reader-onboarding-flow.html#s1">Cấp tài khoản mới</a>
-          <a class="wf-link" href="#s3">Quản trị tài khoản Thủ thư</a>
-          <p class="state-hint">Cấp tài khoản mới tại quầy: Thủ thư hoặc Quản trị viên (DEC-SF-03). Sửa, xóa mềm: Quản trị viên (R0). Thủ thư sửa và khóa tạm ở chi tiết [2] từ R1B (DEC-SF-04). Quản trị tài khoản Thủ thư: chỉ Quản trị viên.</p>
+          <a class="wf-link" href="#s3">Quản trị tài khoản Nhân viên</a>
+          <p class="state-hint">Cấp tài khoản mới tại quầy: Nhân viên hoặc Thủ thư (DEC-SF-03). Sửa, xóa mềm: Thủ thư (R0). Nhân viên sửa và khóa tạm ở chi tiết [2] từ R1B (DEC-SF-04). Quản trị tài khoản Nhân viên: chỉ Thủ thư.</p>
           <div class="wf-card">
             <div class="wf-card-body">
               <div class="wf-card-title">Họ tên (mask nếu thiếu quyền field)</div>
@@ -232,10 +232,10 @@
           <p class="hint-text">UC dùng chữ blocked cho trạng thái khóa. ERD dùng LOCKED. Chưa ánh xạ — màn này ghi LOCKED.</p>
           <div class="banner banner-info"><span>Chỉ đọc, tính từ dữ liệu khác: phiếu mượn đang mở, reservation đang chờ, số dư công nợ. Không sửa tại đây. Số dư là dữ liệu tài chính — mask nếu thiếu quyền field.</span></div>
           <a class="wf-link" href="../../reader-onboarding/html-wireframe/reader-onboarding-flow.html#s1">Sửa hồ sơ</a>
-          <p class="state-hint">Chỉ khi có quyền field cần sửa. Sửa và xóa mềm: Quản trị viên (R0); Thủ thư sửa từ R1B (DEC-SF-04).</p>
+          <p class="state-hint">Chỉ khi có quyền field cần sửa. Sửa và xóa mềm: Thủ thư (R0); Nhân viên sửa từ R1B (DEC-SF-04).</p>
           <div class="modal-box">
             <div class="modal-title">Khóa hoặc mở khóa (R1B)</div>
-            <p class="modal-desc">Ở lại màn [2]. Quyền khóa/mở: cả Thủ thư và Quản trị viên (FACT). Lý do bắt buộc (FR-account-admin-002). Khóa không đóng Loan, Reservation hay Fine đang mở (PROPOSAL, UC 5c). BR-core-001 chặn mượn/gia hạn mới; hạn mức 5 cuốn (DEC-SF-10).</p>
+            <p class="modal-desc">Ở lại màn [2]. Quyền khóa/mở: cả Nhân viên và Thủ thư (FACT). Lý do bắt buộc (FR-account-admin-002). Khóa không đóng Loan, Reservation hay Fine đang mở (PROPOSAL, UC 5c). BR-core-001 chặn mượn/gia hạn mới; hạn mức 5 cuốn (DEC-SF-10).</p>
             <div class="field">
               <label for="s3-reason">Lý do khóa hoặc mở</label>
               <input id="s3-reason" type="text" placeholder="Lý do khóa hoặc mở">
@@ -250,7 +250,7 @@
           </div>
           <div class="modal-box">
             <div class="modal-title">Vô hiệu hóa hồ sơ</div>
-            <p class="modal-desc">BR-core-006 / SRC-FR-L05 (FACT): đã có lịch sử thì không xóa cứng. Còn Loan mở hoặc nợ phạt chưa thanh toán thì chặn (E-core-008) và hiện nghĩa vụ tồn đọng. Xóa cứng chỉ khi chưa phát sinh lịch sử. Chỉ Quản trị viên. Retention/deletion PII chờ OQ-core-003.</p>
+            <p class="modal-desc">BR-core-006 / SRC-FR-L05 (FACT): đã có lịch sử thì không xóa cứng. Còn Loan mở hoặc nợ phạt chưa thanh toán thì chặn (E-core-008) và hiện nghĩa vụ tồn đọng. Xóa cứng chỉ khi chưa phát sinh lịch sử. Chỉ Thủ thư. Retention/deletion PII chờ OQ-core-003.</p>
             <div class="modal-actions">
               <button class="btn-primary" type="button">Vô hiệu hóa</button>
               <button class="btn-secondary" type="button">Hủy</button>
@@ -258,7 +258,7 @@
             <button class="btn-secondary" type="button" disabled>Xóa cứng</button>
             <p class="state-hint">Disabled khi còn phiếu mở, còn nợ, hoặc đã có lịch sử — E-core-008.</p>
           </div>
-          <div class="banner banner-warn"><span>E-core-002 — Actor ngoài Thủ thư/Quản trị viên, hoặc thiếu quyền action. Ở lại [2] hoặc <a class="wf-link" href="#s1">danh sách [1]</a> với action còn quyền. Denial được audit.</span></div>
+          <div class="banner banner-warn"><span>E-core-002 — Actor ngoài Nhân viên/Thủ thư, hoặc thiếu quyền action. Ở lại [2] hoặc <a class="wf-link" href="#s1">danh sách [1]</a> với action còn quyền. Denial được audit.</span></div>
           <div class="banner banner-warn"><span>E-core-004 — Hồ sơ vừa bị actor khác đổi, kể cả khóa/mở. Không ghi đè. Tải lại trạng thái trên chính màn [2].</span></div>
         </div>
       </div>
@@ -271,19 +271,19 @@
       <div class="wf-screen-frame">
         <div class="wf-screen-bar">
           <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
-          <span class="wf-bar-title">Tài khoản Thủ thư [3]</span>
+          <span class="wf-bar-title">Tài khoản Nhân viên [3]</span>
         </div>
         <div class="wf-screen-content">
           <div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div>
           <div class="back-nav"><a class="wf-link" href="#s1">← Danh sách người đọc</a></div>
-          <div class="wf-screen-title">Tài khoản Thủ thư</div>
+          <div class="wf-screen-title">Tài khoản Nhân viên</div>
           <div class="field">
-            <label for="s3-query">Tìm tài khoản Thủ thư</label>
+            <label for="s3-query">Tìm tài khoản Nhân viên</label>
             <input id="s3-query" type="text" placeholder="Họ tên hoặc email">
           </div>
           <div class="wf-card">
             <div class="wf-card-body">
-              <div class="wf-card-title">Họ tên Thủ thư</div>
+              <div class="wf-card-title">Họ tên Nhân viên</div>
               <div class="wf-card-sub">Email · Trạng thái: Hoạt động / Khóa tạm / Vô hiệu</div>
             </div>
           </div>
@@ -291,8 +291,8 @@
           <button class="btn-secondary" type="button">Đặt lại mật khẩu</button>
           <button class="btn-secondary" type="button">Vô hiệu</button>
           <div class="modal-box">
-            <div class="modal-title">Tạo tài khoản Thủ thư</div>
-            <div class="field"><label for="s3-name">Họ tên</label><input id="s3-name" type="text" placeholder="Họ tên Thủ thư"></div>
+            <div class="modal-title">Tạo tài khoản Nhân viên</div>
+            <div class="field"><label for="s3-name">Họ tên</label><input id="s3-name" type="text" placeholder="Họ tên Nhân viên"></div>
             <div class="field"><label for="s3-email">Email</label><input id="s3-email" type="email" placeholder="Email đăng nhập"></div>
             <div class="field"><label for="s3-reason">Lý do</label><textarea id="s3-reason" rows="2" placeholder="Bắt buộc với khóa tạm và vô hiệu"></textarea></div>
             <div class="modal-actions">
@@ -300,9 +300,9 @@
               <button class="btn-secondary" type="button">Hủy</button>
             </div>
           </div>
-          <p class="state-hint">Chỉ Quản trị viên (DEC-SF-04). Thao tác khóa, đặt lại mật khẩu, vô hiệu yêu cầu xác thực lại (<a class="wf-link" href="../../access-control/html-wireframe/auth-flow.html#s5">session-expired · access-control</a>).</p>
+          <p class="state-hint">Chỉ Thủ thư (DEC-SF-04). Thao tác khóa, đặt lại mật khẩu, vô hiệu yêu cầu xác thực lại (<a class="wf-link" href="../../access-control/html-wireframe/auth-flow.html#s5">session-expired · access-control</a>).</p>
           <div class="banner banner-info"><span>Tài khoản đã có lịch sử thao tác chỉ vô hiệu, không xóa cứng (BR-core-006).</span></div>
-          <div class="banner banner-warn"><span>E-core-002 — Không có quyền quản trị tài khoản Thủ thư. Từ chối, ghi audit.</span></div>
+          <div class="banner banner-warn"><span>E-core-002 — Không có quyền quản trị tài khoản Nhân viên. Từ chối, ghi audit.</span></div>
           <div class="banner banner-warn"><span>E-core-003 — Email đã dùng cho tài khoản khác. Không tạo trùng.</span></div>
         </div>
       </div>
@@ -321,7 +321,7 @@
         <tr><td>1</td><td>Phạm vi màn</td><td>Label</td><td>ReadOnly</td><td>Màn quản trị, không phải cổng người đọc. Người đọc xem công nợ và khoản mượn của mình ở `reader-self-service` (DEC-SF-02).</td></tr>
         <tr><td>2</td><td>Tìm hồ sơ người đọc</td><td>Textbox</td><td>Text</td><td>UC bước 1: tìm/lọc. Nguồn không nêu trường lọc, độ dài hay charset — một ô từ khóa, không bịa bộ lọc. PII kết quả theo BR-core-004 / NFR-core-004.</td></tr>
         <tr><td>3</td><td>Tìm</td><td>Button</td><td>Click</td><td>Ở lại [1]. Không thấy hồ sơ: E-core-003. Không tạo mới từ ô tìm.</td></tr>
-        <tr><td>4</td><td>Tạo hồ sơ</td><td>Link</td><td>Click</td><td>Sang reader-form (reader-form · reader-onboarding). FACT: CRUD tài khoản người đọc chỉ Quản trị viên. Thủ thư không có nút này. Thiếu quyền: E-core-002 + audit denial.</td></tr>
+        <tr><td>4</td><td>Tạo hồ sơ</td><td>Link</td><td>Click</td><td>Sang reader-form (reader-form · reader-onboarding). FACT: CRUD tài khoản người đọc chỉ Thủ thư. Nhân viên không có nút này. Thiếu quyền: E-core-002 + audit denial.</td></tr>
         <tr><td>5</td><td>Chi tiết</td><td>Link</td><td>Click</td><td>Chọn hồ sơ còn tồn tại, sang reader-detail [2] (userflow). Card không chứa dữ liệu người thật. Họ tên mask khi thiếu quyền field; không bịa ký tự mask.</td></tr>
         <tr><td>6</td><td>Trạng thái trên dòng</td><td>Label</td><td>ReadOnly</td><td>Hiển thị status ERD: ACTIVE, LOCKED, DELETED. DELETED là xóa mềm (SRC-BR12). UC nói blocked — chưa có ánh xạ sang LOCKED, nên list dùng chữ ERD.</td></tr>
         <tr><td>7</td><td>Field bị mask</td><td>Label</td><td>ReadOnly</td><td>E-core-009. Không trả PII thô. Audit access attempt. Policy retention/deletion là OQ-core-003, non-waivable trước GATE-GNG — không vẽ nút xóa dữ liệu cá nhân.</td></tr>
@@ -332,25 +332,25 @@
         <tr><td>2</td><td>Hồ sơ</td><td>Label</td><td>ReadOnly</td><td>Xem full_name, email, phone, dob, address, card_code, card_expiry, status. PII và tài chính mask theo BR-core-004 / E-core-009. OQ-core-003 chưa cho phép vẽ chính sách lưu trữ.</td></tr>
         <tr><td>3</td><td>Nghĩa vụ đang mở</td><td>Label</td><td>ReadOnly</td><td>Derived: open_loan_count, open_reservation_count, fine_balance. Không lưu, không sửa. Reservation trên hồ sơ là dữ liệu đọc; không mở luồng đặt trước R2 từ màn này vì userflow không có transition đó.</td></tr>
         <tr><td>4</td><td>Sửa hồ sơ</td><td>Link</td><td>Click</td><td>Sang (reader-form · reader-onboarding) khi có quyền field (userflow). Thiếu quyền: E-core-002, ở lại [2].</td></tr>
-        <tr><td>5</td><td>Lý do khóa hoặc mở</td><td>Textbox</td><td>Text</td><td>Lý do bắt buộc (FR-account-admin-002). Thiếu lý do: E-core-001, không đổi trạng thái. Không có độ dài lý do. Quyền thực hiện: Thủ thư và Quản trị viên (FACT).</td></tr>
+        <tr><td>5</td><td>Lý do khóa hoặc mở</td><td>Textbox</td><td>Text</td><td>Lý do bắt buộc (FR-account-admin-002). Thiếu lý do: E-core-001, không đổi trạng thái. Không có độ dài lý do. Quyền thực hiện: Nhân viên và Thủ thư (FACT).</td></tr>
         <tr><td>6</td><td>Cảnh báo nghĩa vụ</td><td>Label</td><td>ReadOnly</td><td>PROPOSAL UC 5c: khóa không hủy Loan/Reservation/Fine hiện có; chỉ chặn giao dịch mới qua BR-core-001. Hạn mức 5 cuốn đang mượn (DEC-SF-10). Actor xác nhận hoặc hủy trước khi khóa.</td></tr>
         <tr><td>7</td><td>Khóa</td><td>Button</td><td>Click</td><td>R1B. Ở lại [2] (userflow: giữ nguyên). Đổi sang LOCKED theo ERD (UC nói blocked). Audit cùng transaction. Đã LOCKED: E-core-008, nút không chạy. Thành công thì BR-core-001 áp ngay cho mượn/gia hạn mới. Notify khóa/mở được flows F2 nêu; kênh là OQ-notification-core-001 — không vẽ kênh.</td></tr>
         <tr><td>8</td><td>Mở khóa</td><td>Button</td><td>Click</td><td>R1B, lý do bắt buộc, ở lại [2]. Đang ACTIVE thì E-core-008. Không tự mở hạn mức hay xóa fine. Step-up nếu phiên yếu: E-access-control-001 sang auth (session-expired · access-control), rồi quay lại [2] (flows F2).</td></tr>
-        <tr><td>9</td><td>Vô hiệu hóa</td><td>Button</td><td>Click</td><td>Chỉ Quản trị viên. Đặt trạng thái vô hiệu/DELETED, audit, không xóa cứng khi đã có lịch sử (BR-core-006). Hồ sơ vô hiệu không đăng nhập/mượn nhưng vẫn đọc được để truy vết. OQ-core-003 vẫn khóa chính sách xóa PII.</td></tr>
+        <tr><td>9</td><td>Vô hiệu hóa</td><td>Button</td><td>Click</td><td>Chỉ Thủ thư. Đặt trạng thái vô hiệu/DELETED, audit, không xóa cứng khi đã có lịch sử (BR-core-006). Hồ sơ vô hiệu không đăng nhập/mượn nhưng vẫn đọc được để truy vết. OQ-core-003 vẫn khóa chính sách xóa PII.</td></tr>
         <tr><td>10</td><td>Hủy vô hiệu hóa</td><td>Button</td><td>Click</td><td>Đóng xác nhận, không đổi status.</td></tr>
         <tr><td>11</td><td>Xóa cứng</td><td>Button</td><td>Click</td><td>Disabled khi còn Loan mở, còn nợ phạt, hoặc đã có lịch sử. E-core-008 nêu nghĩa vụ tồn đọng. Chỉ hồ sơ chưa phát sinh lịch sử mới xóa cứng (UC 5d2). Không bịa thêm điều kiện.</td></tr>
         <tr><td>12</td><td>Từ chối quyền</td><td>Label</td><td>ReadOnly</td><td>E-core-002. Ở [2] hoặc về [1] với action còn quyền. Không leo quyền trên UI.</td></tr>
         <tr><td>13</td><td>Xung đột tại chi tiết</td><td>Label</td><td>ReadOnly</td><td>E-core-004 khi khóa/mở hoặc sửa trạng thái đụng version mới. Feedback tại [2], không ghi đè. Tải lại rồi chỉ hiện action hợp lệ.</td></tr>
 
-        <tr class="wf-desc-screen-header"><td colspan="5">Screen 3: Tài khoản Thủ thư [3]</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 3: Tài khoản Nhân viên [3]</td></tr>
         <tr><td>1</td><td>Quay lại danh sách</td><td>Link</td><td>Click</td><td>Về reader-list [1]. Không ghi dữ liệu.</td></tr>
-        <tr><td>2</td><td>Tìm tài khoản Thủ thư</td><td>Textbox</td><td>Text</td><td>Mục đích: tra tài khoản Thủ thư theo họ tên hoặc email (FR-account-admin-003). Không validate định dạng ô tìm. Không thấy: hiện danh sách trống, không tạo bản ghi từ ô tìm.</td></tr>
+        <tr><td>2</td><td>Tìm tài khoản Nhân viên</td><td>Textbox</td><td>Text</td><td>Mục đích: tra tài khoản Nhân viên theo họ tên hoặc email (FR-account-admin-003). Không validate định dạng ô tìm. Không thấy: hiện danh sách trống, không tạo bản ghi từ ô tìm.</td></tr>
         <tr><td>3</td><td>Thẻ tài khoản</td><td>Card</td><td>ReadOnly</td><td>Họ tên, email, trạng thái Hoạt động / Khóa tạm / Vô hiệu. Chọn thẻ để bật các nút thao tác bên dưới.</td></tr>
-        <tr><td>4</td><td>Khóa tạm</td><td>Button</td><td>Click</td><td>Chặn đăng nhập của tài khoản Thủ thư đến khi mở lại. Lý do bắt buộc (E-core-001 khi trống). Yêu cầu xác thực lại; ghi audit cùng giao dịch, audit lỗi thì hủy (E-core-007). Tài khoản đã Vô hiệu: E-core-008.</td></tr>
-        <tr><td>5</td><td>Đặt lại mật khẩu</td><td>Button</td><td>Click</td><td>Gửi hướng dẫn đặt lại mật khẩu tới email của tài khoản (dùng luồng `reset-password` của access-control). Yêu cầu xác thực lại; ghi audit. Quản trị viên không xem hay đặt mật khẩu thay.</td></tr>
+        <tr><td>4</td><td>Khóa tạm</td><td>Button</td><td>Click</td><td>Chặn đăng nhập của tài khoản Nhân viên đến khi mở lại. Lý do bắt buộc (E-core-001 khi trống). Yêu cầu xác thực lại; ghi audit cùng giao dịch, audit lỗi thì hủy (E-core-007). Tài khoản đã Vô hiệu: E-core-008.</td></tr>
+        <tr><td>5</td><td>Đặt lại mật khẩu</td><td>Button</td><td>Click</td><td>Gửi hướng dẫn đặt lại mật khẩu tới email của tài khoản (dùng luồng `reset-password` của access-control). Yêu cầu xác thực lại; ghi audit. Thủ thư không xem hay đặt mật khẩu thay.</td></tr>
         <tr><td>6</td><td>Vô hiệu</td><td>Button</td><td>Click</td><td>Vô hiệu tài khoản, không xóa cứng khi đã có lịch sử (BR-core-006). Lý do bắt buộc, xác thực lại, audit. Bấm lặp: E-core-005, không ghi hai lần.</td></tr>
-        <tr><td>7</td><td>Tạo tài khoản Thủ thư</td><td>Modal</td><td>Form</td><td>Họ tên + email bắt buộc (E-core-001 khi trống hoặc sai định dạng email). Email trùng: E-core-003. Tạo xong hệ thống gửi hướng dẫn kích hoạt qua email. Bộ trường bắt buộc chi tiết chưa có nguồn — giữ tối thiểu họ tên, email.</td></tr>
-        <tr><td>8</td><td>Thông báo quyền</td><td>Label</td><td>ReadOnly</td><td>Chỉ Quản trị viên vào màn này (DEC-SF-04). Thủ thư hoặc Người đọc: E-core-002, quay về dashboard, ghi audit. Quản lý tài khoản Quản trị viên còn mở (OQ-account-admin-001).</td></tr>
+        <tr><td>7</td><td>Tạo tài khoản Nhân viên</td><td>Modal</td><td>Form</td><td>Họ tên + email bắt buộc (E-core-001 khi trống hoặc sai định dạng email). Email trùng: E-core-003. Tạo xong hệ thống gửi hướng dẫn kích hoạt qua email. Bộ trường bắt buộc chi tiết chưa có nguồn — giữ tối thiểu họ tên, email.</td></tr>
+        <tr><td>8</td><td>Thông báo quyền</td><td>Label</td><td>ReadOnly</td><td>Chỉ Thủ thư vào màn này (DEC-SF-04). Nhân viên hoặc Người đọc: E-core-002, quay về dashboard, ghi audit. Quản lý tài khoản Thủ thư còn mở (OQ-account-admin-001).</td></tr>
       </tbody>
     </table>
   </div>

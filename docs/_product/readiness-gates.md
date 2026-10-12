@@ -1,7 +1,7 @@
 ---
 type: readiness-gates
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/roadmap.md
@@ -19,10 +19,10 @@ links:
 | Gate | Tên | Vị trí trên roadmap | Owner | Non-waivable | Feature liên quan |
 |---|---|---|---|---|---|
 | GATE-DEC | Decision | Entry R0; tiếp diễn trước GATE-GNG | Thủ thư trưởng (điều phối approver) | Có — với hard-stop decision | `policy-config`, `access-control`, `account-admin`, `fine-collection-adv`, `ops-foundation` (privacy) |
-| GATE-MIG | Migration | Exit R0 | Quản trị viên | Có | `data-import`, `catalog-admin`, `copy-inventory` |
-| GATE-UAT | UAT | Trong R1B | Đại diện thủ thư quầy + Quản trị viên | Có | Mọi feature R0–R1B |
+| GATE-MIG | Migration | Exit R0 | Thủ thư | Có | `data-import`, `catalog-admin`, `copy-inventory` |
+| GATE-UAT | UAT | Trong R1B | Đại diện nhân viên quầy + Thủ thư | Có | Mọi feature R0–R1B |
 | GATE-OPS | Operations / Restore | Một phần exit R0; đầy đủ trong R1B | Owner vận hành (chỉ định trong decision register — `PROPOSAL`) | Có (restore trước go-live) | `ops-foundation`, `notification-core` |
-| GATE-TRN | Training / SOP | Trong R1B | Quản trị viên | Có | `checkout`, `return-handling`, `damage-lifecycle`, `lost-handling`, `fine-collection-basic` |
+| GATE-TRN | Training / SOP | Trong R1B | Thủ thư | Có | `checkout`, `return-handling`, `damage-lifecycle`, `lost-handling`, `fine-collection-basic` |
 | GATE-PILOT | Pilot readiness | Cuối R1B | Thủ thư trưởng | Có | Mọi feature R0–R1B |
 | GATE-GNG | Release / Go-No-Go | Cuối R1B | Thủ thư trưởng | **Có — tuyệt đối** | Mọi feature R0–R1B |
 
@@ -43,7 +43,7 @@ links:
 | Trường | Nội dung |
 |---|---|
 | Mục đích | Dữ liệu thật đi vào hệ thống chỉ qua import có kiểm soát: dry-run, lỗi theo dòng, dedup, đối soát tổng, rollback theo batch. |
-| Owner | Quản trị viên (dữ liệu) + đội kỹ thuật (công cụ import). |
+| Owner | Thủ thư (dữ liệu) + đội kỹ thuật (công cụ import). |
 | Artifact | Source profile + mapping của file Excel thật; báo cáo dry-run; biên bản đối soát vật lý; runbook rollback batch. |
 | Entry evidence | File Excel đại diện đã được cung cấp (external blocker — owner Thủ thư trưởng); mapping được duyệt. |
 | Exit evidence | 100% bản ghi lỗi/trùng được chỉ rõ và xử lý trước ghi chính thức; sai lệch kho sau đối soát vật lý ≤ 1% (target); demo rollback một batch lỗi thành công; QR sinh ra quét đúng, có phương án nhập mã thủ công. |
@@ -54,7 +54,7 @@ links:
 | Trường | Nội dung |
 |---|---|
 | Mục đích | Mọi capability P0/R1A–R1B có scenario được người dùng đại diện chạy trên dữ liệu đại diện; traceability capability → requirement → scenario không còn blocker. |
-| Owner | Đại diện thủ thư quầy (UAT) + Quản trị viên (nghiệm thu). |
+| Owner | Đại diện nhân viên quầy (UAT) + Thủ thư (nghiệm thu). |
 | Artifact | UAT script theo scenario (happy/error/boundary/interruption/concurrent); biên bản UAT; danh sách lỗi với severity. |
 | Entry evidence | R1A + phần chức năng R1B hoàn thành; AC tồn tại cho mọi item được UAT (nối Phase 6). |
 | Exit evidence | 0 lỗi blocker mở; lỗi còn lại có owner + workaround SOP; traceability hoàn chỉnh cho P0. |
@@ -76,10 +76,10 @@ links:
 | Trường | Nội dung |
 |---|---|
 | Mục đích | Người vận hành thật biết dùng hệ thống và xử lý ngoại lệ trước pilot. |
-| Owner | Quản trị viên. |
-| Artifact | SOP cho Thủ thư (mượn/trả/hư hỏng/mất/thu phạt/QR hỏng) và Quản trị viên (import, duyệt, cấu hình, báo cáo); dữ liệu tập luyện; biên bản diễn tập. |
+| Owner | Thủ thư. |
+| Artifact | SOP cho Nhân viên (mượn/trả/hư hỏng/mất/thu phạt/QR hỏng) và Thủ thư (import, duyệt, cấu hình, báo cáo); dữ liệu tập luyện; biên bản diễn tập. |
 | Entry evidence | UAT đã chạy để SOP phản ánh hành vi thật. |
-| Exit evidence | ≥1 buổi diễn tập đầy đủ tại quầy với dữ liệu tập; mọi thủ thư pilot đã thực hành mượn–trả–ngoại lệ. |
+| Exit evidence | ≥1 buổi diễn tập đầy đủ tại quầy với dữ liệu tập; mọi nhân viên pilot đã thực hành mượn–trả–ngoại lệ. |
 | Waivable | Không. |
 
 ## GATE-PILOT — Pilot readiness gate

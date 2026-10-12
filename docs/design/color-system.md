@@ -1,14 +1,14 @@
 ---
 type: design-system
 status: approved
-updated: 2026-10-10
+updated: 2026-10-12
 links:
   - docs/he_thong_quan_ly_thu_vien.md
 ---
 
 # Hệ thống màu và nút bấm — App Quản lý Thư viện
 
-> Phạm vi: app Flutter (Android + Web) cho 3 vai trò Người đọc, Nhân viên, Thủ thư.
+> Phạm vi: app Flutter (Android + Web) cho 3 vai trò Người đọc, Nhân viên, Nhân viên.
 > Bảng màu chế độ sáng được duyệt ngày 2026-10-09. Bảng màu chế độ tối đã đo đạt chuẩn tương phản nhưng chưa xem trực quan trên thiết bị thật — cần kiểm tra lại khi dựng màn hình đầu tiên.
 
 ## 1. Mục đích

@@ -2,7 +2,7 @@
 type: srs
 feature: policy-config
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/policy-config/brainstorms/policy-config-scope.md
   - docs/_product/prd.md
@@ -15,7 +15,7 @@ links:
 
 ## 1. Scope
 
-Quản trị viên cấu hình tham số mượn, gia hạn, giữ chỗ, phạt, chặn mượn và kênh thông báo có thời điểm hiệu lực; giao dịch đã bắt đầu giữ quy định tại thời điểm đó.
+Thủ thư cấu hình tham số mượn, gia hạn, giữ chỗ, phạt, chặn mượn và kênh thông báo có thời điểm hiệu lực; giao dịch đã bắt đầu giữ quy định tại thời điểm đó.
 
 **Release:** R0
 
@@ -25,7 +25,7 @@ Quản trị viên cấu hình tham số mượn, gia hạn, giữ chỗ, phạt
 
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
-| Quản trị viên | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
+| Thủ thư | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
 | Thủ thư trưởng | stakeholder | Duyệt quy định và go-live | Có như stakeholder |
 | Hệ thống | hệ thống | Thực thi kiểm tra, ghi audit | Có |
 

@@ -2,7 +2,7 @@
 type: usecase
 feature: damage-lifecycle
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/damage-lifecycle/usecases/damage-lifecycle-usecase-index.md
   - docs/features/damage-lifecycle/srs/damage-lifecycle-spec.md
@@ -16,26 +16,26 @@ links:
 
 ## Primary Actor
 
-Thủ thư (quầy) (tạo báo cáo hư hỏng, ghi nhận mất — FACT §6.4/SRC-FR-S05/S07; tương đương `Nhân viên` nguồn, Quản trị viên kế thừa theo ma trận nguồn) · Quản trị viên (duyệt disposition Bác bỏ/Sửa/Thanh lý, xử lý found-after-lost — FACT SRC-FR-L08, theo mapping spec §2)
+Nhân viên (quầy) (tạo báo cáo hư hỏng, ghi nhận mất — FACT §6.4/SRC-FR-S05/S07; tương đương `Nhân viên` nguồn, Thủ thư kế thừa theo ma trận nguồn) · Thủ thư (duyệt disposition Bác bỏ/Sửa/Thanh lý, xử lý found-after-lost — FACT SRC-FR-L08, theo mapping spec §2)
 
 ## Stakeholders & Interests
 
 | Stakeholder | Interest |
 |-------------|----------|
-| Quản trị viên (reviewer) | Nhận notify ngay khi có report `PENDING` (FACT — nguồn §8); không để bản sao kẹt `PENDING_REVIEW` không rõ nguyên nhân (lý do DEC-P2-03 nâng disposition vào R1A) |
+| Thủ thư (reviewer) | Nhận notify ngay khi có report `PENDING` (FACT — nguồn §8); không để bản sao kẹt `PENDING_REVIEW` không rõ nguyên nhân (lý do DEC-P2-03 nâng disposition vào R1A) |
 | Người đọc | Bồi thường theo SRC-BR06/SRC-BR07 được assess trong cùng transaction đóng Loan; khi sách mất được tìm lại, nghĩa vụ đối soát đúng — không tự xóa (DEC-D3-05) |
 | Bộ phận tài chính | Compensation events (REVERSAL/ADJUSTMENT/REFUND) theo policy — giữ hay không giữ phí xử lý SRC-BR06 là **Open** (OQ-fine-collection-adv-001) |
 | Người đặt trước đang giữ chỗ | Copy `ON_HOLD` bị báo hư hỏng → reservation `READY` quay `WAITING` giữ vị trí hàng chờ (PROPOSAL — DEC-D3-06) |
 
 ## Trigger
 
-- Thủ thư (quầy) quét QR bản sao và chọn "Báo cáo hư hỏng" tại quầy (ngoài luồng trả), hoặc ghi nhận tình trạng "Hư hỏng"/"Mất" trong luồng trả (extend uc-return).
-- Quản trị viên mở `damage-report-detail` để duyệt một report `PENDING`.
-- Thủ thư (quầy)/Quản trị viên xác nhận một bản sao `LOST` được tìm lại (`lost-found`).
+- Nhân viên (quầy) quét QR bản sao và chọn "Báo cáo hư hỏng" tại quầy (ngoài luồng trả), hoặc ghi nhận tình trạng "Hư hỏng"/"Mất" trong luồng trả (extend uc-return).
+- Thủ thư mở `damage-report-detail` để duyệt một report `PENDING`.
+- Nhân viên (quầy)/Thủ thư xác nhận một bản sao `LOST` được tìm lại (`lost-found`).
 
 ## Preconditions
 
-- Actor đã xác thực và có quyền: báo cáo/ghi mất = Thủ thư (quầy) trở lên (tương đương `Nhân viên` nguồn ✓, Quản trị viên kế thừa); disposition (Bác bỏ/Sửa/Thanh lý) = Quản trị viên — ma trận quyền nguồn §2 theo mapping spec §2, FACT.
+- Actor đã xác thực và có quyền: báo cáo/ghi mất = Nhân viên (quầy) trở lên (tương đương `Nhân viên` nguồn ✓, Thủ thư kế thừa); disposition (Bác bỏ/Sửa/Thanh lý) = Thủ thư — ma trận quyền nguồn §2 theo mapping spec §2, FACT.
 - Copy tồn tại và ở trạng thái hợp lệ cho báo cáo: `AVAILABLE`/`ON_HOLD` (trực tiếp) hoặc `ON_LOAN` (phát hiện lúc trả — qua flow trả); `DISPOSED` là terminal — từ chối.
 - Upload ảnh đi qua trust boundary (BR-damage-lifecycle-002); QR chỉ là locator — phải xác thực actor/quyền sau khi locate (BR-copy-inventory-001).
 - Tối đa một `DamageReport` `PENDING` trên một Copy tại một thời điểm (PROPOSAL — lifecycle §6).
@@ -50,9 +50,9 @@ Thủ thư (quầy) (tạo báo cáo hư hỏng, ghi nhận mất — FACT §6.4
 1. Actor quét QR bản sao tại `damage-report-form`; hệ thống locate Copy và hiển thị trạng thái/tình trạng hiện tại.
 2. Actor chọn mức độ (Nhẹ / Vừa / Nặng — SRC-BR07), nhập ghi chú, upload **1–5 ảnh** bằng chứng (FACT — §6.4; mỗi ảnh sau nén ≤ 500 KB, SRC-NFR05).
 3. Hệ thống kiểm tra từng ảnh qua trust boundary: kiểm loại/MIME sniffing, giới hạn kích thước, quét nội dung, tên file lưu an toàn, không tin metadata gốc (BR-damage-lifecycle-002, FR-damage-lifecycle-002).
-4. Trong **một transaction**: tạo `DamageReport` `PENDING` (gắn `loan_id` nếu phát hiện lúc trả), Copy `→PENDING_REVIEW` chặn lưu thông ngay (DMG-T01, mặc định OQ-11 — Open, chưa chốt), ghi AuditEvent + outbox notify Quản trị viên.
-5. Quản trị viên mở `damage-report-detail`, xem ảnh/mô tả/liên kết phiếu mượn; hệ thống chỉ hiển thị disposition hợp lệ.
-6. Quản trị viên chọn disposition tối thiểu (DEC-P2-03 — FACT nguồn SRC-FR-L08):
+4. Trong **một transaction**: tạo `DamageReport` `PENDING` (gắn `loan_id` nếu phát hiện lúc trả), Copy `→PENDING_REVIEW` chặn lưu thông ngay (DMG-T01, mặc định OQ-11 — Open, chưa chốt), ghi AuditEvent + outbox notify Thủ thư.
+5. Thủ thư mở `damage-report-detail`, xem ảnh/mô tả/liên kết phiếu mượn; hệ thống chỉ hiển thị disposition hợp lệ.
+6. Thủ thư chọn disposition tối thiểu (DEC-P2-03 — FACT nguồn SRC-FR-L08):
    - **Bác bỏ** → report `REJECTED`; Copy về `AVAILABLE` hoặc trạng thái lưu trước report nếu vẫn hợp lệ (ví dụ `ON_HOLD` khi giữ chỗ còn hiệu lực — PROPOSAL, DMG-T04).
    - **Sửa** → report `REPAIR`; Copy `→IN_REPAIR` (DMG-T02); theo dõi hoàn tất sửa ở bước 7.
    - **Thanh lý** → report `DISPOSE`; Copy `→DISPOSED` terminal (DMG-T03); fine `DAMAGE` gắn Loan (nếu có) giữ độc lập, không bị xóa theo.
@@ -81,7 +81,7 @@ Thủ thư (quầy) (tạo báo cáo hư hỏng, ghi nhận mất — FACT §6.4
 - 6a1. Report đã có quyết định (terminal) → từ chối action, reload state, chỉ hiện action hợp lệ. Report không reopen.
 
 **6b. Sửa không thành / thanh lý trực tiếp (COPY-T14/T17 — PROPOSAL DEC-D3-07):**
-- 6b1. `IN_REPAIR→DISPOSED` khi Quản trị viên quyết định sửa không thành (bổ sung disposition `DISPOSE` hoặc report mới + audit).
+- 6b1. `IN_REPAIR→DISPOSED` khi Thủ thư quyết định sửa không thành (bổ sung disposition `DISPOSE` hoặc report mới + audit).
 - 6b2. `AVAILABLE→DISPOSED` thanh lý trực tiếp không qua hư hỏng: lý do bắt buộc, không Loan mở, không Reservation giữ; audit.
 
 ## Related Requirements

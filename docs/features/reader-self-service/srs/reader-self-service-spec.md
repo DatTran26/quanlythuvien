@@ -2,7 +2,7 @@
 type: srs
 feature: reader-self-service
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/reader-self-service/brainstorms/reader-self-service-scope.md
   - docs/_product/prd.md
@@ -37,7 +37,7 @@ Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.
 | FR-reader-self-service-001 | Tra cứu sách phía người đọc | Người đọc tra cứu sách theo tên, tác giả, ISBN, thể loại; lọc còn/hết; xem số lượng khả dụng và vị trí kệ. | P0 | R1A | test | Spec cũ (xem id-crosswalk-lmp) |
 | FR-reader-self-service-002 | Sách đang mượn | Người đọc xem danh sách phiếu đang mở của mình: tên sách, hạn trả, số ngày còn lại hoặc đã quá hạn. | P0 | R1A | test | Spec cũ (xem id-crosswalk-lmp) |
 | FR-reader-self-service-003 | Xem công nợ | Người đọc xem các khoản phạt quá hạn, hư hỏng, mất của mình và trạng thái đã hoặc chưa thanh toán. | P1 | R1B | test | Spec cũ (xem id-crosswalk-lmp) |
-| FR-reader-self-service-004 | Thẻ thư viện QR | Người đọc mở mã QR cá nhân để Thủ thư quét khi mượn, trả; chỉ hiện khi tài khoản đã kích hoạt và thẻ còn hạn. | P0 | R1A | test | DEC-SF-02 — SRS cũ thiếu |
+| FR-reader-self-service-004 | Thẻ thư viện QR | Người đọc mở mã QR cá nhân để Nhân viên quét khi mượn, trả; chỉ hiện khi tài khoản đã kích hoạt và thẻ còn hạn. | P0 | R1A | test | DEC-SF-02 — SRS cũ thiếu |
 | FR-reader-self-service-005 | Lịch sử mượn | Người đọc xem các phiếu đã đóng của mình, lọc theo khoảng thời gian. | P0 | R1A | test | DEC-SF-02 — SRS cũ thiếu |
 
 ## 4. Non-Functional Requirements (NFR)

@@ -42,35 +42,35 @@ public class AuthController {
 
     /** Kiểm tra quyền quản trị. Người đọc gọi sẽ bị từ chối. */
     @GetMapping("/admin/ping")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('LIBRARIAN')")
     String ping() {
         return "ok";
     }
 
-    /** Quản trị viên tạo tài khoản thủ thư. */
+    /** Thủ thư tạo tài khoản nhân viên. */
     @PostMapping("/admin/staff")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('LIBRARIAN')")
     AuthService.MeResponse createStaff(@Valid @RequestBody AuthService.CreateStaffRequest request) {
-        return authService.createLibrarian(request);
+        return authService.createStaff(request);
     }
 
-    /** Quản trị viên khóa hoặc mở lại tài khoản. Không khóa chính mình. */
+    /** Thủ thư khóa hoặc mở lại tài khoản. Không khóa chính mình. */
     @PatchMapping("/admin/users/{id}/status")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('LIBRARIAN')")
     AuthService.MeResponse status(@PathVariable long id, @Valid @RequestBody AuthService.StatusRequest request) {
         return authService.setStatus(id, request.status());
     }
 
-    /** Thủ thư kích hoạt người đọc để họ được mượn sách. */
+    /** Nhân viên kích hoạt người đọc để họ được mượn sách. */
     @PostMapping("/readers/{id}/activate")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     AuthService.MeResponse activate(@PathVariable long id) {
         return authService.activateReader(id);
     }
 
     /** Tìm người đọc theo mã thẻ, dùng khi quét QR thẻ tại quầy. */
     @GetMapping("/readers/by-card/{code}")
-    @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF','LIBRARIAN')")
     AuthService.MeResponse byCard(@PathVariable String code) {
         ReaderProfile profile = authService.profileByCard(code);
         return authService.publicMe(profile.getUserId());

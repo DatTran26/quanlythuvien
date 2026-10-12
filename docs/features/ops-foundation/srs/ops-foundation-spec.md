@@ -2,7 +2,7 @@
 type: srs
 feature: ops-foundation
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/ops-foundation/brainstorms/ops-foundation-scope.md
   - docs/_product/prd.md
@@ -26,7 +26,7 @@ Ghi audit cùng giao dịch cho mọi thao tác nhạy cảm (audit lỗi thì t
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
 | Hệ thống | hệ thống | Thực thi kiểm tra, ghi audit | Có |
-| Quản trị viên | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
+| Thủ thư | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
 | Thủ thư trưởng | stakeholder | Duyệt quy định và go-live | Có như stakeholder |
 | Owner vận hành | người | Chạy backup, diễn tập khôi phục | Có |
 

@@ -2,7 +2,7 @@
 type: usecase
 feature: reader-onboarding
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/reader-onboarding/usecases/reader-onboarding-usecase-index.md
   - docs/features/reader-onboarding/srs/reader-onboarding-spec.md
@@ -15,7 +15,7 @@ links:
 
 ## Primary Actor
 
-Thủ thư (đã xác thực qua `uc-access-control`).
+Nhân viên (đã xác thực qua `uc-access-control`).
 
 ## Stakeholders & Interests
 
@@ -31,7 +31,7 @@ Người đọc đến quầy xin cấp thẻ.
 
 ## Preconditions
 
-- Thủ thư đã đăng nhập, có quyền cấp tài khoản (DEC-SF-03; xác nhận lại ở OQ-reader-onboarding-003).
+- Nhân viên đã đăng nhập, có quyền cấp tài khoản (DEC-SF-03; xác nhận lại ở OQ-reader-onboarding-003).
 - Người đọc chưa có hồ sơ, hoặc hồ sơ đã có từ import nhưng chưa kích hoạt.
 
 ## Guarantees
@@ -41,11 +41,11 @@ Người đọc đến quầy xin cấp thẻ.
 
 ## Main Success Scenario
 
-1. Thủ thư mở `reader-form`, nhập mã độc giả, họ tên, thông tin liên hệ, hạn thẻ nếu có.
+1. Nhân viên mở `reader-form`, nhập mã độc giả, họ tên, thông tin liên hệ, hạn thẻ nếu có.
 2. Hệ thống kiểm tra trường bắt buộc và định dạng.
 3. Hệ thống kiểm trùng mã độc giả và mã QR thẻ.
-4. Thủ thư xác nhận; hệ thống lưu hồ sơ, kích hoạt tài khoản, sinh thẻ QR, ghi audit trong một giao dịch.
-5. Thủ thư giao thẻ QR cho người đọc.
+4. Nhân viên xác nhận; hệ thống lưu hồ sơ, kích hoạt tài khoản, sinh thẻ QR, ghi audit trong một giao dịch.
+5. Nhân viên giao thẻ QR cho người đọc.
 
 ## Extensions
 
@@ -54,7 +54,7 @@ Người đọc đến quầy xin cấp thẻ.
 
 **3a. Mã độc giả hoặc mã QR đã tồn tại (E-core-003):**
 - 3a1. Báo trùng, cho mở hồ sơ hiện có; không tạo hồ sơ thứ hai.
-- 3a2. Hồ sơ có sẵn từ import nhưng chưa kích hoạt → Thủ thư mở hồ sơ đó và kích hoạt (bước 4).
+- 3a2. Hồ sơ có sẵn từ import nhưng chưa kích hoạt → Nhân viên mở hồ sơ đó và kích hoạt (bước 4).
 
 **4a. Hai quầy cùng cấp cho một người (E-core-004):**
 - 4a1. Chỉ lần lưu đầu thành công; quầy sau thấy báo trùng.

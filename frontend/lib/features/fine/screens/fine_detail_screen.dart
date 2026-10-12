@@ -2,7 +2,7 @@
 // Spec: docs/features/fine-collection-basic/srs/
 //
 // Mục đích: xem số gốc, đã nộp, còn nợ, lý do; chọn hành động được phép.
-// Đến từ: fine-list. Đi tới: fine-payment, financial-events, fine-adjust (chỉ Quản trị viên).
+// Đến từ: fine-list. Đi tới: fine-payment, financial-events, fine-adjust (chỉ Thủ thư).
 // Khoản đã đóng: nút tắt + lời giải thích (E-core-008).
 
 import 'package:flutter/material.dart';
@@ -64,7 +64,7 @@ class _FineDetailScreenState extends State<FineDetailScreen> {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
-          final (detail, isAdmin) = snapshot.data!;
+          final (detail, isLibrarian) = snapshot.data!;
           final fine = detail.fine;
           return ListView(
             padding: const EdgeInsets.all(16),
@@ -120,8 +120,8 @@ class _FineDetailScreenState extends State<FineDetailScreen> {
                     ),
                     child: const Text('Sổ sự kiện tài chính'),
                   ),
-                  // CHK-fine-collection-basic-007: thủ thư không thấy miễn / điều chỉnh.
-                  if (isAdmin)
+                  // CHK-fine-collection-basic-007: nhân viên không thấy miễn / điều chỉnh.
+                  if (isLibrarian)
                     OutlinedButton(
                       onPressed: fine.isOpen
                           ? () => _go(

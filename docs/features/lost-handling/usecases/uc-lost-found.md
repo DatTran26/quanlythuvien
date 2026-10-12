@@ -2,7 +2,7 @@
 type: usecase
 feature: lost-handling
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/lost-handling/usecases/lost-handling-usecase-index.md
   - docs/features/lost-handling/srs/lost-handling-spec.md
@@ -16,7 +16,7 @@ links:
 
 ## Primary Actor
 
-Thủ thư.
+Nhân viên.
 
 ## Stakeholders & Interests
 
@@ -31,7 +31,7 @@ Người đọc báo mất sách đang mượn; hoặc bản sao đã báo mất
 
 ## Preconditions
 
-- Thủ thư đã xác thực (include `uc-access-control`).
+- Nhân viên đã xác thực (include `uc-access-control`).
 - Ghi nhận mất: phiếu mượn đang mở hoặc quá hạn.
 
 ## Guarantees
@@ -43,12 +43,12 @@ Người đọc báo mất sách đang mượn; hoặc bản sao đã báo mất
 
 ### Luồng A — Ghi nhận mất (R1A)
 
-1. Thủ thư xác nhận với người đọc, mở phiếu đang mượn, chọn ghi nhận mất.
+1. Nhân viên xác nhận với người đọc, mở phiếu đang mượn, chọn ghi nhận mất.
 2. Trong một giao dịch: phiếu sang Mất (LOAN-T05), bản sao sang Mất (COPY-T06), ghi nghĩa vụ bồi thường, audit, thông báo.
 
 ### Luồng B — Tìm lại sau khi mất (R1B)
 
-1. Thủ thư kiểm tra vật lý bản sao tìm lại, xác nhận trên `lost-found`.
+1. Nhân viên kiểm tra vật lý bản sao tìm lại, xác nhận trên `lost-found`.
 2. Có duyệt tài chính: trong một giao dịch, đối soát nghĩa vụ (đảo về 0 nếu chưa thu, hoàn nếu đã thu theo chính sách), bản sao sang Sẵn sàng (COPY-T15) hoặc Đang giữ nếu có hàng chờ từ R2 (COPY-T16), ghi audit.
 
 ## Extensions

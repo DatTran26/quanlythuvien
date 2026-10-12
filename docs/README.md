@@ -1,10 +1,22 @@
 # Tài liệu Hệ thống Quản lý Thư viện
 
+## Tài liệu nền tảng kỹ thuật
+
+| Tài liệu | Mục đích |
+|---|---|
+| [Tổng quan sản phẩm](project-overview-pdr.md) | Mục tiêu, người dùng, ràng buộc và phạm vi nền tảng. |
+| [Kiến trúc hệ thống](system-architecture.md) | Các thành phần đang có, ranh giới và các quyết định kỹ thuật. |
+| [Hướng dẫn cài đặt và vận hành](deployment-guide.md) | Chạy cục bộ, kiểm thử, cấu hình và các giới hạn deployment hiện tại. |
+| [Điều hướng mã nguồn](codebase-summary.md) | Điểm vào và owner thực thi của mỗi khu vực. |
+| [Quy ước phát triển](code-standards.md) | Chất lượng mã, kiểm thử và quy trình đóng góp. |
+| [Hướng dẫn thiết kế](design-guidelines.md) | Điểm vào của hệ thống thiết kế Flutter. |
+| [Định hướng sản phẩm](project-roadmap.md) | Liên kết tới roadmap sản phẩm có thẩm quyền. |
+
 ## Cấu trúc
 
 | Thư mục | Nội dung |
 |---|---|
-| `he_thong_quan_ly_thu_vien.md` | Tài liệu nguồn ban đầu, chỉ đọc. Dùng tên vai trò nguồn ("Nhân viên", "Thủ thư") — xem DEC-SF-01 |
+| `he_thong_quan_ly_thu_vien.md` | Tài liệu nguồn ban đầu, chỉ đọc. Dùng tên vai trò nguồn ("Nhân viên", "Nhân viên") — xem DEC-SF-01 |
 | `_product/` | Tầng sản phẩm: PRD, roadmap, decision register, priority crosswalk, readiness gates, brainstorm sản phẩm |
 | `_shared/` | Dùng chung: project profile, đặc tả chung (`core-spec.md`), mô hình miền (`domain/`), điều hướng giữa feature, chiến lược test và checklist chung, ID registry, bảng đối chiếu mã LMP |
 | `features/{slug}/` | Mỗi feature một thư mục: brainstorm, URD, BRD, PRD, SRS, use case, user flow, wireframe, user story, checklist |
@@ -13,6 +25,7 @@
 ## Thứ tự đọc
 
 1. `_shared/project-profile.md` — bối cảnh, người dùng, thuật ngữ.
+   Bộ tên role hiện hành và hướng dẫn chuyển dữ liệu: [`_shared/role-names.md`](_shared/role-names.md).
 2. `_product/prd.md` — Feature Map và mô tả 23 feature.
 3. `_product/roadmap.md` — release, xếp hạng ưu tiên, phụ thuộc giữa feature.
 4. `_shared/core-spec.md` và `_shared/domain/` — quy tắc, lỗi, entity, state dùng chung.

@@ -2,7 +2,7 @@
 type: usecase-index
 feature: fine-collection-adv
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/fine-collection-adv/srs/fine-collection-adv-spec.md
   - docs/features/fine-collection-adv/srs/fine-collection-adv-flows.md
@@ -14,7 +14,7 @@ links:
 
 | # | Slug | Level | Status | Actor primary | Covers FR | Screens | Errors (E-*) | OQ ref | Priority | Updated |
 |---|------|-------|--------|---------------|-----------|---------|--------------|--------|----------|---------|
-| 1 | [uc-fine-adjustment](uc-fine-adjustment.md) | sea | draft | Quản trị viên/Thủ thư | FR-fine-collection-adv-001..003 | financial-events | E-core-002, 004, 005, 007, 008, 009 | OQ-fine-collection-adv-001..003 | P1 | 2026-10-08 |
+| 1 | [uc-fine-adjustment](uc-fine-adjustment.md) | sea | draft | Thủ thư/Nhân viên | FR-fine-collection-adv-001..003 | financial-events | E-core-002, 004, 005, 007, 008, 009 | OQ-fine-collection-adv-001..003 | P1 | 2026-10-08 |
 
 ## Relationships
 

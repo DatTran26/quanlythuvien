@@ -2,7 +2,7 @@
 type: brainstorm
 feature: damage-lifecycle
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_shared/core-spec.md
@@ -14,7 +14,7 @@ links:
 
 ## 1. Idea Seed
 
-Thủ thư báo hư hỏng kèm 1–5 ảnh, bản sao chuyển Chờ duyệt ngay; Quản trị viên xem bằng chứng và quyết định Bác bỏ, Sửa hoặc Thanh lý để bản sao không kẹt trạng thái.
+Nhân viên báo hư hỏng kèm 1–5 ảnh, bản sao chuyển Chờ duyệt ngay; Thủ thư xem bằng chứng và quyết định Bác bỏ, Sửa hoặc Thanh lý để bản sao không kẹt trạng thái.
 
 ## 2. Context
 
@@ -26,8 +26,8 @@ Thủ thư báo hư hỏng kèm 1–5 ảnh, bản sao chuyển Chờ duyệt ng
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Thủ thư | Không có cách ghi nhận hư hỏng có bằng chứng | Báo cáo nhanh kèm ảnh |
-| Quản trị viên | Sách hỏng nằm mãi không ai xử lý | Danh sách chờ duyệt, quyết định một lần |
+| Nhân viên | Không có cách ghi nhận hư hỏng có bằng chứng | Báo cáo nhanh kèm ảnh |
+| Thủ thư | Sách hỏng nằm mãi không ai xử lý | Danh sách chờ duyệt, quyết định một lần |
 | Người đọc | Bị phạt hư hỏng mà không có bằng chứng | Báo cáo có ảnh và mức độ rõ ràng |
 
 ## 4. Capabilities Breakdown
@@ -36,8 +36,8 @@ Thủ thư báo hư hỏng kèm 1–5 ảnh, bản sao chuyển Chờ duyệt ng
 
 - Báo cáo hư hỏng: quét bản sao, chọn mức độ (Nhẹ, Vừa, Nặng), mô tả, 1–5 ảnh.
 - Kiểm tra ảnh trước khi lưu: loại file, kích thước sau nén, quét nội dung, không tin metadata gốc.
-- Bản sao chuyển Chờ duyệt ngay khi báo; ghi audit, thông báo cho Quản trị viên.
-- Quản trị viên xem báo cáo, chọn Bác bỏ, Sửa hoặc Thanh lý.
+- Bản sao chuyển Chờ duyệt ngay khi báo; ghi audit, thông báo cho Thủ thư.
+- Thủ thư xem báo cáo, chọn Bác bỏ, Sửa hoặc Thanh lý.
 - Sửa xong: xác nhận hoàn tất, cập nhật tình trạng, bản sao về Sẵn sàng.
 - Báo cáo đã quyết định không mở lại; một bản sao chỉ có một báo cáo đang chờ.
 
@@ -53,9 +53,9 @@ Thủ thư báo hư hỏng kèm 1–5 ảnh, bản sao chuyển Chờ duyệt ng
 
 ### 5.1 Báo cáo và duyệt hư hỏng
 
-1) Thủ thư quét bản sao, chọn mức độ, mô tả, chụp 1–5 ảnh.
-2) Hệ thống kiểm tra ảnh, tạo báo cáo, chuyển bản sao Chờ duyệt, ghi audit, thông báo Quản trị viên.
-3) Quản trị viên mở báo cáo, xem ảnh, chọn hướng xử lý.
+1) Nhân viên quét bản sao, chọn mức độ, mô tả, chụp 1–5 ảnh.
+2) Hệ thống kiểm tra ảnh, tạo báo cáo, chuyển bản sao Chờ duyệt, ghi audit, thông báo Thủ thư.
+3) Thủ thư mở báo cáo, xem ảnh, chọn hướng xử lý.
 4) Hệ thống chuyển bản sao theo quyết định, ghi audit.
 
 ```
@@ -65,10 +65,10 @@ Quét bản sao ──> Đã có báo cáo đang chờ? ──có──> Mở b�
         Đủ mức độ + mô tả + 1–5 ảnh hợp lệ? ──không──> Báo lỗi, giữ dữ liệu
                         │ có
                         ▼
-        Tạo báo cáo + bản sao Chờ duyệt + audit + thông báo Quản trị viên
+        Tạo báo cáo + bản sao Chờ duyệt + audit + thông báo Thủ thư
                         │
                         ▼
-        Quản trị viên quyết định ──Bác bỏ──> Bản sao Sẵn sàng
+        Thủ thư quyết định ──Bác bỏ──> Bản sao Sẵn sàng
                         ├──Sửa──> Bản sao Đang sửa ──sửa xong──> Sẵn sàng
                         └──Thanh lý──> Bản sao Thanh lý (trạng thái cuối)
 ```
@@ -99,7 +99,7 @@ Quét bản sao ──> Đã có báo cáo đang chờ? ──có──> Mở b�
 | Entity | Từ | Sang | Trigger | Quay lại được? |
 |--------|------|----|---------|-------------|
 | Báo cáo hư hỏng | — | Chờ duyệt | Gửi báo cáo | — |
-| Báo cáo hư hỏng | Chờ duyệt | Bác bỏ / Sửa / Thanh lý | Quản trị viên quyết định | Không |
+| Báo cáo hư hỏng | Chờ duyệt | Bác bỏ / Sửa / Thanh lý | Thủ thư quyết định | Không |
 | Bản sao | Sẵn sàng / Đang mượn | Chờ duyệt | Gửi báo cáo | Có, qua quyết định |
 | Bản sao | Chờ duyệt | Sẵn sàng / Đang sửa / Thanh lý | Quyết định | Thanh lý là trạng thái cuối |
 
@@ -152,7 +152,7 @@ Quét bản sao ──> Đã có báo cáo đang chờ? ──có──> Mở b�
 
 | Tình huống | Wording |
 |---|---|
-| Hư hỏng chờ duyệt | "Bản sao đã được tạm ngừng lưu thông và đang chờ quản trị viên xử lý." |
+| Hư hỏng chờ duyệt | "Bản sao đã được tạm ngừng lưu thông và đang chờ thủ thư xử lý." |
 
 ## 8. Assumptions
 
@@ -163,7 +163,7 @@ Quét bản sao ──> Đã có báo cáo đang chờ? ──có──> Mở b�
 
 | Rủi ro | Khả năng | Hậu quả nghiệp vụ | Cách phòng |
 |--------|----------|-------------------|-----------|
-| Process: Quản trị viên chậm duyệt | thỉnh thoảng | Giảm số sách khả dụng | Theo dõi tuổi báo cáo chờ duyệt |
+| Process: Thủ thư chậm duyệt | thỉnh thoảng | Giảm số sách khả dụng | Theo dõi tuổi báo cáo chờ duyệt |
 | Compliance: ảnh lưu lâu không có chính sách | hiếm | Lưu dữ liệu không cần thiết | Chờ chính sách lưu giữ |
 
 ## 10. Success Criteria (preliminary)

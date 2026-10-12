@@ -5,6 +5,7 @@
 // Mục đích: xem hồ sơ và nghĩa vụ đang mở; khóa tạm, mở lại tài khoản.
 // Đến từ: reader-list, reader-form (sau khi lưu). Đi tới: reader-form (Sửa).
 import 'package:flutter/material.dart';
+import 'package:frontend/core/auth/session.dart';
 import 'package:frontend/core/utils/format.dart';
 import 'package:frontend/core/theme/app_colors.dart';
 import 'package:frontend/core/theme/app_theme.dart';
@@ -24,12 +25,11 @@ class ReaderDetailScreen extends StatefulWidget {
 }
 
 class _ReaderDetailScreenState extends State<ReaderDetailScreen> {
-  // Tạm coi người thao tác là Quản trị viên #1. Khi có đăng nhập (TV1) thì lấy từ phiên.
-  static const _actorId = 1;
-
   final AccountApi _api = MockAccountApi();
   late Future<ReaderDetail> _future;
   bool _busy = false;
+
+  int get _actorId => AppSession.userId!;
 
   @override
   void initState() {

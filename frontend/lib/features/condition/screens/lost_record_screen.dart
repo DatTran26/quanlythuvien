@@ -1,7 +1,7 @@
 // Màn 11 – Ghi nhận mất (lost-record). Route: /lost/record
 // Bài: Hoang/06-lost-handling/01-lost-record.md
 //
-// Người đọc báo mất sách, thủ thư đối chiếu rồi ghi nhận. Một giao dịch:
+// Người đọc báo mất sách, nhân viên đối chiếu rồi ghi nhận. Một giao dịch:
 // phiếu -> LOST, bản sao -> LOST, phát sinh bồi thường (BR-06: 100% giá sách + phí xử lý).
 // Đến từ: return-scan (truyền LoanView), damage-report-detail (truyền mã bản sao) hoặc menu (trống).
 // API POST /loans/{id}/lost cần phiếu đang mở: sách mất khi đang trên kệ chưa có API.
@@ -176,7 +176,7 @@ class _LostRecordScreenState extends State<LostRecordScreen> {
             ],
             if (_loan != null && _done == null && _error == null) ...[
               const SizedBox(height: 8),
-              // "Cổng an toàn": buộc thủ thư xác nhận đã đối chiếu -> giảm ghi nhầm
+              // "Cổng an toàn": buộc nhân viên xác nhận đã đối chiếu -> giảm ghi nhầm
               CheckboxListTile(
                 value: _confirmed,
                 onChanged: (v) => setState(() => _confirmed = v ?? false),
@@ -247,7 +247,7 @@ class _LostRecordScreenState extends State<LostRecordScreen> {
     );
   }
 
-  /// Cho thủ thư thấy hậu quả tài chính TRƯỚC khi bấm.
+  /// Cho nhân viên thấy hậu quả tài chính TRƯỚC khi bấm.
   Widget _compensation(int price) {
     Widget row(String k, String v, {bool strong = false}) => Padding(
           padding: const EdgeInsets.symmetric(vertical: 2),

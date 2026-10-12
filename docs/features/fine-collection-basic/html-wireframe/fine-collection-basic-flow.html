@@ -258,7 +258,7 @@
           <button class="btn-primary" type="button">Thu tiền mặt (R1A)</button>
           <button class="btn-secondary" type="button">Sự kiện tài chính &amp; tác vụ (R1B)</button>
           <p class="hint-text">Fine ở PAID/WAIVED (terminal): nút Thu tiền bị vô hiệu — chỉ cho tác vụ tham chiếu event gốc (E-core-008).</p>
-          <p class="hint-text">Thủ thư: tác vụ WAIVER/ADJUSTMENT/REVERSAL/REFUND bị khoá/mask theo quyền (E-core-009, BR-core-004).</p>
+          <p class="hint-text">Nhân viên: tác vụ WAIVER/ADJUSTMENT/REVERSAL/REFUND bị khoá/mask theo quyền (E-core-009, BR-core-004).</p>
         </div>
       </div>
       <div class="wf-screen-label">fine-detail</div>
@@ -298,7 +298,7 @@
           <div class="banner banner-warn"><b>E-fine-collection-basic-001</b> — Ghi thanh toán thất bại (critical): rollback, Fine giữ UNPAID, cho retry idempotent cùng key.</div>
           <div class="banner banner-warn"><b>E-fine-collection-basic-002</b> — Submit lặp cùng idempotency key: hiển thị payment event + receipt_no đã ghi, không tạo event thứ hai.</div>
           <div class="banner banner-warn"><b>E-core-007</b> — Audit write thất bại (critical): rollback toàn bộ business write + alert vận hành — fail-closed (BR-core-003).</div>
-          <div class="banner banner-warn"><b>E-core-004</b> — Số dư đổi sau khi mở màn (hai thủ thư thu đồng thời): hiển thị số dư mới, nhập lại; không silent overwrite.</div>
+          <div class="banner banner-warn"><b>E-core-004</b> — Số dư đổi sau khi mở màn (hai nhân viên thu đồng thời): hiển thị số dư mới, nhập lại; không silent overwrite.</div>
         </div>
       </div>
       <div class="wf-screen-label">fine-payment</div>

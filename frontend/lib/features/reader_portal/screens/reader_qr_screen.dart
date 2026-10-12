@@ -1,18 +1,18 @@
 // Màn 3 – Thẻ QR (reader-qr). Route: /portal/card
 // Bài: TV3 3 · Độ khó ⭐⭐
 //
-// Mục đích: hiện mã QR thẻ để thủ thư quét khi mượn / trả.
+// Mục đích: hiện mã QR thẻ để nhân viên quét khi mượn / trả.
 //
 // TODO:
 // - Hiện QR từ cardCode (package QR: thống nhất với widget quét QR của TV1), kèm mã dạng chữ.
-// - Chỉ hiện QR khi tài khoản ACTIVE. PENDING: "Chờ thủ thư kích hoạt". LOCKED: "Thẻ đang bị khóa".
+// - Chỉ hiện QR khi tài khoản ACTIVE. PENDING: "Chờ nhân viên kích hoạt". LOCKED: "Thẻ đang bị khóa".
 // - Tăng độ sáng / chữ to để dễ quét.
 //
 // Lỗ hổng: T5 (/me chưa có cardCode, chưa có hạn thẻ).
 // Màn 3 – Thẻ QR (reader-qr). Route: /portal/card
 // Spec: docs/features/reader-self-service/srs/ (FR-004)
 //
-// Mục đích: hiện mã QR thẻ để thủ thư quét khi mượn / trả.
+// Mục đích: hiện mã QR thẻ để nhân viên quét khi mượn / trả.
 // Lỗ hổng: T5 (/me chưa có cardCode, chưa có hạn thẻ).
 
 import 'package:flutter/material.dart';
@@ -79,13 +79,13 @@ class _ReaderQrScreenState extends State<ReaderQrScreen> {
                     SelectableText(card.cardCode!, style: text.headlineMedium),
                     const SizedBox(height: 8),
                     const Text(
-                      'Đưa mã này cho thủ thư quét khi mượn, trả sách',
+                      'Đưa mã này cho nhân viên quét khi mượn, trả sách',
                     ),
                   ] else
                     Text(
                       card.status == 'LOCKED'
                           ? 'Thẻ đang bị khóa. Vui lòng liên hệ quầy thư viện.'
-                          : 'Tài khoản chờ thủ thư kích hoạt.',
+                          : 'Tài khoản chờ nhân viên kích hoạt.',
                       textAlign: TextAlign.center,
                     ),
                 ],

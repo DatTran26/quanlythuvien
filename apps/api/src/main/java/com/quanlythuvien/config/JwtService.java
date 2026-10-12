@@ -35,6 +35,7 @@ public class JwtService {
         return Jwts.builder()
                 .subject(email)
                 .claim("role", role.name())
+                .claim("roleVocabulary", "source")
                 .issuedAt(Date.from(now))
                 .expiration(Date.from(now.plus(ttlMinutes, ChronoUnit.MINUTES)))
                 .signWith(key)
@@ -43,7 +44,9 @@ public class JwtService {
 
     /** Đọc token và kiểm tra chữ ký. Token sai hoặc hết hạn thì ném lỗi. */
     public Claims parse(String token) {
-        return Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload();
+        return Jwts.parser().verifyWith(key)
+                .require("roleVocabulary", "source")
+                .build().parseSignedClaims(token).getPayload();
     }
 
     /** Số giây token còn sống, để client biết khi nào hết hạn. */

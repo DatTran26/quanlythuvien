@@ -241,7 +241,7 @@
             <span class="wf-card-action"><a class="wf-link" href="#s1">Requeue</a></span>
           </div>
           <p class="hint-text">Mã lý do failed phân biệt được: channel-timeout (retry theo policy) vs invalid-recipient (fail-fast — không retry vô ích); kênh ngoài fail thì nội dung vẫn ghi hộp thư in-app — không mất hoàn toàn (PROPOSAL — ext 3d).</p>
-          <p class="hint-text">Ngưỡng retry + backoff = Open (OQ-policy-config-001); vượt ngưỡng → dead-letter + cảnh báo vận hành có owner (NFR-access-control-002); escalation tới thủ thư trực quầy = PROPOSAL (DEC-D3-08). Kênh bắt buộc cuối = Open (OQ-notification-core-001); SMS/push/Zalo = ứng viên R3 — không render.</p>
+          <p class="hint-text">Ngưỡng retry + backoff = Open (OQ-policy-config-001); vượt ngưỡng → dead-letter + cảnh báo vận hành có owner (NFR-access-control-002); escalation tới nhân viên trực quầy = PROPOSAL (DEC-D3-08). Kênh bắt buộc cuối = Open (OQ-notification-core-001); SMS/push/Zalo = ứng viên R3 — không render.</p>
           <p class="hint-text">Nguồn phát theo lịch (FACT §8): job 00:05 quá hạn (ngày đầu + lặp mỗi 3 ngày), 08:00 nhắc sắp hạn −2 ngày, 15 phút hết hạn giữ — job chạy idempotent theo kỳ, không nhân đôi event.</p>
         </div>
       </div>

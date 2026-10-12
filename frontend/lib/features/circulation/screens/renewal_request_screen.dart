@@ -2,7 +2,7 @@
 // Bài: Hoang/04-renewal/01-renewal-request.md
 //
 // Chọn các phiếu đang mượn để gia hạn. Dòng không gia hạn được thì tắt và ghi lý do (BR-renewal-001).
-// Hiện lấy phiếu của người đang đăng nhập (GET /loans/mine). Thủ thư gia hạn hộ người đọc
+// Hiện lấy phiếu của người đang đăng nhập (GET /loans/mine). Nhân viên gia hạn hộ người đọc
 // cần API lấy phiếu theo người đọc (chưa có), xem 00-cau-hoi-va-lo-hong-api.md.
 
 import 'package:flutter/material.dart';

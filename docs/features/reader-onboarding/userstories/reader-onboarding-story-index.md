@@ -2,7 +2,7 @@
 type: userstory-index
 feature: reader-onboarding
 status: draft
-updated: 2026-10-09
+updated: 2026-10-12
 links:
   - docs/features/reader-onboarding/srs/reader-onboarding-spec.md
 ---
@@ -15,4 +15,4 @@ links:
 
 | # | ID | Title | Persona | Covers FR | Screens | Priority | Status | Jira | Updated |
 |---|----|-------|---------|-----------|---------|----------|--------|------|---------|
-| 1 | [US-001](us-001.md) | Tạo, kích hoạt và cập nhật hồ sơ người đọc | Thủ thư | FR-reader-onboarding-001 | reader-form | P0 | draft | — | 2026-10-09 |
+| 1 | [US-001](us-001.md) | Tạo, kích hoạt và cập nhật hồ sơ người đọc | Nhân viên | FR-reader-onboarding-001 | reader-form | P0 | draft | — | 2026-10-09 |

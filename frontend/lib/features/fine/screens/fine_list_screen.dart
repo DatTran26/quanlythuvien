@@ -1,7 +1,7 @@
 // Màn 1 – Danh sách công nợ (fine-list, fine-collection-basic). Route: /fines
 // Spec: docs/features/fine-collection-basic/srs/
 //
-// Mục đích: thủ thư nhập / quét mã thẻ người đọc để xem khoản phạt và tổng còn nợ.
+// Mục đích: nhân viên nhập / quét mã thẻ người đọc để xem khoản phạt và tổng còn nợ.
 // Đến từ: circulation-desk (TV2), menu. Đi tới: fine-detail.
 // Mã thẻ không tồn tại: E-core-003, cho nhập lại.
 
@@ -14,10 +14,11 @@ import '../widgets/fine_labels.dart';
 import 'fine_detail_screen.dart';
 
 class FineListScreen extends StatefulWidget {
-  const FineListScreen({super.key, required this.api, required this.actorId});
+  const FineListScreen({super.key, required this.api, required this.actorId, this.initialCardCode});
 
   final FineApi api;
   final int actorId;
+  final String? initialCardCode;
 
   @override
   State<FineListScreen> createState() => _FineListScreenState();
@@ -30,6 +31,18 @@ class _FineListScreenState extends State<FineListScreen> {
   bool _showClosed = false;
   bool _loading = false;
   String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    final card = widget.initialCardCode;
+    if (card != null && card.isNotEmpty) {
+      _card.text = card;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _lookup();
+      });
+    }
+  }
 
   @override
   void dispose() {

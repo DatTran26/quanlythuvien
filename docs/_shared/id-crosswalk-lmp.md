@@ -1,7 +1,7 @@
 ---
 type: id-crosswalk
 status: draft
-updated: 2026-10-09
+updated: 2026-10-12
 links:
   - docs/_shared/id-registry.md
   - docs/_product/decision-register.md
@@ -25,11 +25,11 @@ Cách đọc:
 |---|---|---|---|---|---|---|---|---|---|
 | FR-LMP-001 |  | `catalog-admin` | `FR-catalog-admin-001` | Quản lý danh mục sách | R0 | P0 |  | `srs/library-management-platform-spec.md:75` | SRS (2026-10-08) |
 | FR-LMP-002 |  | `copy-inventory` | `FR-copy-inventory-001` | Quản lý bản sao sách | R0 | P0 |  | `srs/library-management-platform-spec.md:76` | SRS (2026-10-08) |
-| FR-LMP-003 | a | `catalog-admin` | `FR-catalog-admin-002` | Tra cứu khả dụng phía Thủ thư/Quản trị viên | R0 | P0 | DEC-SF-07 | `srs/library-management-platform-spec.md:77` | SRS (2026-10-08) |
+| FR-LMP-003 | a | `catalog-admin` | `FR-catalog-admin-002` | Tra cứu khả dụng phía Nhân viên/Thủ thư | R0 | P0 | DEC-SF-07 | `srs/library-management-platform-spec.md:77` | SRS (2026-10-08) |
 | FR-LMP-003 | b | `reader-self-service` | `FR-reader-self-service-001` | Tra cứu sách phía Người đọc (FR-R02) | R1A | P0 | DEC-SF-07 | `srs/library-management-platform-spec.md:77` | SRS (2026-10-08) |
 | FR-LMP-004 | a | `reader-onboarding` | `FR-reader-onboarding-001` | Cấp mới và kích hoạt tài khoản người đọc tại quầy | R0 | P0 | DEC-SF-03 | `srs/library-management-platform-spec.md:78` | SRS (2026-10-08) |
 | FR-LMP-004 | b | `account-admin` | `FR-account-admin-001` | Cập nhật, xóa mềm tài khoản người đọc (FR-L05) | R0 | P0 | DEC-SF-04 | `srs/library-management-platform-spec.md:78` | SRS (2026-10-08) |
-| FR-LMP-005 |  | `account-admin` | `FR-account-admin-002` | Thủ thư sửa/khóa tạm, mở lại người đọc (FR-S10) | R1B | P1 | DEC-SF-04 | `srs/library-management-platform-spec.md:79` | SRS (2026-10-08) |
+| FR-LMP-005 |  | `account-admin` | `FR-account-admin-002` | Nhân viên sửa/khóa tạm, mở lại người đọc (FR-S10) | R1B | P1 | DEC-SF-04 | `srs/library-management-platform-spec.md:79` | SRS (2026-10-08) |
 | FR-LMP-006 |  | `access-control` | `FR-access-control-001` | Đăng nhập và phân quyền | R0 | P0 |  | `srs/library-management-platform-spec.md:80` | SRS (2026-10-08) |
 | FR-LMP-007 |  | `access-control` | `FR-access-control-002` | Step-up và session reset | R0 | P0 |  | `srs/library-management-platform-spec.md:81` | SRS (2026-10-08) |
 | FR-LMP-008 |  | `checkout` | `FR-checkout-001` | Mượn nhiều bản sao nguyên tử | R1A | P0 |  | `srs/library-management-platform-spec.md:82` | SRS (2026-10-08) |
@@ -63,7 +63,7 @@ Cách đọc:
 | FR-LMP-028 |  | `expansion-candidates` | `FR-expansion-candidates-002` | Phân tích nâng cao | R3 | P2 |  | `srs/library-management-platform-spec.md:102` | SRS (2026-10-08) |
 | — (mới) |  | `reader-self-service` | `FR-reader-self-service-004` | Thẻ thư viện QR (FR-R03) | R1A | P0 | DEC-SF-02 — SRS cũ thiếu | Nguồn `he_thong_quan_ly_thu_vien.md` | SRS (2026-10-08) |
 | — (mới) |  | `reader-self-service` | `FR-reader-self-service-005` | Lịch sử mượn (FR-R05) | R1A | P0 | DEC-SF-02 — SRS cũ thiếu | Nguồn `he_thong_quan_ly_thu_vien.md` | SRS (2026-10-08) |
-| — (mới) |  | `account-admin` | `FR-account-admin-003` | Quản lý tài khoản Thủ thư (FR-L06) | R0 | P0 | DEC-SF-04 — SRS cũ thiếu | Nguồn `he_thong_quan_ly_thu_vien.md` | SRS (2026-10-08) |
+| — (mới) |  | `account-admin` | `FR-account-admin-003` | Quản lý tài khoản Nhân viên (FR-L06) | R0 | P0 | DEC-SF-04 — SRS cũ thiếu | Nguồn `he_thong_quan_ly_thu_vien.md` | SRS (2026-10-08) |
 | — (mới) |  | `ops-foundation` | `FR-ops-foundation-002` | Backup hằng ngày giữ 30 bản + diễn tập restore (NFR-07) | R0 | P0 | DEC-SF-05 — SRS cũ thiếu | Nguồn `he_thong_quan_ly_thu_vien.md` | SRS (2026-10-08) |
 | — (mới) |  | `access-control` | `FR-access-control-003` | Quên và đặt lại mật khẩu | R0 | P0 | SRS Tầng 1 thêm — nguồn SRC-FR-C02 | Nguồn tài liệu hệ thống | SRS (2026-10-08) |
 | — (mới) |  | `access-control` | `FR-access-control-004` | Hồ sơ cá nhân | R0 | P0 | SRS Tầng 1 thêm — nguồn SRC-FR-C03 | Nguồn tài liệu hệ thống | SRS (2026-10-08) |
@@ -71,7 +71,7 @@ Cách đọc:
 | — (mới) |  | `catalog-admin` | `FR-catalog-admin-003` | Quản lý danh mục | R0 | P0 | SRS Tầng 1 thêm — nguồn SRC-FR-L04 | Nguồn tài liệu hệ thống | SRS (2026-10-08) |
 | — (mới) |  | `copy-inventory` | `FR-copy-inventory-003` | Sinh QR hàng loạt và in nhãn | R0 | P0 | SRS Tầng 1 thêm — nguồn SRC-FR-L03 | Nguồn tài liệu hệ thống | SRS (2026-10-08) |
 | — (mới) |  | `checkout` | `FR-checkout-003` | In biên nhận mượn | R1A | P0 | SRS Tầng 1 thêm — brainstorm checkout OQ-2 | Brainstorm checkout | SRS (2026-10-08) |
-| — (mới) |  | `ops-reports` | `FR-ops-reports-002` | Danh sách quá hạn cho Thủ thư | R1B | P1 | SRS Tầng 1 thêm — nguồn SRC-FR-S09 | Nguồn tài liệu hệ thống | SRS (2026-10-08) |
+| — (mới) |  | `ops-reports` | `FR-ops-reports-002` | Danh sách quá hạn cho Nhân viên | R1B | P1 | SRS Tầng 1 thêm — nguồn SRC-FR-S09 | Nguồn tài liệu hệ thống | SRS (2026-10-08) |
 | — (mới) |  | `fine-collection-adv` | `FR-fine-collection-adv-003` | Đối soát thu ngân cuối ca | R1B | P1 | SRS Tầng 1 thêm — DEC-D3-08 | uc-fine-payment ext 6a (cũ) | SRS (2026-10-08) |
 
 ## 2. Non-Functional Requirement
@@ -184,7 +184,7 @@ Slug use case mới là đề xuất; chốt khi chạy `/srs` Tầng 2 của t�
 | `uc-catalog-admin` | `catalog-admin` | `uc-catalog-admin` | Đầu sách, tra cứu |  |
 | `uc-catalog-admin` | `copy-inventory` | `uc-copy-inventory` | Bản sao, QR |  |
 | `uc-reader-admin` | `reader-onboarding` | `uc-reader-onboarding` | Cấp mới, kích hoạt tại quầy |  |
-| `uc-reader-admin` | `account-admin` | `uc-account-admin` | Cập nhật, xóa mềm, khóa/mở, tài khoản Thủ thư |  |
+| `uc-reader-admin` | `account-admin` | `uc-account-admin` | Cập nhật, xóa mềm, khóa/mở, tài khoản Nhân viên |  |
 | `uc-checkout` | `checkout` | `uc-checkout` | Toàn bộ |  |
 | `uc-return-renewal` | `return-handling` | `uc-return` | Trả |  |
 | `uc-return-renewal` | `renewal` | `uc-renewal` | Gia hạn |  |

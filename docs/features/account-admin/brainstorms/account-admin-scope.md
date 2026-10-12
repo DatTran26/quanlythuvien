@@ -2,7 +2,7 @@
 type: brainstorm
 feature: account-admin
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/decision-register.md
@@ -14,21 +14,21 @@ links:
 
 ## 1. Idea Seed
 
-Quản trị viên quản lý vòng đời tài khoản người đọc và tài khoản Thủ thư (sửa, khóa, xóa mềm); Thủ thư sửa thông tin và khóa tạm người đọc khi phục vụ tại quầy. Mọi thay đổi có lý do và dấu vết.
+Thủ thư quản lý vòng đời tài khoản người đọc và tài khoản Nhân viên (sửa, khóa, xóa mềm); Nhân viên sửa thông tin và khóa tạm người đọc khi phục vụ tại quầy. Mọi thay đổi có lý do và dấu vết.
 
 ## 2. Context
 
 - Cấp tài khoản người đọc mới thuộc `reader-onboarding`; feature này lo phần sau khi tài khoản đã tồn tại.
-- Tài khoản Thủ thư do Quản trị viên tạo, khóa, đặt lại mật khẩu, xóa mềm (FR-L06 nguồn). Ai quản lý tài khoản Quản trị viên vẫn còn mở.
-- Phần R1B: Thủ thư được sửa thông tin và khóa tạm người đọc nhưng không được xóa (FR-S10 nguồn).
+- Tài khoản Nhân viên do Thủ thư tạo, khóa, đặt lại mật khẩu, xóa mềm (FR-L06 nguồn). Ai quản lý tài khoản Thủ thư vẫn còn mở.
+- Phần R1B: Nhân viên được sửa thông tin và khóa tạm người đọc nhưng không được xóa (FR-S10 nguồn).
 - Khóa tài khoản có hiệu lực ngay với điều kiện mượn ở `checkout` và `renewal`.
 
 ## 3. User Types (preliminary)
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Quản trị viên | Không biết ai đã sửa hoặc khóa tài khoản | Quản lý vòng đời tài khoản có dấu vết |
-| Thủ thư | Không khóa tạm được người đọc vi phạm ngay tại quầy | Khóa tạm có lý do, không cần chờ quản trị |
+| Thủ thư | Không biết ai đã sửa hoặc khóa tài khoản | Quản lý vòng đời tài khoản có dấu vết |
+| Nhân viên | Không khóa tạm được người đọc vi phạm ngay tại quầy | Khóa tạm có lý do, không cần chờ quản trị |
 | Người đọc | Bị khóa mà không biết lý do | Trạng thái khóa có lý do rõ ràng |
 
 ## 4. Capabilities Breakdown
@@ -36,15 +36,15 @@ Quản trị viên quản lý vòng đời tài khoản người đọc và tài
 ### P0 — must have
 
 - Tra cứu, xem chi tiết tài khoản người đọc kèm khoản đang mượn, đặt trước, công nợ.
-- Quản trị viên sửa tài khoản người đọc và xóa mềm (vô hiệu hóa); chặn xóa khi còn phiếu mượn mở hoặc nợ phạt.
-- Quản trị viên tạo, khóa, đặt lại mật khẩu, xóa mềm tài khoản Thủ thư.
+- Thủ thư sửa tài khoản người đọc và xóa mềm (vô hiệu hóa); chặn xóa khi còn phiếu mượn mở hoặc nợ phạt.
+- Thủ thư tạo, khóa, đặt lại mật khẩu, xóa mềm tài khoản Nhân viên.
 - Không xóa cứng tài khoản đã có lịch sử nghiệp vụ.
 - Hai người cùng sửa một hồ sơ: không ghi đè im lặng, người sau thấy bản mới nhất.
 - Audit mọi thay đổi tài khoản cùng giao dịch.
 
 ### P1 — should have
 
-- Thủ thư sửa thông tin và khóa tạm, mở lại người đọc với lý do bắt buộc (R1B).
+- Nhân viên sửa thông tin và khóa tạm, mở lại người đọc với lý do bắt buộc (R1B).
 
 ### P2 — nice to have
 
@@ -59,14 +59,14 @@ Quản trị viên quản lý vòng đời tài khoản người đọc và tài
 
 ### 5.2 Khóa tạm và mở lại người đọc
 
-1) Thủ thư hoặc Quản trị viên chọn khóa, nhập lý do bắt buộc.
+1) Nhân viên hoặc Thủ thư chọn khóa, nhập lý do bắt buộc.
 2) Hệ thống cảnh báo nếu người đọc đang có phiếu mượn hoặc đặt trước.
 3) Xác nhận; hệ thống chuyển trạng thái, ghi audit; từ thời điểm này người đọc không mượn, gia hạn được.
 4) Mở lại cũng cần lý do và có audit.
 
 ### 5.3 Xóa mềm tài khoản
 
-1) Quản trị viên chọn vô hiệu hóa tài khoản.
+1) Thủ thư chọn vô hiệu hóa tài khoản.
 2) Hệ thống kiểm tra nghĩa vụ đang mở; còn phiếu mượn mở hoặc nợ phạt thì chặn và liệt kê.
 3) Không còn nghĩa vụ: tài khoản bị vô hiệu, không đăng nhập hay mượn được; hồ sơ và lịch sử vẫn tra cứu được.
 
@@ -105,20 +105,20 @@ Chọn thao tác trên tài khoản ──> Có quyền? ──không──> T�
 
 | From State | To State | Rule | Action | Result |
 |------------|----------|------|--------|--------|
-| Quản trị viên | Tài khoản người đọc | Có quyền sửa, khóa, vô hiệu | Thao tác | Thực hiện |
-| Quản trị viên | Tài khoản Thủ thư | Có quyền tạo, khóa, đặt lại mật khẩu, vô hiệu | Thao tác | Thực hiện |
-| Thủ thư (R1B) | Tài khoản người đọc | Chỉ sửa thông tin, khóa tạm, mở lại | Thao tác | Thực hiện |
-| Thủ thư | Vô hiệu tài khoản người đọc hoặc tài khoản Thủ thư khác | Không có quyền | Thao tác | Từ chối |
-| Quản trị viên | Tài khoản Quản trị viên khác | Chưa xác định | — | Còn mở (OQ-1) |
+| Thủ thư | Tài khoản người đọc | Có quyền sửa, khóa, vô hiệu | Thao tác | Thực hiện |
+| Thủ thư | Tài khoản Nhân viên | Có quyền tạo, khóa, đặt lại mật khẩu, vô hiệu | Thao tác | Thực hiện |
+| Nhân viên (R1B) | Tài khoản người đọc | Chỉ sửa thông tin, khóa tạm, mở lại | Thao tác | Thực hiện |
+| Nhân viên | Vô hiệu tài khoản người đọc hoặc tài khoản Nhân viên khác | Không có quyền | Thao tác | Từ chối |
+| Thủ thư | Tài khoản Thủ thư khác | Chưa xác định | — | Còn mở (OQ-1) |
 
 ### 6.3 State Transitions
 
 | Entity | Từ | Sang | Trigger | Quay lại được? |
 |--------|------|----|---------|-------------|
 | Tài khoản người đọc | Đang hoạt động | Bị khóa | Khóa có lý do | Có, mở lại có lý do |
-| Tài khoản người đọc | Đang hoạt động / Bị khóa | Vô hiệu | Quản trị viên vô hiệu, không còn nghĩa vụ | Không |
-| Tài khoản Thủ thư | Đang hoạt động | Bị khóa | Quản trị viên khóa | Có |
-| Tài khoản Thủ thư | Đang hoạt động / Bị khóa | Vô hiệu | Quản trị viên vô hiệu | Không |
+| Tài khoản người đọc | Đang hoạt động / Bị khóa | Vô hiệu | Thủ thư vô hiệu, không còn nghĩa vụ | Không |
+| Tài khoản Nhân viên | Đang hoạt động | Bị khóa | Thủ thư khóa | Có |
+| Tài khoản Nhân viên | Đang hoạt động / Bị khóa | Vô hiệu | Thủ thư vô hiệu | Không |
 
 ### 6.4 Interrupted Transactions
 
@@ -172,14 +172,14 @@ Chọn thao tác trên tài khoản ──> Có quyền? ──không──> T�
 ## 8. Assumptions
 
 - Khóa tạm không thu hồi sách đang mượn và không hủy đặt trước.
-- Quản trị viên đầu tiên được tạo sẵn khi triển khai.
+- Thủ thư đầu tiên được tạo sẵn khi triển khai.
 
 ## 9. Risks
 
 | Rủi ro | Khả năng | Hậu quả nghiệp vụ | Cách phòng |
 |--------|----------|-------------------|-----------|
-| Compliance: Quản trị viên tự nâng quyền hoặc khóa lẫn nhau | hiếm | Mất kiểm soát hệ thống | Chốt OQ-1 trước R0 |
-| Process: Thủ thư khóa nhầm người đọc | thỉnh thoảng | Người đọc bị chặn mượn oan | Lý do bắt buộc, mở lại được ngay |
+| Compliance: Thủ thư tự nâng quyền hoặc khóa lẫn nhau | hiếm | Mất kiểm soát hệ thống | Chốt OQ-1 trước R0 |
+| Process: Nhân viên khóa nhầm người đọc | thỉnh thoảng | Người đọc bị chặn mượn oan | Lý do bắt buộc, mở lại được ngay |
 
 ## 10. Success Criteria (preliminary)
 
@@ -188,7 +188,7 @@ Chọn thao tác trên tài khoản ──> Có quyền? ──không──> T�
 
 ## 11. Open Questions
 
-- [ ] OQ-1: Ai quản lý tài khoản Quản trị viên và cơ chế chống tự nâng quyền? (OQ-account-admin-001; hold — security/IT)
+- [ ] OQ-1: Ai quản lý tài khoản Thủ thư và cơ chế chống tự nâng quyền? (OQ-account-admin-001; hold — security/IT)
 
 ## 12. Next Steps
 

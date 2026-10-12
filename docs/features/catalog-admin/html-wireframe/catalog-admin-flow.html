@@ -179,7 +179,7 @@
     <div class="wf-feature-label">Feature: catalog-admin / Wireframe</div>
     <div class="wf-flow-title">Đầu sách và danh mục</div>
     <div class="wf-flow-meta">4 màn hình · Device: mobile · Cập nhật: 2026-10-09 · Nguồn: srs/catalog-admin-userflow.md + srs/catalog-admin-spec.md</div>
-    <div class="wf-flow-desc">Quản trị viên và Thủ thư tra cứu đầu sách; Quản trị viên tạo, sửa, vô hiệu đầu sách và quản lý danh mục thể loại, tác giả, nhà xuất bản, vị trí kệ.</div>
+    <div class="wf-flow-desc">Thủ thư và Nhân viên tra cứu đầu sách; Thủ thư tạo, sửa, vô hiệu đầu sách và quản lý danh mục thể loại, tác giả, nhà xuất bản, vị trí kệ.</div>
   </div>
 
   <div class="wf-rows">
@@ -202,7 +202,7 @@
           <p class="hint-text">Ngưỡng phản hồi ≤2s @50.000 bản sao là PROPOSAL (NFR-catalog-admin-001). Đầu sách đã vô hiệu hóa không xuất hiện trong tra cứu mới.</p>
           <a class="wf-link" href="#s3">Tạo đầu sách</a>
           <a class="wf-link" href="#s4">Quản lý danh mục</a>
-          <p class="state-hint">Tra cứu: Thủ thư và Quản trị viên (FR-catalog-admin-002). Tạo, sửa, vô hiệu đầu sách và quản lý danh mục: chỉ Quản trị viên (DEC-SF-01). Thiếu quyền: E-core-002, ở lại màn này.</p>
+          <p class="state-hint">Tra cứu: Nhân viên và Thủ thư (FR-catalog-admin-002). Tạo, sửa, vô hiệu đầu sách và quản lý danh mục: chỉ Thủ thư (DEC-SF-01). Thiếu quyền: E-core-002, ở lại màn này.</p>
           <div class="wf-card">
             <div class="wf-card-body">
               <div class="wf-card-title">Tiêu đề đầu sách</div>
@@ -236,7 +236,7 @@
           <p class="hint-text">is_loanable cấp đầu sách là PROPOSAL (DEC-D3-09). Default chờ OQ-10 — không điền giá trị mặc định.</p>
           <div class="banner banner-info"><span>Số bản sao tính lại, không lưu counter: khả dụng · đang giữ ON_HOLD · đang mượn ON_LOAN · không khả dụng PENDING_REVIEW / IN_REPAIR / LOST / DISPOSED (FR-catalog-admin-002).</span></div>
           <a class="wf-link" href="#s3">Sửa đầu sách</a>
-          <p class="state-hint">Chỉ Quản trị viên (DEC-SF-01). Vô hiệu hóa theo BR-core-006.</p>
+          <p class="state-hint">Chỉ Thủ thư (DEC-SF-01). Vô hiệu hóa theo BR-core-006.</p>
           <a class="wf-link" href="../../copy-inventory/html-wireframe/copy-inventory-flow.html#s1">Xem bản sao</a>
           <div class="modal-box">
             <div class="modal-title">Vô hiệu hóa đầu sách</div>
@@ -369,7 +369,7 @@
           <button class="btn-secondary" type="button">Vô hiệu mục</button>
           <p class="state-hint">Mục đã được đầu sách hoặc bản sao dùng chỉ vô hiệu, không xóa cứng (BR-core-006). Mục vô hiệu không hiện trong biểu mẫu mới.</p>
           <div class="banner banner-warn"><span>E-core-003 — Tên mục đã tồn tại trong cùng loại danh mục.</span></div>
-          <div class="banner banner-warn"><span>E-core-002 — Chỉ Quản trị viên quản lý danh mục. Từ chối, ghi audit.</span></div>
+          <div class="banner banner-warn"><span>E-core-002 — Chỉ Thủ thư quản lý danh mục. Từ chối, ghi audit.</span></div>
         </div>
       </div>
       <div class="wf-screen-label">category-admin</div>
@@ -384,9 +384,9 @@
       </thead>
       <tbody>
         <tr class="wf-desc-screen-header"><td colspan="5">Screen 1: Tra cứu danh mục [1]</td></tr>
-        <tr><td>1</td><td>Tiêu đề, tác giả hoặc ISBN</td><td>Textbox</td><td>Text</td><td>Mục đích: tìm đầu sách theo tiêu đề/tác giả/ISBN (UC bước 1, FR-catalog-admin-001). Một ô từ khóa vì nguồn không tách ba control lọc riêng. Không có charset hay độ dài tối đa — không bịa. Rỗng vẫn ở màn [1]. Người đọc chỉ tra cứu (FR-catalog-admin-002); CRUD là Quản trị viên (FACT).</td></tr>
+        <tr><td>1</td><td>Tiêu đề, tác giả hoặc ISBN</td><td>Textbox</td><td>Text</td><td>Mục đích: tìm đầu sách theo tiêu đề/tác giả/ISBN (UC bước 1, FR-catalog-admin-001). Một ô từ khóa vì nguồn không tách ba control lọc riêng. Không có charset hay độ dài tối đa — không bịa. Rỗng vẫn ở màn [1]. Người đọc chỉ tra cứu (FR-catalog-admin-002); CRUD là Thủ thư (FACT).</td></tr>
         <tr><td>2</td><td>Tìm</td><td>Button</td><td>Click</td><td>Chạy tra cứu và giữ actor ở catalog-search. Kết quả có thì chọn để sang [2]. Không thấy bản ghi: E-core-003, không tạo đầu sách từ ô tìm. Ngưỡng ≤2s @50.000 bản sao là PROPOSAL (NFR-catalog-admin-001). Bản is_active=false không hiện trong tra cứu mới (UC 5c2) nhưng lịch sử cũ vẫn đọc được khi mở đúng bản ghi.</td></tr>
-        <tr><td>3</td><td>Tạo đầu sách</td><td>Link</td><td>Click</td><td>Sang biểu mẫu [3] khi có quyền (transition userflow). Chỉ Quản trị viên (DEC-SF-01); Thủ thư không thấy link này. Thiếu quyền: E-core-002 banner, audit denial (BR-core-004), không mở form.</td></tr>
+        <tr><td>3</td><td>Tạo đầu sách</td><td>Link</td><td>Click</td><td>Sang biểu mẫu [3] khi có quyền (transition userflow). Chỉ Thủ thư (DEC-SF-01); Nhân viên không thấy link này. Thiếu quyền: E-core-002 banner, audit denial (BR-core-004), không mở form.</td></tr>
         <tr><td>4</td><td>Chi tiết</td><td>Link</td><td>Click</td><td>Chọn một kết quả còn tồn tại để sang bibliographic-detail [2]. Card chỉ là khung hiển thị tiêu đề/tác giả/ISBN, không phải dữ liệu mẫu nghiệp vụ.</td></tr>
         <tr><td>5</td><td>Số bản sao theo nhóm</td><td>Label</td><td>ReadOnly</td><td>FR-catalog-admin-002: khả dụng, đang giữ (ON_HOLD), đang mượn (ON_LOAN), không khả dụng (PENDING_REVIEW/IN_REPAIR/LOST/DISPOSED). FACT: khả dụng tính từ trạng thái, không lưu counter (SRC-BR11, CP-AVL-01). PROPOSAL: điều kiện is_loanable trong công thức (DEC-D3-09).</td></tr>
         <tr><td>6</td><td>Không thấy đầu sách</td><td>Label</td><td>ReadOnly</td><td>E-core-003 khi mã/từ khóa không ra bản ghi. Ở lại [1]. Không partial write.</td></tr>
@@ -430,7 +430,7 @@
         <tr><td>4</td><td>Thẻ mục</td><td>Card</td><td>ReadOnly</td><td>Tên, số đầu sách đang dùng, trạng thái Đang dùng / Vô hiệu. Link Sửa mở hộp thêm/sửa với giá trị hiện tại.</td></tr>
         <tr><td>5</td><td>Thêm hoặc sửa mục</td><td>Modal</td><td>Form</td><td>Tên bắt buộc (E-core-001). Trùng tên trong cùng loại: E-core-003. Hai người sửa cùng lúc: E-core-004, tải lại bản mới, không ghi đè. Ghi audit cùng giao dịch (BR-core-003). Thuộc tính thêm cho vị trí kệ (khu, tầng) chưa có nguồn — chỉ giữ tên.</td></tr>
         <tr><td>6</td><td>Vô hiệu mục</td><td>Button</td><td>Click</td><td>Mục đã được dùng chỉ vô hiệu, không xóa cứng (BR-core-006). Đầu sách cũ giữ nguyên tham chiếu; mục vô hiệu không hiện trong biểu mẫu mới. Đã vô hiệu: E-core-008.</td></tr>
-        <tr><td>7</td><td>Thông báo quyền</td><td>Label</td><td>ReadOnly</td><td>Chỉ Quản trị viên (FR-catalog-admin-003). Thủ thư: E-core-002, quay về catalog-search, ghi audit.</td></tr>
+        <tr><td>7</td><td>Thông báo quyền</td><td>Label</td><td>ReadOnly</td><td>Chỉ Thủ thư (FR-catalog-admin-003). Nhân viên: E-core-002, quay về catalog-search, ghi audit.</td></tr>
       </tbody>
     </table>
   </div>

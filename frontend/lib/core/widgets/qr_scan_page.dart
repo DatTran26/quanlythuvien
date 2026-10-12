@@ -100,25 +100,10 @@ class _QrScanPageState extends State<QrScanPage> {
   }
 
   Future<void> _typeManually() async {
-    final ctrl = TextEditingController();
     final code = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Nhập mã thủ công'),
-        content: TextField(
-          controller: ctrl,
-          autofocus: true,
-          textCapitalization: TextCapitalization.characters,
-          decoration: const InputDecoration(labelText: 'Mã trên tem/thẻ'),
-          onSubmitted: (v) => Navigator.pop(ctx, v),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Hủy')),
-          FilledButton(onPressed: () => Navigator.pop(ctx, ctrl.text), child: const Text('Dùng mã này')),
-        ],
-      ),
+      builder: (ctx) => const _ManualCodeDialog(),
     );
-    ctrl.dispose();
     if (code == null || code.trim().isEmpty || !mounted) return;
     if (_continuous) {
       final fb = await widget.onCode!(code.trim());
@@ -238,6 +223,46 @@ class _QrScanPageState extends State<QrScanPage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// Hộp nhập mã. Controller sống trong State để chỉ bị dispose sau khi TextField đã unmount.
+/// Dispose ngay khi showDialog trả về sẽ cắt controller trong lúc route còn animate đóng,
+/// TextField còn lắng nghe và làm vỡ cây widget (`_dependents.isEmpty`).
+class _ManualCodeDialog extends StatefulWidget {
+  const _ManualCodeDialog();
+
+  @override
+  State<_ManualCodeDialog> createState() => _ManualCodeDialogState();
+}
+
+class _ManualCodeDialogState extends State<_ManualCodeDialog> {
+  final _ctrl = TextEditingController();
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  void _submit() => Navigator.pop(context, _ctrl.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Nhập mã thủ công'),
+      content: TextField(
+        controller: _ctrl,
+        autofocus: true,
+        textCapitalization: TextCapitalization.characters,
+        decoration: const InputDecoration(labelText: 'Mã trên tem/thẻ'),
+        onSubmitted: (_) => _submit(),
+      ),
+      actions: [
+        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Hủy')),
+        FilledButton(onPressed: _submit, child: const Text('Dùng mã này')),
+      ],
     );
   }
 }

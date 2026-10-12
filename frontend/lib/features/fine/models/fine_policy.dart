@@ -1,5 +1,5 @@
 // Phần quy định mượn liên quan tới phạt.
-// API: GET /policy -> LendingPolicy (chỉ LIBRARIAN, ADMIN; người đọc chưa đọc được: T14)
+// API: GET /policy -> LendingPolicy (chỉ STAFF, LIBRARIAN; người đọc chưa đọc được: T14)
 // Mock: shared.lendingPolicy. Toàn bộ quy định thuộc policy-config (TV1).
 
 class FinePolicy {

@@ -2,7 +2,7 @@
 type: mock-data
 scope: shared
 status: draft
-updated: 2026-10-10
+updated: 2026-10-12
 links:
   - docs/_shared/mock-data.json
   - docs/_product/team-assignment.md
@@ -57,7 +57,7 @@ Chỉ sửa qua PR chung, vì đổi một bản ghi có thể làm hỏng màn 
 |---|---|
 | `notifications` | `notification-core`, `notification-audit-ui`: có thông báo đã đọc và chưa đọc |
 | `fineTransactions` | `fine-collection-basic` (thu tiền mặt, biên nhận), `fine-collection-adv` (miễn phạt) |
-| `auditLogs` | `notification-audit-ui`: màn xem nhật ký của Quản trị viên |
+| `auditLogs` | `notification-audit-ui`: màn xem nhật ký của Thủ thư |
 | `notificationOutbox` | `notification-core`: trạng thái gửi từng thông báo (`SENT`, `RETRYING`, `DEAD`), số lần thử, lỗi cuối. Backend chưa có outbox (T13) |
 
 Mỗi người được tự thêm key mới vào section của mình mà không cần hỏi ai. Nếu sau đó người khác cũng cần key đó, chuyển nó lên `shared` bằng PR chung.

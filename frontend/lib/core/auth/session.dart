@@ -7,13 +7,13 @@ abstract final class AppSession {
   static String email = '';
 
   static bool get isSignedIn => userId != null;
-  static bool get isAdmin => role == 'ADMIN';
-  static bool get isStaff => role == 'ADMIN' || role == 'LIBRARIAN';
+  static bool get isLibrarian => role == 'LIBRARIAN';
+  static bool get isStaff => role == 'LIBRARIAN' || role == 'STAFF';
   static bool get isReader => role == 'READER';
 
   static String get roleLabel => switch (role) {
-        'ADMIN' => 'Quản trị viên',
         'LIBRARIAN' => 'Thủ thư',
+        'STAFF' => 'Nhân viên',
         'READER' => 'Người đọc',
         _ => role,
       };

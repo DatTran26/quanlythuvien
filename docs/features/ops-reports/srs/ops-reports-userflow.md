@@ -1,7 +1,7 @@
 ---
 type: srs-userflow
 feature: ops-reports
-updated: 2026-10-09
+updated: 2026-10-12
 primary_device: mobile
 stage: flow-approved
 flow_approved_at: 2026-10-09
@@ -18,7 +18,7 @@ flowchart TD
     n1["[1] Dashboard báo cáo"]
     d1{"Có quyền và có dữ liệu?"}
     r1["RP-01, RP-02, RP-04"]
-    n2["[2] Danh sách quá hạn Thủ thư — R1B"]
+    n2["[2] Danh sách quá hạn Nhân viên — R1B"]
     e1["E-core-002 — không có quyền"]
     empty["Empty — chưa có dữ liệu kỳ"]
 
@@ -42,7 +42,7 @@ flowchart TD
 | [#] | Slug | Màn hình | Mục đích | Thuộc flow |
 |-----|------|----------|----------|------------|
 | 1 | report-dashboard | Dashboard báo cáo | RP-01 tài khoản, RP-02 kho, RP-04 quá hạn; lọc; xuất Excel/PDF. | ops-reports-flow |
-| 2 | overdue-list-staff | Danh sách quá hạn | R1B Thủ thư xem phiếu quá hạn để nhắc. | ops-reports-flow |
+| 2 | overdue-list-staff | Danh sách quá hạn | R1B Nhân viên xem phiếu quá hạn để nhắc. | ops-reports-flow |
 
 ## 3. Danh sách flow
 
@@ -58,9 +58,9 @@ Chuyển màn sang feature khác ghi bằng chữ khi đích chưa có wireframe
 |-----------|------------|---------|-----------|
 | Dashboard [1] | (giữ) [1] | Tải RP-01/02/04 | Có quyền và có dữ liệu |
 | Dashboard [1] | (giữ) [1] | Tải | Empty hoặc E-core-002 |
-| Dashboard [1] | Quá hạn [2] | Mở danh sách Thủ thư | R1B |
+| Dashboard [1] | Quá hạn [2] | Mở danh sách Nhân viên | R1B |
 
 ## 4. Open Questions
 
-- [ ] OQ-ops-reports-001 — Thủ thư quầy có quyền xem RP-01, RP-02, RP-04 không? Owner: domain approver.
+- [ ] OQ-ops-reports-001 — Nhân viên quầy có quyền xem RP-01, RP-02, RP-04 không? Owner: domain approver.
 - [ ] OQ-ops-reports-002 — Priority chính thức P0 (PRD) hay P1 (SRS cũ)? Owner: Product Owner.

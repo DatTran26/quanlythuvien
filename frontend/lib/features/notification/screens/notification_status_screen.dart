@@ -2,7 +2,7 @@
 // Spec: docs/features/notification-core/srs/ (FR-001, E-notification-core-001/002, BR-core-005)
 // Checklist: CHK-notification-core-003 – kênh gửi lỗi thì trạng thái gửi được ghi là lỗi.
 //
-// Mục đích: Quản trị viên xem thông báo đã gửi / đang thử lại / lỗi hẳn (dead-letter).
+// Mục đích: Thủ thư xem thông báo đã gửi / đang thử lại / lỗi hẳn (dead-letter).
 // Chỉ xem: chính sách thử lại chạy ở backend. Lỗ hổng: T13 (backend chưa có outbox).
 
 import 'package:flutter/material.dart';

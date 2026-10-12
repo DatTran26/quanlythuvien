@@ -1,14 +1,14 @@
 ---
 type: srs-flows
 feature: fine-collection-adv
-updated: 2026-10-08
+updated: 2026-10-12
 ---
 
 # fine-collection-adv — Flows
 
 ## Flow: Miễn, điều chỉnh, đảo, hoàn và đối soát cuối ca
 
-**Trigger:** Quản trị viên xử lý ngoại lệ tài chính; kết thúc ca. · **UC:** uc-fine-adjustment · **Release:** R1B
+**Trigger:** Thủ thư xử lý ngoại lệ tài chính; kết thúc ca. · **UC:** uc-fine-adjustment · **Release:** R1B
 
 ```mermaid
 flowchart TD
@@ -30,7 +30,7 @@ flowchart TD
     Cancel --> End
     Deny --> End
     Wait --> End
-    Shift(["Bắt đầu — cuối ca"]) --> Count["Thủ thư nhập tiền mặt thực có"]
+    Shift(["Bắt đầu — cuối ca"]) --> Count["Nhân viên nhập tiền mặt thực có"]
     Count --> Match{"Khớp tổng khoản thu của ca?"}
     Match -->|"có"| EndShift(["Kết thúc — đóng ca"])
     Match -->|"không"| Recon["Ghi sự kiện đối soát, cảnh báo vận hành"]

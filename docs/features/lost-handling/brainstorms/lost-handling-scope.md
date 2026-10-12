@@ -2,7 +2,7 @@
 type: brainstorm
 feature: lost-handling
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/decision-register.md
@@ -14,7 +14,7 @@ links:
 
 ## 1. Idea Seed
 
-Khi người đọc làm mất sách, Thủ thư ghi nhận mất: phiếu mượn đóng ở trạng thái Mất, bản sao chuyển Mất, hệ thống ghi nghĩa vụ bồi thường. Nếu sau đó tìm lại sách, nghĩa vụ đã ghi được đối soát trước khi bản sao quay về kho.
+Khi người đọc làm mất sách, Nhân viên ghi nhận mất: phiếu mượn đóng ở trạng thái Mất, bản sao chuyển Mất, hệ thống ghi nghĩa vụ bồi thường. Nếu sau đó tìm lại sách, nghĩa vụ đã ghi được đối soát trước khi bản sao quay về kho.
 
 ## 2. Context
 
@@ -26,7 +26,7 @@ Khi người đọc làm mất sách, Thủ thư ghi nhận mất: phiếu mư�
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Thủ thư | Phiếu mượn sách mất treo mãi | Đóng phiếu ở trạng thái Mất, có nghĩa vụ bồi thường |
+| Nhân viên | Phiếu mượn sách mất treo mãi | Đóng phiếu ở trạng thái Mất, có nghĩa vụ bồi thường |
 | Người đọc | Tìm lại sách nhưng vẫn bị ghi nợ | Đối soát nghĩa vụ khi tìm lại |
 
 ## 4. Capabilities Breakdown
@@ -49,12 +49,12 @@ Khi người đọc làm mất sách, Thủ thư ghi nhận mất: phiếu mư�
 
 ### 5.1 Ghi nhận mất (R1A)
 
-1) Thủ thư xác nhận với người đọc, mở phiếu đang mượn, chọn ghi nhận mất.
+1) Nhân viên xác nhận với người đọc, mở phiếu đang mượn, chọn ghi nhận mất.
 2) Hệ thống đóng phiếu ở trạng thái Mất, chuyển bản sao sang Mất, ghi bồi thường, audit, thông báo.
 
 ### 5.2 Tìm lại sau khi mất (R1B)
 
-1) Thủ thư kiểm tra bản sao tìm lại, xác nhận đã tìm thấy.
+1) Nhân viên kiểm tra bản sao tìm lại, xác nhận đã tìm thấy.
 2) Có duyệt tài chính: đối soát nghĩa vụ (đảo nếu chưa thu, hoàn nếu đã thu theo chính sách), bản sao về Sẵn sàng.
 3) Chưa có duyệt: ghi "đã tìm thấy — chờ đối soát", bản sao vẫn Mất.
 

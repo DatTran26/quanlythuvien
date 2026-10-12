@@ -16,6 +16,7 @@
 // - T12: /audit chỉ trả 50 dòng, chưa lọc, chưa phân trang, chưa có lịch sử theo một bản ghi.
 // - T13: backend chưa có outbox / retry / dead-letter -> notification-status chỉ dựng bằng mock.
 
+import 'package:frontend/core/auth/session.dart';
 import 'package:frontend/core/data/mock_db.dart';
 
 import '../models/app_notification.dart';
@@ -57,6 +58,7 @@ abstract class NotificationApi {
 class MockNotificationApi implements NotificationApi {
   @override
   Future<List<AppNotification>> mine(int userId) async {
+    _requireCurrentUser(userId);
     final db = await MockDb.load();
     final list =
         db
@@ -74,6 +76,7 @@ class MockNotificationApi implements NotificationApi {
 
   @override
   Future<void> markRead(int notificationId, {required int userId}) async {
+    _requireCurrentUser(userId);
     final db = await MockDb.load();
     final row = db
         .table('tv3', 'notifications')
@@ -98,7 +101,7 @@ class MockNotificationApi implements NotificationApi {
   @override
   Future<List<OutboxItem>> outbox({required int actorId}) async {
     final db = await MockDb.load();
-    await _requireAdmin(db, actorId);
+    await _requireLibrarian(db, actorId);
     final names = _userNames(db);
     final notifications = {
       for (final n in db.table('tv3', 'notifications')) n['id'] as int: n,
@@ -123,7 +126,7 @@ class MockNotificationApi implements NotificationApi {
     DateTime? to,
   }) async {
     final db = await MockDb.load();
-    await _requireAdmin(db, actorId);
+    await _requireLibrarian(db, actorId);
     final names = _userNames(db);
     return db
         .table('tv3', 'auditLogs')
@@ -201,16 +204,26 @@ class MockNotificationApi implements NotificationApi {
       u['id'] as int: u['displayName'] as String,
   };
 
-  /// FR-notification-audit-ui-002: nhật ký và trạng thái gửi chỉ Quản trị viên xem (E-core-002).
-  Future<void> _requireAdmin(MockDb db, int actorId) async {
+  void _requireCurrentUser(int userId) {
+    final currentUserId = AppSession.userId;
+    if (currentUserId != null && currentUserId != userId) {
+      throw const NotificationAccessException(
+        'NOT_OWNER',
+        'Không xem hoặc sửa thông báo của người dùng khác',
+      );
+    }
+  }
+
+  /// FR-notification-audit-ui-002: nhật ký và trạng thái gửi chỉ Thủ thư xem (E-core-002).
+  Future<void> _requireLibrarian(MockDb db, int actorId) async {
     final actor = db
         .table('shared', 'users')
         .where((u) => u['id'] == actorId)
         .firstOrNull;
-    if (actor?['role'] != 'ADMIN') {
+    if (actor?['role'] != 'LIBRARIAN') {
       throw const NotificationAccessException(
         'FORBIDDEN',
-        'Chỉ Quản trị viên được xem nhật ký và trạng thái gửi thông báo',
+        'Chỉ Thủ thư được xem nhật ký và trạng thái gửi thông báo',
       );
     }
   }

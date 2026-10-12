@@ -2,7 +2,7 @@
 type: brainstorm
 feature: trend-reports
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_shared/id-crosswalk-lmp.md
@@ -12,7 +12,7 @@ links:
 
 ## 1. Idea Seed
 
-Quản trị viên xem báo cáo xu hướng trên dữ liệu vận hành tích lũy để quyết định mua thêm, sửa hay thanh lý sách.
+Thủ thư xem báo cáo xu hướng trên dữ liệu vận hành tích lũy để quyết định mua thêm, sửa hay thanh lý sách.
 
 ## 2. Context
 
@@ -24,7 +24,7 @@ Quản trị viên xem báo cáo xu hướng trên dữ liệu vận hành tích
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Quản trị viên | Mua sách theo cảm tính | Số liệu mượn, phạt, quan tâm, hư hỏng theo thời gian |
+| Thủ thư | Mua sách theo cảm tính | Số liệu mượn, phạt, quan tâm, hư hỏng theo thời gian |
 
 ## 4. Capabilities Breakdown
 
@@ -48,7 +48,7 @@ Quản trị viên xem báo cáo xu hướng trên dữ liệu vận hành tích
 
 ### 5.1 Xem báo cáo xu hướng
 
-1) Quản trị viên mở dashboard báo cáo, chọn báo cáo xu hướng.
+1) Thủ thư mở dashboard báo cáo, chọn báo cáo xu hướng.
 2) Chọn khoảng thời gian; hệ thống hiện số liệu.
 3) Xuất Excel hoặc PDF.
 
@@ -114,7 +114,7 @@ Không áp dụng — feature chỉ đọc.
 
 ## 8. Assumptions
 
-- Chỉ Quản trị viên xem báo cáo xu hướng.
+- Chỉ Thủ thư xem báo cáo xu hướng.
 
 ## 9. Risks
 

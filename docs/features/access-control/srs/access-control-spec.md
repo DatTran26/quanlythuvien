@@ -2,7 +2,7 @@
 type: srs
 feature: access-control
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/access-control/brainstorms/access-control-scope.md
   - docs/_product/prd.md
@@ -26,8 +26,8 @@ links:
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
 | Người đọc | người | Tự phục vụ, mượn sách | Có |
-| Thủ thư | người | Vận hành quầy | Có |
-| Quản trị viên | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
+| Nhân viên | người | Vận hành quầy | Có |
+| Thủ thư | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
 | Hệ thống | hệ thống | Thực thi kiểm tra, ghi audit | Có |
 | Bảo mật/pháp chế | stakeholder | Kiểm soát dữ liệu cá nhân, retention | Có như stakeholder |
 
@@ -99,11 +99,11 @@ __Assumptions:__
 | Giả định | Invalidate nếu sai |
 |---|---|
 | Dùng tài khoản nội bộ (email hoặc mã thẻ + mật khẩu) | FR-access-control-001, 003 |
-| Quản trị viên đầu tiên tạo sẵn khi triển khai | `account-admin` |
+| Thủ thư đầu tiên tạo sẵn khi triển khai | `account-admin` |
 
 ## 12. Open Questions
 
 - [ ] OQ-access-control-001 — Mô hình danh tính: tài khoản nội bộ, SSO hay dịch vụ danh tính ngoài? Owner: security/IT.
 - [ ] OQ-access-control-002 — Ngưỡng đăng nhập sai, thời gian khóa tạm, thời lượng phiên, hiệu lực link đặt lại mật khẩu? Owner: security/IT.
 - [ ] OQ-access-control-003 — Quy tắc mật khẩu (độ dài, ký tự)? Owner: security/IT.
-- [ ] OQ-access-control-004 — Mở khóa tạm tự động theo thời gian hay chỉ Quản trị viên mở? Owner: security/IT.
+- [ ] OQ-access-control-004 — Mở khóa tạm tự động theo thời gian hay chỉ Thủ thư mở? Owner: security/IT.

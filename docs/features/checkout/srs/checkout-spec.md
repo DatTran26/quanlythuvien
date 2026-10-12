@@ -2,7 +2,7 @@
 type: srs
 feature: checkout
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/checkout/brainstorms/checkout-scope.md
   - docs/_product/prd.md
@@ -15,7 +15,7 @@ links:
 
 ## 1. Scope
 
-Thủ thư quét thẻ và nhiều sách; hệ thống kiểm điều kiện người đọc và từng cuốn ngay khi quét, ghi cả giỏ trong một giao dịch (tất cả hoặc không cuốn nào), chống ghi trùng và tranh chấp giữa hai quầy, rồi in biên nhận mượn.
+Nhân viên quét thẻ và nhiều sách; hệ thống kiểm điều kiện người đọc và từng cuốn ngay khi quét, ghi cả giỏ trong một giao dịch (tất cả hoặc không cuốn nào), chống ghi trùng và tranh chấp giữa hai quầy, rồi in biên nhận mượn.
 
 **Release:** R1A
 
@@ -25,7 +25,7 @@ Thủ thư quét thẻ và nhiều sách; hệ thống kiểm điều kiện ng�
 
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
-| Thủ thư | người | Vận hành quầy | Có |
+| Nhân viên | người | Vận hành quầy | Có |
 | Người đọc | người | Mượn, trả, theo dõi khoản mượn | Có |
 | Hệ thống | hệ thống | Thực thi rule, job, audit, outbox | Có |
 | Thủ thư trưởng | stakeholder | Duyệt quy định và go-live | Có như stakeholder |
@@ -38,7 +38,7 @@ Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.
 |---|---|---|---|---|---|---|
 | FR-checkout-001 | Mượn nhiều bản sao nguyên tử | Một phiếu mượn có nhiều bản sao chỉ thành công khi toàn bộ điều kiện hợp lệ; một bản sao lỗi làm cả giao dịch rollback. | P0 | R1A | test | Spec cũ (xem id-crosswalk-lmp) |
 | FR-checkout-002 | Idempotency và concurrency mượn | Lặp submit/checkout cùng request không tạo phiếu trùng; hai giao dịch tranh cùng bản sao chỉ một giao dịch thắng. | P0 | R1A | test/concurrency | Spec cũ (xem id-crosswalk-lmp) |
-| FR-checkout-003 | In biên nhận mượn | Sau khi ghi phiếu thành công, hệ thống in biên nhận gộp các cuốn theo thời điểm tạo, gồm: tên thư viện, mã phiếu, ngày giờ mượn, tên và mã thẻ người đọc, danh sách cuốn (tên sách, mã bản sao) kèm hạn trả từng cuốn, Thủ thư thực hiện. | P0 | R1A | demo/test | Brainstorm checkout OQ-2 (2026-10-08) |
+| FR-checkout-003 | In biên nhận mượn | Sau khi ghi phiếu thành công, hệ thống in biên nhận gộp các cuốn theo thời điểm tạo, gồm: tên thư viện, mã phiếu, ngày giờ mượn, tên và mã thẻ người đọc, danh sách cuốn (tên sách, mã bản sao) kèm hạn trả từng cuốn, Nhân viên thực hiện. | P0 | R1A | demo/test | Brainstorm checkout OQ-2 (2026-10-08) |
 
 ## 4. Non-Functional Requirements (NFR)
 
