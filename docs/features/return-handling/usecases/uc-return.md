@@ -2,7 +2,7 @@
 type: usecase
 feature: return-handling
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/return-handling/usecases/return-handling-usecase-index.md
   - docs/features/return-handling/srs/return-handling-spec.md
@@ -17,21 +17,21 @@ links:
 
 ## Primary Actor
 
-Thủ thư (trả sách tại quầy, gia hạn thay mặt). Người đọc — gia hạn tự phục vụ phụ thuộc cổng FR-reader-self-service-002 (R2); trong R1B gia hạn tại quầy.
+Nhân viên (trả sách tại quầy, gia hạn thay mặt). Người đọc — gia hạn tự phục vụ phụ thuộc cổng FR-reader-self-service-002 (R2); trong R1B gia hạn tại quầy.
 
 ## Stakeholders & Interests
 
 | Stakeholder | Interest |
 |-------------|----------|
 | Người đọc | Được thông báo rõ phạt tạm tính và trạng thái sau trả; gia hạn bị từ chối có lý do cụ thể |
-| Quản trị viên (disposition owner) | Copy hư hỏng không kẹt trạng thái — DamageReport PENDING có đường duyệt (DEC-P2-03) |
+| Thủ thư (disposition owner) | Copy hư hỏng không kẹt trạng thái — DamageReport PENDING có đường duyệt (DEC-P2-03) |
 | Bộ phận tài chính | Mọi nghĩa vụ phạt là FinancialEvent append-only (BR-core-002); chính sách fine chờ OQ-fine-collection-adv-001 |
 | Người đọc đang chờ đặt trước (R2) | Copy trả về được phân bổ FIFO nguyên tử (BR-reservation-001) |
 
 ## Trigger
 
-- Trả: Người đọc mang sách đến quầy; Thủ thư quét Copy trên `return-scan`.
-- Gia hạn: Thủ thư/Người đọc yêu cầu gia hạn một Loan đang mở.
+- Trả: Người đọc mang sách đến quầy; Nhân viên quét Copy trên `return-scan`.
+- Gia hạn: Nhân viên/Người đọc yêu cầu gia hạn một Loan đang mở.
 
 ## Preconditions
 
@@ -49,9 +49,9 @@ Thủ thư (trả sách tại quầy, gia hạn thay mặt). Người đọc —
 
 ### Luồng A — Trả sách (FR-return-handling-001, FR-overdue-fines-001)
 
-1. Thủ thư mở `return-scan`, quét QR Copy; hệ thống dùng mã chỉ để locate bản ghi (BR-copy-inventory-001).
+1. Nhân viên mở `return-scan`, quét QR Copy; hệ thống dùng mã chỉ để locate bản ghi (BR-copy-inventory-001).
 2. Hệ thống tìm Loan đang mở gắn Copy (D3 — baseline §6.1).
-3. Thủ thư ghi nhận tình trạng trả: **Bình thường** hoặc **Hư hỏng** (severity Nhẹ/Vừa/Nặng + mô tả + ảnh 1–5 nếu báo hư hỏng — DMG-T01); nhánh "Mất" xử lý ở `uc-damage-report` (COPY-T06, LOAN-T05).
+3. Nhân viên ghi nhận tình trạng trả: **Bình thường** hoặc **Hư hỏng** (severity Nhẹ/Vừa/Nặng + mô tả + ảnh 1–5 nếu báo hư hỏng — DMG-T01); nhánh "Mất" xử lý ở `uc-damage-report` (COPY-T06, LOAN-T05).
 4. Hệ thống trong **một transaction**, theo thứ tự bắt buộc (FACT): đóng Loan `ACTIVE/OVERDUE→RETURNED` (LOAN-T04, ghi `returned_at`, `return_condition`, `closed_by`) + assess FinancialEvent `ASSESSMENT` phạt quá hạn nếu `now > due_at` (tính theo policy — PROPOSAL OQ-policy-config-001; phạt hư hỏng theo SRC-BR07 nếu D4) → sau đó quyết định trạng thái Copy (D4/D5): hư hỏng → `PENDING_REVIEW` + DamageReport `PENDING` gắn `loan_id` (COPY-T05 + DMG-T01); bình thường, queue rỗng → `AVAILABLE` (COPY-T03); bình thường, có hàng chờ → `ON_HOLD` + Reservation đầu hàng `WAITING→READY` nguyên tử (COPY-T04 — **chỉ từ R2**, DEC-P2-05) + audit + outbox notify.
 5. `return-result` hiển thị: Loan đã đóng, phạt tạm tính nếu có (chuyển tiếp `uc-fine-cash-payment` để thu), trạng thái mới của Copy ("Đã nhận trả sách và cập nhật trạng thái bản sao." — baseline §7.3).
 
@@ -70,7 +70,7 @@ Thủ thư (trả sách tại quầy, gia hạn thay mặt). Người đọc —
 - A2c2. Recovery: tiếp tục cuốn kế tiếp trong lô trả.
 
 **A3a/A4a. Trả có hư hỏng (D4 = YES):**
-- A4a1. Tạo DamageReport `PENDING` gắn `loan_id` (1–5 ảnh, severity — DMG-T01), Copy `→PENDING_REVIEW` chặn lưu thông ngay (mặc định OQ-11 — Open, chưa chốt), assess phạt hư hỏng SRC-BR07, notify Quản trị viên — tất cả trong transaction đóng Loan (extend `uc-damage-report`).
+- A4a1. Tạo DamageReport `PENDING` gắn `loan_id` (1–5 ảnh, severity — DMG-T01), Copy `→PENDING_REVIEW` chặn lưu thông ngay (mặc định OQ-11 — Open, chưa chốt), assess phạt hư hỏng SRC-BR07, notify Thủ thư — tất cả trong transaction đóng Loan (extend `uc-damage-report`).
 - A4a2. Recovery: nếu upload ảnh lỗi (E-damage-lifecycle-001) → cho chọn file khác, không lưu file rủi ro; report chưa đủ evidence thì lưu nháp theo luồng damage (PROPOSAL).
 
 **A4b. Trả quá hạn:**

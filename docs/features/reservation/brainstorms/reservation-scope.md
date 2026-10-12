@@ -2,7 +2,7 @@
 type: brainstorm
 feature: reservation
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/decision-register.md
@@ -15,7 +15,7 @@ links:
 
 ## 1. Idea Seed
 
-Khi đầu sách hết bản khả dụng, người đọc hoặc Thủ thư đặt trước; hệ thống xếp hàng theo thứ tự thời gian, giữ sách 48 giờ cho người đầu hàng khi có bản về kho, hết hạn thì chuyển người kế tiếp, và người đọc nhận sách qua quầy mượn.
+Khi đầu sách hết bản khả dụng, người đọc hoặc Nhân viên đặt trước; hệ thống xếp hàng theo thứ tự thời gian, giữ sách 48 giờ cho người đầu hàng khi có bản về kho, hết hạn thì chuyển người kế tiếp, và người đọc nhận sách qua quầy mượn.
 
 ## 2. Context
 
@@ -29,7 +29,7 @@ Khi đầu sách hết bản khả dụng, người đọc hoặc Thủ thư đ�
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
 | Người đọc | Sách hết, phải canh hỏi liên tục | Xếp hàng và được báo khi có sách |
-| Thủ thư | Giữ sách tay, nhầm người | Hệ thống giữ đúng người, đúng hạn |
+| Nhân viên | Giữ sách tay, nhầm người | Hệ thống giữ đúng người, đúng hạn |
 
 ## 4. Capabilities Breakdown
 
@@ -43,7 +43,7 @@ Khi đầu sách hết bản khả dụng, người đọc hoặc Thủ thư đ�
 - Hàng chờ theo thứ tự thời gian; hiển thị vị trí.
 - Bản sao về kho thì giữ cho người đầu hàng, đặt hạn giữ, thông báo sẵn sàng — trong một giao dịch.
 - Job mỗi 15 phút: hết hạn giữ thì chuyển người kế tiếp hoặc đưa bản sao về Sẵn sàng.
-- Hủy đặt trước khi đang chờ hoặc đang giữ; Thủ thư hủy thay được.
+- Hủy đặt trước khi đang chờ hoặc đang giữ; Nhân viên hủy thay được.
 - Nhận sách tại quầy qua `checkout`.
 - Chỉ một giao dịch thắng khi có tranh chấp giữ chỗ.
 
@@ -58,7 +58,7 @@ Khi đầu sách hết bản khả dụng, người đọc hoặc Thủ thư đ�
 1) Người đọc tìm đầu sách đang hết bản, chọn đặt trước.
 2) Hệ thống kiểm tra điều kiện, thêm vào cuối hàng chờ, hiển thị vị trí.
 3) Khi một bản sao về kho, hệ thống giữ cho người đầu hàng, đặt hạn 48 giờ, thông báo.
-4) Người đọc đến quầy trong hạn; Thủ thư xác nhận và cho mượn.
+4) Người đọc đến quầy trong hạn; Nhân viên xác nhận và cho mượn.
 
 ```
 Đặt trước ──> Đầu sách còn bản khả dụng? ──có──> Từ chối, gợi ý mượn trực tiếp
@@ -94,7 +94,7 @@ Khi đầu sách hết bản khả dụng, người đọc hoặc Thủ thư đ�
 
 | From State | To State | Rule | Action | Result |
 |------------|----------|------|--------|--------|
-| Đang chờ | Đã hủy | Người đọc hoặc Thủ thư hủy | Hủy | Rời hàng chờ |
+| Đang chờ | Đã hủy | Người đọc hoặc Nhân viên hủy | Hủy | Rời hàng chờ |
 | Sẵn sàng nhận | Hoàn tất | Đến nhận trong hạn | Mượn | Phiếu mượn được tạo |
 | Sẵn sàng nhận | Hết hạn | Quá hạn giữ | Job 15 phút | Chuyển người kế tiếp |
 | Sẵn sàng nhận | Đã hủy | Hủy khi đang giữ | Hủy | Giải phóng bản sao |

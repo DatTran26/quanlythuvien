@@ -2,7 +2,7 @@
 type: usecase
 feature: renewal
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/renewal/usecases/renewal-usecase-index.md
   - docs/features/renewal/srs/renewal-spec.md
@@ -17,7 +17,7 @@ links:
 
 ## Primary Actor
 
-Thủ thư (gia hạn thay người đọc tại quầy). Người đọc (gia hạn online trên cổng người đọc — R1B, DEC-SF-02).
+Nhân viên (gia hạn thay người đọc tại quầy). Người đọc (gia hạn online trên cổng người đọc — R1B, DEC-SF-02).
 
 ## Stakeholders & Interests
 
@@ -28,7 +28,7 @@ Thủ thư (gia hạn thay người đọc tại quầy). Người đọc (gia h
 
 ## Trigger
 
-Thủ thư hoặc người đọc yêu cầu gia hạn một phiếu đang mở.
+Nhân viên hoặc người đọc yêu cầu gia hạn một phiếu đang mở.
 
 ## Preconditions
 
@@ -45,7 +45,7 @@ Thủ thư hoặc người đọc yêu cầu gia hạn một phiếu đang mở.
 
 ### Luồng B — Gia hạn (FR-renewal-001, R1B)
 
-1. Thủ thư chọn Loan đang mở trên hồ sơ/quầy (hoặc Người đọc chọn khoản mượn của mình trên cổng người đọc — R1B, DEC-SF-02).
+1. Nhân viên chọn Loan đang mở trên hồ sơ/quầy (hoặc Người đọc chọn khoản mượn của mình trên cổng người đọc — R1B, DEC-SF-02).
 2. Hệ thống kiểm BR-renewal-001 + BR-core-001: Loan `ACTIVE` chưa quá hạn; `renew_count < limit` (PROPOSAL OQ-policy-config-001); không có Reservation đang chờ trên cùng title — **kiểm tra vẫn chạy nhưng queue rỗng cho tới R2, rule đúng ngữ nghĩa** (DEC-P2-05); reader còn đủ điều kiện.
 3. LOAN-T03: `due_at += policy renewal` (baseline đề xuất +7 ngày — PROPOSAL), `renew_count++`, audit; `renewal-result` hiển thị hạn trả mới.
 

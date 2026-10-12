@@ -1,8 +1,8 @@
 // Màn 6 – Miễn / điều chỉnh (fine-adjust, fine-collection-adv). Route: /fines/:id/adjust
 // Spec: docs/features/fine-collection-adv/srs/ (FR-002), CHK-fine-collection-adv-002 (cần step-up),
-// CHK-fine-collection-basic-007 (thủ thư không ghi sự kiện ngoài PAYMENT).
+// CHK-fine-collection-basic-007 (nhân viên không ghi sự kiện ngoài PAYMENT).
 //
-// Mục đích: Quản trị viên miễn toàn bộ hoặc điều chỉnh tăng / giảm, lý do bắt buộc.
+// Mục đích: Thủ thư miễn toàn bộ hoặc điều chỉnh tăng / giảm, lý do bắt buộc.
 // Hoàn tiền / đảo bút toán chờ OQ-fine-collection-adv-001.
 
 import 'package:flutter/material.dart';

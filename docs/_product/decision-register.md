@@ -1,7 +1,7 @@
 ---
 type: decision-register
 status: draft
-updated: 2026-10-09
+updated: 2026-10-12
 links:
   - docs/he_thong_quan_ly_thu_vien.md
   - docs/_shared/project-profile.md
@@ -46,17 +46,19 @@ Các decision trên gắn với `OQ-reservation-001`, `OQ-core-002`, `OQ-fine-co
 
 ## Quyết định tách feature (namespace `DEC-SF-*`)
 
+Ngày 2026-10-12, người dùng yêu cầu trở lại tên nghiệp vụ gốc. Quyết định đổi tên ngày 2026-10-08 (Nhân viên → Thủ thư; Thủ thư → Quản trị viên) đã được thay thế bởi DEC-SF-01 hiện hành bên dưới; các quyết định nghiệp vụ và phạm vi quyền khác giữ nguyên.
+
 > Giải 9 xung đột phân bổ khi tách feature gộp thành 23 feature theo `docs/_product/prd.md` Mục 7. Nguồn: `plans/261008-2006-split-features-per-prd-map/feature-allocation-draft.md` Mục 4.
 
 | ID | Chủ đề | Loại | Owner | Approver | Due gate | Hard-stop? | Status | Evidence / source |
 |----|--------|------|-------|----------|----------|------------|--------|--------------------|
-| DEC-SF-01 | Tên vai trò: Người đọc / Thủ thư (trực quầy) / Quản trị viên (dữ liệu, cấu hình, báo cáo, nhật ký). "Nhân viên" nguồn → Thủ thư; "Thủ thư" nguồn → Quản trị viên; Thủ thư trưởng giữ nguyên là approver nghiệp vụ. PRD, roadmap, priority-crosswalk, project-profile đổi theo | Decision | BA lead | Thủ thư trưởng | Trước khi viết URD feature đầu tiên | Không | Chốt (người dùng 2026-10-08) | Nguồn §2; spec Mục 2 mapping |
+| DEC-SF-01 | Giữ tên vai trò theo nghiệp vụ gốc: Người đọc (`READER`), Nhân viên (`STAFF`, trực quầy), Thủ thư (`LIBRARIAN`, quản trị dữ liệu, cấu hình, báo cáo, nhật ký). Đồng bộ UI, API, seed, mock, test, tài liệu và wireframe. Giữ quyền tương ứng; Thủ thư trưởng vẫn là approver nghiệp vụ. | Decision | BA lead | Người dùng | Đồng bộ toàn hệ thống | Không | Chốt lại (người dùng 2026-10-12), thay quyết định đổi tên ngày 2026-10-08 | Yêu cầu: “đồng bộ lại toàn bộ đi giữ tên trong nghiệp vụ gốc”; nguồn §2 |
 | DEC-SF-02 | `reader-self-service` theo roadmap: R1A/P0 tra cứu, thẻ QR, đang mượn, lịch sử (FR-R02..R05, bổ sung FR SRS còn thiếu); R1B/P1 xem công nợ (FR-R09). Gia hạn online thuộc `renewal`, đặt trước online thuộc `reservation` (R2). Tách theo `FR-reader-self-service-002/003`, `FR-reservation-003`, `FR-expansion-candidates-001` | Decision | BA lead | Product owner | Phase 1 tách feature | Không | Chốt (người dùng 2026-10-08) | `roadmap.md` R1A Scope; `priority-crosswalk.md` FR-R02..R09 |
-| DEC-SF-03 | Tài khoản người đọc chỉ cấp tại quầy (Thủ thư/Quản trị viên tạo + kích hoạt); không tự đăng ký online. Trả lời OQ-03, khác mặc định nguồn; sửa value stream bước 2 của PRD | Decision | BA lead | Thủ thư trưởng | Phase 1 tách feature | Không | Chốt (người dùng 2026-10-08) | Nguồn FR-R01, OQ-03 |
-| DEC-SF-04 | `account-admin`: Quản trị viên CRUD + xóa mềm tài khoản người đọc (FR-L05) và tài khoản Thủ thư (FR-L06) ở R0; Thủ thư sửa/khóa tạm người đọc (FR-S10) ở R1B. Quản lý tài khoản Quản trị viên vẫn mở | Decision | BA lead | Thủ thư trưởng + security/IT | Phase 1 tách feature | Có — OQ-account-admin-001 | Chốt (người dùng 2026-10-08) | Nguồn FR-L05/L06/S10; `priority-crosswalk.md` |
+| DEC-SF-03 | Tài khoản người đọc chỉ cấp tại quầy (Nhân viên/Thủ thư tạo + kích hoạt); không tự đăng ký online. Trả lời OQ-03, khác mặc định nguồn; sửa value stream bước 2 của PRD | Decision | BA lead | Thủ thư trưởng | Phase 1 tách feature | Không | Chốt (người dùng 2026-10-08) | Nguồn FR-R01, OQ-03 |
+| DEC-SF-04 | `account-admin`: Thủ thư CRUD + xóa mềm tài khoản người đọc (FR-L05) và tài khoản Nhân viên (FR-L06) ở R0; Nhân viên sửa/khóa tạm người đọc (FR-S10) ở R1B. Quản lý tài khoản Thủ thư vẫn mở | Decision | BA lead | Thủ thư trưởng + security/IT | Phase 1 tách feature | Có — OQ-account-admin-001 | Chốt (người dùng 2026-10-08) | Nguồn FR-L05/L06/S10; `priority-crosswalk.md` |
 | DEC-SF-05 | Thêm FR backup/restore vào `ops-foundation` (R0): backup hằng ngày, giữ 30 bản; diễn tập restore là bằng chứng GATE-OPS | Decision | BA lead | Thủ thư trưởng + technical owner | SRS `ops-foundation` | Không | Chốt (người dùng 2026-10-08) | Nguồn NFR-07; `priority-crosswalk.md` dòng backup/restore |
 | DEC-SF-06 | `lost-handling` 2 lát: ghi nhận mất tối thiểu P0/R1A (DEC-P2-07); tìm lại sau khi mất P1/R1B (DEC-D3-05) | Decision | BA lead | Thủ thư trưởng + Finance owner | SRS `lost-handling` | Không | Chốt (người dùng 2026-10-08) | DEC-P2-07, DEC-D3-05 |
-| DEC-SF-07 | Tra cứu tách 2: phía Thủ thư/Quản trị viên ở `catalog-admin` (R0, phục vụ quản trị); phía Người đọc (FR-R02) ở `reader-self-service` (R1A) | Decision | BA lead | Product owner | Phase 1 tách feature | Không | Chốt (người dùng 2026-10-08) | FR-catalog-admin-002 / FR-reader-self-service-001; `priority-crosswalk.md` FR-R02 |
+| DEC-SF-07 | Tra cứu tách 2: phía Nhân viên/Thủ thư ở `catalog-admin` (R0, phục vụ quản trị); phía Người đọc (FR-R02) ở `reader-self-service` (R1A) | Decision | BA lead | Product owner | Phase 1 tách feature | Không | Chốt (người dùng 2026-10-08) | FR-catalog-admin-002 / FR-reader-self-service-001; `priority-crosswalk.md` FR-R02 |
 | DEC-SF-08 | Persona trong user story đổi theo bộ tên DEC-SF-01 khi chuyển sang feature | Decision | BA lead | — | Rollout từng feature | Không | Chốt (người dùng 2026-10-08) | story index |
 | DEC-SF-09 | Thêm màn trung tâm thông báo (FR-C04) cho `notification-audit-ui`, R1B theo DEC-P2-01 | Decision | BA lead | Product owner | User-flow `notification-audit-ui` | Không | Chốt (người dùng 2026-10-08) | Nguồn FR-C04; DEC-P2-01 |
 | DEC-SF-10 | Giá trị quy định mượn: tối đa 5 cuốn đang mượn, thời hạn mượn 14 ngày, nợ phạt từ 50.000đ trở lên thì chặn mượn. Trả lời một phần OQ-04 nguồn / `OQ-policy-config-001`; các giá trị gia hạn, phạt, giữ chỗ, SLA vẫn mở | Decision | BA lead | Thủ thư trưởng | Trước khi khóa SRS `checkout` | Không | Chốt (người dùng 2026-10-08) | Nguồn BR-01/03/04; `checkout-scope.md` OQ-1 |

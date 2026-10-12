@@ -17,8 +17,8 @@ void main() {
 
   test('admin đăng nhập bằng email và mật khẩu seed', () async {
     await AuthStore.login('admin@library.local', AuthStore.demoPassword);
-    expect(AppSession.isAdmin, isTrue);
-    expect(AppSession.displayName, 'Quản trị viên');
+    expect(AppSession.isLibrarian, isTrue);
+    expect(AppSession.displayName, 'Thủ thư');
   });
 
   test('người đọc đăng nhập bằng mã thẻ', () async {

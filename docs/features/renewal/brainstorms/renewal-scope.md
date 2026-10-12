@@ -2,7 +2,7 @@
 type: brainstorm
 feature: renewal
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/decision-register.md
@@ -14,7 +14,7 @@ links:
 
 ## 1. Idea Seed
 
-Người đọc tự gia hạn online hoặc nhờ Thủ thư gia hạn tại quầy; hệ thống chỉ gia hạn khi phiếu chưa quá hạn, chưa hết lượt gia hạn và không có người đặt trước đầu sách đó, và luôn nêu rõ lý do khi từ chối.
+Người đọc tự gia hạn online hoặc nhờ Nhân viên gia hạn tại quầy; hệ thống chỉ gia hạn khi phiếu chưa quá hạn, chưa hết lượt gia hạn và không có người đặt trước đầu sách đó, và luôn nêu rõ lý do khi từ chối.
 
 ## 2. Context
 
@@ -27,7 +27,7 @@ Người đọc tự gia hạn online hoặc nhờ Thủ thư gia hạn tại qu
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
 | Người đọc | Phải mang sách ra quầy để gia hạn | Tự gia hạn online |
-| Thủ thư | Không biết vì sao không gia hạn được | Lý do từ chối rõ ràng |
+| Nhân viên | Không biết vì sao không gia hạn được | Lý do từ chối rõ ràng |
 
 ## 4. Capabilities Breakdown
 
@@ -37,7 +37,7 @@ Người đọc tự gia hạn online hoặc nhờ Thủ thư gia hạn tại qu
 
 ### P1 — should have
 
-- Gia hạn tại quầy: Thủ thư chọn phiếu đang mở của người đọc, gia hạn.
+- Gia hạn tại quầy: Nhân viên chọn phiếu đang mở của người đọc, gia hạn.
 - Gia hạn online: người đọc chọn khoản đang mượn của mình, gia hạn.
 - Kiểm tra: phiếu chưa quá hạn, chưa hết lượt gia hạn, đầu sách không có người đặt trước, người đọc đủ điều kiện.
 - Gia hạn thành công: hạn trả cộng thêm theo cấu hình, tăng đếm lượt, ghi audit, thông báo hạn mới.
@@ -52,7 +52,7 @@ Người đọc tự gia hạn online hoặc nhờ Thủ thư gia hạn tại qu
 
 ### 5.1 Gia hạn
 
-1) Người đọc hoặc Thủ thư chọn phiếu đang mở, chọn gia hạn.
+1) Người đọc hoặc Nhân viên chọn phiếu đang mở, chọn gia hạn.
 2) Hệ thống kiểm tra điều kiện.
 3) Đạt: cập nhật hạn trả, tăng đếm lượt, ghi audit, thông báo hạn mới.
 4) Không đạt: hiển thị lý do cụ thể.
@@ -90,7 +90,7 @@ Chọn phiếu ──> Đã quá hạn? ──có──> Từ chối: trả sác
 | From State | To State | Rule | Action | Result |
 |------------|----------|------|--------|--------|
 | Người đọc | Phiếu của chính mình | Gia hạn online | Gia hạn | Thực hiện nếu đạt điều kiện |
-| Thủ thư | Phiếu của người đọc | Gia hạn thay | Gia hạn | Thực hiện nếu đạt điều kiện |
+| Nhân viên | Phiếu của người đọc | Gia hạn thay | Gia hạn | Thực hiện nếu đạt điều kiện |
 | Người đọc | Phiếu của người khác | Không có quyền | Gia hạn | Từ chối |
 
 ### 6.3 State Transitions

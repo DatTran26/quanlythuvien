@@ -2,7 +2,7 @@
 type: usecase-index
 feature: return-handling
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/return-handling/srs/return-handling-spec.md
   - docs/features/return-handling/srs/return-handling-flows.md
@@ -14,7 +14,7 @@ links:
 
 | # | Slug | Level | Status | Actor primary | Covers FR | Screens | Errors (E-*) | OQ ref | Priority | Updated |
 |---|------|-------|--------|---------------|-----------|---------|--------------|--------|----------|---------|
-| 1 | [uc-return](uc-return.md) | sea | draft | Thủ thư | FR-return-handling-001 | return-scan, return-result | E-core-003, 004, 006, 007, 008 | OQ-return-handling-001 | P0 | 2026-10-08 |
+| 1 | [uc-return](uc-return.md) | sea | draft | Nhân viên | FR-return-handling-001 | return-scan, return-result | E-core-003, 004, 006, 007, 008 | OQ-return-handling-001 | P0 | 2026-10-08 |
 
 ## Relationships
 

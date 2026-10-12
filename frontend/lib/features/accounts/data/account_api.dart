@@ -15,7 +15,7 @@
 // - T1: chưa có GET /admin/users?role=&q= để liệt kê, tìm tài khoản.
 // - T2: chưa có API trả số phiếu mở, đặt trước, công nợ của một người đọc.
 // - T3: khóa/mở chưa nhận lý do (spec bắt buộc), chưa ghi audit.
-// - T4: chưa có POST /readers (thủ thư cấp tài khoản ACTIVE tại quầy, DEC-SF-03).
+// - T4: chưa có POST /readers (nhân viên cấp tài khoản ACTIVE tại quầy, DEC-SF-03).
 
 import 'package:frontend/core/data/mock_db.dart';
 import 'package:frontend/features/notification/data/notification_api.dart';
@@ -151,6 +151,8 @@ class MockAccountApi implements AccountApi {
     required int actorId,
   }) async {
     final db = await MockDb.load();
+    final actor = _findUser(db, actorId);
+    final actorRole = actor['role'];
     final cleanReason = reason.trim();
     if (cleanReason.isEmpty) {
       throw const AccountException('REASON_REQUIRED', 'Cần nhập lý do');
@@ -162,11 +164,17 @@ class MockAccountApi implements AccountApi {
       );
     }
     final row = _findUser(db, userId);
-    if (row['role'] == 'ADMIN') {
+    if (actorRole != 'STAFF' && actorRole != 'LIBRARIAN') {
+      throw const AccountException('FORBIDDEN', 'Không có quyền quản lý tài khoản');
+    }
+    if (row['role'] == 'LIBRARIAN') {
       throw const AccountException(
         'ADMIN_PROTECTED',
-        'Không đổi trạng thái quản trị viên khác',
+        'Không đổi trạng thái thủ thư khác',
       );
+    }
+    if (row['role'] == 'STAFF' && actorRole != 'LIBRARIAN') {
+      throw const AccountException('FORBIDDEN', 'Chỉ Thủ thư được quản lý tài khoản Nhân viên');
     }
     final current = row['status'] as String;
     if (current == 'PENDING') {
@@ -204,7 +212,7 @@ class MockAccountApi implements AccountApi {
   @override
   Future<List<AppUser>> staff() async {
     final all = await users();
-    return all.where((u) => u.role == 'LIBRARIAN').toList();
+    return all.where((u) => u.role == 'STAFF').toList();
   }
 
   @override
@@ -215,12 +223,13 @@ class MockAccountApi implements AccountApi {
     required int actorId,
   }) async {
     final db = await MockDb.load();
+    _requireLibrarian(db, actorId);
     final row = _insertUser(
       db,
       displayName: displayName,
       email: email,
       password: password,
-      role: 'LIBRARIAN',
+      role: 'STAFF',
     );
     _audit(
       db,
@@ -241,6 +250,7 @@ class MockAccountApi implements AccountApi {
     required int actorId,
   }) async {
     final db = await MockDb.load();
+    _requireDeskStaff(db, actorId);
     final row = _insertUser(
       db,
       displayName: displayName,
@@ -270,6 +280,7 @@ class MockAccountApi implements AccountApi {
   @override
   Future<AppUser> activate(int userId, {required int actorId}) async {
     final db = await MockDb.load();
+    _requireDeskStaff(db, actorId);
     final row = _findUser(db, userId);
     if (row['role'] != 'READER') {
       throw const AccountException(
@@ -301,8 +312,21 @@ class MockAccountApi implements AccountApi {
         );
   }
 
+  void _requireDeskStaff(MockDb db, int actorId) {
+    final role = _findUser(db, actorId)['role'];
+    if (role != 'STAFF' && role != 'LIBRARIAN') {
+      throw const AccountException('FORBIDDEN', 'Không có quyền quản lý người đọc');
+    }
+  }
+
+  void _requireLibrarian(MockDb db, int actorId) {
+    if (_findUser(db, actorId)['role'] != 'LIBRARIAN') {
+      throw const AccountException('FORBIDDEN', 'Chỉ Thủ thư được quản lý tài khoản Nhân viên');
+    }
+  }
+
   /// Kiểm tra dữ liệu, chặn email trùng rồi thêm tài khoản ACTIVE vào bộ nhớ.
-  /// Dùng chung cho tạo thủ thư (1C) và cấp tài khoản người đọc (2).
+  /// Dùng chung cho tạo nhân viên (1C) và cấp tài khoản người đọc (2).
   Map<String, dynamic> _insertUser(
     MockDb db, {
     required String displayName,

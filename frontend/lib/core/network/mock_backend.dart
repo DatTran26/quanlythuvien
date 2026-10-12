@@ -4,7 +4,7 @@
 // - Giữ trong bộ nhớ: mượn, trả, gia hạn… làm thay đổi dữ liệu cho tới khi tắt app.
 // - Đường dẫn, JSON và mã lỗi bám theo LibraryController / *Service trong apps/api.
 // - Có thêm GET /loans/open?copyCode= (lỗ hổng G3): backend thật CHƯA có endpoint này.
-// - Người đang đăng nhập giả định: thủ thư #2 cho thao tác quầy, người đọc #3 cho các API "/mine".
+// - Người đang đăng nhập giả định: nhân viên #2 cho thao tác quầy, người đọc #3 cho các API "/mine".
 //
 // Tắt bản giả, gọi backend thật: flutter run --dart-define=REAL_API=true
 
@@ -27,7 +27,7 @@ class MockBackend {
     _instance._files.clear();
   }
 
-  static const _staffId = 2; // thủ thư đang trực quầy
+  static const _staffId = 2; // nhân viên đang trực quầy
   static const _readerId = 3; // người đọc cho các API "/mine"
   static const _latency = Duration(milliseconds: 350);
 
@@ -234,10 +234,25 @@ class MockBackend {
     }
     if (body['damaged'] == true) {
       copy['status'] = 'PENDING_REVIEW';
+      final severity = (body['severity'] ?? 'LIGHT') as String;
       _damageReports.add({
         'id': _nextId(_damageReports), 'copyId': copy['id'], 'reporterId': _staffId, 'status': 'PENDING',
-        'severity': body['severity'] ?? 'LIGHT', 'note': body['note'], 'photoPath': null, 'createdAt': _iso(now),
+        'severity': severity, 'note': body['note'], 'photoPath': null, 'createdAt': _iso(now),
       });
+      final percent = switch (severity) {
+        'HEAVY' => 100,
+        'MEDIUM' => 30,
+        _ => 0,
+      };
+      final price = _title(copy['titleId'] as int)['priceVnd'] as int;
+      final damageFee = price * percent ~/ 100;
+      if (damageFee > 0 && !_fines.any((f) => f['loanId'] == id && f['reason'] == 'DAMAGE')) {
+        _fines.add({
+          'id': _nextId(_fines), 'loanId': id, 'readerId': loan['readerId'], 'amountVnd': damageFee,
+          'balanceVnd': damageFee, 'reason': 'DAMAGE', 'status': 'OPEN',
+          'note': 'Hư hỏng $severity', 'createdAt': _iso(now),
+        });
+      }
     } else {
       _releaseCopy(copy);
     }

@@ -1,7 +1,7 @@
 ---
 type: priority-crosswalk
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/he_thong_quan_ly_thu_vien.md
   - docs/_product/product-roadmap-baseline.md
@@ -62,15 +62,15 @@ Mỗi dòng là một PROPOSAL gắn decision ID; chi tiết owner/approver/due 
 | FR-S06 | Gia hạn tại quầy | P2 | P1 | R1B | Như FR-R06 | renewal |
 | FR-S07 | Ghi nhận mất sách | P2 | **P0-PROPOSAL** | R1A | Nâng: Loan phải có đường kết thúc LOST trong MVP — DEC-P2-07 | lost-handling |
 | FR-S08 | Thu phạt | P2 | P0 (tối thiểu) / P1 (nâng cao) | R1A / R1B | Chia scope — DEC-P2-04 | fine-collection-basic (tối thiểu), fine-collection-adv (nâng cao) |
-| FR-S09 | Danh sách quá hạn (thủ thư) | P2 | P1 | R1B | RP-04 (P0) đã phủ nhu cầu đối soát | ops-reports |
-| FR-S10 | Quản lý người đọc giới hạn | P2 | P1 | R1B | CRUD đầy đủ của Quản trị viên đã ở R0 (FR-L05) | account-admin |
+| FR-S09 | Danh sách quá hạn (nhân viên) | P2 | P1 | R1B | RP-04 (P0) đã phủ nhu cầu đối soát | ops-reports |
+| FR-S10 | Quản lý người đọc giới hạn | P2 | P1 | R1B | CRUD đầy đủ của Thủ thư đã ở R0 (FR-L05) | account-admin |
 | FR-S11 | Điểm danh | P3 | P2 | R3 candidate | Phụ thuộc OQ-02 | expansion-candidates |
-| FR-L01 | Kế thừa quyền Thủ thư | P1 | P0 | R0/R1A | Theo phạm vi từng FR-S | — (kế thừa quyền) |
+| FR-L01 | Kế thừa quyền Nhân viên | P1 | P0 | R0/R1A | Theo phạm vi từng FR-S | — (kế thừa quyền) |
 | FR-L02 | CRUD đầu sách | P1 | P0 | R0 | — | catalog-admin |
 | FR-L03 | Nhập bản sao + in QR | P1 | P0 | R0 | — | copy-inventory |
 | FR-L04 | Danh mục | P1 | P0 | R0 | — | catalog-admin |
 | FR-L05 | CRUD tài khoản người đọc | P1 | P0 | R0 | — | account-admin |
-| FR-L06 | CRUD tài khoản thủ thư | P1 | P0 | R0 | — | account-admin |
+| FR-L06 | CRUD tài khoản nhân viên | P1 | P0 | R0 | — | account-admin |
 | FR-L07 | Cấu hình quy định | P1 | P0 | R0 | Giá trị BR chờ GATE-DEC (OQ-04) | policy-config |
 | FR-L08 | Duyệt hư hỏng, thanh lý | P2 | **P0** | R1A | Nâng theo DEC-P2-03 (disposition tối thiểu) | damage-lifecycle |
 | FR-L09 | Báo cáo & xuất file | P2 | P0/P1 | R1A/R2 | Theo từng RP bên dưới | ops-reports, trend-reports |
@@ -82,7 +82,7 @@ Mỗi dòng là một PROPOSAL gắn decision ID; chi tiết owner/approver/due 
 | RP-05 | Phạt | P2 | P1 | R2 | — | trend-reports |
 | RP-06 | Sách được quan tâm | P2 | P1 | R2 | — | trend-reports |
 | RP-07 | Hư hỏng & thanh lý | P2 | P1 | R2 | — | trend-reports |
-| RP-08 | Hoạt động thủ thư | P3 | P2 | R3 candidate | Phụ thuộc điểm danh (OQ-02) | expansion-candidates |
+| RP-08 | Hoạt động nhân viên | P3 | P2 | R3 candidate | Phụ thuộc điểm danh (OQ-02) | expansion-candidates |
 | (mới) | Import Excel + đối soát | P1 ngầm (OQ-15) | P0 | R0 | Audit blocker #6: đưa vào readiness — DEC-P2-09 | data-import |
 | (mới) | Backup/restore + job owner | NFR-07 | P0 | R0/R1B | — | ops-foundation |
 | (mới) | Audit capture | NFR-04 | P0 | R0 | DEC-P2-06 | ops-foundation |

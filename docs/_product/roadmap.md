@@ -3,7 +3,7 @@ type: roadmap
 format: now-next-later
 next_review: sau L1-PRD
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/priority-crosswalk.md
@@ -50,9 +50,9 @@ graph LR
 | Hạng mục | Nội dung |
 |---|---|
 | Scope | CAP-IDENT (đăng nhập, RBAC 3 vai trò, đặt lại mật khẩu, hồ sơ); CAP-ACCT (cấp + kích hoạt tài khoản người đọc tại quầy — DEC-SF-03, CRUD tài khoản); CAP-CATALOG (đầu sách, danh mục, bản sao, sinh/in QR); CAP-IMPORT (dry-run, lỗi theo dòng, đối soát, rollback batch); CAP-POLICY (tham số BR-01..13 + lifecycle engine); CAP-AUDIT capture; CAP-OPS (backup hằng ngày, restore). Nguồn: FR-C01..C03, FR-R01, FR-L02..L07, NFR-02/04/07. |
-| Dependency | GATE-DEC: duyệt privileged identity (OQ-01), giá trị BR (OQ-04), luồng kích hoạt (OQ-03), retention/privacy (OQ-12) tối thiểu để build; file Excel đại diện (external blocker, owner Quản trị viên). |
+| Dependency | GATE-DEC: duyệt privileged identity (OQ-01), giá trị BR (OQ-04), luồng kích hoạt (OQ-03), retention/privacy (OQ-12) tối thiểu để build; file Excel đại diện (external blocker, owner Thủ thư). |
 | Entry criteria | Decision register có owner/approver/due gate cho mọi hard-stop; PRD đã L1-approved. |
-| Exit criteria | GATE-MIG đạt: dry-run 100% lỗi được chỉ rõ; đối soát vật lý khớp (sai lệch ≤ 1% target); tài khoản seed/Quản trị viên hoạt động; audit capture ghi được thao tác; ≥1 lần restore thành công trên dữ liệu import. |
+| Exit criteria | GATE-MIG đạt: dry-run 100% lỗi được chỉ rõ; đối soát vật lý khớp (sai lệch ≤ 1% target); tài khoản seed/Thủ thư hoạt động; audit capture ghi được thao tác; ≥1 lần restore thành công trên dữ liệu import. |
 | KPI | % bản ghi import hợp lệ sau làm sạch; sai lệch kho sau đối soát; thời gian restore (đo lần diễn tập đầu — baseline). |
 | Rủi ro | Excel thật không có/kém chất lượng → entry blocked; policy chốt muộn → dời CAP-POLICY hardening, không dời giao dịch. |
 | Rollback boundary | Toàn bộ R0 là dữ liệu + cấu hình, chưa có giao dịch: rollback = restore backup trước import hoặc re-import batch (import có rollback theo batch). |
@@ -83,18 +83,18 @@ graph LR
 
 | Hạng mục | Nội dung |
 |---|---|
-| Scope | CAP-RENEW + gia hạn online (FR-R06, FR-S06, BR-04); CAP-FINE nâng cao (biên nhận, miễn/điều chỉnh theo thẩm quyền — cần financial-control decision, `PROPOSAL` DEC-P2-04); CAP-NOTIFY đầy đủ (FR-C04 trung tâm thông báo, đánh dấu đã đọc); CAP-AUDIT viewer (FR-L10); FR-S09 danh sách quá hạn cho Thủ thư; FR-S10 quản lý người đọc giới hạn; FR-R09 người đọc xem công nợ; deliverable vận hành: SOP, runbook, owner cho từng tác vụ nền, kênh hỗ trợ pilot. |
+| Scope | CAP-RENEW + gia hạn online (FR-R06, FR-S06, BR-04); CAP-FINE nâng cao (biên nhận, miễn/điều chỉnh theo thẩm quyền — cần financial-control decision, `PROPOSAL` DEC-P2-04); CAP-NOTIFY đầy đủ (FR-C04 trung tâm thông báo, đánh dấu đã đọc); CAP-AUDIT viewer (FR-L10); FR-S09 danh sách quá hạn cho Nhân viên; FR-S10 quản lý người đọc giới hạn; FR-R09 người đọc xem công nợ; deliverable vận hành: SOP, runbook, owner cho từng tác vụ nền, kênh hỗ trợ pilot. |
 | Dependency | R1A exit đạt; GATE-DEC phần financial-control (miễn/điều chỉnh phạt, thẩm quyền) và privacy/retention **phải Resolved + Approved trước GATE-GNG**; BR-04 điều kiện "có người đặt trước" chạy trên hàng chờ rỗng cho tới R2 — không phải dependency đảo (DEC-P2-05). |
 | Entry criteria | R1A ổn định trên dữ liệu thật nội bộ (dogfood tại quầy); không còn lỗi blocker mở. |
-| Exit criteria | GATE-UAT đạt (scenario traceability đầy đủ, không còn blocker); GATE-TRN đạt (SOP + diễn tập Thủ thư/Quản trị viên); GATE-OPS đạt (restore drill thành công, runbook, job owner); GATE-PILOT đạt (người dùng/thiết bị/dữ liệu đại diện, tiêu chí dừng, kênh hỗ trợ); **GATE-GNG ký go-live**. |
-| KPI | Thời gian giao dịch quầy trong UAT vs baseline thủ công; % thủ thư qua diễn tập; số lỗi blocker mở = 0; restore drill đạt. |
+| Exit criteria | GATE-UAT đạt (scenario traceability đầy đủ, không còn blocker); GATE-TRN đạt (SOP + diễn tập Nhân viên/Thủ thư); GATE-OPS đạt (restore drill thành công, runbook, job owner); GATE-PILOT đạt (người dùng/thiết bị/dữ liệu đại diện, tiêu chí dừng, kênh hỗ trợ); **GATE-GNG ký go-live**. |
+| KPI | Thời gian giao dịch quầy trong UAT vs baseline thủ công; % nhân viên qua diễn tập; số lỗi blocker mở = 0; restore drill đạt. |
 | Rủi ro | UAT phát hiện lỗi nghiệp vụ lõi → rollback về R1A cố định, pilot dời; financial-control chưa duyệt → tắt chức năng miễn/điều chỉnh, giữ thu tiền mặt tối thiểu (không block go-live nếu Thủ thư trưởng chấp nhận — quyết định ghi trong GATE-GNG). |
 | Rollback boundary | Trước go-live: rollback là không bật pilot (feature flag). Sau go-live: không rollback dữ liệu; kích hoạt quy trình xử lý thủ công song song và hotfix; tiêu chí dừng pilot định nghĩa tại GATE-PILOT. |
 | Non-goal | Đặt trước, báo cáo xu hướng, mọi candidate R3; cam kết SLA dài hạn. |
 
 ## 6. Release R2 — Đặt trước trọn vòng & báo cáo xu hướng
 
-**Outcome:** người đọc đặt trước khi hết sách; hệ thống giữ chỗ FIFO 48h và phân bổ lại khi hết hạn; Quản trị viên có báo cáo xu hướng để ra quyết định mua/sửa/thanh lý.
+**Outcome:** người đọc đặt trước khi hết sách; hệ thống giữ chỗ FIFO 48h và phân bổ lại khi hết hạn; Thủ thư có báo cáo xu hướng để ra quyết định mua/sửa/thanh lý.
 
 **Feature:** `reservation`, `trend-reports`
 
@@ -117,7 +117,7 @@ graph LR
 
 | Candidate | Evidence hiện có | Điều kiện để lập release |
 |---|---|---|
-| Điểm danh (CAP-ATTEND, FR-S11, RP-08) | OQ-02 chưa rõ là chấm công thủ thư hay ghi nhận người đọc vào | OQ-02 resolved + business case |
+| Điểm danh (CAP-ATTEND, FR-S11, RP-08) | OQ-02 chưa rõ là chấm công nhân viên hay ghi nhận người đọc vào | OQ-02 resolved + business case |
 | Thanh toán online (CAP-PAY, OQ-08) | Mặc định tiền mặt tại quầy | Quyết định cổng thanh toán + financial-control |
 | Nhiều chi nhánh (CAP-BRANCH, OQ-09) | Mặc định một cơ sở | Nhu cầu liên thư viện thực tế |
 | Offline (CAP-OFFLINE, OQ-13) | Mặc định không hỗ trợ | Đánh giá độ phức tạp riêng |
@@ -164,7 +164,7 @@ graph LR
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Đăng nhập & phân quyền | `access-control` | Must (P0) | 5 | 5 | 0.8 | Mọi người dùng; nguồn FR-C01..C03 | M | 10 | — | Có | Identity model mở | Now (R0) |
 | Cấp & kích hoạt tài khoản người đọc tại quầy | `reader-onboarding` | Must (P0) | 4 | 4 | 0.8 | Mọi người đọc mới; FR-R01, DEC-SF-03 | S | 12.8 | access-control | Chờ access-control | PII/retention | Now (R0) |
-| Quản trị tài khoản | `account-admin` | Must (P0) R0; Should (P1) R1B | 3 | 4 | 0.5 | Quản trị viên, Thủ thư; FR-L05/L06/S10 | M | 3 | access-control | Chờ access-control | OQ quản lý tài khoản Quản trị viên | Now (R0) |
+| Quản trị tài khoản | `account-admin` | Must (P0) R0; Should (P1) R1B | 3 | 4 | 0.5 | Thủ thư, Nhân viên; FR-L05/L06/S10 | M | 3 | access-control | Chờ access-control | OQ quản lý tài khoản Thủ thư | Now (R0) |
 | Danh mục & đầu sách | `catalog-admin` | Must (P0) | 5 | 5 | 0.8 | Mọi giao dịch cần đầu sách; FR-L02/L04 | M | 10 | access-control | Chờ access-control | Bộ trường bắt buộc chưa duyệt | Now (R0) |
 | Bản sao & nhãn QR | `copy-inventory` | Must (P0) | 5 | 5 | 0.8 | Mọi giao dịch quét QR; FR-L03 | M | 10 | catalog-admin | Chờ catalog-admin | Trạng thái khởi tạo chờ DEC-D3-01 | Now (R0) |
 | Import Excel & đối soát | `data-import` | Must (P0) | 3 | 5 | 0.5 | Một lần trước pilot nhưng chặn GATE-MIG; DEC-P2-09 | L | 2.5 | catalog-admin, policy-config, file Excel nguồn (external blocker) | Chờ file Excel nguồn | External blocker | Now (R0) |
@@ -178,12 +178,12 @@ graph LR
 | Thu phạt tiền mặt tối thiểu | `fine-collection-basic` | Must (P0-PROPOSAL) | 3 | 4 | 0.5 | Người đọc có nợ phạt; FR-S08, DEC-P2-04 | S | 6 | overdue-fines | Chờ overdue-fines | Policy tài chính mở | Now (R1A) |
 | Tự phục vụ người đọc | `reader-self-service` | Must (P0) R1A; Should (P1) R1B | 5 | 3 | 0.8 | Mọi người đọc; FR-R02..R05, DEC-SF-02 | M | 6 | access-control, checkout | Chờ checkout | Thiết bị cổng chưa chốt | Now (R1A) |
 | Thông báo tối thiểu | `notification-core` | Must (P0) | 4 | 3 | 0.8 | Mọi giao dịch phát sự kiện; DEC-P2-01 | M | 4.8 | access-control | Chờ access-control | Kênh chưa chốt | Now (R1A) |
-| Báo cáo vận hành | `ops-reports` | Must (P0) | 2 | 3 | 0.8 | Quản trị viên hằng ngày; RP-01/02/04 | S | 4.8 | checkout (dữ liệu thật) | Chờ checkout | Priority lệch PRD/SRS cũ | Now (R1A) |
+| Báo cáo vận hành | `ops-reports` | Must (P0) | 2 | 3 | 0.8 | Thủ thư hằng ngày; RP-01/02/04 | S | 4.8 | checkout (dữ liệu thật) | Chờ checkout | Priority lệch PRD/SRS cũ | Now (R1A) |
 | Gia hạn tại quầy & online | `renewal` | Should (P1) | 4 | 3 | 0.8 | Nhiều người đọc gia hạn; FR-R06/S06 | S | 9.6 | checkout; BR gia hạn kiểm hàng chờ rỗng tới R2 (DEC-P2-05) | Chờ checkout | Hàng chờ rỗng tới R2 | Next (R1B) |
 | Thu phạt nâng cao (biên nhận, miễn/điều chỉnh) | `fine-collection-adv` | Should (P1) | 2 | 3 | 0.5 | Ngoại lệ tài chính; FR-S08 nâng cao, DEC-D3-04 | M | 1.5 | fine-collection-basic, financial-control approval | Chờ financial-control | Hard-stop tài chính | Next (R1B) |
 | Trung tâm thông báo & audit viewer | `notification-audit-ui` | Should (P1) | 3 | 2 | 0.8 | Mọi vai trò xem thông báo; FR-C04/L10 | M | 2.4 | notification-core, ops-foundation | Chờ notification-core | Lộ PII trong log | Next (R1B) |
 | Đặt trước trọn vòng | `reservation` | Should (P1) | 4 | 3 | 0.8 | Người đọc khi hết sách; FR-R07/R08 | L | 3.2 | return-handling (điểm quyết định D5), notification-core, policy-config | Chờ pilot ổn định | Bật D5 đổi luồng trả | Later (R2) |
-| Báo cáo xu hướng | `trend-reports` | Should (P1) | 1 | 2 | 0.5 | Quản trị viên định kỳ; RP-03/05/06/07 | M | 0.5 | ops-reports (dữ liệu vận hành tích lũy) | Chờ dữ liệu tích lũy | Dữ liệu chưa đủ dài | Later (R2) |
+| Báo cáo xu hướng | `trend-reports` | Should (P1) | 1 | 2 | 0.5 | Thủ thư định kỳ; RP-03/05/06/07 | M | 0.5 | ops-reports (dữ liệu vận hành tích lũy) | Chờ dữ liệu tích lũy | Dữ liệu chưa đủ dài | Later (R2) |
 | Candidate mở rộng | `expansion-candidates` | Could (P2) | — | — | — | Candidate, không chấm điểm | — | — | Quyết định riêng từng mục | — | Scope creep | Later (R3) |
 
 *Điểm = (Reach × Impact × Confidence) ÷ Effort — xếp hạng tương đối, không phải đo lường tuyệt đối. Thang Reach/Impact 1-5, Confidence 1.0/0.8/0.5, Effort S=1/M=2/L=3. Thứ tự làm vẫn theo phụ thuộc và release; điểm chỉ dùng để so trong cùng giai đoạn. Điểm do BA đề xuất, người dùng duyệt ngày 2026-10-08; Thủ thư trưởng xác nhận cùng L1-Roadmap.*

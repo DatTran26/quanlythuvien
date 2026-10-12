@@ -2,7 +2,7 @@
 type: brainstorm
 feature: checkout
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/product-roadmap-baseline.md
@@ -16,7 +16,7 @@ links:
 
 ## 1. Idea Seed
 
-Thủ thư quét thẻ người đọc và từng cuốn sách tại quầy; hệ thống kiểm tra điều kiện ngay khi quét và ghi toàn bộ phiếu mượn trong một lần xác nhận, không để hai người cùng giữ một bản sao, rồi in biên nhận cho người đọc.
+Nhân viên quét thẻ người đọc và từng cuốn sách tại quầy; hệ thống kiểm tra điều kiện ngay khi quét và ghi toàn bộ phiếu mượn trong một lần xác nhận, không để hai người cùng giữ một bản sao, rồi in biên nhận cho người đọc.
 
 ## 2. Context
 
@@ -29,7 +29,7 @@ Thủ thư quét thẻ người đọc và từng cuốn sách tại quầy; h�
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Thủ thư (trực quầy) | Tra tay từng cuốn, dễ ghi nhầm, không biết người đọc đang nợ hay quá hạn | Quét là biết được mượn hay không, xác nhận một lần cho cả giỏ |
+| Nhân viên (trực quầy) | Tra tay từng cuốn, dễ ghi nhầm, không biết người đọc đang nợ hay quá hạn | Quét là biết được mượn hay không, xác nhận một lần cho cả giỏ |
 | Người đọc | Chờ lâu, bị ghi mượn nhầm hoặc trùng phiếu | Mượn nhanh, có biên nhận ghi rõ hạn trả |
 | Thủ thư trưởng | Không chắc mỗi bản sao chỉ một người giữ | 0 phiếu mở trùng một bản sao, mọi giao dịch có dấu vết |
 
@@ -44,7 +44,7 @@ Thủ thư quét thẻ người đọc và từng cuốn sách tại quầy; h�
 - Ghi cả giỏ trong một lần: hoặc tất cả cuốn được ghi mượn, hoặc không cuốn nào.
 - Chống ghi trùng khi bấm xác nhận lặp hoặc mất mạng sau khi xác nhận.
 - Hai quầy cùng xử lý một bản sao: chỉ thao tác hợp lệ đầu tiên thành công, quầy sau thấy trạng thái mới.
-- In biên nhận ngay sau khi mượn, gộp các cuốn theo thời điểm tạo. Biên nhận gồm: tên thư viện, mã phiếu, ngày giờ mượn; tên và mã thẻ người đọc; danh sách cuốn (tên sách, mã bản sao) kèm hạn trả từng cuốn; Thủ thư thực hiện.
+- In biên nhận ngay sau khi mượn, gộp các cuốn theo thời điểm tạo. Biên nhận gồm: tên thư viện, mã phiếu, ngày giờ mượn; tên và mã thẻ người đọc; danh sách cuốn (tên sách, mã bản sao) kèm hạn trả từng cuốn; Nhân viên thực hiện.
 - Ghi dấu vết (audit) và phát sự kiện thông báo hạn trả trong cùng giao dịch.
 
 ### P1 — should have
@@ -59,22 +59,22 @@ Thủ thư quét thẻ người đọc và từng cuốn sách tại quầy; h�
 
 ### 5.1 Mượn sách tại quầy
 
-1) Thủ thư mở quầy lưu thông, chọn bắt đầu mượn.
-2) Thủ thư quét QR thẻ người đọc; hệ thống tìm người đọc, nạp tình trạng tài khoản, sách đang mượn và công nợ.
+1) Nhân viên mở quầy lưu thông, chọn bắt đầu mượn.
+2) Nhân viên quét QR thẻ người đọc; hệ thống tìm người đọc, nạp tình trạng tài khoản, sách đang mượn và công nợ.
 3) Hệ thống kiểm tra điều kiện mượn (D1). Không đủ thì dừng và nêu lý do cụ thể.
-4) Thủ thư quét từng cuốn; hệ thống kiểm tra từng cuốn ngay khi thêm (D2). Cuốn lỗi không vào giỏ, các cuốn hợp lệ giữ nguyên.
+4) Nhân viên quét từng cuốn; hệ thống kiểm tra từng cuốn ngay khi thêm (D2). Cuốn lỗi không vào giỏ, các cuốn hợp lệ giữ nguyên.
 5) Hệ thống hiển thị màn rà soát: danh sách cuốn và hạn trả dự kiến.
-6) Thủ thư xác nhận; hệ thống ghi toàn bộ giỏ trong một giao dịch: tạo phiếu mượn cho từng cuốn, chuyển bản sao sang Đang mượn, ghi audit, phát sự kiện thông báo.
+6) Nhân viên xác nhận; hệ thống ghi toàn bộ giỏ trong một giao dịch: tạo phiếu mượn cho từng cuốn, chuyển bản sao sang Đang mượn, ghi audit, phát sự kiện thông báo.
 7) Hệ thống hiển thị "Đã tạo phiếu mượn…" và in biên nhận.
 
 ```
-Thủ thư quét thẻ ──> Tìm người đọc ──không thấy──> "Không tìm thấy người đọc với mã này" → quét lại / nhập tay
+Nhân viên quét thẻ ──> Tìm người đọc ──không thấy──> "Không tìm thấy người đọc với mã này" → quét lại / nhập tay
                           │ thấy
                           ▼
               D1: Đủ điều kiện mượn? ──không──> Dừng, nêu lý do (khóa / quá hạn / nợ / hạn mức)
                           │ có
                           ▼
-     Thủ thư quét từng cuốn ◄─────────────────────────────┐
+     Nhân viên quét từng cuốn ◄─────────────────────────────┐
                           │                                │
               D2: Cuốn hợp lệ? ──không──> Không thêm, giữ giỏ ┘
                           │ có
@@ -82,7 +82,7 @@ Thủ thư quét thẻ ──> Tìm người đọc ──không thấy──> "
                 Thêm vào giỏ + hạn trả dự kiến
                           │ (quét xong)
                           ▼
-                Rà soát giỏ → Thủ thư xác nhận
+                Rà soát giỏ → Nhân viên xác nhận
                           │
               D3: Lần xác nhận này đã ghi trước đó? ──có──> Trả kết quả đã ghi, không tạo phiếu thứ hai
                           │ chưa
@@ -154,9 +154,9 @@ Phiếu mượn: (chưa có) ──xác nhận mượn──> Đang mở
 - Quét trùng một cuốn trong cùng giỏ: báo trùng, bỏ qua lần quét sau.
 - Mã thẻ hoặc mã sách không tồn tại: báo không tìm thấy, cho quét lại, nhập tay hoặc tra cứu thủ công.
 - Xác nhận khi giỏ rỗng hoặc phiếu đã xong: nút xác nhận bị vô hiệu, giải thích trạng thái hiện tại.
-- Một cuốn lỗi khi quét: cuốn lỗi bị loại, các cuốn hợp lệ vẫn xác nhận được khi Thủ thư đồng ý. Đây là loại khỏi giỏ trước khi xác nhận, không phải ghi một phần.
+- Một cuốn lỗi khi quét: cuốn lỗi bị loại, các cuốn hợp lệ vẫn xác nhận được khi Nhân viên đồng ý. Đây là loại khỏi giỏ trước khi xác nhận, không phải ghi một phần.
 - Cấu hình hạn mức/hạn mượn đổi giữa chừng: chỉ áp dụng cho giao dịch bắt đầu sau thời điểm hiệu lực; phiếu đã tạo giữ quy định tại thời điểm mượn.
-- Không cho mượn ngoại lệ khi người đọc không đủ điều kiện, kể cả khi Quản trị viên có mặt.
+- Không cho mượn ngoại lệ khi người đọc không đủ điều kiện, kể cả khi Thủ thư có mặt.
 
 ## 7. Validation, Limits & Wording
 
@@ -225,7 +225,7 @@ Lý do theo trạng thái bản sao:
 
 | Rủi ro | Khả năng | Hậu quả nghiệp vụ | Cách phòng |
 |--------|----------|-------------------|-----------|
-| Process: Thủ thư chưa quen việc loại cuốn lỗi và đọc lý do chặn | thường | Giao dịch chậm, người đọc xếp hàng | Diễn tập tại quầy trước pilot (GATE-TRN) |
+| Process: Nhân viên chưa quen việc loại cuốn lỗi và đọc lý do chặn | thường | Giao dịch chậm, người đọc xếp hàng | Diễn tập tại quầy trước pilot (GATE-TRN) |
 | Data: Nhãn QR mờ hoặc dán sai cuốn sau import | thỉnh thoảng | Ghi mượn nhầm cuốn, kho lệch | Đối soát vật lý ở GATE-MIG; luôn cho nhập mã tay |
 | Timeline: Giá trị đã chốt bị đổi sát ngày pilot | hiếm | Phải đổi cấu hình và wording, đào tạo lại quầy | Mọi thay đổi đi qua change request |
 | Adoption: Người đọc không chấp nhận bị chặn cứng, không có ngoại lệ | thỉnh thoảng | Phàn nàn tại quầy | Lý do chặn rõ ràng kèm cách khắc phục ngay tại quầy |
@@ -239,7 +239,7 @@ Lý do theo trạng thái bản sao:
 ## 11. Open Questions
 
 - [x] OQ-1: Giá trị chính thức của hạn mức số cuốn, thời hạn mượn và ngưỡng nợ chặn mượn? → Resolved: 5 cuốn / 14 ngày / 50.000đ (DEC-SF-10, 2026-10-08)
-- [x] OQ-2: Biên nhận mượn in gồm những thông tin gì? → Resolved: tên thư viện, mã phiếu, ngày giờ mượn, tên và mã thẻ người đọc, danh sách cuốn kèm mã bản sao và hạn trả, Thủ thư thực hiện (2026-10-08)
+- [x] OQ-2: Biên nhận mượn in gồm những thông tin gì? → Resolved: tên thư viện, mã phiếu, ngày giờ mượn, tên và mã thẻ người đọc, danh sách cuốn kèm mã bản sao và hạn trả, Nhân viên thực hiện (2026-10-08)
 - [x] OQ-3: Wording khi bản sao không cho mượn được theo từng trạng thái, khi xác nhận lặp và khi quét trùng? → Resolved: xem Mục 7.3 (2026-10-08)
 - [x] OQ-4: Ghi chú non-goal R1A "không biên nhận in/xuất" trong roadmap có cần sửa để ghi rõ chỉ áp cho biên nhận thu phạt? → Resolved: sửa roadmap R1A non-goal và PRD 7.9 (2026-10-08)
 - [ ] OQ-5: Khổ giấy và loại máy in biên nhận tại quầy? (hold — đội vận hành)

@@ -2,7 +2,7 @@
 type: usecase
 feature: account-admin
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/account-admin/usecases/account-admin-usecase-index.md
   - docs/features/account-admin/srs/account-admin-spec.md
@@ -11,11 +11,11 @@ links:
 # Use Case: Quản trị tài khoản (uc-account-admin)
 
 > Scope: account-admin · Level: sea
-> Screens: `reader-list`, `reader-detail`, màn tài khoản Thủ thư · Release: R0 (FR-account-admin-001, 003), R1B (FR-account-admin-002)
+> Screens: `reader-list`, `reader-detail`, màn tài khoản Nhân viên · Release: R0 (FR-account-admin-001, 003), R1B (FR-account-admin-002)
 
 ## Primary Actor
 
-Quản trị viên (sửa, khóa, vô hiệu tài khoản người đọc; tạo, khóa, đặt lại mật khẩu, vô hiệu tài khoản Thủ thư). Thủ thư (R1B: sửa thông tin, khóa tạm và mở lại người đọc; không được vô hiệu).
+Thủ thư (sửa, khóa, vô hiệu tài khoản người đọc; tạo, khóa, đặt lại mật khẩu, vô hiệu tài khoản Nhân viên). Nhân viên (R1B: sửa thông tin, khóa tạm và mở lại người đọc; không được vô hiệu).
 
 ## Stakeholders & Interests
 
@@ -27,7 +27,7 @@ Quản trị viên (sửa, khóa, vô hiệu tài khoản người đọc; tạo
 
 ## Trigger
 
-Quản trị viên hoặc Thủ thư cần tra cứu, sửa, khóa, mở hoặc vô hiệu một tài khoản.
+Thủ thư hoặc Nhân viên cần tra cứu, sửa, khóa, mở hoặc vô hiệu một tài khoản.
 
 ## Preconditions
 
@@ -43,7 +43,7 @@ Quản trị viên hoặc Thủ thư cần tra cứu, sửa, khóa, mở hoặc 
 
 1. Người thao tác mở `reader-list`, tìm tài khoản; dữ liệu cá nhân hiển thị theo quyền.
 2. Mở `reader-detail`: hồ sơ, khoản đang mượn, đặt trước, công nợ.
-3. Chọn thao tác: sửa, khóa tạm, mở lại, hoặc vô hiệu (Quản trị viên).
+3. Chọn thao tác: sửa, khóa tạm, mở lại, hoặc vô hiệu (Thủ thư).
 4. Nhập lý do khi khóa, mở, vô hiệu.
 5. Hệ thống kiểm quyền, kiểm trạng thái hợp lệ, kiểm không có ai sửa trước, lưu và ghi audit.
 
@@ -51,7 +51,7 @@ Quản trị viên hoặc Thủ thư cần tra cứu, sửa, khóa, mở hoặc 
 
 **3a. Thao tác không hợp lệ với trạng thái hiện tại (E-core-008):** khóa tài khoản đã khóa, mở tài khoản đang hoạt động → giải thích, chỉ hiện thao tác hợp lệ.
 
-**3b. Thủ thư chọn vô hiệu hoặc thao tác trên tài khoản Thủ thư khác (E-core-002):** từ chối, ghi audit.
+**3b. Nhân viên chọn vô hiệu hoặc thao tác trên tài khoản Nhân viên khác (E-core-002):** từ chối, ghi audit.
 
 **4a. Thiếu lý do (E-core-001):** báo lỗi, giữ dữ liệu đã nhập.
 
@@ -63,7 +63,7 @@ Quản trị viên hoặc Thủ thư cần tra cứu, sửa, khóa, mở hoặc 
 
 **5d. Audit ghi lỗi (E-core-007):** hủy thao tác, cảnh báo vận hành.
 
-**Nhánh T — Tài khoản Thủ thư (Quản trị viên):** tạo, khóa, đặt lại mật khẩu, vô hiệu; cùng quy tắc lý do, audit, không xóa cứng. Quản lý tài khoản Quản trị viên còn mở (OQ-account-admin-001).
+**Nhánh T — Tài khoản Nhân viên (Thủ thư):** tạo, khóa, đặt lại mật khẩu, vô hiệu; cùng quy tắc lý do, audit, không xóa cứng. Quản lý tài khoản Thủ thư còn mở (OQ-account-admin-001).
 
 ## Related Requirements
 

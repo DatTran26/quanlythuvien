@@ -12,11 +12,11 @@ class DashboardScreen extends StatelessWidget {
   static const _entries = <_Entry>[
     _Entry(Icons.countertops_outlined, 'Quầy lưu thông', 'Mượn, trả, gia hạn tại quầy', AppRoutes.circulationDesk, staff: true),
     _Entry(Icons.menu_book_outlined, 'Danh mục đầu sách', 'Tìm, sửa và ngưng đầu sách', AppRoutes.catalogSearch, staff: true),
-    _Entry(Icons.upload_file_outlined, 'Nhập dữ liệu', 'Chạy thử file và đối soát dòng lỗi', AppRoutes.importUpload, admin: true),
-    _Entry(Icons.tune, 'Quy định mượn', 'Hạn mượn, phạt, giữ chỗ', AppRoutes.adminConfig, admin: true),
-    _Entry(Icons.backup_outlined, 'Sao lưu', 'Lịch sử backup hằng ngày', AppRoutes.backupRuns, admin: true),
-    _Entry(Icons.fact_check_outlined, 'Nhật ký', 'Ai đã làm thao tác nhạy cảm', AppRoutes.auditLog, admin: true),
-    _Entry(Icons.mark_email_unread_outlined, 'Trạng thái gửi', 'Thư đã gửi, đang thử lại, lỗi hẳn', AppRoutes.notificationStatus, admin: true),
+    _Entry(Icons.upload_file_outlined, 'Nhập dữ liệu', 'Chạy thử file và đối soát dòng lỗi', AppRoutes.importUpload, librarian: true),
+    _Entry(Icons.tune, 'Quy định mượn', 'Hạn mượn, phạt, giữ chỗ', AppRoutes.adminConfig, librarian: true),
+    _Entry(Icons.backup_outlined, 'Sao lưu', 'Lịch sử backup hằng ngày', AppRoutes.backupRuns, librarian: true),
+    _Entry(Icons.fact_check_outlined, 'Nhật ký', 'Ai đã làm thao tác nhạy cảm', AppRoutes.auditLog, librarian: true),
+    _Entry(Icons.mark_email_unread_outlined, 'Trạng thái gửi', 'Thư đã gửi, đang thử lại, lỗi hẳn', AppRoutes.notificationStatus, librarian: true),
     _Entry(Icons.people_outline, 'Người đọc', 'Hồ sơ, khóa và kích hoạt thẻ', AppRoutes.readerList, staff: true),
     _Entry(Icons.payments_outlined, 'Thu phạt', 'Xem công nợ và thu tiền mặt', AppRoutes.finePayment, staff: true),
     _Entry(Icons.assessment_outlined, 'Báo cáo', 'Kho, quá hạn và xu hướng', AppRoutes.reportDashboard, staff: true),
@@ -27,7 +27,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final visible = _entries.where((e) {
-      if (AppSession.isAdmin) return e.admin || e.staff;
+      if (AppSession.isLibrarian) return e.librarian || e.staff;
       if (AppSession.isStaff) return e.staff;
       return e.reader;
     });
@@ -75,13 +75,13 @@ class DashboardScreen extends StatelessWidget {
 }
 
 class _Entry {
-  const _Entry(this.icon, this.title, this.subtitle, this.route, {this.admin = false, this.staff = false, this.reader = false});
+  const _Entry(this.icon, this.title, this.subtitle, this.route, {this.librarian = false, this.staff = false, this.reader = false});
 
   final IconData icon;
   final String title;
   final String subtitle;
   final String route;
-  final bool admin;
+  final bool librarian;
   final bool staff;
   final bool reader;
 }

@@ -2,7 +2,7 @@
 // Bài: Hoang/07-reservation/02-reservation-form.md
 //
 // Xác nhận đặt trước một đầu sách. Thành công -> WAITING, xếp cuối hàng chờ FIFO -> sang hàng đợi.
-// G8: API luôn đặt cho người đang đăng nhập; thủ thư đặt thay cần backend thêm readerId.
+// G8: API luôn đặt cho người đang đăng nhập; nhân viên đặt thay cần backend thêm readerId.
 
 import 'package:flutter/material.dart';
 

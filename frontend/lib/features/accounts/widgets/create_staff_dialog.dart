@@ -1,4 +1,4 @@
-// Hộp thoại tạo tài khoản Thủ thư: họ tên, email, mật khẩu tạm.
+// Hộp thoại tạo tài khoản Nhân viên: họ tên, email, mật khẩu tạm.
 // Spec: account-admin staff-accounts (E-core-001 thiếu trường, E-core-003 email trùng).
 // Lỗi từ API (email trùng) hiện ngay dưới ô email, hộp thoại không đóng.
 
@@ -67,7 +67,7 @@ class _CreateStaffDialogState extends State<_CreateStaffDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Tạo tài khoản Thủ thư'),
+      title: const Text('Tạo tài khoản Nhân viên'),
       content: SizedBox(
         width: 360,
         child: Form(

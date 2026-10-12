@@ -2,7 +2,7 @@
 type: brainstorm
 feature: notification-audit-ui
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/decision-register.md
@@ -14,7 +14,7 @@ links:
 
 ## 1. Idea Seed
 
-Mọi vai trò có trung tâm thông báo để xem lại và đánh dấu đã đọc; Quản trị viên có màn tra cứu nhật ký audit và dòng thời gian lịch sử của bản sao, phiếu mượn, đặt trước, khoản phạt, báo cáo hư hỏng.
+Mọi vai trò có trung tâm thông báo để xem lại và đánh dấu đã đọc; Thủ thư có màn tra cứu nhật ký audit và dòng thời gian lịch sử của bản sao, phiếu mượn, đặt trước, khoản phạt, báo cáo hư hỏng.
 
 ## 2. Context
 
@@ -26,7 +26,7 @@ Mọi vai trò có trung tâm thông báo để xem lại và đánh dấu đã 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
 | Mọi vai trò | Lỡ thông báo, không xem lại được | Danh sách thông báo, đã đọc / chưa đọc |
-| Quản trị viên | Không tra được ai làm gì khi có tranh chấp | Lọc audit theo người, đối tượng, thời gian |
+| Thủ thư | Không tra được ai làm gì khi có tranh chấp | Lọc audit theo người, đối tượng, thời gian |
 
 ## 4. Capabilities Breakdown
 
@@ -54,7 +54,7 @@ Mọi vai trò có trung tâm thông báo để xem lại và đánh dấu đã 
 
 ### 5.2 Tra cứu audit và lịch sử
 
-1) Quản trị viên mở nhật ký, lọc.
+1) Thủ thư mở nhật ký, lọc.
 2) Mở một đối tượng để xem dòng thời gian lịch sử.
 
 ## 6. System Behavior Deep Dive
@@ -71,9 +71,9 @@ Mọi vai trò có trung tâm thông báo để xem lại và đánh dấu đã 
 
 | From State | To State | Rule | Action | Result |
 |------------|----------|------|--------|--------|
-| Người đọc, Thủ thư | Thông báo của chính mình | Có quyền | Xem | Hiện |
-| Quản trị viên | Nhật ký audit, lịch sử | Có quyền | Xem | Hiện, che trường theo quyền |
-| Người đọc, Thủ thư | Nhật ký audit | Không có quyền | Xem | Từ chối |
+| Người đọc, Nhân viên | Thông báo của chính mình | Có quyền | Xem | Hiện |
+| Thủ thư | Nhật ký audit, lịch sử | Có quyền | Xem | Hiện, che trường theo quyền |
+| Người đọc, Nhân viên | Nhật ký audit | Không có quyền | Xem | Từ chối |
 
 ### 6.3 State Transitions
 
@@ -125,7 +125,7 @@ Không áp dụng — chủ yếu đọc.
 
 ## 8. Assumptions
 
-- Chỉ Quản trị viên xem nhật ký audit (nguồn: chỉ vai trò quản trị xem nhật ký).
+- Chỉ Thủ thư xem nhật ký audit (nguồn: chỉ vai trò quản trị xem nhật ký).
 
 ## 9. Risks
 

@@ -185,7 +185,7 @@
     <div class="wf-step-badge">1</div><div class="wf-device-tag">mobile · 375px</div>
     <div class="wf-screen-frame"><div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">Yêu cầu gia hạn</span></div>
       <div class="wf-screen-content"><div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div><div class="wf-screen-title">Chọn khoản đang mượn</div>
-        <p class="info-label">Thủ thư tại quầy hoặc Người đọc trên cổng.</p><div class="wf-card"><div class="wf-card-body"><div class="wf-card-title">Giải tích 1</div><div class="wf-card-sub">Hạn trả hiện tại · không quá hạn</div></div></div><button class="btn-primary" type="button">Gửi yêu cầu gia hạn</button><p class="hint-text">Hàng chờ đặt trước chặn gia hạn tới R2 — DEC-P2-05.</p>
+        <p class="info-label">Nhân viên tại quầy hoặc Người đọc trên cổng.</p><div class="wf-card"><div class="wf-card-body"><div class="wf-card-title">Giải tích 1</div><div class="wf-card-sub">Hạn trả hiện tại · không quá hạn</div></div></div><button class="btn-primary" type="button">Gửi yêu cầu gia hạn</button><p class="hint-text">Hàng chờ đặt trước chặn gia hạn tới R2 — DEC-P2-05.</p>
       </div></div><div class="wf-screen-label">renewal-request</div>
   </div>
 <div class="wf-screen" id="s2">
@@ -208,7 +208,7 @@
           </div>
           <p class="hint-text">Kiểm trước khi gia hạn (BR-renewal-001 + BR-core-001): Loan ACTIVE chưa quá hạn; renew_count &lt; limit (đề xuất 1 — OQ-policy-config-001); không có Reservation chờ cùng title (rule đúng ngữ nghĩa nhưng queue rỗng tới R2 — DEC-P2-05); reader đủ điều kiện.</p>
           <div class="divider"><span>Trạng thái: thành công</span></div>
-          <div class="banner banner-info"><span><b>Gia hạn thành công</b> — LOAN-T03: due_at += policy renewal (baseline đề xuất +7 ngày → hạn mới 22/10 — PROPOSAL OQ-policy-config-001) · renew_count 1 · audit. Thủ thư thay mặt tại quầy (R1B); người đọc tự phục vụ phụ thuộc cổng FR-reader-self-service-002 (R2).</span></div>
+          <div class="banner banner-info"><span><b>Gia hạn thành công</b> — LOAN-T03: due_at += policy renewal (baseline đề xuất +7 ngày → hạn mới 22/10 — PROPOSAL OQ-policy-config-001) · renew_count 1 · audit. Nhân viên thay mặt tại quầy (R1B); người đọc tự phục vụ phụ thuộc cổng FR-reader-self-service-002 (R2).</span></div>
           <div class="divider"><span>Trạng thái: bị chặn</span></div>
           <div class="banner banner-warn"><span><b>E-core-008</b> — Loan đã OVERDUE: không gia hạn được (BR-renewal-001; OVERDUE→ACTIVE không qua renew) → hướng dẫn <a class="wf-link" href="#s1">trả sách</a> + <a class="wf-link" href="../../fine-collection-basic/html-wireframe/fine-collection-basic-flow.html">thanh toán phạt</a>.</span></div>
           <div class="banner banner-warn"><span><b>E-core-006</b> — Reader không đủ điều kiện: bị khóa / không active (BR-core-001 áp cho renewal) → <a class="wf-link" href="../../account-admin/html-wireframe/account-admin-flow.html">mở khóa (uc-reader-admin)</a> hoặc giải quyết nghĩa vụ, sau đó renew lại nếu còn hạn.</span></div>

@@ -2,7 +2,7 @@
 type: brainstorm
 feature: copy-inventory
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_shared/core-spec.md
@@ -14,7 +14,7 @@ links:
 
 ## 1. Idea Seed
 
-Quản trị viên đăng ký từng bản sao vật lý của một đầu sách, sinh mã QR duy nhất hàng loạt, xuất file in nhãn để dán lên sách; QR chỉ dùng để tìm bản ghi, không phải bằng chứng ủy quyền.
+Thủ thư đăng ký từng bản sao vật lý của một đầu sách, sinh mã QR duy nhất hàng loạt, xuất file in nhãn để dán lên sách; QR chỉ dùng để tìm bản ghi, không phải bằng chứng ủy quyền.
 
 ## 2. Context
 
@@ -26,8 +26,8 @@ Quản trị viên đăng ký từng bản sao vật lý của một đầu sác
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Quản trị viên | Gõ mã từng cuốn, dễ trùng | Sinh QR hàng loạt và in nhãn |
-| Thủ thư | Nhãn mờ hoặc sai cuốn | Mã duy nhất, nhập tay được khi QR mờ |
+| Thủ thư | Gõ mã từng cuốn, dễ trùng | Sinh QR hàng loạt và in nhãn |
+| Nhân viên | Nhãn mờ hoặc sai cuốn | Mã duy nhất, nhập tay được khi QR mờ |
 
 ## 4. Capabilities Breakdown
 
@@ -54,10 +54,10 @@ Quản trị viên đăng ký từng bản sao vật lý của một đầu sác
 
 ### 5.1 Nhập bản sao và in nhãn
 
-1) Quản trị viên mở chi tiết đầu sách, chọn thêm bản sao.
+1) Thủ thư mở chi tiết đầu sách, chọn thêm bản sao.
 2) Nhập số bản, vị trí kệ, tình trạng ban đầu.
 3) Hệ thống tạo bản sao ở trạng thái Sẵn sàng, sinh QR duy nhất cho từng bản, ghi audit.
-4) Quản trị viên xuất file in nhãn; Thủ thư dán nhãn lên sách.
+4) Thủ thư xuất file in nhãn; Nhân viên dán nhãn lên sách.
 
 ```
 Chọn đầu sách ──> Nhập số bản + vị trí + tình trạng ──> Hợp lệ? ──không──> Báo lỗi

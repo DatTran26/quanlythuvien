@@ -8,7 +8,7 @@ device_width: 375
 flow_hash: aa21ec00
 flows: 1
 screens: 1
-updated: 2026-10-09
+updated: 2026-10-12
 entry: reader-onboarding-wireframe.html
 links:
   - docs/features/reader-onboarding/srs/reader-onboarding-userflow.md
@@ -31,7 +31,7 @@ Mở [`reader-onboarding-wireframe.html`](reader-onboarding-wireframe.html) đ�
 
 - OQ-reader-onboarding-001: Bộ thông tin liên hệ bắt buộc của người đọc?
 - OQ-reader-onboarding-002: Thẻ có thời hạn và có thu phí không (OQ-05 nguồn)?
-- OQ-reader-onboarding-003: Thủ thư được cấp tài khoản thay vì chỉ vai trò quản trị như ma trận nguồn — Thủ thư trưởng xác nhận theo DEC-SF-03?
+- OQ-reader-onboarding-003: Nhân viên được cấp tài khoản thay vì chỉ vai trò quản trị như ma trận nguồn — Thủ thư trưởng xác nhận theo DEC-SF-03?
 
 ## Sources
 

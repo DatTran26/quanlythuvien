@@ -2,7 +2,7 @@
 type: usecase
 feature: fine-collection-basic
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/fine-collection-basic/usecases/fine-collection-basic-usecase-index.md
   - docs/features/fine-collection-basic/srs/fine-collection-basic-spec.md
@@ -16,7 +16,7 @@ links:
 
 ## Primary Actor
 
-Thủ thư (quầy) (thu tiền mặt tại quầy — `PAYMENT`; tương đương `Nhân viên` nguồn — "Ghi nhận mất sách, thu phạt" ✓ cả hai vai trò nguồn) · Quản trị viên (`WAIVER`/`ADJUSTMENT`/`REVERSAL`/`REFUND`/`RECONCILIATION` — R1B, cần finance approver theo DEC-D3-04 — PROPOSAL, OQ-fine-collection-adv-001/OQ-fine-collection-adv-002) · Người đọc (xem công nợ — SRC-FR-R09/R1B; tự thanh toán chỉ khi được phép) · Hệ thống (assessment tự động khi đóng Loan, reconcile job)
+Nhân viên (quầy) (thu tiền mặt tại quầy — `PAYMENT`; tương đương `Nhân viên` nguồn — "Ghi nhận mất sách, thu phạt" ✓ cả hai vai trò nguồn) · Thủ thư (`WAIVER`/`ADJUSTMENT`/`REVERSAL`/`REFUND`/`RECONCILIATION` — R1B, cần finance approver theo DEC-D3-04 — PROPOSAL, OQ-fine-collection-adv-001/OQ-fine-collection-adv-002) · Người đọc (xem công nợ — SRC-FR-R09/R1B; tự thanh toán chỉ khi được phép) · Hệ thống (assessment tự động khi đóng Loan, reconcile job)
 
 ## Stakeholders & Interests
 
@@ -29,13 +29,13 @@ Thủ thư (quầy) (thu tiền mặt tại quầy — `PAYMENT`; tương đươ
 
 ## Trigger
 
-- Thu phạt: Thủ thư (quầy) mở `fine-payment` để ghi nhận tiền mặt cho một `Fine` đang `UNPAID`.
-- Assessment: hệ thống tự động khi đóng Loan quá hạn/hư hỏng/mất (SRC-BR05/06/07) hoặc Quản trị viên tạo thủ công (PROPOSAL).
-- Điều chỉnh: Quản trị viên có thẩm quyền tạo `WAIVER`/`ADJUSTMENT`/`REVERSAL`/`REFUND` (R1B).
+- Thu phạt: Nhân viên (quầy) mở `fine-payment` để ghi nhận tiền mặt cho một `Fine` đang `UNPAID`.
+- Assessment: hệ thống tự động khi đóng Loan quá hạn/hư hỏng/mất (SRC-BR05/06/07) hoặc Thủ thư tạo thủ công (PROPOSAL).
+- Điều chỉnh: Thủ thư có thẩm quyền tạo `WAIVER`/`ADJUSTMENT`/`REVERSAL`/`REFUND` (R1B).
 
 ## Preconditions
 
-- Actor đã xác thực (include uc-access-control); quyền theo event type — Thủ thư (quầy) **chỉ** `PAYMENT`; Quản trị viên mới được `WAIVER`/`ADJUSTMENT`/`REVERSAL`/`REFUND`/`RECONCILIATION` (+ finance approver theo DEC-D3-04 — PROPOSAL, OQ-fine-collection-adv-001/OQ-fine-collection-adv-002).
+- Actor đã xác thực (include uc-access-control); quyền theo event type — Nhân viên (quầy) **chỉ** `PAYMENT`; Thủ thư mới được `WAIVER`/`ADJUSTMENT`/`REVERSAL`/`REFUND`/`RECONCILIATION` (+ finance approver theo DEC-D3-04 — PROPOSAL, OQ-fine-collection-adv-001/OQ-fine-collection-adv-002).
 - `Fine` tồn tại ở trạng thái mở (`UNPAID`) cho payment/waiver/adjustment; `REVERSAL`/`REFUND` tham chiếu event gốc đã ghi.
 - Client đã phát sinh `operation_id`/idempotency key cho lần submit payment (AT-FIN-02, BR-fine-collection-basic-001).
 - Financial-control decision (DEC-D3-04, OQ-fine-collection-adv-001/OQ-fine-collection-adv-002) **Resolved + Approved** trước khi bật waiver/adjustment/partial — hard-stop, non-waivable trước GATE-GNG.
@@ -47,7 +47,7 @@ Thủ thư (quầy) (thu tiền mặt tại quầy — `PAYMENT`; tương đươ
 
 ## Main Success Scenario
 
-1. Thủ thư (quầy) mở `fine-list` của reader; hệ thống hiển thị các `Fine UNPAID` với `balance` suy từ ledger: `Σ ASSESSMENT + Σ ADJUSTMENT(+) − Σ PAYMENT − Σ WAIVER − Σ ADJUSTMENT(−) − Σ REVERSAL` (PROPOSAL — công thức; FACT nguyên tắc append-only).
+1. Nhân viên (quầy) mở `fine-list` của reader; hệ thống hiển thị các `Fine UNPAID` với `balance` suy từ ledger: `Σ ASSESSMENT + Σ ADJUSTMENT(+) − Σ PAYMENT − Σ WAIVER − Σ ADJUSTMENT(−) − Σ REVERSAL` (PROPOSAL — công thức; FACT nguyên tắc append-only).
 2. Actor chọn một Fine, mở `fine-detail` xem breakdown events và lịch sử; chọn "Thu tiền" → `fine-payment`.
 3. Actor nhập số tiền thu bằng tiền mặt (baseline OQ-08), xác nhận; client gửi kèm idempotency key.
 4. Hệ thống kiểm tra: quyền `PAYMENT`, số tiền > 0 và ≤ `balance` hiện tại (CAS theo trạng thái ledger tại commit).
@@ -72,7 +72,7 @@ Thủ thư (quầy) (thu tiền mặt tại quầy — `PAYMENT`; tương đươ
 - 4c1. Toàn bộ business write rollback (fail-closed, BR-core-003/NFR-core-005); alert vận hành. Không để `PAYMENT`/`WAIVER` nào tồn tại mà không có audit.
 
 **4d. Actor thiếu quyền tài chính/field nhạy cảm (E-core-009, BR-core-004):**
-- 4d1. Thủ thư (quầy) cố tạo `WAIVER`/`ADJUSTMENT`/`REVERSAL`/`REFUND` → deny mặc định, mask/block field, audit access attempt.
+- 4d1. Nhân viên (quầy) cố tạo `WAIVER`/`ADJUSTMENT`/`REVERSAL`/`REFUND` → deny mặc định, mask/block field, audit access attempt.
 - 4d2. Vi phạm SoD (người duyệt = người tạo `ASSESSMENT` thủ công cùng khoản) → từ chối + audit (PROPOSAL — DEC-D3-04).
 
 **4e. Hai actor thu cùng một `Fine` đồng thời (`operation_id` khác nhau — không bắt được bởi idempotency):**

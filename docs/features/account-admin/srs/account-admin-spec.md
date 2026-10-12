@@ -2,7 +2,7 @@
 type: srs
 feature: account-admin
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/account-admin/brainstorms/account-admin-scope.md
   - docs/_product/prd.md
@@ -15,18 +15,18 @@ links:
 
 ## 1. Scope
 
-Quản trị viên quản lý vòng đời tài khoản người đọc và tài khoản Thủ thư (sửa, khóa, đặt lại mật khẩu, xóa mềm); từ R1B Thủ thư sửa thông tin, khóa tạm và mở lại người đọc. Mọi thay đổi có lý do khi cần và có audit.
+Thủ thư quản lý vòng đời tài khoản người đọc và tài khoản Nhân viên (sửa, khóa, đặt lại mật khẩu, xóa mềm); từ R1B Nhân viên sửa thông tin, khóa tạm và mở lại người đọc. Mọi thay đổi có lý do khi cần và có audit.
 
-**Release:** R0 (quản trị của Quản trị viên); R1B (Thủ thư khóa tạm)
+**Release:** R0 (quản trị của Thủ thư); R1B (Nhân viên khóa tạm)
 
-**Ngoài phạm vi:** Cấp tài khoản người đọc mới (`reader-onboarding`); quản lý tài khoản Quản trị viên (còn mở).
+**Ngoài phạm vi:** Cấp tài khoản người đọc mới (`reader-onboarding`); quản lý tài khoản Thủ thư (còn mở).
 
 ## 2. Actors & Stakeholders
 
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
-| Quản trị viên | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
-| Thủ thư | người | Vận hành quầy | Có |
+| Thủ thư | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
+| Nhân viên | người | Vận hành quầy | Có |
 | Người đọc | người | Biết lý do khi bị khóa | Có (gián tiếp) |
 | Hệ thống | hệ thống | Thực thi kiểm tra, ghi audit | Có |
 | Bảo mật/pháp chế | stakeholder | Kiểm soát dữ liệu cá nhân, retention | Có như stakeholder |
@@ -37,9 +37,9 @@ Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.
 
 | ID | Title | Description | Priority | Release | Verify by | Source |
 |---|---|---|---|---|---|---|
-| FR-account-admin-001 | Cập nhật và xóa mềm tài khoản người đọc | Quản trị viên tra cứu, xem chi tiết (kèm khoản đang mượn, đặt trước, công nợ), cập nhật và vô hiệu hóa tài khoản người đọc; không xóa cứng tài khoản đã có lịch sử; chặn vô hiệu khi còn phiếu mượn mở hoặc nợ phạt. | P0 | R0 | demo/test | Spec cũ (xem id-crosswalk-lmp) |
+| FR-account-admin-001 | Cập nhật và xóa mềm tài khoản người đọc | Thủ thư tra cứu, xem chi tiết (kèm khoản đang mượn, đặt trước, công nợ), cập nhật và vô hiệu hóa tài khoản người đọc; không xóa cứng tài khoản đã có lịch sử; chặn vô hiệu khi còn phiếu mượn mở hoặc nợ phạt. | P0 | R0 | demo/test | Spec cũ (xem id-crosswalk-lmp) |
 | FR-account-admin-002 | Khóa/mở người đọc | Cho phép tạm ngưng hoặc khôi phục quyền mượn của người đọc với lý do bắt buộc và audit; quyền theo ma trận nguồn (Nhân viên + Thủ thư đều khóa được). | P1 | R1B | test | Spec cũ (xem id-crosswalk-lmp) |
-| FR-account-admin-003 | Quản lý tài khoản Thủ thư | Quản trị viên tạo, khóa, đặt lại mật khẩu và vô hiệu hóa tài khoản Thủ thư; không xóa cứng tài khoản đã có lịch sử; mọi thay đổi có audit. | P0 | R0 | test | DEC-SF-04 — SRS cũ thiếu |
+| FR-account-admin-003 | Quản lý tài khoản Nhân viên | Thủ thư tạo, khóa, đặt lại mật khẩu và vô hiệu hóa tài khoản Nhân viên; không xóa cứng tài khoản đã có lịch sử; mọi thay đổi có audit. | P0 | R0 | test | DEC-SF-04 — SRS cũ thiếu |
 
 ## 4. Non-Functional Requirements (NFR)
 
@@ -62,7 +62,7 @@ Lỗi dùng chung áp dụng: E-core-001, E-core-002, E-core-004, E-core-007, E-
 
 ## 8. Data Entities (tóm tắt — chi tiết ở `docs/_shared/domain/library-erd.md`)
 
-`Reader`; tài khoản Thủ thư (mô hình tài khoản nhân sự còn mở ở `OQ-core-005`); `AuditEvent`.
+`Reader`; tài khoản Nhân viên (mô hình tài khoản nhân sự còn mở ở `OQ-core-005`); `AuditEvent`.
 
 ## 9. Flows (tóm tắt — chi tiết ở `srs/account-admin-flows.md`)
 
@@ -70,7 +70,7 @@ Sửa tài khoản; khóa tạm và mở lại có lý do; vô hiệu tài kho�
 
 ## 10. Screens (tóm tắt — chi tiết ở `srs/account-admin-userflow.md` và `html-wireframe/`)
 
-`reader-list`, `reader-detail`; màn tài khoản Thủ thư (thiết kế ở user-flow).
+`reader-list`, `reader-detail`; màn tài khoản Nhân viên (thiết kế ở user-flow).
 
 ## 11. Constraints, Dependencies & Assumptions
 
@@ -79,13 +79,13 @@ __Constraints:__
 | Ràng buộc | Source / Owner |
 |---|---|
 | Không xóa cứng tài khoản đã có lịch sử | BR-core-006 |
-| Thủ thư không được xóa tài khoản | SRC-FR-S10 (nguồn) |
+| Nhân viên không được xóa tài khoản | SRC-FR-S10 (nguồn) |
 
 __Dependencies:__
 
 | Phụ thuộc | Owner | Blocks nếu chưa sẵn |
 |---|---|---|
-| Quyết định quản lý tài khoản Quản trị viên | Security/IT | Quyền tạo/khóa Quản trị viên |
+| Quyết định quản lý tài khoản Thủ thư | Security/IT | Quyền tạo/khóa Thủ thư |
 | Ghi audit cùng giao dịch | `ops-foundation` | Mọi thao tác ghi |
 
 __Assumptions:__
@@ -96,4 +96,4 @@ __Assumptions:__
 
 ## 12. Open Questions
 
-- [ ] OQ-account-admin-001 — Ai quản lý tài khoản Quản trị viên và cơ chế chống tự nâng quyền? Owner: security/IT.
+- [ ] OQ-account-admin-001 — Ai quản lý tài khoản Thủ thư và cơ chế chống tự nâng quyền? Owner: security/IT.

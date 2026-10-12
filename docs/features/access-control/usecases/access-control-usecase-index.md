@@ -2,7 +2,7 @@
 type: usecase-index
 feature: access-control
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/access-control/srs/access-control-spec.md
   - docs/features/access-control/srs/access-control-flows.md
@@ -14,7 +14,7 @@ links:
 
 | # | Slug | Level | Status | Actor primary | Covers FR | Screens | Errors (E-*) | OQ ref | Priority | Updated |
 |---|------|-------|--------|---------------|-----------|---------|--------------|--------|----------|---------|
-| 1 | [uc-access-control](uc-access-control.md) | sea | draft | Người đọc/Thủ thư/Quản trị viên | FR-access-control-001..005 | access-login, forgot-password, reset-password, dashboard-home, session-expired | E-access-control-001, E-core-002, E-core-009 | OQ-access-control-001, 002 | P0 | 2026-10-08 |
+| 1 | [uc-access-control](uc-access-control.md) | sea | draft | Người đọc/Nhân viên/Thủ thư | FR-access-control-001..005 | access-login, forgot-password, reset-password, dashboard-home, session-expired | E-access-control-001, E-core-002, E-core-009 | OQ-access-control-001, 002 | P0 | 2026-10-08 |
 
 ## Relationships
 

@@ -2,7 +2,7 @@
 type: brainstorm
 feature: fine-collection-basic
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/decision-register.md
@@ -14,7 +14,7 @@ links:
 
 ## 1. Idea Seed
 
-Thủ thư tra công nợ của người đọc, thu tiền mặt tại quầy và ghi khoản thu vào sổ; bấm lặp hay mất mạng không ghi trùng, và không ai sửa hay xóa được khoản đã ghi.
+Nhân viên tra công nợ của người đọc, thu tiền mặt tại quầy và ghi khoản thu vào sổ; bấm lặp hay mất mạng không ghi trùng, và không ai sửa hay xóa được khoản đã ghi.
 
 ## 2. Context
 
@@ -26,7 +26,7 @@ Thủ thư tra công nợ của người đọc, thu tiền mặt tại quầy v
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Thủ thư | Ghi sổ tay, lệch tiền cuối ca | Ghi khoản thu một lần, đúng số dư |
+| Nhân viên | Ghi sổ tay, lệch tiền cuối ca | Ghi khoản thu một lần, đúng số dư |
 | Người đọc | Không biết còn nợ bao nhiêu | Thấy số dư rõ ràng khi nộp |
 
 ## 4. Capabilities Breakdown
@@ -38,7 +38,7 @@ Thủ thư tra công nợ của người đọc, thu tiền mặt tại quầy v
 - Ghi khoản thu vào sổ chỉ thêm, kèm mã khoản thu duy nhất; số dư về 0 thì khoản phạt chuyển Đã thanh toán.
 - Bấm lặp hoặc mất mạng sau xác nhận không ghi khoản thu thứ hai.
 - Hai quầy cùng thu một khoản: chỉ lần ghi trước thành công, quầy sau thấy số dư mới.
-- Thủ thư chỉ được ghi khoản thu, không được miễn hay điều chỉnh.
+- Nhân viên chỉ được ghi khoản thu, không được miễn hay điều chỉnh.
 - Audit và sự kiện thông báo trong cùng giao dịch.
 
 ### P1 — should have
@@ -53,7 +53,7 @@ Thủ thư tra công nợ của người đọc, thu tiền mặt tại quầy v
 
 ### 5.1 Thu tiền mặt
 
-1) Thủ thư mở công nợ của người đọc, chọn một khoản.
+1) Nhân viên mở công nợ của người đọc, chọn một khoản.
 2) Chọn thu tiền, nhập số tiền, xác nhận.
 3) Hệ thống kiểm tra số tiền, ghi khoản thu, cập nhật số dư, ghi audit và thông báo.
 4) Hệ thống hiển thị mã khoản thu và số dư còn lại.
@@ -103,7 +103,7 @@ Chọn khoản phạt ──> Nhập số tiền ──> Lớn hơn 0 và ≤ s�
 
 ### 6.5 Other Edge Cases
 
-- Thủ thư cố miễn hoặc điều chỉnh: bị từ chối, ghi audit.
+- Nhân viên cố miễn hoặc điều chỉnh: bị từ chối, ghi audit.
 
 ## 7. Validation, Limits & Wording
 

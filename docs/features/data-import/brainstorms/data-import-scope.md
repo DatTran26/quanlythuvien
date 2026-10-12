@@ -2,7 +2,7 @@
 type: brainstorm
 feature: data-import
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/readiness-gates.md
@@ -14,20 +14,20 @@ links:
 
 ## 1. Idea Seed
 
-Quản trị viên nhập dữ liệu đầu sách và bản sao có sẵn từ file Excel: hệ thống chạy thử, báo lỗi theo từng dòng, chỉ ghi khi chạy thử đạt, ghi cả lô một lần, rồi đối soát với kiểm kê vật lý.
+Thủ thư nhập dữ liệu đầu sách và bản sao có sẵn từ file Excel: hệ thống chạy thử, báo lỗi theo từng dòng, chỉ ghi khi chạy thử đạt, ghi cả lô một lần, rồi đối soát với kiểm kê vật lý.
 
 ## 2. Context
 
 - Thư viện đã có dữ liệu sách cũ trên Excel; kho phải sạch trước khi mở quầy (GATE-MIG là điều kiện thoát R0).
 - File Excel đại diện chưa có: đây là blocker bên ngoài, nên cấu trúc cột chính thức chưa thể chốt.
-- Sau khi ghi, mã QR cho bản sao mới được sinh ở `copy-inventory`; Thủ thư dán nhãn và quét đối soát.
+- Sau khi ghi, mã QR cho bản sao mới được sinh ở `copy-inventory`; Nhân viên dán nhãn và quét đối soát.
 
 ## 3. User Types (preliminary)
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Quản trị viên | Không biết dữ liệu cũ sai ở đâu | Danh sách lỗi theo dòng trước khi ghi |
-| Thủ thư | Kho trên hệ thống lệch kho thật | Đối soát vật lý có số liệu |
+| Thủ thư | Không biết dữ liệu cũ sai ở đâu | Danh sách lỗi theo dòng trước khi ghi |
+| Nhân viên | Kho trên hệ thống lệch kho thật | Đối soát vật lý có số liệu |
 | Thủ thư trưởng | Không có căn cứ cho phép mở quầy | Báo cáo đối soát đạt ngưỡng |
 
 ## 4. Capabilities Breakdown
@@ -56,11 +56,11 @@ Quản trị viên nhập dữ liệu đầu sách và bản sao có sẵn từ 
 
 ### 5.1 Import và đối soát
 
-1) Quản trị viên tải file Excel.
+1) Thủ thư tải file Excel.
 2) Hệ thống chạy thử, báo lỗi theo dòng.
-3) Quản trị viên sửa file, chạy thử lại cho tới khi đạt.
-4) Quản trị viên xác nhận ghi; hệ thống ghi cả lô một lần, ghi audit.
-5) Hệ thống sinh QR cho bản sao mới; Thủ thư dán nhãn và quét đối soát.
+3) Thủ thư sửa file, chạy thử lại cho tới khi đạt.
+4) Thủ thư xác nhận ghi; hệ thống ghi cả lô một lần, ghi audit.
+5) Hệ thống sinh QR cho bản sao mới; Nhân viên dán nhãn và quét đối soát.
 6) Hệ thống xuất báo cáo đối soát.
 
 ```
@@ -110,7 +110,7 @@ Tải file ──> Đọc được? ──không──> Báo lỗi file
 | Lô import | Chạy thử | Đạt chạy thử | Không còn lỗi | — |
 | Lô import | Đạt chạy thử | Đã ghi | Ghi thành công | Không |
 | Lô import | Đang ghi | Thất bại | Lỗi giữa chừng, hủy toàn lô | Chạy thử lô mới |
-| Lô import | Đang chạy | Đã hủy | Quản trị viên hủy có lý do | Không |
+| Lô import | Đang chạy | Đã hủy | Thủ thư hủy có lý do | Không |
 
 ### 6.4 Interrupted Transactions
 
@@ -118,11 +118,11 @@ Tải file ──> Đọc được? ──không──> Báo lỗi file
 |---|---|---|---|
 | Mất phản hồi sau khi xác nhận ghi | Lô đã ghi hoặc thất bại | Tra lại theo lần xác nhận; không tự tạo lô mới | Không có |
 | Lỗi giữa lúc ghi | Không có dữ liệu nhập dở | Sửa dữ liệu, chạy thử lô mới | Hủy toàn lô |
-| Lô đang chạy bị bỏ dở | Lô ở trạng thái đang chạy | Quản trị viên hủy lô có lý do | Ghi audit |
+| Lô đang chạy bị bỏ dở | Lô ở trạng thái đang chạy | Thủ thư hủy lô có lý do | Ghi audit |
 
 ### 6.5 Other Edge Cases
 
-- Đối soát lệch thì không tự sửa; Quản trị viên điều chỉnh thủ công có audit hoặc nhập lại.
+- Đối soát lệch thì không tự sửa; Thủ thư điều chỉnh thủ công có audit hoặc nhập lại.
 - Lỗi theo dòng che giá trị nhạy cảm nếu người xem không có quyền.
 
 ## 7. Validation, Limits & Wording

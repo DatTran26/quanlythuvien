@@ -66,14 +66,14 @@ abstract final class AppRouter {
 
       AppRoutes.catalogSearch => _staff(const CatalogSearchScreen()),
       AppRoutes.bibliographicDetail => _staff(BibliographicDetailScreen(titleId: args as int)),
-      AppRoutes.bibliographicForm => _admin(BibliographicFormScreen(titleId: args as int?)),
-      AppRoutes.categoryAdmin => _admin(const CategoryAdminScreen()),
+      AppRoutes.bibliographicForm => _librarian(BibliographicFormScreen(titleId: args as int?)),
+      AppRoutes.categoryAdmin => _librarian(const CategoryAdminScreen()),
       AppRoutes.copyInventory => _staff(CopyInventoryScreen(titleId: args as int)),
-      AppRoutes.copyForm => _admin(CopyFormScreen(titleId: args as int)),
-      AppRoutes.importUpload => _admin(const ImportUploadScreen()),
-      AppRoutes.importReport => _admin(ImportReportScreen(batchId: args as int)),
-      AppRoutes.adminConfig => _admin(const AdminConfigScreen()),
-      AppRoutes.backupRuns => _admin(const BackupRunsScreen()),
+      AppRoutes.copyForm => _librarian(CopyFormScreen(titleId: args as int)),
+      AppRoutes.importUpload => _librarian(const ImportUploadScreen()),
+      AppRoutes.importReport => _librarian(ImportReportScreen(batchId: args as int)),
+      AppRoutes.adminConfig => _librarian(const AdminConfigScreen()),
+      AppRoutes.backupRuns => _librarian(const BackupRunsScreen()),
 
       AppRoutes.circulationDesk => _staff(const CirculationDeskScreen()),
       AppRoutes.checkoutScan => _staff(const CheckoutScanScreen()),
@@ -85,7 +85,7 @@ abstract final class AppRouter {
       AppRoutes.renewalResult => _staff(RenewalResultScreen(results: args as List<RenewalItemResult>)),
       AppRoutes.damageForm => _staff(DamageReportFormScreen(initialCopyCode: args as String?)),
       AppRoutes.damageDetail => _staff(
-          DamageReportDetailScreen(args: args as DamageDetailArgs, isAdmin: AppSession.isAdmin),
+          DamageReportDetailScreen(args: args as DamageDetailArgs, isLibrarian: AppSession.isLibrarian),
         ),
       AppRoutes.lostRecord => _staff(LostRecordScreen(args: args)),
       AppRoutes.foundAfterLost => _staff(const FoundAfterLostScreen()),
@@ -97,7 +97,13 @@ abstract final class AppRouter {
       AppRoutes.overdueList => _staff(const OverdueListScreen()),
       AppRoutes.trendDashboard => _staff(const TrendDashboardScreen()),
 
-      AppRoutes.finePayment => _staff(FineListScreen(api: MockFineApi(), actorId: AppSession.userId ?? 0)),
+      AppRoutes.finePayment => _staff(
+          FineListScreen(
+            api: MockFineApi(),
+            actorId: AppSession.userId ?? 0,
+            initialCardCode: args is String ? args : null,
+          ),
+        ),
       AppRoutes.readerList => _staff(const ReaderListScreen()),
       AppRoutes.readerPortal => _reader(
           ReaderPortalShell(
@@ -108,8 +114,8 @@ abstract final class AppRouter {
       AppRoutes.notifications => _signedIn(
           NotificationCenterScreen(userId: AppSession.userId ?? 0, api: MockNotificationApi()),
         ),
-      AppRoutes.auditLog => _admin(AuditLogScreen(actorId: AppSession.userId ?? 0, api: MockNotificationApi())),
-      AppRoutes.notificationStatus => _admin(
+      AppRoutes.auditLog => _librarian(AuditLogScreen(actorId: AppSession.userId ?? 0, api: MockNotificationApi())),
+      AppRoutes.notificationStatus => _librarian(
           NotificationStatusScreen(actorId: AppSession.userId ?? 0, api: MockNotificationApi()),
         ),
 
@@ -126,9 +132,9 @@ abstract final class AppRouter {
     return page;
   }
 
-  static Widget _admin(Widget page) {
+  static Widget _librarian(Widget page) {
     if (!AppSession.isSignedIn) return const LoginScreen();
-    if (!AppSession.isAdmin) return const _DeniedScreen();
+    if (!AppSession.isLibrarian) return const _DeniedScreen();
     return page;
   }
 

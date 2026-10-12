@@ -2,7 +2,7 @@
 type: srs
 feature: damage-lifecycle
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/damage-lifecycle/brainstorms/damage-lifecycle-scope.md
   - docs/_product/prd.md
@@ -15,7 +15,7 @@ links:
 
 ## 1. Scope
 
-Thủ thư báo hư hỏng kèm 1–5 ảnh, bản sao chuyển Chờ duyệt ngay; Quản trị viên quyết định Bác bỏ, Sửa hoặc Thanh lý; sửa xong đưa bản sao về kho.
+Nhân viên báo hư hỏng kèm 1–5 ảnh, bản sao chuyển Chờ duyệt ngay; Thủ thư quyết định Bác bỏ, Sửa hoặc Thanh lý; sửa xong đưa bản sao về kho.
 
 **Release:** R1A
 
@@ -25,8 +25,8 @@ Thủ thư báo hư hỏng kèm 1–5 ảnh, bản sao chuyển Chờ duyệt ng
 
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
-| Thủ thư | người | Vận hành quầy | Có |
-| Quản trị viên | người | Quản trị, duyệt ngoại lệ | Có |
+| Nhân viên | người | Vận hành quầy | Có |
+| Thủ thư | người | Quản trị, duyệt ngoại lệ | Có |
 | Hệ thống | hệ thống | Thực thi rule, job, audit, outbox | Có |
 
 Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.md` Mục 2.

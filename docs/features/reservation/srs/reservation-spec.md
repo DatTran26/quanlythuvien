@@ -2,7 +2,7 @@
 type: srs
 feature: reservation
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/reservation/brainstorms/reservation-scope.md
   - docs/_product/prd.md
@@ -26,7 +26,7 @@ links:
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
 | Người đọc | người | Tự phục vụ | Có |
-| Thủ thư | người | Vận hành quầy | Có |
+| Nhân viên | người | Vận hành quầy | Có |
 | Hệ thống | hệ thống | Thực thi rule, job, audit, outbox | Có |
 
 Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.md` Mục 2.

@@ -2,12 +2,13 @@
 // Bài: TV3 1A (Bước 5) · Độ khó ⭐⭐
 // Spec: docs/features/account-admin/srs/account-admin-userflow.md
 //
-// Mục đích: Thủ thư / Quản trị viên tra cứu tài khoản người đọc.
+// Mục đích: Nhân viên / Thủ thư tra cứu tài khoản người đọc.
 // Đến từ: dashboard-home (TV1). Đi tới: reader-detail, reader-form (Cấp tài khoản mới),
-// staff-accounts (chỉ Quản trị viên).
+// staff-accounts (chỉ Thủ thư).
 //
 
 import 'package:flutter/material.dart';
+import 'package:frontend/core/auth/session.dart';
 import 'package:frontend/features/notification/widgets/notification_bell.dart';
 
 import 'reader_form_screen.dart';
@@ -69,16 +70,15 @@ class _ReaderListScreenState extends State<ReaderListScreen> {
       appBar: AppBar(
         title: const Text('Danh sách người đọc'),
         actions: [
-          // Chỉ Quản trị viên. Khi có phân quyền (TV1) thì ẩn với Thủ thư.
-          IconButton(
-            icon: const Icon(Icons.badge_outlined),
-            tooltip: 'Tài khoản Thủ thư',
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const StaffAccountsScreen()),
+          if (AppSession.isLibrarian)
+            IconButton(
+              icon: const Icon(Icons.badge_outlined),
+              tooltip: 'Tài khoản Nhân viên',
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const StaffAccountsScreen()),
+              ),
             ),
-          ),
-          // Tạm coi người dùng màn là Quản trị viên #1 (giống _actorId ở các màn accounts).
-          const NotificationBell(userId: 1),
+          if (AppSession.userId case final userId?) NotificationBell(userId: userId),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(

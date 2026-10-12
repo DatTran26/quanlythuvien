@@ -2,7 +2,7 @@
 type: brainstorm
 feature: return-handling
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_shared/core-spec.md
@@ -14,7 +14,7 @@ links:
 
 ## 1. Idea Seed
 
-Thủ thư quét sách trả; hệ thống tìm phiếu mượn đang mở, ghi tình trạng, đóng phiếu, tính phạt nếu quá hạn, rồi đưa bản sao về Sẵn sàng hoặc Chờ duyệt nếu hư hỏng — tất cả trong một giao dịch.
+Nhân viên quét sách trả; hệ thống tìm phiếu mượn đang mở, ghi tình trạng, đóng phiếu, tính phạt nếu quá hạn, rồi đưa bản sao về Sẵn sàng hoặc Chờ duyệt nếu hư hỏng — tất cả trong một giao dịch.
 
 ## 2. Context
 
@@ -27,7 +27,7 @@ Thủ thư quét sách trả; hệ thống tìm phiếu mượn đang mở, ghi 
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Thủ thư | Không biết cuốn trả thuộc phiếu nào, phạt bao nhiêu | Quét là đóng đúng phiếu, thấy ngay phạt |
+| Nhân viên | Không biết cuốn trả thuộc phiếu nào, phạt bao nhiêu | Quét là đóng đúng phiếu, thấy ngay phạt |
 | Người đọc | Trả rồi mà hệ thống vẫn ghi đang mượn | Phiếu đóng ngay, biết số phạt nếu có |
 
 ## 4. Capabilities Breakdown
@@ -54,9 +54,9 @@ Thủ thư quét sách trả; hệ thống tìm phiếu mượn đang mở, ghi 
 
 ### 5.1 Trả sách
 
-1) Thủ thư mở màn quét trả, quét QR bản sao.
+1) Nhân viên mở màn quét trả, quét QR bản sao.
 2) Hệ thống tìm phiếu mượn đang mở của bản sao.
-3) Thủ thư ghi tình trạng: bình thường hoặc hư hỏng.
+3) Nhân viên ghi tình trạng: bình thường hoặc hư hỏng.
 4) Hệ thống đóng phiếu, ghi phạt nếu quá hạn, đổi trạng thái bản sao, ghi audit và sự kiện thông báo trong một giao dịch.
 5) Hệ thống hiển thị kết quả trả.
 

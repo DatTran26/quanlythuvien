@@ -1,7 +1,7 @@
 // Màn 1 – Quầy lưu thông (circulation-desk). Route: /circulation
 // Bài: Hoang/02-checkout/01-circulation-desk.md
 //
-// Điểm vào mọi thao tác tại quầy của Thủ thư / Quản trị viên.
+// Điểm vào mọi thao tác tại quầy của Nhân viên / Thủ thư.
 // Màn này không gọi API, chỉ là menu. Tên người dùng lấy từ AppSession (sau là /me của TV1).
 
 import 'package:flutter/material.dart';
@@ -61,7 +61,7 @@ class CirculationDeskScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _Greeting(name: AppSession.displayName, role: AppSession.isAdmin ? 'Quản trị viên' : 'Thủ thư'),
+              _Greeting(name: AppSession.displayName, role: AppSession.isLibrarian ? 'Thủ thư' : 'Nhân viên'),
               const SizedBox(height: 16),
               DeskActionCard(
                 highlight: true,

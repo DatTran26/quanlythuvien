@@ -2,7 +2,7 @@
 type: usecase
 feature: reservation
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/reservation/usecases/reservation-usecase-index.md
   - docs/features/reservation/srs/reservation-spec.md
@@ -16,7 +16,7 @@ links:
 
 ## Primary Actor
 
-Người đọc (tự đặt/hủy — self-service R2) · Thủ thư/Quản trị viên (đặt và hủy thay mặt người đọc, xử lý nhận sách tại quầy — FACT, ma trận quyền nguồn §2 theo mapping spec §2) · Hệ thống (cron RES-T04 expiry, queue advance, notify jobs — FACT nguồn §8)
+Người đọc (tự đặt/hủy — self-service R2) · Nhân viên/Thủ thư (đặt và hủy thay mặt người đọc, xử lý nhận sách tại quầy — FACT, ma trận quyền nguồn §2 theo mapping spec §2) · Hệ thống (cron RES-T04 expiry, queue advance, notify jobs — FACT nguồn §8)
 
 ## Stakeholders & Interests
 
@@ -29,7 +29,7 @@ Người đọc (tự đặt/hủy — self-service R2) · Thủ thư/Quản tr�
 
 ## Trigger
 
-Người đọc bấm "Đặt trước" trên đầu sách có số lượng khả dụng = 0 (SRC-BR08 — FACT), hoặc Thủ thư/Quản trị viên tạo đặt trước thay mặt tại quầy.
+Người đọc bấm "Đặt trước" trên đầu sách có số lượng khả dụng = 0 (SRC-BR08 — FACT), hoặc Nhân viên/Thủ thư tạo đặt trước thay mặt tại quầy.
 
 ## Preconditions
 
@@ -52,8 +52,8 @@ Người đọc bấm "Đặt trước" trên đầu sách có số lượng kh�
 4. Khi một Copy của đầu sách về kho (trả bình thường COPY-T04, sửa xong T13, found T16, hoặc re-hold T19): Hệ thống chọn Reservation đầu queue hợp lệ tại thời điểm commit (AT-RSV-05 — FACT).
 5. Trong **một transaction nguyên tử** (AT-RSV-01 — PROPOSAL): Copy `→ON_HOLD`, gán `held_copy_id`, đặt `hold_expires_at = now + hold_expiry policy` (baseline đề xuất 48h — PROPOSAL, OQ-policy-config-001/OQ-04; SRC-BR10 FACT về cơ chế), Reservation `WAITING→READY` (RES-T02), ghi outbox NotificationEvent + AuditEvent.
 6. Outbox phát thông báo "Sách đã sẵn sàng. Vui lòng đến nhận trong hạn giữ." (FACT — nguồn §8 sự kiện notify; wording baseline §7.3 ghi 48 giờ — giá trị theo hold_expiry policy, PROPOSAL); trạng thái delivery xem trên `notification-status`.
-7. Người đọc đến quầy trong hạn giữ; Thủ thư mở `reservation-pickup`, xác nhận reservation `READY` thuộc đúng reader và `hold_expires_at` chưa qua.
-8. Thủ thư checkout (COPY-T02, extend uc-checkout): trong một transaction — Loan `ACTIVE` tạo, Copy `ON_HOLD→ON_LOAN`, Reservation `READY→FULFILLED` (RES-T03), audit + outbox notify xác nhận.
+7. Người đọc đến quầy trong hạn giữ; Nhân viên mở `reservation-pickup`, xác nhận reservation `READY` thuộc đúng reader và `hold_expires_at` chưa qua.
+8. Nhân viên checkout (COPY-T02, extend uc-checkout): trong một transaction — Loan `ACTIVE` tạo, Copy `ON_HOLD→ON_LOAN`, Reservation `READY→FULFILLED` (RES-T03), audit + outbox notify xác nhận.
 
 ## Extensions
 
@@ -73,7 +73,7 @@ Người đọc bấm "Đặt trước" trên đầu sách có số lượng kh�
 **5a. Notify thất bại sau khi READY đã commit:**
 - 5a1. Business transition đã commit; `READY` **không** tự hủy vì notify lỗi, `hold_expires_at` vẫn chạy (FACT — lifecycle §4 kịch bản bắt buộc).
 - 5a2. Outbox retry theo policy, sau ngưỡng → dead-letter + cảnh báo vận hành (E-notification-core-001/E-notification-core-002, NFR-notification-core-001 — chi tiết tại uc-notification-outbox).
-- 5a3. Escalation cho Thủ thư trực quầy sau ngưỡng retry là PROPOSAL (DEC-D3-08 — kênh escalation chưa duyệt).
+- 5a3. Escalation cho Nhân viên trực quầy sau ngưỡng retry là PROPOSAL (DEC-D3-08 — kênh escalation chưa duyệt).
 
 **7a. Người đọc không đến nhận trong hạn giữ (RES-T04 — FACT; giá trị hạn = PROPOSAL):**
 - 7a1. Cron "Hết hạn giữ đặt trước" (mỗi 15 phút — FACT nguồn §8) CAS `READY→EXPIRED` khi `now > hold_expires_at`; giá trị `hold_expires_at` = now + hold_expiry policy (baseline đề xuất 48h — PROPOSAL, OQ-policy-config-001/OQ-04).
@@ -81,7 +81,7 @@ Người đọc bấm "Đặt trước" trên đầu sách có số lượng kh�
 - 7a3. Outbox notify "đặt trước hết hạn giữ" cho người bị hết hạn; audit. Không tồn tại trạng thái trung gian "copy free chưa ai giữ" lộ ra ngoài (AT-RSV-04 — PROPOSAL).
 
 **7b. Hủy đặt trước:**
-- 7b1. Đang `WAITING`: người đọc (chính mình) hoặc Thủ thư/Quản trị viên (thay mặt) hủy → `CANCELLED`, rời queue (RES-T05 — FACT); audit.
+- 7b1. Đang `WAITING`: người đọc (chính mình) hoặc Nhân viên/Thủ thư (thay mặt) hủy → `CANCELLED`, rời queue (RES-T05 — FACT); audit.
 - 7b2. Đang `READY`: hủy → `CANCELLED` (RES-T06) + giải phóng copy/advance queue nguyên tử như 7a2.
 - 7b3. Hủy trên reservation terminal (`FULFILLED`/`EXPIRED`/`CANCELLED`) → E-core-008 invalid state transition; chỉ hiển thị action hợp lệ.
 
@@ -92,7 +92,7 @@ Người đọc bấm "Đặt trước" trên đầu sách có số lượng kh�
 - 7d1. Hệ thống hiển thị E-reservation-001 (reservation bị hủy/hết hạn), cho hủy yêu cầu, đặt lại cuối queue nếu còn nhu cầu hoặc quay lại tra cứu.
 
 **8a. `hold_expires_at` đi qua giữa lúc xác nhận pickup (cron vs pickup race):**
-- 8a1. Reader đến quầy ngay sát hạn; trong lúc Thủ thư xác nhận, cron RES-T04 (hoặc check `now > hold_expires_at` tại commit) làm reservation `READY→EXPIRED` → CAS `READY→FULFILLED` thất bại → transaction pickup nhận E-core-004 + hiển thị trạng thái mới (`EXPIRED`), **không** tạo Loan.
+- 8a1. Reader đến quầy ngay sát hạn; trong lúc Nhân viên xác nhận, cron RES-T04 (hoặc check `now > hold_expires_at` tại commit) làm reservation `READY→EXPIRED` → CAS `READY→FULFILLED` thất bại → transaction pickup nhận E-core-004 + hiển thị trạng thái mới (`EXPIRED`), **không** tạo Loan.
 - 8a2. Recovery: reload `reservation-pickup` ở trạng thái mới; copy đã advance cho người kế tiếp hoặc về `AVAILABLE` theo 7a2 — nếu vẫn `AVAILABLE` và reader còn nhu cầu thì checkout trực tiếp qua `uc-checkout` (copy không còn gắn hold), hoặc đặt lại cuối queue.
 - 8a3. Grace period tại quầy (cho phép pickup vài phút sau hạn khi reader đã có mặt) là **Open — OQ-policy-config-001**: không tự quyết; nếu chốt thì cấu hình trong hold_expiry policy và áp thống nhất cho cả cron RES-T04.
 

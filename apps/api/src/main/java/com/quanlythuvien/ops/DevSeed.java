@@ -41,8 +41,8 @@ public class DevSeed implements ApplicationRunner {
         if (users.existsByEmail("admin@library.local")) {
             return;
         }
-        save("admin@library.local", "Quản trị viên", Role.ADMIN, UserStatus.ACTIVE, null);
-        save("librarian@library.local", "Thủ thư", Role.LIBRARIAN, UserStatus.ACTIVE, null);
+        save("admin@library.local", "Thủ thư", Role.LIBRARIAN, UserStatus.ACTIVE, null);
+        save("librarian@library.local", "Nhân viên", Role.STAFF, UserStatus.ACTIVE, null);
         UserAccount reader = save("reader@library.local", "Người đọc", Role.READER, UserStatus.ACTIVE, "R10000001");
         ReaderProfile profile = new ReaderProfile();
         profile.setUserId(reader.getId());

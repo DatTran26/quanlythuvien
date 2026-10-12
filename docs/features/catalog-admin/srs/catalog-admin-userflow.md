@@ -1,7 +1,7 @@
 ---
 type: srs-userflow
 feature: catalog-admin
-updated: 2026-10-09
+updated: 2026-10-12
 primary_device: mobile
 stage: flow-approved
 flow_approved_at: 2026-10-09
@@ -67,7 +67,7 @@ Chuyển màn sang feature khác xem `docs/_shared/navigation-map.md`.
 | Chi tiết đầu sách [2] | Biểu mẫu đầu sách [3] | Sửa/vô hiệu | Có quyền; BR-core-006. |
 | Biểu mẫu đầu sách [3] | Chi tiết đầu sách [2] | Lưu | Hợp lệ, không trùng. |
 | Chi tiết đầu sách [2] | Kho bản sao (`copy-inventory`) | Xem bản sao | Luôn. |
-| Tra cứu danh mục [1] | Quản lý danh mục [4] | Quản lý danh mục | Chỉ Quản trị viên. |
+| Tra cứu danh mục [1] | Quản lý danh mục [4] | Quản lý danh mục | Chỉ Thủ thư. |
 
 ## 4. Open Questions
 

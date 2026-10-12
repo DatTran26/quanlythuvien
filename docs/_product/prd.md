@@ -1,7 +1,7 @@
 ---
 type: prd-product
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/he_thong_quan_ly_thu_vien.md
   - docs/_shared/project-profile.md
@@ -39,23 +39,23 @@ Số hóa trọn vòng mượn – trả – đặt trước của một thư vi
 ## 2. Problem & Why Now
 
 - **Vấn đề cốt lõi:** quầy mượn–trả thủ công dễ nhầm sách/người đọc/trạng thái; kho và công nợ phạt không minh bạch; không có baseline để ra quyết định go-live. (FACT)
-- **Ai đang đau:** Thủ thư quầy (tốc độ và độ chính xác giao dịch), Quản trị viên (kiểm soát kho, quy định, hư hỏng, báo cáo), Người đọc (không tự theo dõi được), Thủ thư trưởng (thiếu căn cứ go-live). (FACT — brainstorm §3)
+- **Ai đang đau:** Nhân viên quầy (tốc độ và độ chính xác giao dịch), Thủ thư (kiểm soát kho, quy định, hư hỏng, báo cáo), Người đọc (không tự theo dõi được), Thủ thư trưởng (thiếu căn cứ go-live). (FACT — brainstorm §3)
 - **Giải pháp thay thế hiện tại:** quy trình thủ công/sổ sách tại quầy. (FACT — suy từ mục tiêu số hóa)
 - **Why now:** pilot tại một cơ sở với hai quầy đã là giả định vận hành; nhu cầu import và đối soát Excel đã được xác định, nhưng file đại diện vẫn là external blocker. (FACT — project profile, OQ-15)
 
 ## 3. Target Users
 
-Thuật ngữ theo `docs/_shared/project-profile.md` và DEC-SF-01: tài liệu nguồn gọi người trực quầy là "Nhân viên" và người quản trị là "Thủ thư"; tài liệu này gọi lần lượt là **Thủ thư** và **Quản trị viên**.
+Thuật ngữ thống nhất với nghiệp vụ gốc và DEC-SF-01 (cập nhật 2026-10-12): **Người đọc** (`READER`), **Nhân viên** (`STAFF`, trực quầy) và **Thủ thư** (`LIBRARIAN`, quản lý nghiệp vụ).
 
 | Nhóm người dùng | Vai trò | Job-to-be-done | Bối cảnh sử dụng |
 |---|---|---|---|
 | Người đọc | Primary | Tra cứu sách, xem thẻ QR, theo dõi khoản mượn/đặt trước/phạt, tự gia hạn | Web responsive, tự phục vụ |
-| Thủ thư | Primary | Quét QR tạo phiếu mượn/trả, xử lý ngoại lệ (quá hạn, hư hỏng, mất, phạt), hỗ trợ người đọc | Quầy phục vụ, camera điện thoại hoặc nhập mã thủ công |
-| Quản trị viên | Primary | Quản lý kho, danh mục, tài khoản, quy định; duyệt hư hỏng/thanh lý; báo cáo | Web quản trị |
+| Nhân viên | Primary | Quét QR tạo phiếu mượn/trả, xử lý ngoại lệ (quá hạn, hư hỏng, mất, phạt), hỗ trợ người đọc | Quầy phục vụ, camera điện thoại hoặc nhập mã thủ công |
+| Thủ thư | Primary | Quản lý kho, danh mục, tài khoản, quy định; duyệt hư hỏng/thanh lý; báo cáo | Web quản trị |
 | Thủ thư trưởng | Stakeholder/Approver | Chốt quy định, phạm vi pilot, quyết định go-live | Cổng duyệt |
 | Bảo mật/pháp chế | Stakeholder | Phê duyệt retention, quyền dữ liệu cá nhân, kiểm soát PII | Gate pháp lý trước go-live |
 
-*Ai KHÔNG phải người dùng:* khách vãng lai không có thẻ; vai trò Admin riêng chưa được xác lập (OQ-01 — `PROPOSAL` mặc định: Quản trị viên seed đầu tiên, không tự sửa vai trò lẫn nhau); độc giả ngoài cơ sở pilot.
+*Ai KHÔNG phải người dùng:* khách vãng lai không có thẻ; vai trò Admin riêng chưa được xác lập (OQ-01 — `PROPOSAL` mặc định: Thủ thư seed đầu tiên, không tự sửa vai trò lẫn nhau); độc giả ngoài cơ sở pilot.
 
 ## 4. Value Proposition & Differentiator
 
@@ -86,7 +86,7 @@ Namespace `CAP-*` là `PROPOSAL` chờ ID registry Phase 1. Ưu tiên là normal
 | Theme | Capability ID | Mô tả | Nguồn FR/BR/NFR | Normalized | Release |
 |---|---|---|---|---|---|
 | Danh tính & phân quyền | CAP-IDENT | Đăng nhập/xuất, đặt lại mật khẩu, hồ sơ, RBAC 3 vai trò | FR-C01..C03, NFR-02 | P0 | R0 |
-| Quản trị tài khoản | CAP-ACCT | Cấp + kích hoạt tài khoản người đọc tại quầy (DEC-SF-03); CRUD tài khoản người đọc/Thủ thư; Thủ thư sửa và khóa tạm người đọc | FR-R01, FR-L05, FR-L06, FR-S10 | P0 | R0 (CRUD), R1B (FR-S10) |
+| Quản trị tài khoản | CAP-ACCT | Cấp + kích hoạt tài khoản người đọc tại quầy (DEC-SF-03); CRUD tài khoản người đọc/Nhân viên; Nhân viên sửa và khóa tạm người đọc | FR-R01, FR-L05, FR-L06, FR-S10 | P0 | R0 (CRUD), R1B (FR-S10) |
 | Danh mục & kho | CAP-CATALOG | CRUD đầu sách, bản sao, danh mục, vị trí kệ; sinh/in QR; số lượng khả dụng theo BR-11 | FR-L02..L04 | P0 | R0 |
 | Import & đối soát | CAP-IMPORT | Import Excel dry-run, báo lỗi theo dòng, đối soát vật lý, rollback batch | OQ-15, profile baseline | P0 | R0 |
 | Quy định & state | CAP-POLICY | Cấu hình BR-01..BR-13 không sửa code; hiệu lực theo thời điểm giao dịch; lifecycle Copy/Loan/Reservation/Fine/DamageReport | FR-L07, BR-01..13 | P0 | R0 |
@@ -107,40 +107,40 @@ Namespace `CAP-*` là `PROPOSAL` chờ ID registry Phase 1. Ưu tiên là normal
 
 ### Luồng người dùng tổng quan (value stream)
 
-1) Import Excel → chạy thử → đối soát → dán QR → kho sẵn sàng → `data-import`, `catalog-admin`, `copy-inventory` (Quản trị viên, R0)
-2) Thủ thư cấp và kích hoạt tài khoản người đọc tại quầy → thẻ QR hiệu lực → `reader-onboarding` (R0, DEC-SF-03)
+1) Import Excel → chạy thử → đối soát → dán QR → kho sẵn sàng → `data-import`, `catalog-admin`, `copy-inventory` (Thủ thư, R0)
+2) Nhân viên cấp và kích hoạt tài khoản người đọc tại quầy → thẻ QR hiệu lực → `reader-onboarding` (R0, DEC-SF-03)
 3) Quét thẻ → quét sách → kiểm tra BR ngay khi quét → xác nhận → Loan + audit → `checkout` (R1A)
 4) Quét trả → đóng Loan → tính quá hạn/phạt → chuyển trạng thái Copy (Sẵn sàng/Chờ duyệt/Mất; Đang giữ chỉ khi đặt trước đã bật ở R2) → `return-handling`, `overdue-fines`, `damage-lifecycle`, `lost-handling` (R1A)
 5) Người đọc tra cứu sách, xem thẻ QR, khoản đang mượn và lịch sử → `reader-self-service` (R1A); xem công nợ (R1B)
 6) Người đọc đặt trước khi hết sách → nhận thông báo sẵn sàng → đến nhận trong 48h → `reservation`, `notification-core` (R2)
-7) Quản trị viên cấu hình quy định → duyệt hư hỏng → xem báo cáo/audit → `policy-config`, `damage-lifecycle`, `ops-reports`, `notification-audit-ui` (R0–R2)
+7) Thủ thư cấu hình quy định → duyệt hư hỏng → xem báo cáo/audit → `policy-config`, `damage-lifecycle`, `ops-reports`, `notification-audit-ui` (R0–R2)
 
 ### Bảng Feature Map
 
 | # | Tính năng | Slug | Theme | Persona | Ưu tiên (MoSCoW) | Phụ thuộc | Release | Chi tiết hóa |
 |---|---|---|---|---|---|---|---|---|
 | 1 | Đăng nhập & phân quyền | `access-control` | CAP-IDENT | Mọi vai trò | Must (P0) | — | R0 | ✅ 6 tầng (draft) |
-| 2 | Cấp & kích hoạt tài khoản người đọc tại quầy | `reader-onboarding` | CAP-ACCT | Thủ thư | Must (P0) | access-control | R0 | ✅ 6 tầng (draft) |
-| 3 | Quản trị tài khoản | `account-admin` | CAP-ACCT | Quản trị viên, Thủ thư | Must (P0) R0; Should (P1) R1B | access-control | R0, R1B | ✅ 6 tầng (draft) |
-| 4 | Danh mục & đầu sách | `catalog-admin` | CAP-CATALOG | Quản trị viên, Thủ thư | Must (P0) | access-control | R0 | ✅ 6 tầng (draft) |
-| 5 | Bản sao & nhãn QR | `copy-inventory` | CAP-CATALOG | Quản trị viên | Must (P0) | catalog-admin | R0 | ✅ 6 tầng (draft) |
-| 6 | Import Excel & đối soát | `data-import` | CAP-IMPORT | Quản trị viên | Must (P0) | catalog-admin, policy-config, file Excel nguồn (external blocker) | R0 | ✅ 6 tầng (draft) |
-| 7 | Cấu hình quy định | `policy-config` | CAP-POLICY | Quản trị viên | Must (P0) | Quyết định giá trị BR (GATE-DEC) | R0 | ✅ 6 tầng (draft) |
+| 2 | Cấp & kích hoạt tài khoản người đọc tại quầy | `reader-onboarding` | CAP-ACCT | Nhân viên | Must (P0) | access-control | R0 | ✅ 6 tầng (draft) |
+| 3 | Quản trị tài khoản | `account-admin` | CAP-ACCT | Thủ thư, Nhân viên | Must (P0) R0; Should (P1) R1B | access-control | R0, R1B | ✅ 6 tầng (draft) |
+| 4 | Danh mục & đầu sách | `catalog-admin` | CAP-CATALOG | Thủ thư, Nhân viên | Must (P0) | access-control | R0 | ✅ 6 tầng (draft) |
+| 5 | Bản sao & nhãn QR | `copy-inventory` | CAP-CATALOG | Thủ thư | Must (P0) | catalog-admin | R0 | ✅ 6 tầng (draft) |
+| 6 | Import Excel & đối soát | `data-import` | CAP-IMPORT | Thủ thư | Must (P0) | catalog-admin, policy-config, file Excel nguồn (external blocker) | R0 | ✅ 6 tầng (draft) |
+| 7 | Cấu hình quy định | `policy-config` | CAP-POLICY | Thủ thư | Must (P0) | Quyết định giá trị BR (GATE-DEC) | R0 | ✅ 6 tầng (draft) |
 | 8 | Audit capture & backup/restore | `ops-foundation` | CAP-AUDIT, CAP-OPS | Hệ thống | Must (P0) | access-control | R0 | ✅ 6 tầng (draft) |
-| 9 | Mượn tại quầy | `checkout` | CAP-CIRC | Thủ thư | Must (P0) | access-control, catalog-admin, copy-inventory, policy-config | R1A | ✅ 6 tầng (draft) |
-| 10 | Trả & ngoại lệ | `return-handling` | CAP-CIRC | Thủ thư | Must (P0) | checkout, overdue-fines, damage-lifecycle | R1A | ✅ 6 tầng (draft) |
+| 9 | Mượn tại quầy | `checkout` | CAP-CIRC | Nhân viên | Must (P0) | access-control, catalog-admin, copy-inventory, policy-config | R1A | ✅ 6 tầng (draft) |
+| 10 | Trả & ngoại lệ | `return-handling` | CAP-CIRC | Nhân viên | Must (P0) | checkout, overdue-fines, damage-lifecycle | R1A | ✅ 6 tầng (draft) |
 | 11 | Job quá hạn & fine ledger | `overdue-fines` | CAP-OVERDUE, CAP-FINE | Hệ thống | Must (P0) | policy-config, ops-foundation | R1A | ✅ 6 tầng (draft) |
-| 12 | Báo cáo hư hỏng & duyệt | `damage-lifecycle` | CAP-DAMAGE | Thủ thư, Quản trị viên | Must (P0) | checkout | R1A | ✅ 6 tầng (draft) |
-| 13 | Ghi nhận mất & tìm lại | `lost-handling` | CAP-DAMAGE | Thủ thư | Must (P0-PROPOSAL) R1A; Should (P1) R1B | return-handling, GATE-DEC (financial control) | R1A, R1B | ✅ 6 tầng (draft) |
-| 14 | Thu phạt tiền mặt tối thiểu | `fine-collection-basic` | CAP-FINE | Thủ thư | Must (P0-PROPOSAL) | overdue-fines | R1A | ✅ 6 tầng (draft) |
+| 12 | Báo cáo hư hỏng & duyệt | `damage-lifecycle` | CAP-DAMAGE | Nhân viên, Thủ thư | Must (P0) | checkout | R1A | ✅ 6 tầng (draft) |
+| 13 | Ghi nhận mất & tìm lại | `lost-handling` | CAP-DAMAGE | Nhân viên | Must (P0-PROPOSAL) R1A; Should (P1) R1B | return-handling, GATE-DEC (financial control) | R1A, R1B | ✅ 6 tầng (draft) |
+| 14 | Thu phạt tiền mặt tối thiểu | `fine-collection-basic` | CAP-FINE | Nhân viên | Must (P0-PROPOSAL) | overdue-fines | R1A | ✅ 6 tầng (draft) |
 | 15 | Tự phục vụ người đọc | `reader-self-service` | CAP-READER | Người đọc | Must (P0) R1A; Should (P1) R1B | access-control, checkout | R1A, R1B | ✅ 6 tầng (draft) |
 | 16 | Thông báo tối thiểu | `notification-core` | CAP-NOTIFY | Hệ thống | Must (P0) | access-control | R1A | ✅ 6 tầng (draft) |
-| 17 | Báo cáo vận hành | `ops-reports` | CAP-REPORT | Quản trị viên | Must (P0) | checkout (dữ liệu thật) | R1A, R1B | ✅ 6 tầng (draft) |
-| 18 | Gia hạn tại quầy & online | `renewal` | CAP-RENEW, CAP-READER | Người đọc, Thủ thư | Should (P1) | checkout; BR gia hạn kiểm hàng chờ rỗng tới R2 (DEC-P2-05) | R1B | ✅ 6 tầng (draft) |
-| 19 | Thu phạt nâng cao (biên nhận, miễn/điều chỉnh) | `fine-collection-adv` | CAP-FINE | Thủ thư, Quản trị viên | Should (P1) | fine-collection-basic, financial-control approval | R1B | ✅ 6 tầng (draft) |
-| 20 | Trung tâm thông báo & audit viewer | `notification-audit-ui` | CAP-NOTIFY, CAP-AUDIT | Mọi vai trò, Quản trị viên | Should (P1) | notification-core, ops-foundation | R1B | ✅ 6 tầng (draft) |
-| 21 | Đặt trước trọn vòng | `reservation` | CAP-RESERVE | Người đọc, Thủ thư | Should (P1) | return-handling (điểm quyết định D5), notification-core, policy-config | R2 | ✅ 6 tầng (draft) |
-| 22 | Báo cáo xu hướng | `trend-reports` | CAP-REPORT | Quản trị viên | Should (P1) | ops-reports (dữ liệu vận hành tích lũy) | R2 | ✅ 6 tầng (draft) |
+| 17 | Báo cáo vận hành | `ops-reports` | CAP-REPORT | Thủ thư | Must (P0) | checkout (dữ liệu thật) | R1A, R1B | ✅ 6 tầng (draft) |
+| 18 | Gia hạn tại quầy & online | `renewal` | CAP-RENEW, CAP-READER | Người đọc, Nhân viên | Should (P1) | checkout; BR gia hạn kiểm hàng chờ rỗng tới R2 (DEC-P2-05) | R1B | ✅ 6 tầng (draft) |
+| 19 | Thu phạt nâng cao (biên nhận, miễn/điều chỉnh) | `fine-collection-adv` | CAP-FINE | Nhân viên, Thủ thư | Should (P1) | fine-collection-basic, financial-control approval | R1B | ✅ 6 tầng (draft) |
+| 20 | Trung tâm thông báo & audit viewer | `notification-audit-ui` | CAP-NOTIFY, CAP-AUDIT | Mọi vai trò, Thủ thư | Should (P1) | notification-core, ops-foundation | R1B | ✅ 6 tầng (draft) |
+| 21 | Đặt trước trọn vòng | `reservation` | CAP-RESERVE | Người đọc, Nhân viên | Should (P1) | return-handling (điểm quyết định D5), notification-core, policy-config | R2 | ✅ 6 tầng (draft) |
+| 22 | Báo cáo xu hướng | `trend-reports` | CAP-REPORT | Thủ thư | Should (P1) | ops-reports (dữ liệu vận hành tích lũy) | R2 | ✅ 6 tầng (draft) |
 | 23 | Candidate mở rộng | `expansion-candidates` | CAP-ATTEND/PAY/BRANCH/OFFLINE/MSGALT | — | Could (P2) | Quyết định riêng từng mục | R3 (candidate) | 🔄 brainstorm only — không chi tiết hóa |
 
 Ưu tiên ghi theo MoSCoW kèm normalized priority trong ngoặc (`priority-crosswalk.md`). Cột Release là bổ sung so với template, giữ vì release gắn với readiness gate.
@@ -163,7 +163,7 @@ __OQ riêng:__ OQ-access-control-001; OQ-01 nguồn
 
 ### 7.2 Cấp & kích hoạt tài khoản người đọc tại quầy — `reader-onboarding`
 
-Thủ thư cấp tài khoản người đọc tại quầy và kích hoạt để thẻ QR có hiệu lực (DEC-SF-03).
+Nhân viên cấp tài khoản người đọc tại quầy và kích hoạt để thẻ QR có hiệu lực (DEC-SF-03).
 
 __Phục vụ job:__ Người đọc có thẻ hợp lệ để mượn sách.
 
@@ -171,7 +171,7 @@ __Phạm vi v1:__ Tạo hồ sơ, kiểm trùng định danh, kích hoạt, cấ
 __Chưa làm:__ Tự đăng ký online (DEC-SF-03).
 
 __Luồng chính:__
-1) Thủ thư nhập hồ sơ người đọc
+1) Nhân viên nhập hồ sơ người đọc
 2) Hệ thống kiểm trùng định danh
 3) Kích hoạt, thẻ QR có hiệu lực
 
@@ -180,12 +180,12 @@ __OQ riêng:__ OQ-core-003; OQ-05 nguồn (hạn thẻ)
 
 ### 7.3 Quản trị tài khoản — `account-admin`
 
-Quản trị viên quản lý vòng đời tài khoản người đọc và tài khoản Thủ thư; Thủ thư sửa thông tin và khóa tạm người đọc (DEC-SF-04).
+Thủ thư quản lý vòng đời tài khoản người đọc và tài khoản Nhân viên; Nhân viên sửa thông tin và khóa tạm người đọc (DEC-SF-04).
 
 __Phục vụ job:__ Tài khoản luôn đúng người, đúng quyền, có dấu vết thay đổi.
 
-__Phạm vi v1:__ R0: tạo, sửa, khóa, xóa mềm tài khoản người đọc và tài khoản Thủ thư. R1B: Thủ thư sửa thông tin, khóa tạm và mở lại người đọc.
-__Chưa làm:__ Quản lý tài khoản Quản trị viên (còn mở).
+__Phạm vi v1:__ R0: tạo, sửa, khóa, xóa mềm tài khoản người đọc và tài khoản Nhân viên. R1B: Nhân viên sửa thông tin, khóa tạm và mở lại người đọc.
+__Chưa làm:__ Quản lý tài khoản Thủ thư (còn mở).
 
 __Luồng chính:__
 1) Tra cứu tài khoản
@@ -197,11 +197,11 @@ __OQ riêng:__ OQ-account-admin-001; OQ-01 nguồn
 
 ### 7.4 Danh mục & đầu sách — `catalog-admin`
 
-Quản trị viên quản lý đầu sách và danh mục (thể loại, tác giả, NXB, vị trí kệ); Thủ thư và Quản trị viên tra cứu đầu sách, số bản khả dụng.
+Thủ thư quản lý đầu sách và danh mục (thể loại, tác giả, NXB, vị trí kệ); Nhân viên và Thủ thư tra cứu đầu sách, số bản khả dụng.
 
 __Phục vụ job:__ Kho có dữ liệu đầu sách chuẩn và tra cứu được ngay.
 
-__Phạm vi v1:__ Tạo, sửa, ẩn đầu sách; quản lý danh mục; tra cứu phía Thủ thư/Quản trị viên (DEC-SF-07).
+__Phạm vi v1:__ Tạo, sửa, ẩn đầu sách; quản lý danh mục; tra cứu phía Nhân viên/Thủ thư (DEC-SF-07).
 __Chưa làm:__ Tra cứu phía người đọc (thuộc `reader-self-service`).
 
 __Luồng chính:__
@@ -250,7 +250,7 @@ __OQ riêng:__ OQ-data-import-001; OQ-data-import-002; OQ-15 nguồn
 
 ### 7.7 Cấu hình quy định — `policy-config`
 
-Quản trị viên cấu hình tham số mượn, gia hạn, giữ chỗ, phạt, kênh thông báo, có hiệu lực theo thời điểm, không cần sửa code.
+Thủ thư cấu hình tham số mượn, gia hạn, giữ chỗ, phạt, kênh thông báo, có hiệu lực theo thời điểm, không cần sửa code.
 
 __Phục vụ job:__ Thay đổi quy định không phải chờ phát triển phần mềm.
 
@@ -285,7 +285,7 @@ __OQ riêng:__ OQ-core-003; OQ-core-005
 
 ### 7.9 Mượn tại quầy — `checkout`
 
-Thủ thư quét thẻ và nhiều sách; hệ thống kiểm điều kiện ngay khi quét và ghi phiếu mượn nguyên tử, chống trùng và tranh chấp.
+Nhân viên quét thẻ và nhiều sách; hệ thống kiểm điều kiện ngay khi quét và ghi phiếu mượn nguyên tử, chống trùng và tranh chấp.
 
 __Phục vụ job:__ Mượn sách nhanh, đúng, không hai người cùng giữ một bản sao.
 
@@ -303,7 +303,7 @@ __OQ riêng:__ OQ-policy-config-001; OQ-core-004
 
 ### 7.10 Trả & ngoại lệ — `return-handling`
 
-Thủ thư quét sách trả; hệ thống đóng phiếu, phát hiện quá hạn hoặc hư hỏng và chuyển trạng thái bản sao.
+Nhân viên quét sách trả; hệ thống đóng phiếu, phát hiện quá hạn hoặc hư hỏng và chuyển trạng thái bản sao.
 
 __Phục vụ job:__ Trả sách xong là trạng thái kho và công nợ đúng ngay.
 
@@ -339,7 +339,7 @@ __OQ riêng:__ OQ-policy-config-001
 
 ### 7.12 Báo cáo hư hỏng & duyệt — `damage-lifecycle`
 
-Thủ thư báo hư hỏng kèm 1–5 ảnh, bản sao chuyển Chờ duyệt ngay; Quản trị viên quyết định Bác bỏ, Sửa hoặc Thanh lý.
+Nhân viên báo hư hỏng kèm 1–5 ảnh, bản sao chuyển Chờ duyệt ngay; Thủ thư quyết định Bác bỏ, Sửa hoặc Thanh lý.
 
 __Phục vụ job:__ Sách hỏng được xử lý dứt điểm, không kẹt trạng thái.
 
@@ -349,7 +349,7 @@ __Chưa làm:__ —
 __Luồng chính:__
 1) Báo cáo kèm ảnh
 2) Bản sao chuyển Chờ duyệt
-3) Quản trị viên chọn hướng xử lý
+3) Thủ thư chọn hướng xử lý
 4) Bản sao chuyển trạng thái theo quyết định
 
 __Rủi ro chính:__ Bản sao kẹt Chờ duyệt · __Đo thành công:__ 0 bản sao kẹt trạng thái tạm không có owner
@@ -374,7 +374,7 @@ __OQ riêng:__ DEC-D3-05; OQ-fine-collection-adv-001
 
 ### 7.14 Thu phạt tiền mặt tối thiểu — `fine-collection-basic`
 
-Thủ thư ghi nhận thu tiền mặt tại quầy, chống ghi trùng, không sửa xóa bút toán đã ghi.
+Nhân viên ghi nhận thu tiền mặt tại quầy, chống ghi trùng, không sửa xóa bút toán đã ghi.
 
 __Phục vụ job:__ Người đọc trả được tiền phạt ngay trong pilot.
 
@@ -426,9 +426,9 @@ __OQ riêng:__ OQ-notification-core-001; OQ-07 nguồn
 
 ### 7.17 Báo cáo vận hành — `ops-reports`
 
-Báo cáo vận hành RP-01, RP-02, RP-04 ở R1A và danh sách quá hạn cho Thủ thư (FR-S09 nguồn) ở R1B.
+Báo cáo vận hành RP-01, RP-02, RP-04 ở R1A và danh sách quá hạn cho Nhân viên (FR-S09 nguồn) ở R1B.
 
-__Phục vụ job:__ Quản trị viên nắm tình hình kho và quá hạn hằng ngày.
+__Phục vụ job:__ Thủ thư nắm tình hình kho và quá hạn hằng ngày.
 
 __Phạm vi v1:__ RP-01, RP-02, RP-04, xuất file (R1A); danh sách quá hạn (R1B).
 __Chưa làm:__ Báo cáo xu hướng (thuộc `trend-reports`, R2).
@@ -443,7 +443,7 @@ __OQ riêng:__ OQ-ops-reports-001
 
 ### 7.18 Gia hạn tại quầy & online — `renewal`
 
-Gia hạn tại quầy (Thủ thư làm thay người đọc) và gia hạn online (người đọc tự làm); từ chối khi đã quá hạn, có người đặt trước hoặc hết lượt.
+Gia hạn tại quầy (Nhân viên làm thay người đọc) và gia hạn online (người đọc tự làm); từ chối khi đã quá hạn, có người đặt trước hoặc hết lượt.
 
 __Phục vụ job:__ Người đọc giữ sách lâu hơn mà không phải trả rồi mượn lại.
 
@@ -478,9 +478,9 @@ __OQ riêng:__ OQ-fine-collection-adv-001; OQ-fine-collection-adv-002; DEC-D3-04
 
 ### 7.20 Trung tâm thông báo & audit viewer — `notification-audit-ui`
 
-Trung tâm thông báo cho mọi vai trò (DEC-SF-09); màn xem audit và dòng thời gian lịch sử cho Quản trị viên.
+Trung tâm thông báo cho mọi vai trò (DEC-SF-09); màn xem audit và dòng thời gian lịch sử cho Thủ thư.
 
-__Phục vụ job:__ Người dùng xem lại được thông báo; Quản trị viên tra được ai làm gì.
+__Phục vụ job:__ Người dùng xem lại được thông báo; Thủ thư tra được ai làm gì.
 
 __Phạm vi v1:__ Trung tâm thông báo, đánh dấu đã đọc, nhật ký audit, dòng thời gian lịch sử (R1B).
 __Chưa làm:__ —
@@ -495,7 +495,7 @@ __OQ riêng:__ OQ-core-003
 
 ### 7.21 Đặt trước trọn vòng — `reservation`
 
-Người đọc hoặc Thủ thư đặt trước khi hết bản; hàng chờ theo thứ tự, giữ 48 giờ, hết hạn chuyển người kế tiếp, nhận sách qua quầy mượn.
+Người đọc hoặc Nhân viên đặt trước khi hết bản; hàng chờ theo thứ tự, giữ 48 giờ, hết hạn chuyển người kế tiếp, nhận sách qua quầy mượn.
 
 __Phục vụ job:__ Người đọc chắc chắn có lượt khi sách được trả.
 
@@ -515,7 +515,7 @@ __OQ riêng:__ OQ-reservation-001
 
 Báo cáo xu hướng RP-03, RP-05, RP-06, RP-07 trên dữ liệu vận hành tích lũy.
 
-__Phục vụ job:__ Quản trị viên quyết định mua, sửa, thanh lý dựa trên số liệu.
+__Phục vụ job:__ Thủ thư quyết định mua, sửa, thanh lý dựa trên số liệu.
 
 __Phạm vi v1:__ RP-03, RP-05, RP-06, RP-07, xuất file (R2).
 __Chưa làm:__ RP-08 (candidate R3).
@@ -551,18 +551,18 @@ Không bịa baseline: mọi chỉ số chưa có số liệu lịch sử ghi r�
 |---|---|---|---|---|
 | North Star | Thời gian hoàn tất một giao dịch mượn/trả tại quầy | Chưa đo — đo thủ công quy trình hiện tại trong UAT | Giảm so với baseline đo được; QR→hiển thị < 1 giây (NFR-01) | Đo thời gian UAT + telemetry; Owner: Thủ thư trưởng |
 | Input | Quét QR → hiển thị < 1s; tra cứu < 2s ở 50.000 bản sao | — | NFR-01 | Kiểm thử hiệu năng với dataset import; Owner: đội kỹ thuật |
-| Input | Sai lệch kho vật lý vs hệ thống sau đối soát pilot | — | ≤ 1% | Đối soát kiểm kê; Owner: Quản trị viên |
-| Input | % bản ghi import lỗi/trùng được chỉ rõ trước ghi chính thức | — | 100% | Báo cáo dry-run; Owner: Quản trị viên |
+| Input | Sai lệch kho vật lý vs hệ thống sau đối soát pilot | — | ≤ 1% | Đối soát kiểm kê; Owner: Thủ thư |
+| Input | % bản ghi import lỗi/trùng được chỉ rõ trước ghi chính thức | — | 100% | Báo cáo dry-run; Owner: Thủ thư |
 | Guardrail | Số Loan mở trùng một bản sao | — | 0 | Query kiểm chứng định kỳ; Owner: đội kỹ thuật |
 | Guardrail | % thao tác thay đổi dữ liệu có audit actor/thời điểm/đối tượng | — | 100% | Kiểm tra AuditLog; Owner: đội kỹ thuật |
 | Guardrail | Khôi phục backup thành công trước go-live | — | ≥ 1 lần diễn tập đạt | GATE-OPS evidence; Owner: vận hành |
-| Guardrail | Bản sao kẹt trạng thái tạm (Chờ duyệt/Đang giữ) không có owner | — | 0 | Báo cáo tuổi trạng thái; Owner: Quản trị viên |
+| Guardrail | Bản sao kẹt trạng thái tạm (Chờ duyệt/Đang giữ) không có owner | — | 0 | Báo cáo tuổi trạng thái; Owner: Thủ thư |
 
 Chỉ số KPI **không thu thập PII quá mức cần thiết** (ràng buộc an toàn từ plan).
 
 ## 9. Constraints
 
-- **Kênh/nền tảng:** web responsive là nền tảng duy nhất của baseline; thủ thư quét bằng camera điện thoại hoặc nhập mã thủ công (NFR-06, OQ-14 default — `PROPOSAL` đến khi duyệt). (FACT/PROPOSAL)
+- **Kênh/nền tảng:** web responsive là nền tảng duy nhất của baseline; nhân viên quét bằng camera điện thoại hoặc nhập mã thủ công (NFR-06, OQ-14 default — `PROPOSAL` đến khi duyệt). (FACT/PROPOSAL)
 - **Ngôn ngữ & định dạng:** tiếng Việt, VND, dd/mm/yyyy, UTC+7 (NFR-08). (FACT)
 - **Pháp lý/compliance:** retention, quyền xem/sửa/xóa dữ liệu cá nhân, dữ liệu người chưa thành niên phải được pháp lý/quản trị dữ liệu phê duyệt trước go-live — gate non-waivable. (FACT — project profile Compliance)
 - **Vận hành:** một cơ sở, hai quầy pilot; thu phạt tiền mặt tại quầy; không offline. (FACT — project profile)
@@ -575,7 +575,7 @@ Chỉ số KPI **không thu thập PII quá mức cần thiết** (ràng buộc 
 | File Excel thật sai/trùng QR | feasibility | FACT | thường | Không vận hành được quầy | Dry-run, lỗi theo dòng, đối soát vật lý (GATE-MIG) |
 | Quy định mượn/phạt chốt muộn | viability | FACT | thỉnh thoảng | Viết lại luồng, trễ pilot | GATE-DEC chốt giá trị BR trước SRS |
 | Bản sao kẹt trạng thái Chờ duyệt | usability | FACT | thỉnh thoảng | Giảm sách khả dụng | Disposition tối thiểu trong R1A |
-| Thủ thư chưa quen quy trình | usability | FACT | thường | Giao dịch chậm, sửa tay | SOP, diễn tập (GATE-TRN) |
+| Nhân viên chưa quen quy trình | usability | FACT | thường | Giao dịch chậm, sửa tay | SOP, diễn tập (GATE-TRN) |
 | Quyền riêng tư chưa duyệt | viability | FACT | thỉnh thoảng | Trì hoãn/thu hẹp go-live | GATE-DEC + GATE-GNG non-waivable |
 | Scope creep chen vào MVP | viability | FACT | thỉnh thoảng | Trễ critical path | Candidate giữ ngoài release cam kết |
 | Sơ đồ Copy 7 trạng thái & flow trả gốc không phục hồi được | feasibility | FACT | chưa rõ | SRS khóa trên giả định | Reconstruct-as-proposal + domain approval (Phase 3) |
@@ -585,7 +585,7 @@ Chỉ số KPI **không thu thập PII quá mức cần thiết** (ràng buộc 
 
 Kế thừa OQ-01..OQ-15 từ tài liệu hệ thống (giữ nguyên semantics; governance tại decision register). Các OQ ảnh hưởng trực tiếp release/gate:
 
-- [ ] OQ-01: Ai quản lý tài khoản Quản trị viên? Có cần Admin riêng? → ảnh hưởng privileged identity, GATE-DEC trước R0.
+- [ ] OQ-01: Ai quản lý tài khoản Thủ thư? Có cần Admin riêng? → ảnh hưởng privileged identity, GATE-DEC trước R0.
 - [x] OQ-03: Luồng đăng ký/kích hoạt người đọc → Resolved: chỉ cấp tại quầy, không tự đăng ký online (DEC-SF-03, 2026-10-08).
 - [ ] OQ-04: Giá trị thật BR-01..BR-10; có phân loại người đọc không → GATE-DEC trước khi khóa policy.
 - [ ] OQ-07: Kênh thông báo → xử lý theo DEC-P2-01 (in-app + email sự kiện quan trọng).

@@ -2,7 +2,7 @@
 type: srs
 feature: notification-audit-ui
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/notification-audit-ui/brainstorms/notification-audit-ui-scope.md
   - docs/_product/prd.md
@@ -15,7 +15,7 @@ links:
 
 ## 1. Scope
 
-Trung tâm thông báo cho mọi vai trò (đã đọc, chưa đọc); nhật ký audit chỉ đọc và dòng thời gian lịch sử cho Quản trị viên; che dữ liệu nhạy cảm theo quyền.
+Trung tâm thông báo cho mọi vai trò (đã đọc, chưa đọc); nhật ký audit chỉ đọc và dòng thời gian lịch sử cho Thủ thư; che dữ liệu nhạy cảm theo quyền.
 
 **Release:** R1B
 
@@ -26,8 +26,8 @@ Trung tâm thông báo cho mọi vai trò (đã đọc, chưa đọc); nhật k�
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
 | Người đọc | người | Tự phục vụ | Có |
-| Thủ thư | người | Vận hành quầy | Có |
-| Quản trị viên | người | Quản trị, duyệt ngoại lệ | Có |
+| Nhân viên | người | Vận hành quầy | Có |
+| Thủ thư | người | Quản trị, duyệt ngoại lệ | Có |
 | Bảo mật/pháp chế | stakeholder | Retention, quyền dữ liệu | Có như stakeholder |
 
 Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.md` Mục 2.
@@ -37,7 +37,7 @@ Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.
 | ID | Title | Description | Priority | Release | Verify by | Source |
 |---|---|---|---|---|---|---|
 | FR-notification-audit-ui-001 | Trung tâm thông báo | Mọi vai trò xem danh sách thông báo của chính mình, mới nhất trước, đánh dấu đã đọc, xem số chưa đọc (SRC-FR-C04). | P1 | R1B | test | Spec cũ (xem id-crosswalk-lmp) |
-| FR-notification-audit-ui-002 | Xem nhật ký audit | Quản trị viên tra cứu nhật ký audit theo người làm, đối tượng, thời gian; chỉ đọc; che trường nhạy cảm theo quyền. | P1 | R1B | test | Spec cũ (xem id-crosswalk-lmp) |
+| FR-notification-audit-ui-002 | Xem nhật ký audit | Thủ thư tra cứu nhật ký audit theo người làm, đối tượng, thời gian; chỉ đọc; che trường nhạy cảm theo quyền. | P1 | R1B | test | Spec cũ (xem id-crosswalk-lmp) |
 | FR-notification-audit-ui-003 | Truy vết lịch sử nghiệp vụ | Xem lịch sử trạng thái và sự kiện liên quan của bản sao, phiếu mượn, đặt trước, tiền phạt và báo cáo hư hỏng. | P1 | R1B | demo/test | Spec cũ (xem id-crosswalk-lmp) |
 
 ## 4. Non-Functional Requirements (NFR)
@@ -88,7 +88,7 @@ __Assumptions:__
 
 | Giả định | Invalidate nếu sai |
 |---|---|
-| Chỉ Quản trị viên xem nhật ký audit | FR-notification-audit-ui-002 |
+| Chỉ Thủ thư xem nhật ký audit | FR-notification-audit-ui-002 |
 
 ## 12. Open Questions
 

@@ -2,7 +2,7 @@
 type: usecase
 feature: notification-core
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/notification-core/usecases/notification-core-usecase-index.md
   - docs/features/notification-core/srs/notification-core-spec.md
@@ -15,7 +15,7 @@ links:
 
 ## Primary Actor
 
-Hệ thống. Quản trị viên theo dõi trạng thái gửi.
+Hệ thống. Thủ thư theo dõi trạng thái gửi.
 
 ## Stakeholders & Interests
 

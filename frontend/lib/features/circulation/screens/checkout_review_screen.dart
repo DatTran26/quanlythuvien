@@ -78,7 +78,7 @@ class _CheckoutReviewScreenState extends State<CheckoutReviewScreen> {
         if (created.isEmpty) {
           _error = (msg, fix);
         } else {
-          // Một phần đã ghi (chỉ xảy ra do G1) -> nói thật rõ cho thủ thư
+          // Một phần đã ghi (chỉ xảy ra do G1) -> nói thật rõ cho nhân viên
           _error = (
             'Đã mượn ${created.length}/${_copies.length} cuốn. '
                 'Cuốn "${_copies[created.length].titleName}" bị từ chối: $msg',
@@ -230,7 +230,7 @@ class _CheckoutReviewScreenState extends State<CheckoutReviewScreen> {
               const Divider(height: 24),
               for (final loan in _receipt!) _kv('#${loan.id}  ${loan.titleName}', fmtDate(loan.dueAt)),
               const Divider(height: 24),
-              _kv('Thủ thư', AppSession.displayName), // sau lấy từ /me (TV1)
+              _kv('Nhân viên', AppSession.displayName), // sau lấy từ /me (TV1)
             ],
           ),
         ),

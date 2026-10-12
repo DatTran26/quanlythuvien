@@ -2,7 +2,7 @@
 type: brainstorm
 feature: ops-reports
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_shared/core-spec.md
@@ -13,34 +13,34 @@ links:
 
 ## 1. Idea Seed
 
-Quản trị viên xem và xuất các báo cáo vận hành hằng ngày: tổng quan tài khoản, tình trạng kho, phiếu quá hạn; từ R1B Thủ thư có danh sách quá hạn để nhắc người đọc.
+Thủ thư xem và xuất các báo cáo vận hành hằng ngày: tổng quan tài khoản, tình trạng kho, phiếu quá hạn; từ R1B Nhân viên có danh sách quá hạn để nhắc người đọc.
 
 ## 2. Context
 
 - RP-01, RP-02, RP-04 thuộc R1A; RP-04 nâng P0 vì quá hạn phải theo dõi được ngay từ pilot (DEC-P2-02).
-- Danh sách quá hạn cho Thủ thư (FR-S09 nguồn) ở R1B.
+- Danh sách quá hạn cho Nhân viên (FR-S09 nguồn) ở R1B.
 - Báo cáo xu hướng RP-03, RP-05, RP-06, RP-07 thuộc `trend-reports` (R2), dùng chung màn dashboard báo cáo.
-- Nguồn chỉ cho vai trò quản trị xem báo cáo; Thủ thư quầy xem báo cáo hay không còn mở.
+- Nguồn chỉ cho vai trò quản trị xem báo cáo; Nhân viên quầy xem báo cáo hay không còn mở.
 
 ## 3. User Types (preliminary)
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Quản trị viên | Tổng hợp tay từ sổ sách | Báo cáo theo khoảng thời gian, xuất file |
-| Thủ thư | Không biết ai đang quá hạn để nhắc | Danh sách quá hạn (R1B) |
+| Thủ thư | Tổng hợp tay từ sổ sách | Báo cáo theo khoảng thời gian, xuất file |
+| Nhân viên | Không biết ai đang quá hạn để nhắc | Danh sách quá hạn (R1B) |
 
 ## 4. Capabilities Breakdown
 
 ### P0 — must have
 
-- RP-01 Tổng quan tài khoản: số người đọc và Thủ thư theo trạng thái, người đọc mới theo tháng.
+- RP-01 Tổng quan tài khoản: số người đọc và Nhân viên theo trạng thái, người đọc mới theo tháng.
 - RP-02 Tình trạng kho: số bản sao theo trạng thái và tình trạng (mới, cũ, hư, mất, thanh lý).
 - RP-04 Quá hạn: danh sách phiếu quá hạn, số ngày, người đọc.
 - Lọc theo khoảng thời gian, xuất Excel và PDF.
 
 ### P1 — should have
 
-- Danh sách quá hạn cho Thủ thư để nhắc người đọc (R1B).
+- Danh sách quá hạn cho Nhân viên để nhắc người đọc (R1B).
 
 ### P2 — nice to have
 
@@ -50,7 +50,7 @@ Quản trị viên xem và xuất các báo cáo vận hành hằng ngày: tổn
 
 ### 5.1 Xem và xuất báo cáo
 
-1) Quản trị viên mở dashboard báo cáo, chọn báo cáo.
+1) Thủ thư mở dashboard báo cáo, chọn báo cáo.
 2) Chọn khoảng thời gian; hệ thống hiện số liệu.
 3) Xuất Excel hoặc PDF.
 
@@ -67,9 +67,9 @@ Quản trị viên xem và xuất các báo cáo vận hành hằng ngày: tổn
 
 | From State | To State | Rule | Action | Result |
 |------------|----------|------|--------|--------|
-| Quản trị viên | RP-01, RP-02, RP-04 | Có quyền | Xem, xuất | Thực hiện |
-| Thủ thư | Danh sách quá hạn (R1B) | Có quyền | Xem | Thực hiện |
-| Thủ thư | RP-01, RP-02, RP-04 | Chưa xác định | Xem | Còn mở (OQ-1) |
+| Thủ thư | RP-01, RP-02, RP-04 | Có quyền | Xem, xuất | Thực hiện |
+| Nhân viên | Danh sách quá hạn (R1B) | Có quyền | Xem | Thực hiện |
+| Nhân viên | RP-01, RP-02, RP-04 | Chưa xác định | Xem | Còn mở (OQ-1) |
 
 ### 6.3 State Transitions
 
@@ -134,7 +134,7 @@ Không áp dụng — feature chỉ đọc.
 
 ## 11. Open Questions
 
-- [ ] OQ-1: Thủ thư quầy có quyền xem RP-01, RP-02, RP-04 không? (OQ-ops-reports-001; hold — domain approver)
+- [ ] OQ-1: Nhân viên quầy có quyền xem RP-01, RP-02, RP-04 không? (OQ-ops-reports-001; hold — domain approver)
 - [ ] OQ-2: Priority chính thức: P0 theo PRD hay P1 theo SRS cũ? (hold)
 
 ## 12. Next Steps

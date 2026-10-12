@@ -2,7 +2,7 @@
 type: usecase-index
 feature: trend-reports
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/trend-reports/srs/trend-reports-spec.md
   - docs/features/trend-reports/srs/trend-reports-flows.md
@@ -14,7 +14,7 @@ links:
 
 | # | Slug | Level | Status | Actor primary | Covers FR | Screens | Errors (E-*) | OQ ref | Priority | Updated |
 |---|------|-------|--------|---------------|-----------|---------|--------------|--------|----------|---------|
-| 1 | [uc-trend-reports](uc-trend-reports.md) | sea | draft | Quản trị viên | FR-trend-reports-001 | report-dashboard | E-core-002, 009 | OQ-trend-reports-001 | P1 | 2026-10-08 |
+| 1 | [uc-trend-reports](uc-trend-reports.md) | sea | draft | Thủ thư | FR-trend-reports-001 | report-dashboard | E-core-002, 009 | OQ-trend-reports-001 | P1 | 2026-10-08 |
 
 ## Relationships
 

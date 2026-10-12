@@ -1,12 +1,14 @@
-// Màn 3 – Tài khoản Thủ thư (staff-accounts). Route: /staff
+// Màn 3 – Tài khoản Nhân viên (staff-accounts). Route: /staff
 // Bài: TV3 1B · Độ khó ⭐⭐
 // Spec: docs/features/account-admin/srs/account-admin-userflow.md
 //
-// Mục đích: chỉ Quản trị viên. Tạo, khóa, mở tài khoản Thủ thư.
+// Mục đích: chỉ Thủ thư. Tạo, khóa, mở tài khoản Nhân viên.
 // Đến từ: reader-list.
 //
 
 import 'package:flutter/material.dart';
+import 'package:frontend/core/auth/session.dart';
+import 'package:frontend/features/notification/widgets/access_denied_view.dart';
 
 import '../data/account_api.dart';
 import '../models/app_user.dart';
@@ -22,11 +24,10 @@ class StaffAccountsScreen extends StatefulWidget {
 }
 
 class _StaffAccountsScreenState extends State<StaffAccountsScreen> {
-  // Tạm coi người thao tác là Quản trị viên #1. Khi có đăng nhập (TV1) thì lấy từ phiên.
-  static const _actorId = 1;
-
   final AccountApi _api = MockAccountApi();
   late Future<List<AppUser>> _future;
+
+  int get _actorId => AppSession.userId!;
 
   @override
   void initState() {
@@ -53,7 +54,7 @@ class _StaffAccountsScreenState extends State<StaffAccountsScreen> {
     if (created != true || !mounted) return;
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('Đã tạo tài khoản Thủ thư')));
+    ).showSnackBar(const SnackBar(content: Text('Đã tạo tài khoản Nhân viên')));
     _reload();
   }
 
@@ -86,8 +87,17 @@ class _StaffAccountsScreenState extends State<StaffAccountsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (!AppSession.isLibrarian) {
+      return const Scaffold(
+        body: SafeArea(
+          child: AccessDeniedView(
+            message: 'Tài khoản của bạn không có quyền mở màn này.',
+          ),
+        ),
+      );
+    }
     return Scaffold(
-      appBar: AppBar(title: const Text('Tài khoản Thủ thư')),
+      appBar: AppBar(title: const Text('Tài khoản Nhân viên')),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _create,
         icon: const Icon(Icons.person_add),
@@ -104,7 +114,7 @@ class _StaffAccountsScreenState extends State<StaffAccountsScreen> {
           }
           final staff = snapshot.data!;
           if (staff.isEmpty) {
-            return const Center(child: Text('Chưa có tài khoản Thủ thư'));
+            return const Center(child: Text('Chưa có tài khoản Nhân viên'));
           }
           return ListView.separated(
             itemCount: staff.length,

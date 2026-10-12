@@ -218,7 +218,7 @@
           </div>
           <p class="hint-text">Mỗi ảnh ≤500KB sau nén (NFR-05); kiểm tra loại/MIME sniffing, quét nội dung, tên file an toàn, không tin metadata gốc (BR-damage-lifecycle-002, FR-damage-lifecycle-002).</p>
           <button class="btn-primary" type="button">Gửi báo cáo</button>
-          <p class="hint-text">Submit → 1 transaction: DamageReport PENDING + Copy →PENDING_REVIEW + audit + outbox notify Quản trị viên. Chặn lưu thông ngay khi báo hư hỏng là mặc định — Open, chưa chốt (OQ-11).</p>
+          <p class="hint-text">Submit → 1 transaction: DamageReport PENDING + Copy →PENDING_REVIEW + audit + outbox notify Thủ thư. Chặn lưu thông ngay khi báo hư hỏng là mặc định — Open, chưa chốt (OQ-11).</p>
           <p class="hint-text">Báo phát hiện trong luồng trả: hệ thống đóng Loan + assess phạt BR-07 TRƯỚC rồi mới tạo report (COPY-T05 — FACT), gắn loan_id vào report.</p>
           <div class="divider"><span>Trạng thái lỗi</span></div>
           <div class="banner banner-warn"><b>E-core-001</b> — Thiếu mức độ/ghi chú/ảnh: inline error, giữ dữ liệu nhập, cho sửa và submit lại; không tạo report.</div>
@@ -245,7 +245,7 @@
           <div class="wf-card">
             <div class="wf-card-body">
               <div class="wf-card-title">COPY-00912 · "Tên đầu sách"</div>
-              <div class="wf-card-sub">Mức độ: Vừa · Người báo: Thủ thư · 02/10 09:30 · Gắn Loan LOAN-00567 (phát hiện lúc trả)</div>
+              <div class="wf-card-sub">Mức độ: Vừa · Người báo: Nhân viên · 02/10 09:30 · Gắn Loan LOAN-00567 (phát hiện lúc trả)</div>
               <div class="wf-card-sub">Mô tả: "Rách bìa, cong gáy…"</div>
             </div>
           </div>
@@ -255,7 +255,7 @@
             <div class="wf-card"><div class="wf-card-body"><div class="wf-card-sub">[Ảnh 3]</div></div></div>
           </div>
           <p class="hint-text">Copy ON_HOLD bị báo hư hỏng → Reservation READY quay WAITING giữ vị trí hàng chờ + notify người đặt (PROPOSAL — DEC-D3-06, áp dụng từ R2).</p>
-          <div class="divider"><span>Disposition — Quản trị viên (chỉ khi PENDING)</span></div>
+          <div class="divider"><span>Disposition — Thủ thư (chỉ khi PENDING)</span></div>
           <button class="btn-secondary" type="button">Bác bỏ → REJECTED</button>
           <button class="btn-secondary" type="button">Sửa → REPAIR (Copy →IN_REPAIR)</button>
           <button class="btn-primary" type="button">Thanh lý → DISPOSE (Copy →DISPOSED)</button>

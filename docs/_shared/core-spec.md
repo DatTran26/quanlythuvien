@@ -2,7 +2,7 @@
 type: srs
 scope: shared
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_shared/project-profile.md
   - docs/_shared/id-crosswalk-lmp.md
@@ -25,21 +25,21 @@ links:
 
 | Actor | Loại | Mục tiêu | Trong scope? |
 |-------|------|----------|--------------|
-| Thủ thư | người | Xử lý mượn/trả/gia hạn/đặt trước/báo hư hỏng tại quầy | Có |
-| Người đọc | người | Tra cứu, đặt trước, nhận thông báo, thanh toán khi được phép | Có (P0 qua thủ thư; P1 self-service) |
-| Quản trị viên | người | Quản trị cấu hình, người dùng, quyền, import, audit | Có |
+| Nhân viên | người | Xử lý mượn/trả/gia hạn/đặt trước/báo hư hỏng tại quầy | Có |
+| Người đọc | người | Tra cứu, đặt trước, nhận thông báo, thanh toán khi được phép | Có (P0 qua nhân viên; P1 self-service) |
+| Thủ thư | người | Quản trị cấu hình, người dùng, quyền, import, audit | Có |
 | Hệ thống | hệ thống | Áp trạng thái, hàng đợi, outbox, audit, job nhắc hạn | Có |
 | Kênh thông báo ngoài | ngoài | Email/SMS/push tùy cấu hình | PROPOSAL — kênh cụ thể chưa chốt |
 | Bộ phận tài chính/kế toán | stakeholder | Đối soát tiền phạt, điều chỉnh, hoàn/đảo bút toán | Có như stakeholder; policy là OQ |
 | Bảo mật/pháp chế | stakeholder | Kiểm soát PII, retention, audit | Có như stakeholder; policy là OQ |
 
-**Mapping vai trò nguồn ↔ naming SRS (PROPOSAL — trả lời một phần OQ-01 nguồn, phần còn lại ở OQ-account-admin-001):**
+**Tên vai trò thống nhất với nghiệp vụ nguồn (DEC-SF-01, cập nhật 2026-10-12):**
 
 | Vai trò trong tài liệu nguồn (§2 `he_thong_quan_ly_thu_vien.md`) | Tên dùng trong bộ SRS này | Ghi chú |
 |---|---|---|
-| `Người đọc` | `Người đọc` | Giữ nguyên |
-| `Nhân viên` (trực quầy: mượn/trả, quét QR, báo hư hỏng, khóa tạm người đọc) | `Thủ thư` | Đổi tên — PROPOSAL |
-| `Thủ thư` (kế thừa Nhân viên + quản trị dữ liệu, cấu hình, báo cáo, nhật ký) | `Quản trị viên` | Đổi tên — PROPOSAL; việc tách vai trò admin riêng chính là câu hỏi OQ-01 nguồn |
+| `Người đọc` | `Người đọc` (`READER`) | Giữ nguyên |
+| `Nhân viên` (trực quầy: mượn/trả, quét QR, báo hư hỏng, khóa tạm người đọc) | `Nhân viên` (`STAFF`) | Giữ nguyên tên nguồn |
+| `Thủ thư` (kế thừa Nhân viên + quản trị dữ liệu, cấu hình, báo cáo, nhật ký) | `Thủ thư` (`LIBRARIAN`) | Giữ nguyên tên nguồn; vai trò Admin riêng ngoài phạm vi (OQ-01 nguồn) |
 | — | `Hệ thống` | Actor kỹ thuật cho job/cron/outbox/audit |
 
 Mọi quyền thao tác trong các UC/model phải dùng đúng naming SRS ở cột 2. Delta so với ma trận quyền nguồn phải gắn nhãn PROPOSAL kèm lý do — không ghi FACT cho quyền đã siết/mở.
@@ -69,7 +69,7 @@ Tên vai trò chốt theo DEC-SF-01 (`docs/_product/decision-register.md`).
 | BR-core-003 | Audit phải ghi cùng transaction; nếu audit fail thì business write fail, không để sensitive action không audit. | Sensitive action | FR-ops-foundation-001 | Plan red-team |
 | BR-core-004 | Quyền xem/đổi field PII và tài chính áp theo actor × resource × action × field × purpose; deny mặc định. | Access sensitive field/action | FR-access-control-001/FR-ops-foundation-001 | Plan red-team |
 | BR-core-005 | Notification không làm fail business transaction chính; business commit ghi outbox event để delivery retry sau. | Business event emits notification | FR-notification-core-001 | Plan red-team |
-| BR-core-006 | Xóa mềm: Reader, Thủ thư, BibliographicRecord, Copy đã có lịch sử nghiệp vụ chỉ được vô hiệu hóa/deactivate — không xóa cứng (giữ ledger append-only và audit trail). | Delete/deactivate request | FR-catalog-admin-001/FR-copy-inventory-001/FR-reader-onboarding-001 | Source fact (SRC-BR12 nguồn) |
+| BR-core-006 | Xóa mềm: Reader, Nhân viên, BibliographicRecord, Copy đã có lịch sử nghiệp vụ chỉ được vô hiệu hóa/deactivate — không xóa cứng (giữ ledger append-only và audit trail). | Delete/deactivate request | FR-catalog-admin-001/FR-copy-inventory-001/FR-reader-onboarding-001 | Source fact (SRC-BR12 nguồn) |
 
 ## 6. Error dùng chung
 
@@ -126,9 +126,9 @@ Tên vai trò chốt theo DEC-SF-01 (`docs/_product/decision-register.md`).
 
 | Giả định | Invalidate nếu sai |
 |----------|--------------------|
-| Thủ thư là actor P0 chính; người đọc tự phục vụ có thể dời R2 | FR-reader-self-service-002 và screen portal |
+| Nhân viên là actor P0 chính; người đọc tự phục vụ có thể dời R2 | FR-reader-self-service-002 và screen portal |
 | Reservation trọn vòng có một release owner duy nhất là R2; luồng trả R1A không phân bổ hàng chờ (D5 = "không có hàng chờ") | FR-reservation-001/FR-reservation-002; PROPOSAL DEC-P2-05 |
-| Cấu hình loan/renewal/hold/fine là policy do quản trị viên quản lý | BR-core-001/BR-renewal-001/BR-reservation-001 |
+| Cấu hình loan/renewal/hold/fine là policy do thủ thư quản lý | BR-core-001/BR-renewal-001/BR-reservation-001 |
 | Upload ảnh cần trong damage/lost flow từ R1A (báo cáo hư hỏng có ảnh 1–5 thuộc CAP-DAMAGE R1A) | FR-damage-lifecycle-002 |
 | Mobile 375 là primary device của HTML wireframe theo quyết định người dùng ngày 2026-10-07 | Userflow/wireframe device |
 

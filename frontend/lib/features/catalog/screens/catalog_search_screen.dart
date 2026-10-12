@@ -28,7 +28,7 @@ class _CatalogSearchScreenState extends State<CatalogSearchScreen> {
       appBar: AppBar(
         title: const Text('Danh mục'),
         actions: [
-          if (AppSession.isAdmin)
+          if (AppSession.isLibrarian)
             IconButton(
               tooltip: 'Thể loại',
               onPressed: () => Navigator.pushNamed(context, AppRoutes.categoryAdmin),
@@ -36,7 +36,7 @@ class _CatalogSearchScreenState extends State<CatalogSearchScreen> {
             ),
         ],
       ),
-      floatingActionButton: AppSession.isAdmin
+      floatingActionButton: AppSession.isLibrarian
           ? FloatingActionButton.extended(
               onPressed: () async {
                 await Navigator.pushNamed(context, AppRoutes.bibliographicForm);

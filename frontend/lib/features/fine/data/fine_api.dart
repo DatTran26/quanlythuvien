@@ -1,7 +1,7 @@
-// API khoản phạt cho thủ thư / quản trị viên và người đọc.
+// API khoản phạt cho nhân viên / thủ thư và người đọc.
 //
 // API backend tương ứng:
-// - policy()              -> GET  /policy (chỉ LIBRARIAN, ADMIN: T14)
+// - policy()              -> GET  /policy (chỉ STAFF, LIBRARIAN: T14)
 // - finesOfReader(id)     -> chưa có (T9). Người đọc tự xem: GET /fines/mine
 // - debtOf(id)            -> chưa có, tạm cộng từ finesOfReader
 // - readerByCard(code)    -> GET  /readers/by-card/{code}
@@ -9,12 +9,12 @@
 // - collect(...)          -> POST /fines/{id}/collect (backend thu toàn bộ, chưa thu một phần: T10;
 //                            chưa nhận operationId: T15)
 // - events(id)            -> chưa có (T8)
-// - waive(...)            -> POST /fines/{id}/waive { reason } (chỉ ADMIN)
+// - waive(...)            -> POST /fines/{id}/waive { reason } (chỉ LIBRARIAN)
 // - adjust(...)           -> chưa có (T10)
 //
 // Lỗ hổng:
 // - T8: chưa có ledger fine_transaction, biên nhận không được lưu.
-// - T9: chưa có GET /readers/{id}/fines, chi tiết khoản phạt cho thủ thư.
+// - T9: chưa có GET /readers/{id}/fines, chi tiết khoản phạt cho nhân viên.
 // - T10: /collect chỉ thu toàn bộ, chưa thu một phần; chưa có điều chỉnh, hoàn tiền.
 // - T14: người đọc chưa đọc được mức phạt / ngưỡng chặn (GET /policy chỉ cho nhân viên).
 // - T15: /collect chưa có idempotency key (BR-fine-collection-basic-001).
@@ -45,7 +45,7 @@ class FineException implements Exception {
 /// Người đọc tìm được khi quét / nhập mã thẻ.
 typedef FineReader = ({int id, String name, String cardCode, String status});
 
-/// Khoản phạt kèm thông tin để hiển thị cho thủ thư.
+/// Khoản phạt kèm thông tin để hiển thị cho nhân viên.
 typedef FineDetail = ({
   Fine fine,
   FineReader reader,
@@ -115,6 +115,48 @@ class MockFineApi implements FineApi {
         .fold<int>(0, (sum, f) => sum + f.balanceVnd);
   }
 
+  /// Mã thẻ của người đọc, dùng để mở màn thu tiền sau khi trả sách.
+  Future<String?> cardOf(int readerId) async {
+    final db = await MockDb.load();
+    final profile = db
+        .table('shared', 'readerProfiles')
+        .where((p) => p['userId'] == readerId)
+        .firstOrNull;
+    return profile?['cardCode'] as String?;
+  }
+
+  /// Ghi bồi thường hư hỏng lúc trả. Nhẹ hoặc 0 đồng thì không tạo khoản.
+  /// Cùng phiếu không ghi hai lần.
+  Future<void> assessDamage({
+    required int loanId,
+    required int readerId,
+    required int amountVnd,
+    required String note,
+  }) async {
+    if (amountVnd <= 0) return;
+    final db = await MockDb.load();
+    final fines = db.table('shared', 'fines');
+    final exists = fines.any(
+      (f) => f['loanId'] == loanId && f['reason'] == 'DAMAGE',
+    );
+    if (exists) return;
+    final nextId = fines.fold<int>(
+      0,
+      (max, f) => (f['id'] as int) > max ? f['id'] as int : max,
+    );
+    fines.add({
+      'id': nextId + 1,
+      'loanId': loanId,
+      'readerId': readerId,
+      'amountVnd': amountVnd,
+      'balanceVnd': amountVnd,
+      'reason': 'DAMAGE',
+      'status': 'OPEN',
+      'note': note,
+      'createdAt': DateTime.now().toIso8601String(),
+    });
+  }
+
   // ---- Bài 5: fine-collection-basic ----
   @override
   Future<FineReader?> readerByCard(String cardCode) async {
@@ -159,7 +201,7 @@ class MockFineApi implements FineApi {
   @override
   Future<bool> canAdjust(int actorId) async {
     final db = await MockDb.load();
-    return _role(db, actorId) == 'ADMIN';
+    return _role(db, actorId) == 'LIBRARIAN';
   }
 
   @override
@@ -180,12 +222,12 @@ class MockFineApi implements FineApi {
       return (transaction: _tx(db, earlier), duplicate: true);
     }
 
-    // CHK-fine-collection-basic-007: thủ thư chỉ được ghi PAYMENT; người đọc không được ghi gì.
+    // CHK-fine-collection-basic-007: nhân viên chỉ được ghi PAYMENT; người đọc không được ghi gì.
     final role = _role(db, actorId);
-    if (role != 'LIBRARIAN' && role != 'ADMIN') {
+    if (role != 'STAFF' && role != 'LIBRARIAN') {
       throw const FineException(
         'FORBIDDEN',
-        'Chỉ thủ thư hoặc quản trị viên được thu tiền',
+        'Chỉ nhân viên hoặc thủ thư được thu tiền',
       );
     }
     final row = _openFineRow(db, fineId);
@@ -258,7 +300,7 @@ class MockFineApi implements FineApi {
     required int actorId,
   }) async {
     final db = await MockDb.load();
-    _requireAdmin(db, actorId);
+    _requireLibrarian(db, actorId);
     final why = _requireReason(reason);
     final row = _openFineRow(db, fineId);
     final balance = row['balanceVnd'] as int;
@@ -277,7 +319,7 @@ class MockFineApi implements FineApi {
     required int actorId,
   }) async {
     final db = await MockDb.load();
-    _requireAdmin(db, actorId);
+    _requireLibrarian(db, actorId);
     final why = _requireReason(reason);
     if (deltaVnd == 0) {
       throw const FineException('VALIDATION', 'Số tiền điều chỉnh phải khác 0');
@@ -345,11 +387,11 @@ class MockFineApi implements FineApi {
               .firstOrNull?['role']
           as String?;
 
-  void _requireAdmin(MockDb db, int actorId) {
-    if (_role(db, actorId) != 'ADMIN') {
+  void _requireLibrarian(MockDb db, int actorId) {
+    if (_role(db, actorId) != 'LIBRARIAN') {
       throw const FineException(
         'FORBIDDEN',
-        'Chỉ quản trị viên được miễn hoặc điều chỉnh phạt',
+        'Chỉ thủ thư được miễn hoặc điều chỉnh phạt',
       );
     }
   }

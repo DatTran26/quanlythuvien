@@ -17,6 +17,7 @@ import '../../../core/utils/format.dart';
 import '../../../core/widgets/loading_button.dart';
 import '../../../core/widgets/qr_scan_page.dart';
 import '../../../core/widgets/snackbar.dart';
+import '../../fine/data/fine_api.dart';
 import '../data/circulation_api.dart';
 import '../data/error_text.dart';
 import '../models/loan_view.dart';
@@ -100,6 +101,26 @@ class _ReturnScanScreenState extends State<ReturnScanScreen> {
     }
   }
 
+  /// Vừa = 30% giá bìa, nặng = 100%. Nhẹ không thu. Ghi vào sổ phạt để màn thu tiền thấy.
+  Future<(int, String?)> _damageFee(LoanView loan) async {
+    final fines = MockFineApi();
+    final card = ApiClient.useRealApi ? null : await fines.cardOf(loan.readerId);
+    if (!_damaged || _severity == 'LIGHT' || _severity == null) {
+      return (0, card);
+    }
+    final percent = _severity == 'HEAVY' ? 100 : 30;
+    final copy = await _api.findCopy(loan.copyCode);
+    final amount = copy.priceVnd * percent ~/ 100;
+    if (amount <= 0 || ApiClient.useRealApi) return (amount, card);
+    await fines.assessDamage(
+      loanId: loan.id,
+      readerId: loan.readerId,
+      amountVnd: amount,
+      note: _severity == 'HEAVY' ? 'Hư hỏng mức nặng (100% giá bìa)' : 'Hư hỏng mức vừa (30% giá bìa)',
+    );
+    return (amount, card);
+  }
+
   /// Trả sách xử lý từng cuốn một (mỗi cuốn phải chọn tình trạng) -> quét 1 lần.
   Future<void> _scanByCamera() async {
     final code = await scanQrOnce(context, title: 'Quét sách trả');
@@ -121,12 +142,19 @@ class _ReturnScanScreenState extends State<ReturnScanScreen> {
         severity: _damaged ? _severity : null,
         note: _damaged ? _noteCtrl.text.trim() : null,
       );
+      final fee = await _damageFee(result);
       if (!mounted) return;
       // pushReplacement: không cho bấm ← quay lại form đã gửi
       Navigator.pushReplacementNamed(
         context,
         AppRoutes.returnResult,
-        arguments: ReturnOutcome(loan: result, damaged: _damaged, overdueDays: _overdueDays),
+        arguments: ReturnOutcome(
+          loan: result,
+          damaged: _damaged,
+          overdueDays: _overdueDays,
+          damageFeeVnd: fee.$1,
+          readerCard: fee.$2,
+        ),
       );
     } on ApiException catch (e) {
       if (!mounted) return;

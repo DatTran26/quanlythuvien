@@ -2,7 +2,7 @@
 type: usecase-index
 feature: fine-collection-basic
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/fine-collection-basic/srs/fine-collection-basic-spec.md
   - docs/features/fine-collection-basic/srs/fine-collection-basic-flows.md
@@ -14,7 +14,7 @@ links:
 
 | # | Slug | Level | Status | Actor primary | Covers FR | Screens | Errors (E-*) | OQ ref | Priority | Updated |
 |---|------|-------|--------|---------------|-----------|---------|--------------|--------|----------|---------|
-| 1 | [uc-fine-cash-payment](uc-fine-cash-payment.md) | sea | draft | Thủ thư | FR-fine-collection-basic-001 | fine-list, fine-detail, fine-payment | E-fine-collection-basic-001, 002, E-core-004, 005, 007, 009 | OQ-fine-collection-basic-001 | P0 | 2026-10-08 |
+| 1 | [uc-fine-cash-payment](uc-fine-cash-payment.md) | sea | draft | Nhân viên | FR-fine-collection-basic-001 | fine-list, fine-detail, fine-payment | E-fine-collection-basic-001, 002, E-core-004, 005, 007, 009 | OQ-fine-collection-basic-001 | P0 | 2026-10-08 |
 
 ## Relationships
 

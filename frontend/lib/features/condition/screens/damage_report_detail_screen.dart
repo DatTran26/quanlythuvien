@@ -1,8 +1,8 @@
 // Màn 10 – Chi tiết báo cáo hư hỏng (damage-report-detail). Route: /damage/detail
 // Bài: Hoang/05-damage-lifecycle/02-damage-report-detail.md
 //
-// Xem báo cáo và để Quản trị viên quyết định: Bác bỏ / Đưa đi sửa / Thanh lý (DEC-P2-03, DEC-D3-07).
-// Thủ thư chỉ thấy banner "Đang chờ Quản trị viên duyệt". Vai trò lấy từ AppSession (sau là /me của TV1).
+// Xem báo cáo và để Thủ thư quyết định: Bác bỏ / Đưa đi sửa / Thanh lý (DEC-P2-03, DEC-D3-07).
+// Nhân viên chỉ thấy banner "Đang chờ Thủ thư duyệt". Vai trò lấy từ AppSession (sau là /me của TV1).
 // Khác bài học: ảnh tải bằng ApiClient.getBytes + Image.memory (bài gợi ý cho web, tránh CORS).
 
 import 'dart:typed_data';
@@ -27,10 +27,10 @@ import '../models/damage_report.dart';
 typedef DamageDetailArgs = ({DamageReport report, BookCopy copy});
 
 class DamageReportDetailScreen extends StatefulWidget {
-  const DamageReportDetailScreen({super.key, required this.args, required this.isAdmin});
+  const DamageReportDetailScreen({super.key, required this.args, required this.isLibrarian});
 
   final DamageDetailArgs args;
-  final bool isAdmin; // TV1 cung cấp vai trò người dùng hiện tại
+  final bool isLibrarian; // TV1 cung cấp vai trò người dùng hiện tại
 
   @override
   State<DamageReportDetailScreen> createState() => _DamageReportDetailScreenState();
@@ -267,9 +267,9 @@ class _DamageReportDetailScreenState extends State<DamageReportDetailScreen> {
   List<Widget> _actions() {
     final widgets = <Widget>[];
 
-    if (_pending && widget.isAdmin) {
+    if (_pending && widget.isLibrarian) {
       widgets.addAll([
-        _sectionTitle('Quyết định (Quản trị viên)'),
+        _sectionTitle('Quyết định (Thủ thư)'),
         Row(children: [
           Expanded(child: OutlinedButton(onPressed: () => _decide('REJECT'), child: const Text('Bác bỏ'))),
           const SizedBox(width: 12),
@@ -295,7 +295,7 @@ class _DamageReportDetailScreenState extends State<DamageReportDetailScreen> {
     } else if (_pending) {
       widgets.addAll([
         const SizedBox(height: 16),
-        const InfoBanner(kind: BannerKind.info, message: 'Đang chờ Quản trị viên duyệt. Bản sao tạm ngừng cho mượn.'),
+        const InfoBanner(kind: BannerKind.info, message: 'Đang chờ Thủ thư duyệt. Bản sao tạm ngừng cho mượn.'),
       ]);
     }
 

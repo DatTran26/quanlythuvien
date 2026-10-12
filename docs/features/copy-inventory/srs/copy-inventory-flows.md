@@ -1,7 +1,7 @@
 ---
 type: srs-flows
 feature: copy-inventory
-updated: 2026-10-08
+updated: 2026-10-12
 ---
 
 # copy-inventory — Flows
@@ -12,7 +12,7 @@ updated: 2026-10-08
 
 ```mermaid
 flowchart TD
-    Start(["Bắt đầu — Quản trị viên mở kho bản sao của đầu sách"]) --> Title{"Đầu sách tồn tại và đang dùng?"}
+    Start(["Bắt đầu — Thủ thư mở kho bản sao của đầu sách"]) --> Title{"Đầu sách tồn tại và đang dùng?"}
     Title -->|"không"| Err0["E-core-003 — không tìm thấy đầu sách"]
     Err0 --> End(["Kết thúc"])
     Title -->|"có"| Kind{"Thao tác?"}
@@ -23,7 +23,7 @@ flowchart TD
     Valid -->|"có"| Create["COPY-T00 — tạo N bản sao Sẵn sàng, sinh N mã QR duy nhất, ghi audit"]
     Create --> Print["Xuất file in nhãn"]
     Kind -->|"in lại nhãn"| Reprint["In đúng mã cũ, không cấp mã mới"]
-    Reprint --> Stick["Thủ thư dán nhãn"]
+    Reprint --> Stick["Nhân viên dán nhãn"]
     Print --> Stick
     Stick --> End
 ```

@@ -1,7 +1,7 @@
 ---
 type: srs-userflow
 feature: account-admin
-updated: 2026-10-09
+updated: 2026-10-12
 primary_device: mobile
 stage: flow-approved
 flow_approved_at: 2026-10-09
@@ -17,7 +17,7 @@ flow_hash: "4804f246"
 flowchart TD
     n1["[1] Danh sách người đọc"]
     n2["[2] Chi tiết người đọc"]
-    n3["[3] Tài khoản Thủ thư"]
+    n3["[3] Tài khoản Nhân viên"]
     d1{"Có quyền, trạng thái hợp lệ, đủ lý do?"}
     d2{"Vô hiệu: còn nghĩa vụ mở?"}
     e1["E-core-001, 002, 004, 008 — báo lỗi hoặc xung đột"]
@@ -33,7 +33,7 @@ flowchart TD
     d1 -->|"Có"| n2
     d1 -->|"Không"| e1
     e1 -.->|"Tải lại hoặc sửa"| n2
-    n1 -->|"Quản trị tài khoản Thủ thư"| n3
+    n1 -->|"Quản trị tài khoản Nhân viên"| n3
     n3 -->|"Tạo, khóa, đặt lại mật khẩu, vô hiệu"| d1
 
     classDef happy fill:#d4edda,stroke:#28a745
@@ -50,13 +50,13 @@ flowchart TD
 |-----|------|----------|----------|------------|
 | 1 | reader-list | Danh sách người đọc | Tra cứu tài khoản người đọc, dữ liệu cá nhân che theo quyền. | account-admin-flow |
 | 2 | reader-detail | Chi tiết người đọc | Hồ sơ, khoản đang mượn, đặt trước, công nợ; sửa, khóa tạm, mở lại, vô hiệu. | account-admin-flow |
-| 3 | staff-accounts | Tài khoản Thủ thư | Quản trị viên tạo, khóa, đặt lại mật khẩu, vô hiệu tài khoản Thủ thư (mới). | account-admin-flow |
+| 3 | staff-accounts | Tài khoản Nhân viên | Thủ thư tạo, khóa, đặt lại mật khẩu, vô hiệu tài khoản Nhân viên (mới). | account-admin-flow |
 
 ## 3. Danh sách flow
 
 | Flow-slug | Tên flow | Màn hình gồm |
 |-----------|----------|--------------|
-| account-admin-flow | Quản trị tài khoản người đọc và Thủ thư | reader-list → reader-detail → staff-accounts |
+| account-admin-flow | Quản trị tài khoản người đọc và Nhân viên | reader-list → reader-detail → staff-accounts |
 
 ## 3.5. Chuyển màn (transitions)
 
@@ -67,8 +67,8 @@ Chuyển màn sang feature khác xem `docs/_shared/navigation-map.md`.
 | Danh sách người đọc [1] | Chi tiết người đọc [2] | Chọn hồ sơ | Hồ sơ tồn tại. |
 | Danh sách người đọc [1] | Biểu mẫu người đọc (`reader-onboarding`) | Cấp tài khoản mới | Có quyền cấp. |
 | Chi tiết người đọc [2] | (giữ nguyên) [2] | Sửa, khóa tạm, mở lại, vô hiệu | Lý do bắt buộc; E-core-004/008 hiển thị tại chỗ. |
-| Danh sách người đọc [1] | Tài khoản Thủ thư [3] | Quản trị tài khoản Thủ thư | Chỉ Quản trị viên. |
+| Danh sách người đọc [1] | Tài khoản Nhân viên [3] | Quản trị tài khoản Nhân viên | Chỉ Thủ thư. |
 
 ## 4. Open Questions
 
-- [ ] OQ-account-admin-001 — Quản lý tài khoản Quản trị viên.
+- [ ] OQ-account-admin-001 — Quản lý tài khoản Thủ thư.

@@ -69,26 +69,26 @@ public class AuthService {
     }
 
     @Transactional
-    /** Tạo tài khoản thủ thư đang hoạt động. */
-    public MeResponse createLibrarian(CreateStaffRequest request) {
+    /** Tạo tài khoản nhân viên đang hoạt động. */
+    public MeResponse createStaff(CreateStaffRequest request) {
         String email = normalize(request.email());
         if (users.existsByEmail(email)) {
             throw ApiException.conflict("EMAIL_TAKEN", "Email đã được đăng ký");
         }
-        UserAccount user = newAccount(email, request.password(), request.displayName(), Role.LIBRARIAN, UserStatus.ACTIVE);
+        UserAccount user = newAccount(email, request.password(), request.displayName(), Role.STAFF, UserStatus.ACTIVE);
         return me(users.save(user));
     }
 
     @Transactional
-    /** Đổi trạng thái tài khoản. Không khóa chính mình, không đụng quản trị viên khác. */
+    /** Đổi trạng thái tài khoản. Không khóa chính mình, không đụng thủ thư khác. */
     public MeResponse setStatus(long userId, UserStatus status) {
         UserAccount actor = requireCurrent();
         UserAccount target = users.findById(userId).orElseThrow(() -> ApiException.notFound("Không thấy tài khoản"));
         if (actor.getId().equals(target.getId())) {
             throw ApiException.conflict("SELF_LOCK", "Không khóa chính tài khoản đang dùng");
         }
-        if (target.getRole() == Role.ADMIN) {
-            throw ApiException.conflict("ADMIN_PROTECTED", "Không đổi trạng thái quản trị viên khác");
+        if (target.getRole() == Role.LIBRARIAN) {
+            throw ApiException.conflict("LIBRARIAN_PROTECTED", "Không đổi trạng thái thủ thư khác");
         }
         target.setStatus(status);
         return me(target);

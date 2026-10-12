@@ -187,7 +187,7 @@ class _ReaderMyFinesScreenState extends State<ReaderMyFinesScreen> {
       title: Text(
         '${fineReasonLabel(fine.reason)} · ${formatVnd(fine.amountVnd)}',
       ),
-      // Ngày ghi nhận + ghi chú của thủ thư (có thể đã nói "đã nộp ..."), không tự ghép thêm.
+      // Ngày ghi nhận + ghi chú của nhân viên (có thể đã nói "đã nộp ..."), không tự ghép thêm.
       subtitle: Text(
         [
           formatDate(fine.createdAt),

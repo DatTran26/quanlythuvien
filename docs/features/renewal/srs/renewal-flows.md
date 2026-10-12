@@ -1,7 +1,7 @@
 ---
 type: srs-flows
 feature: renewal
-updated: 2026-10-08
+updated: 2026-10-12
 ---
 
 # renewal — Flows
@@ -26,7 +26,7 @@ flowchart TD
 
 | Bước | Actor | Quyết định / điều kiện | Phản hồi hệ thống | Error path |
 |------|-------|------------------------|--------------------|------------|
-| 1 | Thủ thư/Quản trị viên/Người đọc | Yêu cầu gia hạn trên Loan `ACTIVE` | Load loan + policy tại thời điểm mượn | E-core-002/E-core-009 — self-service chỉ trên loan của chính mình |
+| 1 | Nhân viên/Thủ thư/Người đọc | Yêu cầu gia hạn trên Loan `ACTIVE` | Load loan + policy tại thời điểm mượn | E-core-002/E-core-009 — self-service chỉ trên loan của chính mình |
 | 2 | Hệ thống | BR-renewal-001: chưa quá hạn · `renew_count < limit` · title không có reservation đang chờ (queue rỗng tới R2 — DEC-P2-05) | Đủ điều kiện → LOAN-T03: `due_at += 7 ngày` (baseline), `renew_count++`, audit | E-core-006 — hiển thị lý do từ chối; E-core-008 — loan terminal không gia hạn |
 | 3 | Hệ thống | Race với trả/mất | Transition commit trước thắng; transition sau nhận invalid-state | E-core-004 — reload trạng thái mới (lifecycle §3) |
 | 4 | Hệ thống | Sau commit | Notify hạn mới qua outbox | INV-04 |

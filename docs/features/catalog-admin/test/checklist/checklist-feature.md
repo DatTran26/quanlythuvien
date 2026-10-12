@@ -1,6 +1,6 @@
 # Checklist — catalog-admin
 
-[1] [Yes] CHK-catalog-admin-001 → FR-catalog-admin-001 · Kiểm tra Quản trị viên lưu hồ sơ thư mục hợp lệ thì mở lại đúng thuộc tính đã lưu
+[1] [Yes] CHK-catalog-admin-001 → FR-catalog-admin-001 · Kiểm tra Thủ thư lưu hồ sơ thư mục hợp lệ thì mở lại đúng thuộc tính đã lưu
 [1] [Yes] CHK-catalog-admin-002 → FR-catalog-admin-001, E-core-001 · Kiểm tra hồ sơ thư mục thiếu dữ liệu bắt buộc không được ghi
 [2] [Yes] CHK-catalog-admin-003 → FR-catalog-admin-001, E-core-001 · Kiểm tra form hồ sơ thư mục giữ dữ liệu đã nhập sau lỗi validation
 [1] [Yes] CHK-catalog-admin-004 → FR-catalog-admin-001, E-core-003 · Kiểm tra khóa nghiệp vụ đã tồn tại không tạo hồ sơ thư mục thứ hai

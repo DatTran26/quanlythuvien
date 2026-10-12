@@ -2,7 +2,7 @@
 type: userstory-index
 feature: trend-reports
 status: draft
-updated: 2026-10-09
+updated: 2026-10-12
 links:
   - docs/features/trend-reports/srs/trend-reports-spec.md
 ---
@@ -15,4 +15,4 @@ links:
 
 | # | ID | Title | Persona | Covers FR | Screens | Priority | Status | Jira | Updated |
 |---|----|-------|---------|-----------|---------|----------|--------|------|---------|
-| 1 | [US-001](us-001.md) | Xem báo cáo xu hướng | Quản trị viên | FR-trend-reports-001 | trend-dashboard | P1 | draft | — | 2026-10-09 |
+| 1 | [US-001](us-001.md) | Xem báo cáo xu hướng | Thủ thư | FR-trend-reports-001 | trend-dashboard | P1 | draft | — | 2026-10-09 |

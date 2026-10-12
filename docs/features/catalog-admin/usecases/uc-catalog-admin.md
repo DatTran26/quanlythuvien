@@ -2,7 +2,7 @@
 type: usecase
 feature: catalog-admin
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/catalog-admin/usecases/catalog-admin-usecase-index.md
   - docs/features/catalog-admin/srs/catalog-admin-spec.md
@@ -15,22 +15,22 @@ links:
 
 ## Primary Actor
 
-Quản trị viên (tạo, sửa, vô hiệu đầu sách và danh mục). Thủ thư (tra cứu).
+Thủ thư (tạo, sửa, vô hiệu đầu sách và danh mục). Nhân viên (tra cứu).
 
 ## Stakeholders & Interests
 
 | Stakeholder | Interest |
 |-------------|----------|
-| Thủ thư | Tra cứu nhanh số bản theo trạng thái |
+| Nhân viên | Tra cứu nhanh số bản theo trạng thái |
 | Thủ thư trưởng | Dữ liệu kho tin cậy, mọi thay đổi có audit |
 
 ## Trigger
 
-Quản trị viên cần tạo, sửa, vô hiệu đầu sách hoặc danh mục; Thủ thư cần tra cứu đầu sách.
+Thủ thư cần tạo, sửa, vô hiệu đầu sách hoặc danh mục; Nhân viên cần tra cứu đầu sách.
 
 ## Preconditions
 
-- Người thao tác đã xác thực (include `uc-access-control`); chỉ Quản trị viên ghi được.
+- Người thao tác đã xác thực (include `uc-access-control`); chỉ Thủ thư ghi được.
 - Danh mục (thể loại, tác giả, nhà xuất bản, vị trí kệ) đã có hoặc được tạo cùng lúc.
 
 ## Guarantees
@@ -42,7 +42,7 @@ Quản trị viên cần tạo, sửa, vô hiệu đầu sách hoặc danh mục
 
 1. Người thao tác mở `catalog-search`, tìm theo tên, tác giả, ISBN, thể loại; lọc còn/hết (dưới 2 giây ở 50.000 bản sao — NFR-catalog-admin-001).
 2. Mở `bibliographic-detail`: thông tin đầu sách, số bản khả dụng, đang giữ, đang mượn, không khả dụng, vị trí kệ.
-3. Quản trị viên mở `bibliographic-form`, tạo hoặc sửa đầu sách.
+3. Thủ thư mở `bibliographic-form`, tạo hoặc sửa đầu sách.
 4. Hệ thống kiểm trường bắt buộc, định dạng, kiểm trùng; lưu và ghi audit trong một giao dịch.
 
 ## Extensions

@@ -50,6 +50,38 @@ class LibraryApiTest {
     }
 
     @Test
+    void staffKeepsCounterAccessWithoutManagementAccess() throws Exception {
+        String email = unique("staff");
+        user(email, Role.STAFF, UserStatus.ACTIVE);
+        String token = login(email);
+        mvc.perform(get("/api/policy").header("Authorization", "Bearer " + token))
+                .andExpect(status().isOk());
+        mvc.perform(get("/api/admin/ping").header("Authorization", "Bearer " + token))
+                .andExpect(status().isForbidden());
+        mvc.perform(post("/api/admin/staff").header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json.writeValueAsString(java.util.Map.of(
+                                "email", unique("newstaff"), "password", "Dev123456", "displayName", "Nhân viên"))))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void librarianCreatesStaffWithOriginalRoleCode() throws Exception {
+        String email = unique("librarian");
+        user(email, Role.LIBRARIAN, UserStatus.ACTIVE);
+        String token = login(email);
+        mvc.perform(get("/api/admin/ping").header("Authorization", "Bearer " + token))
+                .andExpect(status().isOk());
+        MvcResult result = mvc.perform(post("/api/admin/staff")
+                        .header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json.writeValueAsString(java.util.Map.of(
+                                "email", unique("newstaff"), "password", "Dev123456", "displayName", "Nhân viên"))))
+                .andExpect(status().isOk()).andReturn();
+        assertEquals("STAFF", json.readTree(result.getResponse().getContentAsString()).get("role").asText());
+    }
+
+    @Test
     void readerCannotCallAdminPing() throws Exception {
         String email = unique("reader");
         long id = user(email, Role.READER, UserStatus.ACTIVE);
@@ -64,7 +96,7 @@ class LibraryApiTest {
     @Test
     void secondLoanOfSameCopyIsRejected() throws Exception {
         String admin = unique("admin");
-        user(admin, Role.ADMIN, UserStatus.ACTIVE);
+        user(admin, Role.LIBRARIAN, UserStatus.ACTIVE);
         String readerEmail = unique("member");
         long readerId = user(readerEmail, Role.READER, UserStatus.ACTIVE);
         String token = login(admin);
@@ -91,7 +123,7 @@ class LibraryApiTest {
     @Transactional
     void overdueReturnCreatesOneFineAndBlocksNextLoan() throws Exception {
         String admin = unique("admin");
-        user(admin, Role.ADMIN, UserStatus.ACTIVE);
+        user(admin, Role.LIBRARIAN, UserStatus.ACTIVE);
         long readerId = user(unique("member"), Role.READER, UserStatus.ACTIVE);
         String token = login(admin);
         long titleId = createTitle(token, "Trễ hạn");
@@ -136,7 +168,7 @@ class LibraryApiTest {
     @Test
     void dryRunDoesNotWriteInvalidSheet() throws Exception {
         String admin = unique("admin");
-        user(admin, Role.ADMIN, UserStatus.ACTIVE);
+        user(admin, Role.LIBRARIAN, UserStatus.ACTIVE);
         String token = login(admin);
         byte[] workbook = sheetWithBlankPrice();
         MockMultipartFile file = new MockMultipartFile("file", "bad.xlsx",

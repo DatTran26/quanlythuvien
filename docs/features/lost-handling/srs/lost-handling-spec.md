@@ -2,7 +2,7 @@
 type: srs
 feature: lost-handling
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/lost-handling/brainstorms/lost-handling-scope.md
   - docs/_product/prd.md
@@ -25,7 +25,7 @@ Ghi nhận mất sách: phiếu và bản sao chuyển Mất, ghi nghĩa vụ b�
 
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
-| Thủ thư | người | Vận hành quầy | Có |
+| Nhân viên | người | Vận hành quầy | Có |
 | Người đọc | người | Mượn, trả, theo dõi khoản mượn | Có |
 | Bộ phận tài chính | stakeholder | Chính sách phạt, đối soát | Có như stakeholder |
 | Hệ thống | hệ thống | Thực thi rule, job, audit, outbox | Có |
@@ -36,8 +36,8 @@ Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.
 
 | ID | Title | Description | Priority | Release | Verify by | Source |
 |---|---|---|---|---|---|---|
-| FR-lost-handling-001 | Ghi nhận mất sách | Thủ thư ghi nhận mất trên phiếu đang mở: trong một giao dịch, phiếu và bản sao chuyển Mất, ghi nghĩa vụ bồi thường, audit, thông báo người đọc; phiếu Mất không mở lại, ghi nhận lặp trả kết quả gốc. | P0 | R1A | test | Spec cũ (xem id-crosswalk-lmp) |
-| FR-lost-handling-002 | Tìm lại sau khi mất | Khi tìm lại bản sao đã Mất, Thủ thư kiểm tra vật lý; nghĩa vụ đã ghi không tự xóa mà được đối soát (đảo nếu chưa thu, hoàn nếu đã thu theo chính sách) trước khi bản sao về Sẵn sàng; chưa có duyệt tài chính thì chỉ ghi 'đã tìm thấy — chờ đối soát'. | P1 | R1B | test | Spec cũ (xem id-crosswalk-lmp) |
+| FR-lost-handling-001 | Ghi nhận mất sách | Nhân viên ghi nhận mất trên phiếu đang mở: trong một giao dịch, phiếu và bản sao chuyển Mất, ghi nghĩa vụ bồi thường, audit, thông báo người đọc; phiếu Mất không mở lại, ghi nhận lặp trả kết quả gốc. | P0 | R1A | test | Spec cũ (xem id-crosswalk-lmp) |
+| FR-lost-handling-002 | Tìm lại sau khi mất | Khi tìm lại bản sao đã Mất, Nhân viên kiểm tra vật lý; nghĩa vụ đã ghi không tự xóa mà được đối soát (đảo nếu chưa thu, hoàn nếu đã thu theo chính sách) trước khi bản sao về Sẵn sàng; chưa có duyệt tài chính thì chỉ ghi 'đã tìm thấy — chờ đối soát'. | P1 | R1B | test | Spec cũ (xem id-crosswalk-lmp) |
 
 ## 4. Non-Functional Requirements (NFR)
 

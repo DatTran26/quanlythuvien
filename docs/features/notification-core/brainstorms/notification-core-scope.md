@@ -2,7 +2,7 @@
 type: brainstorm
 feature: notification-core
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/decision-register.md
@@ -27,7 +27,7 @@ Mọi giao dịch nghiệp vụ phát sự kiện thông báo vào hàng đợi 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
 | Người đọc | Không được nhắc hạn trả, bị phạt | Nhận thông báo đúng lúc |
-| Quản trị viên | Không biết thông báo nào gửi lỗi | Theo dõi trạng thái gửi, xử lý hàng lỗi |
+| Thủ thư | Không biết thông báo nào gửi lỗi | Theo dõi trạng thái gửi, xử lý hàng lỗi |
 
 ## 4. Capabilities Breakdown
 
@@ -133,7 +133,7 @@ Sự kiện và thời điểm gửi (nguồn Mục 8):
 | Sách đặt trước sẵn sàng | Người đọc | Ngay khi gán bản sao (R2) |
 | Đặt trước hết hạn giữ | Người đọc | Khi hết 48 giờ (R2) |
 | Phát sinh khoản phạt | Người đọc | Khi đóng phiếu |
-| Có báo cáo hư hỏng mới | Quản trị viên | Ngay |
+| Có báo cáo hư hỏng mới | Thủ thư | Ngay |
 | Tài khoản bị khóa / mở khóa | Người bị ảnh hưởng | Ngay |
 
 ### 7.3 Wording samples (exact strings)
@@ -178,7 +178,7 @@ Sự kiện và thời điểm gửi (nguồn Mục 8):
 - [ ] OQ-1: Kênh bắt buộc: chỉ in-app + email hay thêm kênh khác? (OQ-notification-core-001; hold — Product Owner)
 - [ ] OQ-2: Số lần thử lại và khoảng cách thử? (hold — vận hành)
 - [ ] OQ-3: Danh sách sự kiện quan trọng gửi email (giả định ở Mục 8)? (hold — Product Owner)
-- [ ] OQ-4: Ai xử lý hàng lỗi, có thông báo Thủ thư trực quầy không? (DEC-D3-08; hold)
+- [ ] OQ-4: Ai xử lý hàng lỗi, có thông báo Nhân viên trực quầy không? (DEC-D3-08; hold)
 
 ## 12. Next Steps
 

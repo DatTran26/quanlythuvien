@@ -1,5 +1,5 @@
 // Màn 3 – Nhật ký audit (audit-log, notification-audit-ui). Route: /audit
-// Spec: docs/features/notification-audit-ui/srs/ (FR-002): Quản trị viên tra cứu theo người làm,
+// Spec: docs/features/notification-audit-ui/srs/ (FR-002): Thủ thư tra cứu theo người làm,
 // đối tượng, thời gian; chỉ đọc; che trường nhạy cảm.
 // Checklist: CHK-notification-audit-ui-001 (người có quyền xem được ai làm gì),
 //            CHK-notification-audit-ui-002 (người không có quyền bị từ chối, E-core-002).

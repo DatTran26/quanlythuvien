@@ -2,7 +2,7 @@
 type: srs
 feature: trend-reports
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/trend-reports/brainstorms/trend-reports-scope.md
   - docs/_product/prd.md
@@ -25,7 +25,7 @@ Báo cáo xu hướng RP-03 mượn–trả theo thời gian, RP-05 phạt, RP-0
 
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
-| Quản trị viên | người | Quản trị, duyệt ngoại lệ | Có |
+| Thủ thư | người | Quản trị, duyệt ngoại lệ | Có |
 | Hệ thống | hệ thống | Thực thi rule, job, audit, outbox | Có |
 
 Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.md` Mục 2.
@@ -34,7 +34,7 @@ Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.
 
 | ID | Title | Description | Priority | Release | Verify by | Source |
 |---|---|---|---|---|---|---|
-| FR-trend-reports-001 | Báo cáo xu hướng | Quản trị viên xem RP-03 (lượt mượn/trả theo ngày, tháng, năm), RP-05 (phạt phát sinh, đã thu, chưa thu, miễn), RP-06 (top mượn nhiều, hàng chờ dài, không ai mượn trong 12 tháng), RP-07 (hư hỏng theo trạng thái duyệt, thanh lý trong kỳ); lọc thời gian, xuất Excel và PDF. | P1 | R2 | demo/test | Spec cũ (xem id-crosswalk-lmp) |
+| FR-trend-reports-001 | Báo cáo xu hướng | Thủ thư xem RP-03 (lượt mượn/trả theo ngày, tháng, năm), RP-05 (phạt phát sinh, đã thu, chưa thu, miễn), RP-06 (top mượn nhiều, hàng chờ dài, không ai mượn trong 12 tháng), RP-07 (hư hỏng theo trạng thái duyệt, thanh lý trong kỳ); lọc thời gian, xuất Excel và PDF. | P1 | R2 | demo/test | Spec cũ (xem id-crosswalk-lmp) |
 
 ## 4. Non-Functional Requirements (NFR)
 
@@ -83,7 +83,7 @@ __Assumptions:__
 
 | Giả định | Invalidate nếu sai |
 |---|---|
-| Chỉ Quản trị viên xem | Ma trận quyền |
+| Chỉ Thủ thư xem | Ma trận quyền |
 
 ## 12. Open Questions
 

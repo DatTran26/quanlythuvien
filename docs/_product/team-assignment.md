@@ -2,7 +2,7 @@
 type: team-assignment
 scope: product
 status: draft
-updated: 2026-10-10
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/roadmap.md
@@ -23,7 +23,7 @@ Khối lượng tính theo cột Effort trong `roadmap.md` Mục 12 (S=1, M=2, L
 |---|---|---|---|
 | Feature | `access-control` (M)<br>`catalog-admin` (M)<br>`copy-inventory` (M)<br>`data-import` (L)<br>`policy-config` (M)<br>`ops-foundation` (M)<br>**+ khung app dùng chung** | `checkout` (L)<br>`return-handling` (L)<br>`damage-lifecycle` (M)<br>`lost-handling` (S)<br>`renewal` (S)<br>`reservation` (L)<br>`ops-reports` (S)<br>`trend-reports` (M) | `reader-onboarding` (S)<br>`account-admin` (M)<br>`reader-self-service` (M)<br>`notification-core` (M)<br>`notification-audit-ui` (M)<br>`overdue-fines` (M)<br>`fine-collection-basic` (S)<br>`fine-collection-adv` (M) |
 | Khối lượng | 13 + khung app (~2) ≈ **15** | **16** | **14** |
-| Vai trò chính | Quản trị viên | Thủ thư | Người đọc + tài chính |
+| Vai trò chính | Thủ thư | Nhân viên | Người đọc + tài chính |
 | Module backend liên quan | `identity`, `catalog`, `imports`, `audit`, `ops`, `config` | `circulation`, `condition`, `reservation`, `report` | `identity` (ReaderProfile), `fine`, `notification`, `audit` (viewer) |
 
 ## Chuyển màn nằm gọn trong một người

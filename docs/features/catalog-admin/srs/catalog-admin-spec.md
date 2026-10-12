@@ -2,7 +2,7 @@
 type: srs
 feature: catalog-admin
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/catalog-admin/brainstorms/catalog-admin-scope.md
   - docs/_product/prd.md
@@ -15,7 +15,7 @@ links:
 
 ## 1. Scope
 
-Quản trị viên quản lý đầu sách và danh mục (thể loại, tác giả, nhà xuất bản, vị trí kệ); Thủ thư và Quản trị viên tra cứu đầu sách và số bản theo nhóm trạng thái.
+Thủ thư quản lý đầu sách và danh mục (thể loại, tác giả, nhà xuất bản, vị trí kệ); Nhân viên và Thủ thư tra cứu đầu sách và số bản theo nhóm trạng thái.
 
 **Release:** R0
 
@@ -25,8 +25,8 @@ Quản trị viên quản lý đầu sách và danh mục (thể loại, tác gi
 
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
-| Quản trị viên | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
-| Thủ thư | người | Vận hành quầy | Có |
+| Thủ thư | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
+| Nhân viên | người | Vận hành quầy | Có |
 | Hệ thống | hệ thống | Thực thi kiểm tra, ghi audit | Có |
 
 Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.md` Mục 2.
@@ -36,8 +36,8 @@ Tên vai trò và mapping với tài liệu nguồn xem `docs/_shared/core-spec.
 | ID | Title | Description | Priority | Release | Verify by | Source |
 |---|---|---|---|---|---|---|
 | FR-catalog-admin-001 | Quản lý danh mục sách | Tạo, xem, cập nhật, tìm kiếm bản ghi thư mục gồm tiêu đề, tác giả, thể loại, nhà xuất bản, năm, ISBN và mô tả khi có. | P0 | R0 | demo/test | Spec cũ (xem id-crosswalk-lmp) |
-| FR-catalog-admin-002 | Tra cứu khả dụng phía Thủ thư và Quản trị viên | Tra cứu đầu sách theo tên, tác giả, ISBN, thể loại; lọc còn hoặc hết; xem số bản sao khả dụng, đang giữ, đang mượn, không khả dụng và vị trí kệ. Số lượng tính từ trạng thái bản sao. | P0 | R0 | test | Spec cũ (xem id-crosswalk-lmp) |
-| FR-catalog-admin-003 | Quản lý danh mục | Quản trị viên tạo, sửa, vô hiệu thể loại, tác giả, nhà xuất bản, vị trí kệ; danh mục đã được dùng không xóa cứng. | P0 | R0 | demo/test | SRC-FR-L04 (nguồn); brainstorm |
+| FR-catalog-admin-002 | Tra cứu khả dụng phía Nhân viên và Thủ thư | Tra cứu đầu sách theo tên, tác giả, ISBN, thể loại; lọc còn hoặc hết; xem số bản sao khả dụng, đang giữ, đang mượn, không khả dụng và vị trí kệ. Số lượng tính từ trạng thái bản sao. | P0 | R0 | test | Spec cũ (xem id-crosswalk-lmp) |
+| FR-catalog-admin-003 | Quản lý danh mục | Thủ thư tạo, sửa, vô hiệu thể loại, tác giả, nhà xuất bản, vị trí kệ; danh mục đã được dùng không xóa cứng. | P0 | R0 | demo/test | SRC-FR-L04 (nguồn); brainstorm |
 
 ## 4. Non-Functional Requirements (NFR)
 

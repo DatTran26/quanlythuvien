@@ -1,4 +1,4 @@
-// Model tài khoản (Quản trị viên, Thủ thư, Người đọc).
+// Model tài khoản (Thủ thư, Nhân viên, Người đọc).
 // API: GET /me, GET /readers/by-card/{code} -> { id, email, displayName, role, status }
 // Mock: shared.users (có thêm createdAt).
 
@@ -6,7 +6,7 @@ class AppUser {
   final int id;
   final String email;
   final String displayName;
-  final String role; // ADMIN | LIBRARIAN | READER
+  final String role; // LIBRARIAN | STAFF | READER
   final String status; // PENDING | ACTIVE | LOCKED
   final DateTime createdAt;
 

@@ -2,7 +2,7 @@
 type: usecase
 feature: ops-reports
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/ops-reports/usecases/ops-reports-usecase-index.md
   - docs/features/ops-reports/srs/ops-reports-spec.md
@@ -15,18 +15,18 @@ links:
 
 ## Primary Actor
 
-Quản trị viên. Thủ thư (danh sách quá hạn, R1B).
+Thủ thư. Nhân viên (danh sách quá hạn, R1B).
 
 ## Stakeholders & Interests
 
 | Stakeholder | Interest |
 |-------------|----------|
-| Quản trị viên | Số liệu kho và quá hạn hằng ngày |
+| Thủ thư | Số liệu kho và quá hạn hằng ngày |
 | Bảo mật/pháp chế | File xuất không lộ dữ liệu ngoài quyền |
 
 ## Trigger
 
-Quản trị viên hoặc Thủ thư mở dashboard báo cáo.
+Thủ thư hoặc Nhân viên mở dashboard báo cáo.
 
 ## Preconditions
 
@@ -49,7 +49,7 @@ Quản trị viên hoặc Thủ thư mở dashboard báo cáo.
 
 **2a. Không có dữ liệu:** hiện trạng thái trống.
 
-**Nhánh Q (R1B):** Thủ thư mở danh sách quá hạn để nhắc người đọc.
+**Nhánh Q (R1B):** Nhân viên mở danh sách quá hạn để nhắc người đọc.
 
 ## Related Requirements
 

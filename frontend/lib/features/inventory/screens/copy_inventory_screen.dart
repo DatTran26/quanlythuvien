@@ -21,7 +21,7 @@ class _CopyInventoryScreenState extends State<CopyInventoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Kho bản sao')),
-      floatingActionButton: AppSession.isAdmin
+      floatingActionButton: AppSession.isLibrarian
           ? FloatingActionButton.extended(
               onPressed: () async {
                 await Navigator.pushNamed(context, AppRoutes.copyForm, arguments: widget.titleId);

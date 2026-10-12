@@ -2,7 +2,7 @@
 type: srs
 feature: data-import
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/data-import/brainstorms/data-import-scope.md
   - docs/_product/prd.md
@@ -25,8 +25,8 @@ Nhập dữ liệu đầu sách và bản sao từ Excel: chạy thử, báo l�
 
 | Actor | Loại (người/hệ thống/ngoài) | Mục tiêu | Trong scope? |
 |---|---|---|---|
-| Quản trị viên | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
-| Thủ thư | người | Vận hành quầy | Có |
+| Thủ thư | người | Quản trị dữ liệu, cấu hình, tài khoản | Có |
+| Nhân viên | người | Vận hành quầy | Có |
 | Thủ thư trưởng | stakeholder | Duyệt quy định và go-live | Có như stakeholder |
 | Hệ thống | hệ thống | Thực thi kiểm tra, ghi audit | Có |
 

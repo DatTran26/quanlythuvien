@@ -2,7 +2,7 @@
 type: brainstorm
 feature: reader-onboarding
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/decision-register.md
@@ -14,7 +14,7 @@ links:
 
 ## 1. Idea Seed
 
-Thủ thư cấp tài khoản cho người đọc ngay tại quầy, kiểm trùng định danh, kích hoạt để thẻ QR có hiệu lực; người đọc không tự đăng ký online.
+Nhân viên cấp tài khoản cho người đọc ngay tại quầy, kiểm trùng định danh, kích hoạt để thẻ QR có hiệu lực; người đọc không tự đăng ký online.
 
 ## 2. Context
 
@@ -28,8 +28,8 @@ Thủ thư cấp tài khoản cho người đọc ngay tại quầy, kiểm trù
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
 | Người đọc | Làm thẻ mất thời gian, không biết khi nào dùng được | Nhận thẻ QR dùng được ngay tại quầy |
-| Thủ thư | Tạo trùng hồ sơ cho cùng một người | Hệ thống báo trùng ngay khi nhập |
-| Quản trị viên | Hồ sơ cá nhân bị nhập thiếu, sai | Bộ thông tin tối thiểu thống nhất, có dấu vết |
+| Nhân viên | Tạo trùng hồ sơ cho cùng một người | Hệ thống báo trùng ngay khi nhập |
+| Thủ thư | Hồ sơ cá nhân bị nhập thiếu, sai | Bộ thông tin tối thiểu thống nhất, có dấu vết |
 
 ## 4. Capabilities Breakdown
 
@@ -53,13 +53,13 @@ Thủ thư cấp tài khoản cho người đọc ngay tại quầy, kiểm trù
 ### 5.1 Cấp tài khoản tại quầy
 
 1) Người đọc đến quầy, xuất trình giấy tờ.
-2) Thủ thư mở biểu mẫu người đọc, nhập thông tin.
+2) Nhân viên mở biểu mẫu người đọc, nhập thông tin.
 3) Hệ thống kiểm tra trường bắt buộc và kiểm trùng định danh.
-4) Thủ thư xác nhận; hệ thống lưu hồ sơ, kích hoạt tài khoản, sinh thẻ QR, ghi audit.
-5) Thủ thư giao thẻ QR cho người đọc.
+4) Nhân viên xác nhận; hệ thống lưu hồ sơ, kích hoạt tài khoản, sinh thẻ QR, ghi audit.
+5) Nhân viên giao thẻ QR cho người đọc.
 
 ```
-Thủ thư nhập hồ sơ ──> Đủ trường bắt buộc? ──không──> Báo lỗi tại trường, giữ dữ liệu đã nhập
+Nhân viên nhập hồ sơ ──> Đủ trường bắt buộc? ──không──> Báo lỗi tại trường, giữ dữ liệu đã nhập
                               │ có
                               ▼
                    Định danh đã tồn tại? ──có──> Báo trùng, mở hồ sơ hiện có
@@ -86,7 +86,7 @@ Không áp dụng — một vai trò, một trạng thái đầu vào.
 
 | Entity | Từ | Sang | Trigger | Quay lại được? |
 |--------|------|----|---------|-------------|
-| Tài khoản người đọc | — | Đang hoạt động | Thủ thư xác nhận cấp tài khoản | Không quay lại; khóa/vô hiệu thuộc `account-admin` |
+| Tài khoản người đọc | — | Đang hoạt động | Nhân viên xác nhận cấp tài khoản | Không quay lại; khóa/vô hiệu thuộc `account-admin` |
 
 ### 6.4 Interrupted Transactions
 
@@ -98,7 +98,7 @@ Không áp dụng — một vai trò, một trạng thái đầu vào.
 ### 6.5 Other Edge Cases
 
 - Thẻ QR chỉ dùng để tìm người đọc, không thay cho kiểm tra quyền.
-- Hồ sơ đã có từ import thì không tạo lại; Thủ thư mở hồ sơ đó để kích hoạt.
+- Hồ sơ đã có từ import thì không tạo lại; Nhân viên mở hồ sơ đó để kích hoạt.
 
 ## 7. Validation, Limits & Wording
 
@@ -141,7 +141,7 @@ Không áp dụng — một vai trò, một trạng thái đầu vào.
 
 ## 8. Assumptions
 
-- Thủ thư cấp được tài khoản tại quầy theo DEC-SF-03, dù ma trận quyền nguồn chỉ cho vai trò quản trị tạo tài khoản người đọc.
+- Nhân viên cấp được tài khoản tại quầy theo DEC-SF-03, dù ma trận quyền nguồn chỉ cho vai trò quản trị tạo tài khoản người đọc.
 - Thẻ có thời hạn 1 năm, không thu phí (mặc định OQ-05 nguồn) cho tới khi chốt.
 
 ## 9. Risks
@@ -161,7 +161,7 @@ Không áp dụng — một vai trò, một trạng thái đầu vào.
 - [ ] OQ-1: Bộ thông tin liên hệ bắt buộc của người đọc? (hold — domain approver)
 - [ ] OQ-2: Thẻ có thời hạn và có thu phí không? (OQ-05 nguồn; hold — Thủ thư trưởng)
 - [ ] OQ-3: Chính sách lưu giữ và xóa dữ liệu cá nhân người đọc? (OQ-core-003; hold — pháp chế)
-- [ ] OQ-4: Thủ thư được cấp tài khoản thay vì chỉ Quản trị viên như ma trận nguồn — cần Thủ thư trưởng xác nhận lại theo DEC-SF-03? (hold)
+- [ ] OQ-4: Nhân viên được cấp tài khoản thay vì chỉ Thủ thư như ma trận nguồn — cần Thủ thư trưởng xác nhận lại theo DEC-SF-03? (hold)
 
 ## 12. Next Steps
 

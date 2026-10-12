@@ -59,18 +59,25 @@ class ReturnResultScreen extends StatelessWidget {
                 title: 'Phát sinh phạt quá hạn',
                 message: 'Trả trễ ${result.overdueDays} ngày. Khoản phạt đã được ghi vào tài khoản người đọc.',
                 action: TextButton(
-                  onPressed: () => Navigator.pushNamed(context, AppRoutes.finePayment,
-                      arguments: loan.readerId), // màn của TV3 (Bảo)
+                  onPressed: () => Navigator.pushNamed(context, AppRoutes.finePayment, arguments: result.readerCard),
                   child: const Text('Thu phạt'),
                 ),
               ),
             ],
             if (result.damaged) ...[
               const SizedBox(height: 12),
-              const InfoBanner(
-                kind: BannerKind.info,
-                title: 'Bản sao chờ duyệt hư hỏng',
-                message: 'Đã lập báo cáo hư hỏng. Bản sao tạm ngừng cho mượn đến khi Quản trị viên duyệt.',
+              InfoBanner(
+                kind: result.damageFeeVnd > 0 ? BannerKind.warning : BannerKind.info,
+                title: result.damageFeeVnd > 0 ? 'Phát sinh bồi thường hư hỏng' : 'Bản sao chờ duyệt hư hỏng',
+                message: result.damageFeeVnd > 0
+                    ? 'Bồi thường ${fmtMoney(result.damageFeeVnd)}. Bản sao tạm ngừng cho mượn đến khi Thủ thư duyệt.'
+                    : 'Hư nhẹ không tính phí. Bản sao tạm ngừng cho mượn đến khi Thủ thư duyệt.',
+                action: result.damageFeeVnd > 0
+                    ? TextButton(
+                        onPressed: () => Navigator.pushNamed(context, AppRoutes.finePayment, arguments: result.readerCard),
+                        child: const Text('Thu bồi thường'),
+                      )
+                    : null,
               ),
             ],
             const SizedBox(height: 8),

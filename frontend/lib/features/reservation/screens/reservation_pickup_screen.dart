@@ -1,7 +1,7 @@
 // Màn 16 – Nhận sách đặt trước (reservation-pickup). Route: /reservation/pickup · R2
 // Bài: Hoang/07-reservation/04-reservation-pickup.md
 //
-// Thủ thư quét thẻ người đọc + bản sao đang giữ (ON_HOLD), kiểm tra đúng người / còn hạn,
+// Nhân viên quét thẻ người đọc + bản sao đang giữ (ON_HOLD), kiểm tra đúng người / còn hạn,
 // rồi chuyển sang checkout-review với 1 cuốn (dùng lại màn rà soát). Backend POST /loans tự
 // chuyển Reservation sang FULFILLED.
 

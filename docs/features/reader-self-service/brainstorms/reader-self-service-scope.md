@@ -2,7 +2,7 @@
 type: brainstorm
 feature: reader-self-service
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/decision-register.md
@@ -14,7 +14,7 @@ links:
 
 ## 1. Idea Seed
 
-Người đọc tự đăng nhập để tra cứu sách, mở thẻ QR cho Thủ thư quét, xem các sách đang mượn với hạn trả và lịch sử mượn; từ R1B xem được công nợ của mình.
+Người đọc tự đăng nhập để tra cứu sách, mở thẻ QR cho Nhân viên quét, xem các sách đang mượn với hạn trả và lịch sử mượn; từ R1B xem được công nợ của mình.
 
 ## 2. Context
 
@@ -28,14 +28,14 @@ Người đọc tự đăng nhập để tra cứu sách, mở thẻ QR cho Th�
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
 | Người đọc | Phải ra quầy hỏi còn sách không, đang mượn gì, hạn khi nào | Tự xem trên điện thoại |
-| Thủ thư | Mất thời gian trả lời câu hỏi tra cứu | Người đọc tự tra |
+| Nhân viên | Mất thời gian trả lời câu hỏi tra cứu | Người đọc tự tra |
 
 ## 4. Capabilities Breakdown
 
 ### P0 — must have
 
 - Tra cứu sách theo tên, tác giả, ISBN, thể loại; lọc còn/hết; xem số lượng khả dụng và vị trí kệ.
-- Thẻ thư viện QR: hiển thị mã QR cá nhân để Thủ thư quét khi mượn, trả.
+- Thẻ thư viện QR: hiển thị mã QR cá nhân để Nhân viên quét khi mượn, trả.
 - Sách đang mượn: danh sách phiếu đang mở, hạn trả, số ngày còn lại hoặc đã quá hạn.
 - Lịch sử mượn: các phiếu đã đóng, lọc theo thời gian.
 - Chỉ xem dữ liệu của chính mình.
@@ -57,7 +57,7 @@ Người đọc tự đăng nhập để tra cứu sách, mở thẻ QR cho Th�
 
 ### 5.2 Mở thẻ QR và xem sách đang mượn
 
-1) Người đọc mở thẻ QR, đưa Thủ thư quét.
+1) Người đọc mở thẻ QR, đưa Nhân viên quét.
 2) Người đọc mở "Sách đang mượn" xem hạn trả từng cuốn.
 
 ### 5.3 Xem lịch sử và công nợ

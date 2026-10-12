@@ -2,7 +2,7 @@
 type: brainstorm
 feature: overdue-fines
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/decision-register.md
@@ -27,7 +27,7 @@ Hằng ngày hệ thống quét phiếu mượn, chuyển phiếu quá hạn, nh
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
 | Người đọc | Không biết sắp đến hạn, bị phạt bất ngờ | Được nhắc trước hạn và khi quá hạn |
-| Thủ thư | Tính phạt tay, dễ sai | Phạt tự động, đúng quy định |
+| Nhân viên | Tính phạt tay, dễ sai | Phạt tự động, đúng quy định |
 | Thủ thư trưởng | Công nợ không khớp | Số dư luôn bằng tổng các sự kiện tài chính |
 
 ## 4. Capabilities Breakdown

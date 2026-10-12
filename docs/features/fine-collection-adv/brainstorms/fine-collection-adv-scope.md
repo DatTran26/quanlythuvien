@@ -2,7 +2,7 @@
 type: brainstorm
 feature: fine-collection-adv
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/decision-register.md
@@ -14,7 +14,7 @@ links:
 
 ## 1. Idea Seed
 
-In biên nhận thu phạt, cho Quản trị viên miễn, điều chỉnh, đảo hoặc hoàn tiền phạt với lý do, thẩm quyền và audit; đối soát tiền thu cuối ca với sổ.
+In biên nhận thu phạt, cho Thủ thư miễn, điều chỉnh, đảo hoặc hoàn tiền phạt với lý do, thẩm quyền và audit; đối soát tiền thu cuối ca với sổ.
 
 ## 2. Context
 
@@ -25,8 +25,8 @@ In biên nhận thu phạt, cho Quản trị viên miễn, điều chỉnh, đ�
 
 | User Type | Pain Point | Primary Need |
 |-----------|-----------|--------------|
-| Quản trị viên | Không có cách sửa sai phạt có kiểm soát | Miễn/điều chỉnh có lý do và dấu vết |
-| Thủ thư | Không có biên nhận đưa người đọc | In biên nhận thu phạt |
+| Thủ thư | Không có cách sửa sai phạt có kiểm soát | Miễn/điều chỉnh có lý do và dấu vết |
+| Nhân viên | Không có biên nhận đưa người đọc | In biên nhận thu phạt |
 | Thủ thư trưởng | Lệch tiền mặt cuối ca | Đối soát thu ngân |
 
 ## 4. Capabilities Breakdown
@@ -54,14 +54,14 @@ In biên nhận thu phạt, cho Quản trị viên miễn, điều chỉnh, đ�
 
 ### 5.1 Miễn hoặc điều chỉnh
 
-1) Quản trị viên mở sổ sự kiện của khoản phạt, chọn thao tác.
+1) Thủ thư mở sổ sự kiện của khoản phạt, chọn thao tác.
 2) Nhập số tiền và lý do; hệ thống yêu cầu xác thực lại.
 3) Hệ thống kiểm tra quyền, thẩm quyền theo số tiền và phân tách trách nhiệm, ghi sự kiện, ghi audit.
 
 ### 5.2 Đối soát cuối ca
 
 1) Cuối ca, hệ thống tổng hợp khoản thu của quầy.
-2) Thủ thư nhập tiền mặt thực có; lệch thì ghi sự kiện đối soát và cảnh báo vận hành.
+2) Nhân viên nhập tiền mặt thực có; lệch thì ghi sự kiện đối soát và cảnh báo vận hành.
 
 ```
 Chọn thao tác ──> Có quyền? ──không──> Từ chối, audit
@@ -95,7 +95,7 @@ Chọn thao tác ──> Có quyền? ──không──> Từ chối, audit
 | Chưa thanh toán | Đã miễn | Miễn hết số dư | Miễn | Đóng khoản |
 | Chưa thanh toán | Chưa thanh toán | Điều chỉnh | Điều chỉnh | Số dư đổi |
 | Đã thanh toán / Đã miễn | — | Trạng thái cuối | Thu, sửa trực tiếp | Từ chối; chỉ đảo/hoàn/điều chỉnh có tham chiếu |
-| Thủ thư | Miễn, điều chỉnh | Không có quyền | Thao tác | Từ chối |
+| Nhân viên | Miễn, điều chỉnh | Không có quyền | Thao tác | Từ chối |
 
 ### 6.3 State Transitions
 
@@ -152,7 +152,7 @@ Chọn thao tác ──> Có quyền? ──không──> Từ chối, audit
 
 ## 8. Assumptions
 
-- Chỉ Quản trị viên được miễn, điều chỉnh, đảo, hoàn.
+- Chỉ Thủ thư được miễn, điều chỉnh, đảo, hoàn.
 
 ## 9. Risks
 

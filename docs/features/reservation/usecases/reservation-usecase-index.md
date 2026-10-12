@@ -2,7 +2,7 @@
 type: usecase-index
 feature: reservation
 status: draft
-updated: 2026-10-08
+updated: 2026-10-12
 links:
   - docs/features/reservation/srs/reservation-spec.md
   - docs/features/reservation/srs/reservation-flows.md
@@ -14,7 +14,7 @@ links:
 
 | # | Slug | Level | Status | Actor primary | Covers FR | Screens | Errors (E-*) | OQ ref | Priority | Updated |
 |---|------|-------|--------|---------------|-----------|---------|--------------|--------|----------|---------|
-| 1 | [uc-reservation](uc-reservation.md) | sea | draft | Người đọc/Thủ thư/Hệ thống | FR-reservation-001..003 | reservation-search, reservation-form, reservation-queue, reservation-pickup | E-reservation-001, E-core-004, 005, 006, 008 | OQ-reservation-001..003 | P1 | 2026-10-08 |
+| 1 | [uc-reservation](uc-reservation.md) | sea | draft | Người đọc/Nhân viên/Hệ thống | FR-reservation-001..003 | reservation-search, reservation-form, reservation-queue, reservation-pickup | E-reservation-001, E-core-004, 005, 006, 008 | OQ-reservation-001..003 | P1 | 2026-10-08 |
 
 ## Relationships
 
