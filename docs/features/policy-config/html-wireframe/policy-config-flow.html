@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>policy-config — Cấu hình quy định | Wireframe</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f0f0f0;color:#000;padding:24px}.wf-page{max-width:1400px;margin:auto}.wf-breadcrumb{margin:0 auto 16px;max-width:1400px}.wf-breadcrumb a,.wf-link{color:#000;text-decoration:underline}.wf-breadcrumb a{display:inline-block;border:1px solid #000;background:#fff;padding:6px 12px;border-radius:4px}html.in-iframe .wf-breadcrumb{display:none}.wf-header{background:#fff;border-bottom:2px solid #000;padding:16px 20px;margin-bottom:24px}.wf-feature-label,.wf-flow-meta,.hint-text{font-size:11px;color:#888}.wf-flow-title{font-size:22px;font-weight:700;margin-top:4px}.wf-flow-desc{font-size:13px;margin-top:8px;line-height:1.5}.wf-rows{display:flex;flex-wrap:wrap;align-items:flex-start;gap:20px 16px}.wf-screen{width:375px;flex:0 0 375px}.wf-step-badge{width:20px;height:20px;border-radius:50%;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-bottom:6px}.wf-device-tag{display:inline-block;font-size:10px;border:1px solid #ccc;padding:1px 6px;margin-bottom:6px}.wf-screen-frame{border:2px solid #000;border-radius:8px;overflow:hidden;background:#fff}.wf-screen-bar{background:#f0f0f0;border-bottom:1px solid #000;padding:6px 10px;text-align:center;font-size:11px;font-weight:700}.wf-screen-content{padding:14px;display:flex;flex-direction:column;gap:10px}.wf-app-brand{text-align:center;font-size:12px;font-weight:700;border-bottom:1px solid #f0f0f0;padding-bottom:6px}.wf-screen-title{text-align:center;font-size:15px;font-weight:700}.wf-screen-label{text-align:center;font-size:11px;margin-top:6px}.field{display:flex;flex-direction:column;gap:3px}.field label{font-size:11px;font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid #000;border-radius:3px;padding:7px 9px;background:#fff;color:#000;font-size:12px}.field input::placeholder,.field textarea::placeholder{color:#888}.checkbox{display:flex;gap:6px;align-items:flex-start;font-size:11px}.checkbox input{margin-top:2px}.btn-primary,.btn-secondary{width:100%;padding:9px 12px;border:2px solid #000;border-radius:4px;font-size:12px;font-weight:700}.btn-primary{background:#000;color:#fff}.btn-secondary{background:#fff;color:#000}.wf-card,.banner,.modal-box{border:1px solid #000;border-radius:4px;padding:9px;background:#fff;font-size:11px;line-height:1.45}.wf-card-title,.modal-title{font-weight:700}.wf-card-sub,.modal-desc{margin-top:3px}.banner{background:#f0f0f0}.modal-box{border-width:2px}.back-nav{font-size:11px;border-bottom:1px solid #ccc;padding-bottom:7px}.divider{text-align:center;font-size:10px;color:#888;border-top:1px solid #ccc;padding-top:6px}.wf-desc-section{margin-top:32px}.wf-desc-title{font-size:14px;font-weight:700;border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:10px}.wf-desc-table{width:100%;border-collapse:collapse;background:#fff;font-size:11px}.wf-desc-table th,.wf-desc-table td{border:1px solid #000;padding:6px;vertical-align:top;text-align:left}.wf-desc-table th{background:#f0f0f0}.wf-desc-table td:first-child,.wf-desc-table th:first-child{width:36px;text-align:center}.wf-desc-screen-header td{background:#000;color:#fff;font-weight:700}.wf-footer{margin-top:30px;border-top:1px solid #ccc;padding-top:10px;font-size:10px;color:#888;display:flex;justify-content:space-between}
+  </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.documentElement.classList.add('in-iframe');</script>
+<div class="wf-breadcrumb"><a href="policy-config-wireframe.html">← Mục lục wireframe (policy-config)</a></div>
+<div class="wf-page" data-device="mobile">
+
+  <div class="wf-header">
+    <div class="wf-feature-label">Feature: policy-config / Wireframe</div>
+    <div class="wf-flow-title">Cấu hình quy định</div>
+    <div class="wf-flow-meta">1 màn hình · Device: mobile · Cập nhật: 2026-10-09 · Nguồn: srs/policy-config-userflow.md + srs/policy-config-spec.md</div>
+    <div class="wf-flow-desc">Thủ thư sửa tham số quy định với thời điểm hiệu lực và lý do; giá trị mới chỉ áp cho giao dịch bắt đầu sau thời điểm hiệu lực.</div>
+  </div>
+
+  <div class="wf-rows">
+    <article class="wf-screen" id="s1">
+      <div class="wf-step-badge">1</div><div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame"><div class="wf-screen-bar">Cấu hình quản trị</div><div class="wf-screen-content">
+        <div class="wf-app-brand">QuanLyThuVien</div><h2 class="wf-screen-title">Cấu hình nghiệp vụ</h2>
+        <div class="banner">Giá trị policy hiện hành chỉ áp dụng cho giao dịch bắt đầu sau thời điểm hiệu lực. Đã chốt: tối đa 5 cuốn đang mượn, hạn mượn 14 ngày, nợ phạt từ 50.000đ chặn mượn (DEC-SF-10). Gia hạn, phạt, giữ chỗ, SLA còn mở — OQ-policy-config-001; miền giá trị — OQ-policy-config-002.</div>
+        <div class="field"><label>Nhóm cấu hình</label><select><option>Loan / Renewal / Hold / Fine / Role / Notification</option></select></div>
+        <div class="field"><label>Tên tham số</label><input type="text" placeholder="Chọn tham số đã được định nghĩa"></div>
+        <div class="field"><label>Giá trị mới</label><input type="text" placeholder="Theo miền giá trị đã được phê duyệt"></div>
+        <div class="field"><label>Thời điểm hiệu lực</label><input type="text" placeholder="Chưa có quy ước định dạng trong nguồn"></div>
+        <div class="field"><label>Lý do thay đổi</label><textarea rows="3" placeholder="Bắt buộc để audit before/after"></textarea></div>
+        <button class="btn-primary" type="button">Lưu cấu hình</button>
+        <a class="btn-secondary" href="../../data-import/html-wireframe/data-import-flow.html#s1">Mở import dữ liệu</a>
+        <div class="banner">E-core-001: giá trị ngoài miền cho phép. E-core-002/E-core-007: thiếu quyền hoặc audit fail thì không lưu.</div>
+      </div></div><div class="wf-screen-label">admin-config</div>
+    </article>
+  </div>
+
+  <div class="wf-desc-section">
+    <div class="wf-desc-title">Mô tả màn hình</div>
+    <table class="wf-desc-table">
+      <thead>
+        <tr><th>#</th><th>Items</th><th>Control type</th><th>Data type</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 1: Cấu hình quản trị [1]</td></tr>
+    <tr><td>1</td><td>Nhóm cấu hình</td><td>Select</td><td>Enum</td><td>PolicyConfig theo FR-policy-config-001; danh sách giá trị cụ thể phải lấy từ cấu hình được phê duyệt.</td></tr><tr><td>2</td><td>Giá trị mới</td><td>Textbox</td><td>Text</td><td>Miền giá trị/default còn Open; E-core-001 khi invalid.</td></tr><tr><td>3</td><td>Lý do</td><td>Textarea</td><td>Text</td><td>Ghi audit before/after; audit fail thì rollback theo BR-core-003.</td></tr><tr><td>4</td><td>Mở import</td><td>Link</td><td>Navigation</td><td>Đi tới import-upload (import-upload · data-import) khi actor có quyền.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wf-footer">
+    <span>policy-config / policy-config-flow</span>
+    <span>/wireframe-html · 2026-10-09</span>
+  </div>
+
+</div>
+</body>
+</html>

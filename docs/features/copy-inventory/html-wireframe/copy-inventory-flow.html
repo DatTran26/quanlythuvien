@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>copy-inventory — Kho bản sao và in nhãn | Wireframe</title>
+  <style>
+    /* RESET */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f0f0;
+      color: #000;
+      padding: 32px 24px;
+    }
+    .wf-page { max-width: 1400px; margin: 0 auto; }
+
+    /* BREADCRUMB về cửa-vào TOC — chỉ hiện khi mở file flow TRỰC TIẾP, ẩn khi trong iframe của {feature}-wireframe.html */
+    .wf-breadcrumb { max-width: 1400px; margin: 0 auto 16px; }
+    .wf-breadcrumb a { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #000; text-decoration: none; border: 1px solid #000; border-radius: 4px; padding: 6px 12px; background: #fff; }
+    .wf-breadcrumb a:hover { background: #f0f0f0; }
+    html.in-iframe .wf-breadcrumb { display: none; }
+
+    /* HEADER */
+    .wf-header { margin-bottom: 28px; border-bottom: 2px solid #000; padding-bottom: 14px; background: #fff; padding: 16px 20px; }
+    .wf-feature-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; }
+    .wf-flow-title { font-size: 22px; font-weight: 700; margin-top: 4px; }
+    .wf-flow-meta { font-size: 12px; color: #888; margin-top: 6px; }
+    .wf-flow-desc { font-size: 13px; color: #000; margin-top: 8px; line-height: 1.5; }
+
+    /* FLOW ROW — screens xếp ngang, TỰ WRAP theo bề rộng device (KHÔNG ép 3/row) */
+    .wf-rows { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px 16px; }
+    .wf-row-divider { display: none; } /* không còn chia row cứng — wrap tự nhiên */
+
+    /* SCREEN WRAPPER — bề rộng = device thật, KHÔNG phải 33% trừu tượng.
+       data-device trên .wf-page quyết định: mobile 375 / tablet 768 / desktop 1440.
+       Frame giữ tỉ lệ thật của thiết bị → không còn "size sai / trông giả". */
+    .wf-screen { flex: 0 0 auto; }
+    .wf-page[data-device="mobile"]  .wf-screen { width: 375px; }
+    .wf-page[data-device="tablet"]  .wf-screen { width: 768px; }
+    .wf-page[data-device="desktop"] .wf-screen { width: 1024px; max-width: 100%; }
+    .wf-page:not([data-device]) .wf-screen { width: 375px; } /* fallback mobile-first */
+    .wf-device-tag { display: inline-block; font-size: 10px; color: #000; border: 1px solid #ccc; border-radius: 3px; padding: 1px 6px; margin-bottom: 6px; }
+    .wf-step-badge {
+      font-size: 10px; font-weight: 700; color: #fff;
+      background: #000; border-radius: 50%;
+      width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 6px;
+    }
+    .wf-screen-label { text-align: center; font-size: 11px; color: #000; margin-top: 6px; }
+    .wf-shared-badge { font-size: 9px; color: #888; border: 1px solid #ccc; border-radius: 3px; padding: 0 4px; margin-left: 4px; }
+    .wf-arrow { display: flex; align-items: center; padding-top: 48px; font-size: 22px; color: #000; flex-shrink: 0; }
+
+    /* SCREEN FRAME (device chrome) */
+    .wf-screen-frame { border: 2px solid #000; border-radius: 8px; overflow: hidden; background: #fff; }
+    .wf-screen-bar { background: #f0f0f0; border-bottom: 1px solid #000; padding: 6px 10px; display: flex; align-items: center; gap: 5px; }
+    .wf-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid #888; background: #fff; flex-shrink: 0; }
+    .wf-bar-title { font-size: 11px; font-weight: 600; flex: 1; text-align: center; }
+    .wf-screen-content { padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+    /* FORM CONTAINER — form/auth/dialog KHÔNG trải rộng hết khung desktop.
+       Bọc nội dung form trong .wf-form (box căn giữa, hẹp) — input/nút full-width TRONG box này,
+       không phải full khung. Trên mobile 375 thì .wf-form ~= full width tự nhiên. */
+    .wf-form { width: 100%; max-width: 380px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .wf-form.card { border: 1px solid #ccc; border-radius: 8px; padding: 20px; background: #fff; } /* optional: viền box rõ */
+
+    /* APP BRAND */
+    .wf-app-brand { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: #000; padding-bottom: 4px; border-bottom: 1px solid #f0f0f0; margin-bottom: 4px; }
+    .wf-screen-title { font-size: 15px; font-weight: 700; text-align: center; margin-bottom: 4px; }
+
+    /* FORM ELEMENTS */
+    .field { display: flex; flex-direction: column; gap: 3px; }
+    .field label { font-size: 11px; font-weight: 600; }
+    .field input[type=text], .field input[type=email], .field input[type=password], .field select, .field textarea {
+      border: 1px solid #000; border-radius: 3px; padding: 7px 9px;
+      font-size: 12px; width: 100%; background: #fff; color: #000;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: #888; }
+    .input-pw { position: relative; }
+    .input-pw input { padding-right: 28px; width: 100%; border: 1px solid #000; border-radius: 3px; padding: 7px 9px; font-size: 12px; }
+    .input-pw .eye { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 13px; cursor: pointer; color: #000; }
+
+    /* CHECKBOX */
+    label.checkbox { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; }
+    label.checkbox input { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* BUTTONS */
+    .btn-primary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #000; color: #fff;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-secondary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-google {
+      display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .g-icon { font-size: 14px; font-weight: 900; font-style: italic; }
+
+    /* LINK */
+    .wf-link { font-size: 12px; color: #000; text-decoration: underline; cursor: pointer; }
+    .links-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; }
+
+    /* BANNERS / INFO */
+    .banner { font-size: 11px; padding: 8px 10px; border: 1px solid #000; border-radius: 4px; display: flex; gap: 6px; align-items: flex-start; line-height: 1.4; }
+    .banner-info { background: #f0f0f0; }
+    .banner-warn { background: #f0f0f0; }
+
+    /* LABELS / HINTS */
+    .info-label { font-size: 12px; color: #000; line-height: 1.5; text-align: center; }
+    .hint-text { font-size: 11px; color: #888; font-style: italic; }
+    .state-hint { font-size: 10px; color: #888; font-style: italic; margin-top: 2px; }
+
+    /* PASSWORD CHECKLIST */
+    .pw-check { display: flex; gap: 8px; flex-wrap: wrap; font-size: 10px; }
+    .pw-check .ok { color: #000; }
+    .pw-check .ok::before { content: "✓ "; }
+    .pw-check .fail { color: #888; }
+    .pw-check .fail::before { content: "✗ "; }
+
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #888; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #ccc; }
+
+    /* MODAL BOX */
+    .modal-box { border: 2px solid #000; border-radius: 6px; padding: 12px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+    .modal-title { font-size: 12px; font-weight: 700; border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+    .modal-desc { font-size: 11px; color: #000; line-height: 1.5; }
+    .modal-actions { display: flex; gap: 8px; margin-top: 4px; }
+    .modal-actions .btn-secondary, .modal-actions .btn-primary { flex: 1; font-size: 11px; padding: 7px 8px; }
+
+    /* ICON PLACEHOLDER */
+    .icon-lg { text-align: center; font-size: 28px; margin-bottom: 4px; }
+
+    /* BACK NAV */
+    .back-nav { font-size: 12px; color: #000; display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 4px; }
+
+    /* CARD */
+    .wf-card { border: 1px solid #ccc; border-radius: 4px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; }
+    .wf-card-body { flex: 1; }
+    .wf-card-title { font-size: 12px; font-weight: 700; }
+    .wf-card-sub { font-size: 11px; color: #000; }
+    .wf-card-action { flex-shrink: 0; }
+
+    /* CAPTCHA placeholder */
+    .captcha-box { border: 1px dashed #888; border-radius: 4px; padding: 8px; text-align: center; font-size: 10px; color: #888; background: #f0f0f0; }
+
+    /* FOOTER */
+    .wf-footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid #ccc; font-size: 10px; color: #888; display: flex; justify-content: space-between; }
+
+    /* SCREEN DESCRIPTION TABLE (Phase F.5) */
+    .wf-desc-section { margin-top: 32px; }
+    .wf-desc-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #000; }
+    .wf-desc-table { width: 100%; border-collapse: collapse; background: #fff; font-size: 12px; }
+    .wf-desc-table th, .wf-desc-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; }
+    .wf-desc-table th { background: #f0f0f0; font-weight: 700; font-size: 11px; text-transform: uppercase; }
+    .wf-desc-table td:first-child, .wf-desc-table th:first-child { width: 36px; text-align: center; }
+    .wf-desc-table td:nth-child(2) { width: 150px; }  /* Items */
+    .wf-desc-table td:nth-child(3) { width: 110px; }  /* Control type */
+    .wf-desc-table td:nth-child(4) { width: 90px; }   /* Data type */
+    /* col 5 (Description) = phần còn lại */
+    .wf-desc-screen-header td { background: #000; color: #fff; font-weight: 700; font-size: 12px; }
+  </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.documentElement.classList.add('in-iframe');</script>
+<div class="wf-breadcrumb"><a href="copy-inventory-wireframe.html">← Mục lục wireframe (copy-inventory)</a></div>
+<div class="wf-page" data-device="mobile">
+
+  <div class="wf-header">
+    <div class="wf-feature-label">Feature: copy-inventory / Wireframe</div>
+    <div class="wf-flow-title">Kho bản sao và in nhãn</div>
+    <div class="wf-flow-meta">2 màn hình · Device: mobile · Cập nhật: 2026-10-09 · Nguồn: srs/copy-inventory-userflow.md + srs/copy-inventory-spec.md</div>
+    <div class="wf-flow-desc">Xem bản sao của một đầu sách theo trạng thái, nhập N bản với mã QR duy nhất và in lại nhãn.</div>
+  </div>
+
+  <div class="wf-rows">
+    <div class="wf-screen" id="s1">
+      <div class="wf-step-badge">1</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Kho bản sao [1]</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div>
+          <div class="back-nav"><a class="wf-link" href="../../catalog-admin/html-wireframe/catalog-admin-flow.html#s2">← Chi tiết đầu sách</a></div>
+          <div class="wf-screen-title">Kho bản sao <span class="wf-shared-badge">R0</span></div>
+          <p class="info-label">Các bản sao của đầu sách đang mở. Trạng thái lưu chỉ đổi qua use case nghiệp vụ, không đổi tay trên danh sách.</p>
+          <a class="wf-link" href="#s2">Tạo bản sao</a>
+          <p class="state-hint">Cần quyền. Copy phải gắn BibliographicRecord hợp lệ.</p>
+          <div class="wf-card">
+            <div class="wf-card-body">
+              <div class="wf-card-title">Mã QR/barcode</div>
+              <div class="wf-card-sub">Kệ · Tình trạng NEW/GOOD/WORN/DAMAGED · Trạng thái lưu · Override cho mượn (PROPOSAL)</div>
+            </div>
+            <a class="wf-link wf-card-action" href="#s2">Sửa</a>
+          </div>
+          <p class="hint-text">Chưa có bản sao: danh sách rỗng, vẫn tạo mới nếu có quyền. Bản DISPOSED là terminal. Bản ON_LOAN hoặc ON_HOLD không xóa.</p>
+          <button class="btn-secondary" type="button" disabled>Đổi trạng thái tại danh sách</button>
+          <p class="state-hint">Disabled — E-core-008. Transition đi qua nghiệp vụ mượn/trả/hư hỏng, không phải nút trên kho.</p>
+          <div class="banner banner-warn"><span>E-core-008 — Thao tác không hợp lệ từ trạng thái hiện tại (ví dụ xóa bản đang mượn/đang giữ, hoặc tác động lên DISPOSED). Reload và chỉ hiện action hợp lệ.</span></div>
+        </div>
+      </div>
+      <div class="wf-screen-label">copy-inventory</div>
+    </div>
+
+    <div class="wf-screen" id="s2">
+      <div class="wf-step-badge">2</div>
+      <div class="wf-device-tag">mobile · 375px</div>
+      <div class="wf-screen-frame">
+        <div class="wf-screen-bar">
+          <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+          <span class="wf-bar-title">Biểu mẫu bản sao [2]</span>
+        </div>
+        <div class="wf-screen-content">
+          <div class="wf-app-brand">HỆ THỐNG QUẢN LÝ THƯ VIỆN</div>
+          <div class="back-nav"><a class="wf-link" href="#s1">← Kho bản sao</a></div>
+          <div class="wf-screen-title">Biểu mẫu bản sao</div>
+          <div class="wf-form">
+            <p class="info-label">Gắn với đầu sách đang mở (bibliographic_record_id). Không chọn title khác trên form này.</p>
+            <div class="field">
+              <label for="s5-qr">Mã QR/barcode (qr_code)</label>
+              <input id="s5-qr" type="text" placeholder="Mã định vị duy nhất">
+            </div>
+            <p class="state-hint">FACT, unique. Chỉ là locator (BR-copy-inventory-001, FR-copy-inventory-002), không phải quyền. Không bịa quy tắc charset/độ dài.</p>
+            <div class="field">
+              <label for="s5-shelf">Vị trí kệ (shelf)</label>
+              <input id="s5-shelf" type="text" placeholder="Vị trí kệ">
+            </div>
+            <p class="state-hint">Tham chiếu danh mục kệ. Danh sách kệ chưa có nguồn — không bịa option.</p>
+            <div class="field">
+              <label for="s5-condition">Tình trạng ban đầu (condition)</label>
+              <select id="s5-condition">
+                <option>Chọn tình trạng</option>
+                <option>NEW</option>
+                <option>GOOD</option>
+                <option>WORN</option>
+                <option>DAMAGED</option>
+              </select>
+            </div>
+            <p class="state-hint">Tập giá trị FACT. Nguồn không chốt giá trị mặc định — dòng đầu không phải một condition hợp lệ.</p>
+            <p class="info-label">Trạng thái khởi tạo: AVAILABLE (COPY-T00 — PROPOSAL, DEC-D3-01). Không có ô đổi status thủ công.</p>
+            <div class="field">
+              <label for="s5-override">Override cho mượn (loanable_override) — PROPOSAL</label>
+              <select id="s5-override">
+                <option>INHERIT</option>
+                <option>LOANABLE</option>
+                <option>NOT_LOANABLE</option>
+              </select>
+            </div>
+            <p class="state-hint">DEC-D3-09. Mặc định tài liệu: INHERIT. effective_loanable là giá trị tính, không nhập.</p>
+            <div class="field">
+              <label for="s5-acquired">Ngày nhập kho (acquired_at)</label>
+              <input id="s5-acquired" type="text" placeholder="Thời điểm nhập kho">
+            </div>
+            <p class="state-hint">FACT. Định dạng ngày chưa có nguồn — không bịa mask.</p>
+            <p class="info-label">Phiên bản (version) chỉ đọc khi sửa — khóa lạc quan CAS (SRC-BR13). BibliographicRecord không có field version trong ERD.</p>
+            <button class="btn-primary" type="button">Lưu bản sao</button>
+            <p class="hint-text">Hợp lệ thì về <a class="wf-link" href="../../catalog-admin/html-wireframe/catalog-admin-flow.html#s2">chi tiết đầu sách (bibliographic-detail · catalog-admin)</a>, không về kho. Audit cùng transaction. Audit fail: E-core-007, rollback.</p>
+            <button class="btn-secondary" type="button">In nhãn QR</button>
+            <p class="state-hint">Sau khi bản sao đã lưu (F1 bước 5). QR mờ/trùng: nhập lại mã hoặc in lại. Quét không thay quyền.</p>
+            <div class="banner banner-warn"><span>E-core-003 — Mã trùng, title không tồn tại, hoặc mã không đọc được. Không ghi bản sao trùng locator. Nhập/sinh mã mới hoặc mở bản sao đang giữ mã đó.</span></div>
+            <div class="banner banner-warn"><span>E-core-001 — Thiếu trường bắt buộc hoặc sai định dạng. Giữ dữ liệu đã nhập. Nguồn không liệt kê required-set của từng field bản sao.</span></div>
+            <div class="modal-box">
+              <div class="modal-title">Xung đột đồng thời (E-core-004)</div>
+              <p class="modal-desc">Version đã đổi sau khi mở form. Không ghi đè im lặng. Diff là PROPOSAL. Tải trạng thái mới hoặc hủy.</p>
+              <div class="modal-actions">
+                <button class="btn-primary" type="button">Tải trạng thái mới</button>
+                <button class="btn-secondary" type="button">Hủy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-screen-label">copy-form</div>
+    </div>
+  </div>
+
+  <div class="wf-desc-section">
+    <div class="wf-desc-title">Mô tả màn hình</div>
+    <table class="wf-desc-table">
+      <thead>
+        <tr><th>#</th><th>Items</th><th>Control type</th><th>Data type</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 1: Kho bản sao [1]</td></tr>
+        <tr><td>1</td><td>Quay lại chi tiết</td><td>Link</td><td>Click</td><td>Về bibliographic-detail (bibliographic-detail · catalog-admin). Không ghi.</td></tr>
+        <tr><td>2</td><td>Tạo bản sao</td><td>Link</td><td>Click</td><td>Sang copy-form [2] khi có quyền. Copy phải thuộc đầu sách hợp lệ (precondition UC). Thiếu quyền: E-core-002.</td></tr>
+        <tr><td>3</td><td>Sửa</td><td>Link</td><td>Click</td><td>Mở [2] cho bản sao đang chọn. Không đổi status lưu trên card. QR chỉ để định vị (BR-copy-inventory-001).</td></tr>
+        <tr><td>4</td><td>Dòng bản sao</td><td>Label</td><td>ReadOnly</td><td>Hiển thị qr_code, shelf, condition (NEW/GOOD/WORN/DAMAGED — FACT), status lưu 7 giá trị (FACT tên / PROPOSAL ma trận transition DEC-D3-01), loanable_override (PROPOSAL). Empty state: chưa có bản sao, không bịa dòng mẫu.</td></tr>
+        <tr><td>5</td><td>Đổi trạng thái tại danh sách</td><td>Button</td><td>Click</td><td>Luôn disabled. UC 5b: không đổi status thủ công; DISPOSED terminal; không xóa bản ON_LOAN/ON_HOLD. E-core-008 giải thích và chỉ giữ action hợp lệ sau reload.</td></tr>
+        <tr><td>6</td><td>Trạng thái không hợp lệ</td><td>Label</td><td>ReadOnly</td><td>E-core-008. Recovery: reload, không suy transition mới. Đổi vòng đời bản sao đi qua UC mượn/trả/hư hỏng tương ứng.</td></tr>
+
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 2: Biểu mẫu bản sao [2]</td></tr>
+        <tr><td>1</td><td>Quay lại kho</td><td>Link</td><td>Click</td><td>Về [1], không lưu. Điểm vào tạo/sửa là kho (userflow).</td></tr>
+        <tr><td>2</td><td>Đầu sách đang gắn</td><td>Label</td><td>ReadOnly</td><td>bibliographic_record_id, FACT. Title không tồn tại: E-core-003, không tạo Copy. Không thêm control đổi đầu sách vì nguồn không mô tả.</td></tr>
+        <tr><td>3</td><td>Mã QR/barcode</td><td>Textbox</td><td>Text</td><td>qr_code, FACT, unique, locator duy nhất (FR-copy-inventory-001, FR-copy-inventory-002, BR-copy-inventory-001). Quét không phải authorization. Trùng hoặc không đọc được: E-core-003. Charset/độ dài chưa có — không bịa. “Sinh mã mới” là nhánh recovery UC 5a, không phải thuật toán cụ thể.</td></tr>
+        <tr><td>4</td><td>Vị trí kệ</td><td>Textbox</td><td>Text</td><td>shelf, FACT, tham chiếu Shelf. Danh mục kệ chưa liệt kê; PolicyConfig vị trí là PROPOSAL. Ô chữ để không bịa option.</td></tr>
+        <tr><td>5</td><td>Tình trạng ban đầu</td><td>Dropdown</td><td>Select</td><td>condition, FACT: NEW, GOOD, WORN, DAMAGED. FR-copy-inventory-001 yêu cầu tình trạng ban đầu khi đăng ký. Không có default được chốt — option đầu là lời nhắc chọn, không phải giá trị enum. Giá trị lạ: E-core-001.</td></tr>
+        <tr><td>6</td><td>Trạng thái khởi tạo</td><td>Label</td><td>ReadOnly</td><td>Tạo mới: AVAILABLE qua COPY-T00, PROPOSAL DEC-D3-01. Không có dropdown status vì đổi tay là E-core-008. Bảy tên trạng thái là FACT; ma trận transition là PROPOSAL.</td></tr>
+        <tr><td>7</td><td>Override cho mượn</td><td>Dropdown</td><td>Select</td><td>loanable_override, PROPOSAL DEC-D3-09: INHERIT / LOANABLE / NOT_LOANABLE. Tài liệu đặt mặc định INHERIT. effective_loanable là derived, không nhập. Đổi override vẫn audit (CP-AVL-03, PROPOSAL) nhưng không phải transition.</td></tr>
+        <tr><td>8</td><td>Ngày nhập kho</td><td>Textbox</td><td>Text</td><td>acquired_at, FACT. Nguồn không nêu định dạng ngày — không bịa mask. Sai định dạng nếu sau này có rule thì E-core-001; hiện chưa có rule chi tiết.</td></tr>
+        <tr><td>9</td><td>Phiên bản</td><td>Label</td><td>ReadOnly</td><td>version của Copy, FACT, CAS SRC-BR13 / NFR-core-002. Chỉ hiện khi sửa. Submit trên version cũ: E-core-004. ERD không đặt version trên BibliographicRecord.</td></tr>
+        <tr><td>10</td><td>Lưu bản sao</td><td>Button</td><td>Click</td><td>Đạt validation và concurrency thì sang chi tiết đầu sách (bibliographic-detail · catalog-admin) (userflow), không sang kho. Tạo Copy AVAILABLE là PROPOSAL COPY-T00 + audit. E-core-001/E-core-003 ở lại [2]. Mermaid userflow chỉ vẽ mũi tên sửa-lỗi về (bibliographic-form · catalog-admin); UC 5a giữ lỗi trên copy-form — wireframe theo UC cho lỗi của chính form này.</td></tr>
+        <tr><td>11</td><td>In nhãn QR</td><td>Button</td><td>Click</td><td>F1 bước 5, sau khi Copy đã lưu. Nhãn là locator, không phải credential. QR sai/mờ/trùng: nhập tay hoặc in lại. Không bịa khổ giấy hay mẫu tem.</td></tr>
+        <tr><td>12</td><td>Lỗi mã bản sao</td><td>Label</td><td>ReadOnly</td><td>E-core-003: trùng locator, title không tồn tại, mã không đọc được. Không ghi bản trùng. Mở bản đang sở hữu mã hoặc nhập mã khác.</td></tr>
+        <tr><td>13</td><td>Lỗi validation bản sao</td><td>Label</td><td>ReadOnly</td><td>E-core-001. Giữ dữ liệu. Required-set từng field chưa được liệt kê trong nguồn.</td></tr>
+        <tr><td>14</td><td>Tải trạng thái mới</td><td>Button</td><td>Click</td><td>Recovery E-core-004 trên Copy.version. Không ghi đè. Diff là PROPOSAL.</td></tr>
+        <tr><td>15</td><td>Hủy xung đột</td><td>Button</td><td>Click</td><td>Không commit thay đổi bản sao.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wf-footer">
+    <span>copy-inventory / copy-inventory-flow</span>
+    <span>/wireframe-html · 2026-10-09</span>
+  </div>
+
+</div>
+</body>
+</html>

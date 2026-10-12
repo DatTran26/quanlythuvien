@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: library-api
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/library}
+    username: ${DATABASE_USER:library}
+    password: ${DATABASE_PASSWORD:library}
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.jdbc.time_zone: Asia/Ho_Chi_Minh
+  flyway:
+    enabled: true
+  jackson:
+    time-zone: Asia/Ho_Chi_Minh
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 3MB
+
+server:
+  port: ${PORT:8080}
+
+app:
+  seed: ${APP_SEED:false}
+  seed-password: ${APP_SEED_PASSWORD:Dev123456}
+  bcrypt-strength: 10
+  jwt:
+    secret: ${JWT_SECRET:dev-only-secret-change-me-to-32bytes}
+    ttl-minutes: 60
+  storage:
+    dir: ${STORAGE_DIR:./data/uploads}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

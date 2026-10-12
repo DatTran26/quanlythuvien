@@ -1,0 +1,265 @@
+{
+  "_meta": {
+    "version": 1,
+    "updated": "2026-10-10",
+    "referenceNow": "2026-10-10T08:00:00",
+    "description": "Dữ liệu mẫu dùng khi app chưa nối CSDL thật. Tên trường và enum khớp entity trong apps/api. Quan hệ giữa các bảng ghi bằng id (titleId, copyId, readerId...). Phân loại dùng chung / dùng riêng xem mock-data.md.",
+    "sections": {
+      "shared": "Cả 3 thành viên đọc. Chỉ sửa qua PR chung.",
+      "tv1": "Riêng TV1 – Nền tảng, Danh mục & Kho.",
+      "tv2": "Riêng TV2 – Lưu thông tại quầy & Báo cáo.",
+      "tv3": "Riêng TV3 – Người đọc, Tài chính & Thông báo."
+    }
+  },
+
+  "shared": {
+    "users": [
+      { "id": 1, "email": "admin@library.local", "displayName": "Thủ thư", "role": "LIBRARIAN", "status": "ACTIVE", "createdAt": "2026-08-01T08:00:00" },
+      { "id": 2, "email": "librarian@library.local", "displayName": "Nhân viên", "role": "STAFF", "status": "ACTIVE", "createdAt": "2026-08-01T08:00:00" },
+      { "id": 3, "email": "reader@library.local", "displayName": "Người đọc", "role": "READER", "status": "ACTIVE", "createdAt": "2026-08-01T08:00:00" },
+      { "id": 4, "email": "an.nguyen@student.local", "displayName": "Nguyễn Văn An", "role": "READER", "status": "ACTIVE", "createdAt": "2026-08-02T09:10:00" },
+      { "id": 5, "email": "binh.tran@student.local", "displayName": "Trần Thị Bình", "role": "READER", "status": "ACTIVE", "createdAt": "2026-08-02T09:20:00" },
+      { "id": 6, "email": "cuong.le@student.local", "displayName": "Lê Minh Cường", "role": "READER", "status": "ACTIVE", "createdAt": "2026-08-03T10:00:00" },
+      { "id": 7, "email": "dung.pham@student.local", "displayName": "Phạm Thu Dung", "role": "READER", "status": "ACTIVE", "createdAt": "2026-08-03T10:15:00" },
+      { "id": 8, "email": "em.hoang@student.local", "displayName": "Hoàng Gia Em", "role": "READER", "status": "PENDING", "createdAt": "2026-10-09T15:30:00" },
+      { "id": 9, "email": "giang.vo@student.local", "displayName": "Võ Hương Giang", "role": "READER", "status": "LOCKED", "createdAt": "2026-05-20T08:45:00" }
+    ],
+
+    "readerProfiles": [
+      { "userId": 3, "cardCode": "R10000001" },
+      { "userId": 4, "cardCode": "R10000002" },
+      { "userId": 5, "cardCode": "R10000003" },
+      { "userId": 6, "cardCode": "R10000004" },
+      { "userId": 7, "cardCode": "R10000005" },
+      { "userId": 8, "cardCode": "R10000006" },
+      { "userId": 9, "cardCode": "R10000007" }
+    ],
+
+    "categories": [
+      { "id": 1, "name": "Công nghệ thông tin" },
+      { "id": 2, "name": "Văn học" },
+      { "id": 3, "name": "Kinh tế" },
+      { "id": 4, "name": "Khoa học tự nhiên" },
+      { "id": 5, "name": "Ngoại ngữ" }
+    ],
+
+    "titles": [
+      { "id": 1, "name": "Lập trình Flutter cơ bản", "author": "Nguyễn Hữu Phúc", "isbn": "9786040000011", "categoryId": 1, "priceVnd": 120000, "loanable": true, "active": true },
+      { "id": 2, "name": "Cấu trúc dữ liệu và giải thuật", "author": "Lê Minh Hoàng", "isbn": "9786040000028", "categoryId": 1, "priceVnd": 95000, "loanable": true, "active": true },
+      { "id": 3, "name": "Spring Boot thực chiến", "author": "Trần Quốc Bảo", "isbn": "9786040000035", "categoryId": 1, "priceVnd": 150000, "loanable": true, "active": true },
+      { "id": 4, "name": "Cơ sở dữ liệu PostgreSQL", "author": "Phạm Văn Khoa", "isbn": "9786040000042", "categoryId": 1, "priceVnd": 110000, "loanable": true, "active": true },
+      { "id": 5, "name": "Dế Mèn phiêu lưu ký", "author": "Tô Hoài", "isbn": "9786040000059", "categoryId": 2, "priceVnd": 60000, "loanable": true, "active": true },
+      { "id": 6, "name": "Số đỏ", "author": "Vũ Trọng Phụng", "isbn": "9786040000066", "categoryId": 2, "priceVnd": 55000, "loanable": true, "active": true },
+      { "id": 7, "name": "Kinh tế học vi mô", "author": "Nguyễn Văn Ngọc", "isbn": "9786040000073", "categoryId": 3, "priceVnd": 130000, "loanable": true, "active": true },
+      { "id": 8, "name": "Vật lý đại cương", "author": "Lương Duyên Bình", "isbn": "9786040000080", "categoryId": 4, "priceVnd": 90000, "loanable": true, "active": true },
+      { "id": 9, "name": "Ngữ pháp tiếng Anh thực hành", "author": "Đặng Thu Hà", "isbn": "9786040000097", "categoryId": 5, "priceVnd": 180000, "loanable": true, "active": true },
+      { "id": 10, "name": "Từ điển Anh – Việt", "author": "Viện Ngôn ngữ học", "isbn": "9786040000103", "categoryId": 5, "priceVnd": 250000, "loanable": false, "active": true },
+      { "id": 11, "name": "Lập trình Java nâng cao", "author": "Hồ Sĩ Đàm", "isbn": "9786040000110", "categoryId": 1, "priceVnd": 140000, "loanable": true, "active": false }
+    ],
+
+    "copies": [
+      { "id": 1, "titleId": 1, "code": "BC000001", "status": "ON_LOAN", "shelf": "A1-01", "loanableOverride": null, "version": 3 },
+      { "id": 2, "titleId": 1, "code": "BC000002", "status": "AVAILABLE", "shelf": "A1-01", "loanableOverride": null, "version": 4 },
+      { "id": 3, "titleId": 1, "code": "BC000003", "status": "ON_LOAN", "shelf": "A1-01", "loanableOverride": null, "version": 2 },
+      { "id": 4, "titleId": 2, "code": "BC000004", "status": "AVAILABLE", "shelf": "A1-02", "loanableOverride": null, "version": 3 },
+      { "id": 5, "titleId": 2, "code": "BC000005", "status": "PENDING_REVIEW", "shelf": "A1-02", "loanableOverride": null, "version": 3 },
+      { "id": 6, "titleId": 3, "code": "BC000006", "status": "ON_LOAN", "shelf": "A1-03", "loanableOverride": null, "version": 2 },
+      { "id": 7, "titleId": 3, "code": "BC000007", "status": "ON_HOLD", "shelf": "QUAY-GIU", "loanableOverride": null, "version": 3 },
+      { "id": 8, "titleId": 4, "code": "BC000008", "status": "AVAILABLE", "shelf": "A1-04", "loanableOverride": null, "version": 1 },
+      { "id": 9, "titleId": 4, "code": "BC000009", "status": "IN_REPAIR", "shelf": "KHO-SUA", "loanableOverride": null, "version": 4 },
+      { "id": 10, "titleId": 5, "code": "BC000010", "status": "ON_LOAN", "shelf": "B2-01", "loanableOverride": null, "version": 2 },
+      { "id": 11, "titleId": 5, "code": "BC000011", "status": "AVAILABLE", "shelf": "B2-01", "loanableOverride": null, "version": 3 },
+      { "id": 12, "titleId": 6, "code": "BC000012", "status": "LOST", "shelf": "B2-02", "loanableOverride": null, "version": 3 },
+      { "id": 13, "titleId": 7, "code": "BC000013", "status": "AVAILABLE", "shelf": "C1-01", "loanableOverride": null, "version": 3 },
+      { "id": 14, "titleId": 7, "code": "BC000014", "status": "DISPOSED", "shelf": null, "loanableOverride": null, "version": 4 },
+      { "id": 15, "titleId": 8, "code": "BC000015", "status": "ON_LOAN", "shelf": "D1-01", "loanableOverride": null, "version": 3 },
+      { "id": 16, "titleId": 9, "code": "BC000016", "status": "ON_LOAN", "shelf": "E1-01", "loanableOverride": null, "version": 2 },
+      { "id": 17, "titleId": 10, "code": "BC000017", "status": "AVAILABLE", "shelf": "E1-02", "loanableOverride": null, "version": 1 },
+      { "id": 18, "titleId": 2, "code": "BC000018", "status": "AVAILABLE", "shelf": "A1-02", "loanableOverride": false, "version": 1 }
+    ],
+
+    "lendingPolicy": {
+      "id": 1,
+      "maxActiveLoans": 5,
+      "loanDays": 14,
+      "maxRenewals": 1,
+      "renewDays": 7,
+      "finePerDayVnd": 2000,
+      "fineBlockVnd": 50000,
+      "holdHours": 48,
+      "maxOpenReservations": 3,
+      "lostProcessingFeeVnd": 0
+    },
+
+    "loans": [
+      { "id": 1, "copyId": 1, "titleId": 1, "readerId": 3, "status": "ACTIVE", "borrowedAt": "2026-10-01T09:15:00", "dueAt": "2026-10-15T09:15:00", "returnedAt": null, "renewCount": 0 },
+      { "id": 2, "copyId": 3, "titleId": 1, "readerId": 4, "status": "OVERDUE", "borrowedAt": "2026-09-15T10:00:00", "dueAt": "2026-09-29T10:00:00", "returnedAt": null, "renewCount": 0 },
+      { "id": 3, "copyId": 6, "titleId": 3, "readerId": 5, "status": "ACTIVE", "borrowedAt": "2026-10-05T14:00:00", "dueAt": "2026-10-19T14:00:00", "returnedAt": null, "renewCount": 0 },
+      { "id": 4, "copyId": 10, "titleId": 5, "readerId": 3, "status": "OVERDUE", "borrowedAt": "2026-09-20T08:30:00", "dueAt": "2026-10-04T08:30:00", "returnedAt": null, "renewCount": 0 },
+      { "id": 5, "copyId": 12, "titleId": 6, "readerId": 6, "status": "LOST", "borrowedAt": "2026-08-20T09:00:00", "dueAt": "2026-09-03T09:00:00", "returnedAt": null, "renewCount": 0 },
+      { "id": 6, "copyId": 15, "titleId": 8, "readerId": 7, "status": "ACTIVE", "borrowedAt": "2026-09-21T15:00:00", "dueAt": "2026-10-12T15:00:00", "returnedAt": null, "renewCount": 1 },
+      { "id": 7, "copyId": 16, "titleId": 9, "readerId": 4, "status": "ACTIVE", "borrowedAt": "2026-10-08T10:00:00", "dueAt": "2026-10-22T10:00:00", "returnedAt": null, "renewCount": 0 },
+      { "id": 8, "copyId": 5, "titleId": 2, "readerId": 5, "status": "RETURNED", "borrowedAt": "2026-09-10T09:00:00", "dueAt": "2026-09-24T09:00:00", "returnedAt": "2026-10-09T16:00:00", "renewCount": 0 },
+      { "id": 9, "copyId": 2, "titleId": 1, "readerId": 3, "status": "RETURNED", "borrowedAt": "2026-08-01T09:00:00", "dueAt": "2026-08-15T09:00:00", "returnedAt": "2026-08-14T17:20:00", "renewCount": 0 },
+      { "id": 10, "copyId": 4, "titleId": 2, "readerId": 6, "status": "RETURNED", "borrowedAt": "2026-08-05T10:00:00", "dueAt": "2026-08-19T10:00:00", "returnedAt": "2026-08-25T11:00:00", "renewCount": 0 },
+      { "id": 11, "copyId": 9, "titleId": 4, "readerId": 7, "status": "RETURNED", "borrowedAt": "2026-09-01T08:00:00", "dueAt": "2026-09-15T08:00:00", "returnedAt": "2026-09-14T16:30:00", "renewCount": 0 },
+      { "id": 12, "copyId": 14, "titleId": 7, "readerId": 4, "status": "RETURNED", "borrowedAt": "2026-07-01T09:00:00", "dueAt": "2026-07-15T09:00:00", "returnedAt": "2026-07-15T08:40:00", "renewCount": 0 },
+      { "id": 13, "copyId": 11, "titleId": 5, "readerId": 9, "status": "RETURNED", "borrowedAt": "2026-06-01T09:00:00", "dueAt": "2026-06-15T09:00:00", "returnedAt": "2026-07-15T10:00:00", "renewCount": 0 },
+      { "id": 14, "copyId": 13, "titleId": 7, "readerId": 5, "status": "RETURNED", "borrowedAt": "2026-09-02T13:00:00", "dueAt": "2026-09-16T13:00:00", "returnedAt": "2026-09-10T09:30:00", "renewCount": 0 }
+    ],
+
+    "fines": [
+      { "id": 1, "loanId": 8, "readerId": 5, "amountVnd": 30000, "balanceVnd": 30000, "reason": "OVERDUE", "status": "OPEN", "note": "Trả trễ 15 ngày × 2.000đ", "createdAt": "2026-10-09T16:00:00" },
+      { "id": 2, "loanId": 10, "readerId": 6, "amountVnd": 12000, "balanceVnd": 0, "reason": "OVERDUE", "status": "PAID", "note": "Trả trễ 6 ngày × 2.000đ", "createdAt": "2026-08-25T11:00:00" },
+      { "id": 3, "loanId": 5, "readerId": 6, "amountVnd": 55000, "balanceVnd": 55000, "reason": "LOST", "status": "OPEN", "note": "Báo mất, bồi thường theo giá bìa", "createdAt": "2026-10-03T10:00:00" },
+      { "id": 4, "loanId": 12, "readerId": 4, "amountVnd": 130000, "balanceVnd": 0, "reason": "DAMAGE", "status": "WAIVED", "note": "Sách ngấm nước do dột kho, miễn bồi thường", "createdAt": "2026-07-15T08:45:00" },
+      { "id": 5, "loanId": 13, "readerId": 9, "amountVnd": 60000, "balanceVnd": 40000, "reason": "OVERDUE", "status": "OPEN", "note": "Trả trễ 30 ngày × 2.000đ, đã nộp 20.000đ", "createdAt": "2026-07-15T10:00:00" }
+    ]
+  },
+
+  "tv1": {
+    "importBatches": [
+      {
+        "id": 1,
+        "fileName": "kho-sach-2026-09.xlsx",
+        "status": "COMMITTED",
+        "uploadedBy": 1,
+        "uploadedAt": "2026-09-01T08:30:00",
+        "committedAt": "2026-09-01T08:45:00",
+        "totalRows": 18,
+        "validRows": 18,
+        "errorRows": 0,
+        "rows": []
+      },
+      {
+        "id": 2,
+        "fileName": "bo-sung-2026-10.xlsx",
+        "status": "DRY_RUN",
+        "uploadedBy": 1,
+        "uploadedAt": "2026-10-10T07:50:00",
+        "committedAt": null,
+        "totalRows": 5,
+        "validRows": 2,
+        "errorRows": 3,
+        "rows": [
+          { "rowNo": 2, "name": "Lập trình Kotlin", "author": "Nguyễn Thành Nam", "isbn": "9786040000127", "category": "Công nghệ thông tin", "priceVnd": 125000, "copies": 2, "shelf": "A1-05", "result": "OK", "error": null },
+          { "rowNo": 3, "name": "Truyện Kiều", "author": "Nguyễn Du", "isbn": "9786040000134", "category": "Văn học", "priceVnd": 70000, "copies": 3, "shelf": "B2-03", "result": "OK", "error": null },
+          { "rowNo": 4, "name": "", "author": "Không rõ", "isbn": "9786040000141", "category": "Văn học", "priceVnd": 50000, "copies": 1, "shelf": "B2-03", "result": "ERROR", "error": "Thiếu tên đầu sách" },
+          { "rowNo": 5, "name": "Spring Boot thực chiến", "author": "Trần Quốc Bảo", "isbn": "9786040000035", "category": "Công nghệ thông tin", "priceVnd": 150000, "copies": 1, "shelf": "A1-03", "result": "ERROR", "error": "ISBN đã tồn tại (đầu sách #3)" },
+          { "rowNo": 6, "name": "Hóa học hữu cơ", "author": "Trần Văn Sơn", "isbn": "9786040000158", "category": "Hóa học", "priceVnd": -1, "copies": 2, "shelf": "D1-02", "result": "ERROR", "error": "Thể loại không có trong danh mục; giá bìa không hợp lệ" }
+        ]
+      }
+    ],
+
+    "backupRuns": [
+      { "id": 1, "startedAt": "2026-10-08T02:00:00", "finishedAt": "2026-10-08T02:00:41", "status": "SUCCESS", "fileName": "pgdump-2026-10-08.sql.gz", "sizeKb": 812 },
+      { "id": 2, "startedAt": "2026-10-09T02:00:00", "finishedAt": "2026-10-09T02:00:39", "status": "SUCCESS", "fileName": "pgdump-2026-10-09.sql.gz", "sizeKb": 820 },
+      { "id": 3, "startedAt": "2026-10-10T02:00:00", "finishedAt": "2026-10-10T02:01:05", "status": "FAILED", "fileName": null, "sizeKb": null, "error": "Hết dung lượng ổ đĩa backup" }
+    ]
+  },
+
+  "tv2": {
+    "reservations": [
+      { "id": 1, "titleId": 3, "readerId": 7, "status": "READY", "heldCopyId": 7, "createdAt": "2026-10-02T09:00:00", "readyUntil": "2026-10-11T18:00:00" },
+      { "id": 2, "titleId": 9, "readerId": 5, "status": "WAITING", "heldCopyId": null, "createdAt": "2026-10-09T11:00:00", "readyUntil": null },
+      { "id": 3, "titleId": 2, "readerId": 3, "status": "CANCELLED", "heldCopyId": null, "createdAt": "2026-09-20T14:00:00", "readyUntil": null },
+      { "id": 4, "titleId": 5, "readerId": 4, "status": "EXPIRED", "heldCopyId": null, "createdAt": "2026-08-28T10:00:00", "readyUntil": "2026-09-03T10:00:00" },
+      { "id": 5, "titleId": 1, "readerId": 3, "status": "FULFILLED", "heldCopyId": 2, "createdAt": "2026-07-28T08:00:00", "readyUntil": "2026-08-02T08:00:00" }
+    ],
+
+    "damageReports": [
+      { "id": 1, "copyId": 5, "reporterId": 2, "status": "PENDING", "severity": "MEDIUM", "note": "Rách 5 trang cuối, bong gáy", "photoPath": null, "createdAt": "2026-10-09T16:05:00" },
+      { "id": 2, "copyId": 9, "reporterId": 2, "status": "REPAIR", "severity": "LIGHT", "note": "Bìa trầy, cần bọc lại", "photoPath": null, "createdAt": "2026-09-14T16:35:00" },
+      { "id": 3, "copyId": 14, "reporterId": 2, "status": "DISPOSED", "severity": "HEAVY", "note": "Ngấm nước, mốc toàn bộ", "photoPath": null, "createdAt": "2026-07-15T08:42:00" },
+      { "id": 4, "copyId": 4, "reporterId": 2, "status": "REJECTED", "severity": "LIGHT", "note": "Vết bút chì nhẹ, tẩy được", "photoPath": null, "createdAt": "2026-08-25T11:05:00" }
+    ],
+
+    "opsReport": {
+      "asOf": "2026-10-10T08:00:00",
+      "activeLoans": 6,
+      "overdueLoans": 2,
+      "openReservations": 2,
+      "pendingDamageReports": 1,
+      "openFinesVnd": 125000,
+      "copiesByStatus": {
+        "AVAILABLE": 7,
+        "ON_LOAN": 6,
+        "ON_HOLD": 1,
+        "PENDING_REVIEW": 1,
+        "IN_REPAIR": 1,
+        "LOST": 1,
+        "DISPOSED": 1
+      },
+      "overdueList": [
+        { "loanId": 2, "readerId": 4, "copyCode": "BC000003", "titleName": "Lập trình Flutter cơ bản", "daysOverdue": 11 },
+        { "loanId": 4, "readerId": 3, "copyCode": "BC000010", "titleName": "Dế Mèn phiêu lưu ký", "daysOverdue": 6 }
+      ]
+    },
+
+    "trendReport": {
+      "loansByMonth": [
+        { "month": "2026-05", "loans": 42, "returns": 38 },
+        { "month": "2026-06", "loans": 55, "returns": 49 },
+        { "month": "2026-07", "loans": 31, "returns": 40 },
+        { "month": "2026-08", "loans": 28, "returns": 30 },
+        { "month": "2026-09", "loans": 64, "returns": 51 },
+        { "month": "2026-10", "loans": 19, "returns": 14 }
+      ],
+      "topTitles": [
+        { "titleId": 1, "loans": 37 },
+        { "titleId": 3, "loans": 29 },
+        { "titleId": 2, "loans": 24 },
+        { "titleId": 5, "loans": 18 },
+        { "titleId": 9, "loans": 15 }
+      ],
+      "loansByCategory": [
+        { "categoryId": 1, "loans": 118 },
+        { "categoryId": 2, "loans": 46 },
+        { "categoryId": 3, "loans": 21 },
+        { "categoryId": 4, "loans": 33 },
+        { "categoryId": 5, "loans": 21 }
+      ]
+    }
+  },
+
+  "tv3": {
+    "notifications": [
+      { "id": 1, "userId": 7, "title": "Sách đặt trước đã sẵn sàng", "body": "Spring Boot thực chiến (BC000007) đang được giữ cho bạn đến 18:00 ngày 11/10/2026.", "readAt": null, "createdAt": "2026-10-09T18:00:00" },
+      { "id": 2, "userId": 3, "title": "Sách quá hạn", "body": "Dế Mèn phiêu lưu ký (BC000010) đã quá hạn từ 04/10/2026. Phí phạt 2.000đ/ngày.", "readAt": "2026-10-05T12:00:00", "createdAt": "2026-10-05T07:00:00" },
+      { "id": 3, "userId": 3, "title": "Sắp đến hạn trả", "body": "Lập trình Flutter cơ bản (BC000001) đến hạn ngày 15/10/2026.", "readAt": null, "createdAt": "2026-10-10T07:00:00" },
+      { "id": 4, "userId": 4, "title": "Sách quá hạn", "body": "Lập trình Flutter cơ bản (BC000003) đã quá hạn từ 29/09/2026. Phí phạt 2.000đ/ngày.", "readAt": null, "createdAt": "2026-09-30T07:00:00" },
+      { "id": 5, "userId": 5, "title": "Phát sinh phí phạt", "body": "Bạn có khoản phạt 30.000đ do trả trễ Cấu trúc dữ liệu và giải thuật.", "readAt": null, "createdAt": "2026-10-09T16:00:00" },
+      { "id": 6, "userId": 6, "title": "Đã ghi nhận mất sách", "body": "Số đỏ (BC000012) được ghi nhận mất. Khoản bồi thường 55.000đ.", "readAt": "2026-10-03T19:00:00", "createdAt": "2026-10-03T10:00:00" },
+      { "id": 7, "userId": 1, "title": "Báo cáo hư hỏng chờ duyệt", "body": "BC000005 – Cấu trúc dữ liệu và giải thuật, mức Trung bình.", "readAt": null, "createdAt": "2026-10-09T16:05:00" }
+    ],
+
+    "fineTransactions": [
+      { "id": 1, "fineId": 2, "type": "PAYMENT", "method": "CASH", "amountVnd": 12000, "receiptNo": "BL-2026-0001", "actorId": 2, "reason": null, "createdAt": "2026-08-25T11:10:00" },
+      { "id": 2, "fineId": 4, "type": "WAIVER", "method": null, "amountVnd": 130000, "receiptNo": null, "actorId": 1, "reason": "Hư hỏng do dột kho, không do người đọc", "createdAt": "2026-07-16T09:00:00" },
+      { "id": 3, "fineId": 5, "type": "PAYMENT", "method": "CASH", "amountVnd": 20000, "receiptNo": "BL-2026-0002", "actorId": 2, "reason": null, "createdAt": "2026-07-20T15:00:00" }
+    ],
+
+    "auditLogs": [
+      { "id": 1, "actorId": 1, "action": "IMPORT_COMMIT", "entityType": "IMPORT_BATCH", "entityId": "1", "detail": "Nhập 18 bản sao từ kho-sach-2026-09.xlsx", "createdAt": "2026-09-01T08:45:00" },
+      { "id": 2, "actorId": 1, "action": "POLICY_UPDATE", "entityType": "LENDING_POLICY", "entityId": "1", "detail": "fineBlockVnd 30000 → 50000", "createdAt": "2026-09-02T10:00:00" },
+      { "id": 3, "actorId": 1, "action": "FINE_WAIVE", "entityType": "FINE", "entityId": "4", "detail": "Miễn 130.000đ", "createdAt": "2026-07-16T09:00:00" },
+      { "id": 4, "actorId": 2, "action": "CHECKOUT", "entityType": "LOAN", "entityId": "1", "detail": "BC000001 → R10000001", "createdAt": "2026-10-01T09:15:00" },
+      { "id": 5, "actorId": 2, "action": "LOST_MARK", "entityType": "LOAN", "entityId": "5", "detail": "BC000012 ghi nhận mất", "createdAt": "2026-10-03T10:00:00" },
+      { "id": 6, "actorId": 2, "action": "CHECKOUT", "entityType": "LOAN", "entityId": "7", "detail": "BC000016 → R10000002", "createdAt": "2026-10-08T10:00:00" },
+      { "id": 7, "actorId": 2, "action": "RETURN", "entityType": "LOAN", "entityId": "8", "detail": "BC000005 trả trễ 15 ngày", "createdAt": "2026-10-09T16:00:00" },
+      { "id": 8, "actorId": 2, "action": "DAMAGE_REPORT", "entityType": "DAMAGE_REPORT", "entityId": "1", "detail": "BC000005 mức MEDIUM", "createdAt": "2026-10-09T16:05:00" },
+      { "id": 9, "actorId": 2, "action": "READER_CREATE", "entityType": "USER", "entityId": "8", "detail": "Tạo tài khoản chờ kích hoạt R10000006", "createdAt": "2026-10-09T15:30:00" },
+      { "id": 10, "actorId": 3, "action": "LOGIN", "entityType": "USER", "entityId": "3", "detail": null, "createdAt": "2026-10-10T07:30:00" }
+    ],
+
+    "notificationOutbox": [
+      { "id": 1, "notificationId": 1, "channel": "EMAIL", "status": "SENT", "attempts": 1, "lastError": null, "updatedAt": "2026-10-09T18:00:05" },
+      { "id": 2, "notificationId": 2, "channel": "EMAIL", "status": "SENT", "attempts": 1, "lastError": null, "updatedAt": "2026-10-05T07:00:04" },
+      { "id": 3, "notificationId": 3, "channel": "EMAIL", "status": "RETRYING", "attempts": 2, "lastError": "Máy chủ email không phản hồi (timeout)", "updatedAt": "2026-10-10T07:20:00" },
+      { "id": 4, "notificationId": 4, "channel": "EMAIL", "status": "DEAD", "attempts": 5, "lastError": "Địa chỉ email không tồn tại", "updatedAt": "2026-10-01T07:00:00" },
+      { "id": 5, "notificationId": 5, "channel": "EMAIL", "status": "SENT", "attempts": 1, "lastError": null, "updatedAt": "2026-10-09T16:00:03" },
+      { "id": 6, "notificationId": 6, "channel": "EMAIL", "status": "SENT", "attempts": 2, "lastError": null, "updatedAt": "2026-10-03T10:05:00" },
+      { "id": 7, "notificationId": 7, "channel": "IN_APP", "status": "SENT", "attempts": 1, "lastError": null, "updatedAt": "2026-10-09T16:05:00" }
+    ]
+  }
+}

@@ -2,6 +2,7 @@
 type: ba-roadmap-plan
 status: in-progress
 updated: 2026-10-05
+superseded_by: plans/261008-2006-split-features-per-prd-map/plan.md
 links:
   - docs/he_thong_quan_ly_thu_vien.md
   - docs/_shared/project-profile.md

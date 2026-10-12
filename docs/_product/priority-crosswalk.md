@@ -1,10 +1,10 @@
 ---
 type: priority-crosswalk
 status: draft
-updated: 2026-10-05
+updated: 2026-10-12
 links:
   - docs/he_thong_quan_ly_thu_vien.md
-  - docs/features/library-management-platform/brainstorms/product-roadmap-baseline.md
+  - docs/_product/product-roadmap-baseline.md
   - plans/reports/ba-audit-261005-0018-library-management-roadmap.md
   - docs/_product/prd.md
   - docs/_product/roadmap.md
@@ -39,57 +39,57 @@ Mỗi dòng là một PROPOSAL gắn decision ID; chi tiết owner/approver/due 
 
 ## 3. Crosswalk chi tiết theo FR/RP/capability nguồn
 
-| ID nguồn | Nội dung | Source priority | Normalized | Release | Điều chỉnh / ghi chú |
-|---|---|---|---|---|---|
-| FR-C01 | Đăng nhập/đăng xuất, RBAC | P1 | P0 | R0 | — |
-| FR-C02 | Quên/đổi mật khẩu | P1 | P0 | R0 | — |
-| FR-C03 | Hồ sơ cá nhân | P1 | P0 | R0 | — |
-| FR-C04 | Thông báo trong ứng dụng (đầy đủ) | P2 | P1 | R1B | Tách phần tối thiểu sự kiện quan trọng sang P0 — DEC-P2-01 |
-| FR-R01 | Đăng ký tài khoản (+ kích hoạt) | P1 | P0 | R0 | Phụ thuộc OQ-03 default `PROPOSAL` |
-| FR-R02 | Tra cứu sách | P1 | P0 | R1A | — |
-| FR-R03 | Thẻ thư viện QR | P1 | P0 | R1A | Hiển thị thẻ phụ thuộc kích hoạt (R0) |
-| FR-R04 | Sách đang mượn | P1 | P0 | R1A | — |
-| FR-R05 | Lịch sử mượn | P1 | P0 | R1A | — |
-| FR-R06 | Gia hạn online | P2 | P1 | R1B | BR-04 kiểm tra hàng chờ rỗng tới R2 — DEC-P2-05 |
-| FR-R07 | Đặt trước sách | P2 | P1 | R2 | DEC-P2-05 |
-| FR-R08 | Hủy/theo dõi đặt trước | P2 | P1 | R2 | DEC-P2-05 |
-| FR-R09 | Xem phạt/công nợ | P2 | P1 | R1B | Ledger đã P0/R1A; chỉ phần hiển thị người đọc ở R1B |
-| FR-S01 | Quét QR sách | P1 | P0 | R1A | — |
-| FR-S02 | Quét QR thẻ người đọc | P1 | P0 | R1A | — |
-| FR-S03 | Tạo phiếu mượn | P1 | P0 | R1A | — |
-| FR-S04 | Nhận trả sách | P1 | P0 | R1A | D5 không phân bổ trong R1A — DEC-P2-05 |
-| FR-S05 | Báo cáo hư hỏng | P1 | P0 | R1A | Đi kèm disposition tối thiểu — DEC-P2-03 |
-| FR-S06 | Gia hạn tại quầy | P2 | P1 | R1B | Như FR-R06 |
-| FR-S07 | Ghi nhận mất sách | P2 | **P0-PROPOSAL** | R1A | Nâng: Loan phải có đường kết thúc LOST trong MVP — DEC-P2-07 |
-| FR-S08 | Thu phạt | P2 | P0 (tối thiểu) / P1 (nâng cao) | R1A / R1B | Chia scope — DEC-P2-04 |
-| FR-S09 | Danh sách quá hạn (nhân viên) | P2 | P1 | R1B | RP-04 (P0) đã phủ nhu cầu đối soát |
-| FR-S10 | Quản lý người đọc giới hạn | P2 | P1 | R1B | CRUD đầy đủ của Thủ thư đã ở R0 (FR-L05) |
-| FR-S11 | Điểm danh | P3 | P2 | R3 candidate | Phụ thuộc OQ-02 |
-| FR-L01 | Kế thừa quyền Nhân viên | P1 | P0 | R0/R1A | Theo phạm vi từng FR-S |
-| FR-L02 | CRUD đầu sách | P1 | P0 | R0 | — |
-| FR-L03 | Nhập bản sao + in QR | P1 | P0 | R0 | — |
-| FR-L04 | Danh mục | P1 | P0 | R0 | — |
-| FR-L05 | CRUD tài khoản người đọc | P1 | P0 | R0 | — |
-| FR-L06 | CRUD tài khoản nhân viên | P1 | P0 | R0 | — |
-| FR-L07 | Cấu hình quy định | P1 | P0 | R0 | Giá trị BR chờ GATE-DEC (OQ-04) |
-| FR-L08 | Duyệt hư hỏng, thanh lý | P2 | **P0** | R1A | Nâng theo DEC-P2-03 (disposition tối thiểu) |
-| FR-L09 | Báo cáo & xuất file | P2 | P0/P1 | R1A/R2 | Theo từng RP bên dưới |
-| FR-L10 | Nhật ký hoạt động (viewer) | P2 | P1 | R1B | Capture đã P0/R0 — DEC-P2-06 |
-| RP-01 | Tổng quan tài khoản | P1 | P0 | R1A | — |
-| RP-02 | Tình trạng kho sách | P1 | P0 | R1A | — |
-| RP-03 | Mượn–trả theo thời gian | P2 | P1 | R2 | — |
-| RP-04 | Quá hạn | P1 | P0 | R1A | DEC-P2-02 |
-| RP-05 | Phạt | P2 | P1 | R2 | — |
-| RP-06 | Sách được quan tâm | P2 | P1 | R2 | — |
-| RP-07 | Hư hỏng & thanh lý | P2 | P1 | R2 | — |
-| RP-08 | Hoạt động nhân viên | P3 | P2 | R3 candidate | Phụ thuộc điểm danh (OQ-02) |
-| (mới) | Import Excel + đối soát | P1 ngầm (OQ-15) | P0 | R0 | Audit blocker #6: đưa vào readiness — DEC-P2-09 |
-| (mới) | Backup/restore + job owner | NFR-07 | P0 | R0/R1B | — |
-| (mới) | Audit capture | NFR-04 | P0 | R0 | DEC-P2-06 |
-| (mới) | Thông báo tối thiểu sự kiện | mục 8 | P0 | R1A | DEC-P2-01 |
-| OQ-08 | Thanh toán online | P3 (mục 12) | P2 | R3 candidate | — |
-| OQ-09 | Nhiều chi nhánh | P3 | P2 | R3 candidate | — |
-| OQ-13 | Offline | P3 | P2 | R3 candidate | — |
+| ID nguồn | Nội dung | Source priority | Normalized | Release | Điều chỉnh / ghi chú | Feature đích |
+|---|---|---|---|---|---|---|
+| FR-C01 | Đăng nhập/đăng xuất, RBAC | P1 | P0 | R0 | — | access-control |
+| FR-C02 | Quên/đổi mật khẩu | P1 | P0 | R0 | — | access-control |
+| FR-C03 | Hồ sơ cá nhân | P1 | P0 | R0 | — | access-control |
+| FR-C04 | Thông báo trong ứng dụng (đầy đủ) | P2 | P1 | R1B | Tách phần tối thiểu sự kiện quan trọng sang P0 — DEC-P2-01 | notification-core (tối thiểu), notification-audit-ui (trung tâm) |
+| FR-R01 | Đăng ký tài khoản (+ kích hoạt) | P1 | P0 | R0 | Chỉ cấp tại quầy, không tự đăng ký online — DEC-SF-03 | reader-onboarding |
+| FR-R02 | Tra cứu sách | P1 | P0 | R1A | — | reader-self-service |
+| FR-R03 | Thẻ thư viện QR | P1 | P0 | R1A | Hiển thị thẻ phụ thuộc kích hoạt (R0) | reader-self-service |
+| FR-R04 | Sách đang mượn | P1 | P0 | R1A | — | reader-self-service |
+| FR-R05 | Lịch sử mượn | P1 | P0 | R1A | — | reader-self-service |
+| FR-R06 | Gia hạn online | P2 | P1 | R1B | BR-04 kiểm tra hàng chờ rỗng tới R2 — DEC-P2-05 | renewal |
+| FR-R07 | Đặt trước sách | P2 | P1 | R2 | DEC-P2-05 | reservation |
+| FR-R08 | Hủy/theo dõi đặt trước | P2 | P1 | R2 | DEC-P2-05 | reservation |
+| FR-R09 | Xem phạt/công nợ | P2 | P1 | R1B | Ledger đã P0/R1A; chỉ phần hiển thị người đọc ở R1B | reader-self-service |
+| FR-S01 | Quét QR sách | P1 | P0 | R1A | — | checkout, return-handling (QR từ copy-inventory) |
+| FR-S02 | Quét QR thẻ người đọc | P1 | P0 | R1A | — | checkout |
+| FR-S03 | Tạo phiếu mượn | P1 | P0 | R1A | — | checkout |
+| FR-S04 | Nhận trả sách | P1 | P0 | R1A | D5 không phân bổ trong R1A — DEC-P2-05 | return-handling |
+| FR-S05 | Báo cáo hư hỏng | P1 | P0 | R1A | Đi kèm disposition tối thiểu — DEC-P2-03 | damage-lifecycle |
+| FR-S06 | Gia hạn tại quầy | P2 | P1 | R1B | Như FR-R06 | renewal |
+| FR-S07 | Ghi nhận mất sách | P2 | **P0-PROPOSAL** | R1A | Nâng: Loan phải có đường kết thúc LOST trong MVP — DEC-P2-07 | lost-handling |
+| FR-S08 | Thu phạt | P2 | P0 (tối thiểu) / P1 (nâng cao) | R1A / R1B | Chia scope — DEC-P2-04 | fine-collection-basic (tối thiểu), fine-collection-adv (nâng cao) |
+| FR-S09 | Danh sách quá hạn (nhân viên) | P2 | P1 | R1B | RP-04 (P0) đã phủ nhu cầu đối soát | ops-reports |
+| FR-S10 | Quản lý người đọc giới hạn | P2 | P1 | R1B | CRUD đầy đủ của Thủ thư đã ở R0 (FR-L05) | account-admin |
+| FR-S11 | Điểm danh | P3 | P2 | R3 candidate | Phụ thuộc OQ-02 | expansion-candidates |
+| FR-L01 | Kế thừa quyền Nhân viên | P1 | P0 | R0/R1A | Theo phạm vi từng FR-S | — (kế thừa quyền) |
+| FR-L02 | CRUD đầu sách | P1 | P0 | R0 | — | catalog-admin |
+| FR-L03 | Nhập bản sao + in QR | P1 | P0 | R0 | — | copy-inventory |
+| FR-L04 | Danh mục | P1 | P0 | R0 | — | catalog-admin |
+| FR-L05 | CRUD tài khoản người đọc | P1 | P0 | R0 | — | account-admin |
+| FR-L06 | CRUD tài khoản nhân viên | P1 | P0 | R0 | — | account-admin |
+| FR-L07 | Cấu hình quy định | P1 | P0 | R0 | Giá trị BR chờ GATE-DEC (OQ-04) | policy-config |
+| FR-L08 | Duyệt hư hỏng, thanh lý | P2 | **P0** | R1A | Nâng theo DEC-P2-03 (disposition tối thiểu) | damage-lifecycle |
+| FR-L09 | Báo cáo & xuất file | P2 | P0/P1 | R1A/R2 | Theo từng RP bên dưới | ops-reports, trend-reports |
+| FR-L10 | Nhật ký hoạt động (viewer) | P2 | P1 | R1B | Capture đã P0/R0 — DEC-P2-06 | notification-audit-ui |
+| RP-01 | Tổng quan tài khoản | P1 | P0 | R1A | — | ops-reports |
+| RP-02 | Tình trạng kho sách | P1 | P0 | R1A | — | ops-reports |
+| RP-03 | Mượn–trả theo thời gian | P2 | P1 | R2 | — | trend-reports |
+| RP-04 | Quá hạn | P1 | P0 | R1A | DEC-P2-02 | ops-reports |
+| RP-05 | Phạt | P2 | P1 | R2 | — | trend-reports |
+| RP-06 | Sách được quan tâm | P2 | P1 | R2 | — | trend-reports |
+| RP-07 | Hư hỏng & thanh lý | P2 | P1 | R2 | — | trend-reports |
+| RP-08 | Hoạt động nhân viên | P3 | P2 | R3 candidate | Phụ thuộc điểm danh (OQ-02) | expansion-candidates |
+| (mới) | Import Excel + đối soát | P1 ngầm (OQ-15) | P0 | R0 | Audit blocker #6: đưa vào readiness — DEC-P2-09 | data-import |
+| (mới) | Backup/restore + job owner | NFR-07 | P0 | R0/R1B | — | ops-foundation |
+| (mới) | Audit capture | NFR-04 | P0 | R0 | DEC-P2-06 | ops-foundation |
+| (mới) | Thông báo tối thiểu sự kiện | mục 8 | P0 | R1A | DEC-P2-01 | notification-core |
+| OQ-08 | Thanh toán online | P3 (mục 12) | P2 | R3 candidate | — | expansion-candidates |
+| OQ-09 | Nhiều chi nhánh | P3 | P2 | R3 candidate | — | expansion-candidates |
+| OQ-13 | Offline | P3 | P2 | R3 candidate | — | expansion-candidates |
 
 ## 4. Ngoại lệ nâng/hạ so với quy tắc mặc định
 

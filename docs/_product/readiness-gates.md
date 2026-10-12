@@ -1,7 +1,7 @@
 ---
 type: readiness-gates
 status: draft
-updated: 2026-10-05
+updated: 2026-10-12
 links:
   - docs/_product/prd.md
   - docs/_product/roadmap.md
@@ -16,15 +16,15 @@ links:
 
 ## Tổng quan
 
-| Gate | Tên | Vị trí trên roadmap | Owner | Non-waivable |
-|---|---|---|---|---|
-| GATE-DEC | Decision | Entry R0; tiếp diễn trước GATE-GNG | Thủ thư trưởng (điều phối approver) | Có — với hard-stop decision |
-| GATE-MIG | Migration | Exit R0 | Thủ thư | Có |
-| GATE-UAT | UAT | Trong R1B | Đại diện nhân viên quầy + Thủ thư | Có |
-| GATE-OPS | Operations / Restore | Một phần exit R0; đầy đủ trong R1B | Owner vận hành (chỉ định trong decision register — `PROPOSAL`) | Có (restore trước go-live) |
-| GATE-TRN | Training / SOP | Trong R1B | Thủ thư | Có |
-| GATE-PILOT | Pilot readiness | Cuối R1B | Thủ thư trưởng | Có |
-| GATE-GNG | Release / Go-No-Go | Cuối R1B | Thủ thư trưởng | **Có — tuyệt đối** |
+| Gate | Tên | Vị trí trên roadmap | Owner | Non-waivable | Feature liên quan |
+|---|---|---|---|---|---|
+| GATE-DEC | Decision | Entry R0; tiếp diễn trước GATE-GNG | Thủ thư trưởng (điều phối approver) | Có — với hard-stop decision | `policy-config`, `access-control`, `account-admin`, `fine-collection-adv`, `ops-foundation` (privacy) |
+| GATE-MIG | Migration | Exit R0 | Thủ thư | Có | `data-import`, `catalog-admin`, `copy-inventory` |
+| GATE-UAT | UAT | Trong R1B | Đại diện nhân viên quầy + Thủ thư | Có | Mọi feature R0–R1B |
+| GATE-OPS | Operations / Restore | Một phần exit R0; đầy đủ trong R1B | Owner vận hành (chỉ định trong decision register — `PROPOSAL`) | Có (restore trước go-live) | `ops-foundation`, `notification-core` |
+| GATE-TRN | Training / SOP | Trong R1B | Thủ thư | Có | `checkout`, `return-handling`, `damage-lifecycle`, `lost-handling`, `fine-collection-basic` |
+| GATE-PILOT | Pilot readiness | Cuối R1B | Thủ thư trưởng | Có | Mọi feature R0–R1B |
+| GATE-GNG | Release / Go-No-Go | Cuối R1B | Thủ thư trưởng | **Có — tuyệt đối** | Mọi feature R0–R1B |
 
 ## GATE-DEC — Decision gate
 
