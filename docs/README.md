@@ -1,5 +1,17 @@
 # Tài liệu Hệ thống Quản lý Thư viện
 
+## Tài liệu nền tảng kỹ thuật
+
+| Tài liệu | Mục đích |
+|---|---|
+| [Tổng quan sản phẩm](project-overview-pdr.md) | Mục tiêu, người dùng, ràng buộc và phạm vi nền tảng. |
+| [Kiến trúc hệ thống](system-architecture.md) | Các thành phần đang có, ranh giới và các quyết định kỹ thuật. |
+| [Hướng dẫn cài đặt và vận hành](deployment-guide.md) | Chạy cục bộ, kiểm thử, cấu hình và các giới hạn deployment hiện tại. |
+| [Điều hướng mã nguồn](codebase-summary.md) | Điểm vào và owner thực thi của mỗi khu vực. |
+| [Quy ước phát triển](code-standards.md) | Chất lượng mã, kiểm thử và quy trình đóng góp. |
+| [Hướng dẫn thiết kế](design-guidelines.md) | Điểm vào của hệ thống thiết kế Flutter. |
+| [Định hướng sản phẩm](project-roadmap.md) | Liên kết tới roadmap sản phẩm có thẩm quyền. |
+
 ## Cấu trúc
 
 | Thư mục | Nội dung |
