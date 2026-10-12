@@ -10,7 +10,7 @@ Quy ước (theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/)):
 - Việc chưa merge nằm ở `[Chưa phát hành]`. Khi merge vào `develop`, đổi thành ngày merge.
 - Changelog của tài liệu BA nằm ở `docs/_shared/changelog.md` và do hook ghi, không sửa tay.
 
-## [Chưa phát hành]
+## [0.1.0] - 2026-10-12
 
 ### Thêm
 
